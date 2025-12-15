@@ -1,0 +1,807 @@
+---
+alwaysApply: true
+---
+
+
+# Development Rules for Plutony Web Project
+
+## 📋 Pre-Development Checklist
+
+**CRITICAL: Before starting ANY task, ALWAYS:**
+
+1. Check `TODO.md` for existing tasks
+2. If your task is not listed, add it to the appropriate phase in `TODO.md`
+3. Track your progress by updating task status in `TODO.md`
+4. When completing a series of tasks, update or create `CHANGELOG.md` with semantic versioning
+5. Update the version numbers in both `@/app/lib/constants/version.ts` and `package.json` to reflect the new release
+6. Commit each change atomically, ensuring that each commit represents a single, focused modification
+
+### 🌐 Internationalization Checklist
+
+**CRITICAL: Before implementing ANY feature, ALWAYS check internationalization requirements:**
+
+1. **Content Internationalization:**
+   - [ ] Does this feature involve user-facing text? → Use `next-intl` translations
+   - [ ] Does this feature involve form labels/placeholders? → Add to translation files
+   - [ ] Does this feature involve error messages? → Add to translation files
+   - [ ] Does this feature involve success/notification messages? → Add to translation files
+
+2. **URL Structure:**
+   - [ ] Does this feature create new pages? → Ensure locale-aware routing (`/[locale]/...`)
+   - [ ] Does this feature involve dynamic routes? → Include locale in route parameters
+   - [ ] Does this feature generate links? → Use locale-aware URL generation
+
+3. **Data Internationalization:**
+   - [ ] Does this feature involve content from CMS/database? → Ensure locale filtering
+   - [ ] Does this feature involve author information? → Check locale-specific author data
+   - [ ] Does this feature involve dates/times? → Use locale-aware date formatting
+   - [ ] Does this feature involve numbers/currency? → Use locale-aware formatting
+
+4. **Component Internationalization:**
+   - [ ] Is this a new component? → Accept `locale` prop if needed
+   - [ ] Does this component display text? → Use `useTranslations` hook
+   - [ ] Does this component handle user input? → Ensure locale-aware validation messages
+   - [ ] Does this component generate URLs? → Use locale-aware URL generation
+
+5. **API/Service Internationalization:**
+   - [ ] Does this feature involve API calls? → Include locale in requests if needed
+   - [ ] Does this feature involve caching? → Ensure locale-specific cache keys
+   - [ ] Does this feature involve data filtering? → Filter by locale when appropriate
+
+6. **Testing Internationalization:**
+   - [ ] Test feature in both Turkish (`/tr`) and English (`/en`) locales
+   - [ ] Verify all text is properly translated
+   - [ ] Verify URLs are locale-aware
+   - [ ] Verify data filtering works correctly for each locale
+
+**Translation File Locations:**
+- `app/i18n/locales/tr/` - Turkish translations
+- `app/i18n/locales/en/` - English translations
+- `app/i18n/locales/tr/common.json` - Common Turkish translations
+- `app/i18n/locales/en/common.json` - Common English translations
+
+**Locale-Aware Development Patterns:**
+```typescript
+// ✅ Correct: Use useTranslations hook
+const t = useTranslations('namespace');
+return <div>{t('key')}</div>;
+
+// ✅ Correct: Use locale-aware URL generation
+<Link href={`/${locale}/path`}>Link</Link>
+
+// ✅ Correct: Use locale-aware date formatting
+new Date().toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US')
+
+// ✅ Correct: Filter data by locale
+const localeData = allData.filter(item => item.locale === locale);
+```
+
+### Version Management
+
+**When updating versions:**
+
+1. **Check current version:**
+   - `package.json` version number
+   - `@/app/lib/constants.ts` version constants
+   - `CHANGELOG.md` latest version
+
+2. **Determine version bump:**
+   - MAJOR (x.0.0): Breaking changes
+   - MINOR (0.x.0): New features, no breaking changes
+   - PATCH (0.0.x): Bug fixes, no new features
+
+3. **Update files:**
+
+   ```typescript
+   // @/app/lib/constants.ts
+   export const VERSION = '1.2.3'
+   ```
+
+   ```json
+   // package.json
+   {
+     "name": "plutony-web",
+     "version": "1.2.3"
+   }
+   ```
+
+4. **Commit version updates:**
+
+   ```bash
+   git commit -m "version: 1.2.3"
+   ```
+
+### Atomic Commits
+
+**Rules for atomic commits:**
+
+1. **Single Purpose:**
+   - Each commit should do ONE thing
+   - Changes should be logically related
+   - Easy to understand and review
+
+2. **Scope Limitation:**
+   - Limit to one feature/fix/refactor
+   - Keep changes focused and minimal
+   - Split large changes into smaller commits
+
+3. **File Organization:**
+   - Group related file changes
+   - Include all necessary dependencies
+   - Don't mix unrelated changes
+
+4. **Examples:**
+
+   ✅ **Good Atomic Commits:**
+
+   ```bash
+   # Single feature
+   feat(auth): add email verification
+   
+   # Single bug fix
+   fix(ui): resolve button alignment in navbar
+   
+   # Focused refactor
+   refactor(api): convert user endpoints to TypeScript
+   ```
+
+   ❌ **Bad Non-Atomic Commits:**
+
+   ```bash
+   # Multiple unrelated changes
+   chore: fix typos, add new feature, update deps
+   
+   # Too broad/vague
+   update: various changes and improvements
+   
+   # Mixed concerns
+   feat: add auth and update styling
+   ```
+
+5. **Commit Organization:**
+   - Write clear commit messages
+   - Use conventional commit format
+   - Reference issues/tickets when applicable
+
+### Git Usage Rules for AI Agents
+
+**CRITICAL: AI agents must follow these git rules to avoid confusion:**
+
+1. **No Git Status Checking:**
+   - ❌ NEVER run `git status`, `git diff`, or `git log` commands
+   - ❌ NEVER check git history or repository state
+   - ❌ NEVER use git commands to determine what files to commit
+
+2. **Commit Only Current Session Changes:**
+   - ✅ ONLY commit files that were modified/created in the current chat session
+   - ✅ Track changes mentally based on what you actually edited
+   - ✅ Use `git add <specific-files>` for files you know you changed
+   - ✅ Commit immediately after making changes
+
+3. **Simple Commit Process:**
+   ```bash
+   # Only use these commands:
+   git add <file1> <file2> <file3>  # Only files you modified
+   git commit -m "descriptive message"
+   ```
+
+4. **Avoid Complex Git Operations:**
+   - ❌ NO `git status --porcelain`
+   - ❌ NO `git diff` or `git log` commands
+   - ❌ NO checking for staged/unstaged changes
+   - ❌ NO git history analysis
+
+5. **Session-Based Tracking:**
+   - Keep mental track of files you modified during the session
+   - Only commit files you actually changed
+   - If unsure, ask the user which files to commit
+
+**Example of CORRECT git usage:**
+```bash
+# Agent modified these files in current session:
+git add src/lib/auth/config.ts src/middleware.ts
+git commit -m "feat(auth): implement rate limiting and CSRF protection"
+```
+
+**Example of INCORRECT git usage:**
+```bash
+# ❌ DON'T DO THIS:
+git status                    # Confusing and unnecessary
+git diff                      # Takes too long and confuses
+git log --oneline -5          # Unnecessary history check
+git add .                     # Might add unrelated files
+```
+
+## 🛠️ Technology Stack & Standards
+
+### Core Technologies
+
+- **Framework**: NextJS 15+ (App Router)
+- **React**: 19.1.0
+- **TypeScript**: 5.7.3
+- **Styling**: Tailwind CSS 3.4.17
+- **Package Manager**: PNPM (ALWAYS use pnpm, never npm or yarn)
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Database**: PostgreSQL with direct postgres client
+- **Authentication**: NextAuth.js 5.0.0-beta
+- **Email**: Resend
+- **Content**: Content Collections with MDX
+
+### Development Standards
+
+- **Code Quality**: ESLint + Prettier + TypeScript strict mode
+- **Validation**: Zod for all form validation and API input validation
+- **Build System**: Turbo for fast builds and development
+- **Git Hooks**: Husky + lint-staged for pre-commit checks
+- **Testing**: Unit tests for core functions, integration tests for APIs
+- **Performance**: Next.js 15+ optimizations, image optimization, lazy loading
+- **Logging**: Centralized logging system (no console.log in production)
+
+### Environment & Scripts
+
+**Available Scripts:**
+
+```bash
+# Development
+pnpm dev              # Start development server with Turbo
+pnpm dev:turbo        # Start development server with Turbo (explicit)
+
+# Build & Production
+pnpm build            # Build for production
+pnpm start            # Start production server
+
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm lint:fix         # Run ESLint with auto-fix
+pnpm format           # Format code with Prettier
+pnpm format:check     # Check formatting without changes
+pnpm type-check       # Run TypeScript type checking
+pnpm check            # Run all checks (lint + format + type)
+pnpm check:fix        # Run all checks with auto-fix
+```
+
+### Standard Project Scripts (Git Bash)
+
+- On Windows, run these in Git Bash from the repository root
+- Ensure scripts are executable if needed: `chmod +x scripts/*.sh`
+
+```bash
+# 1) Fresh clean install (stop dev, remove node_modules/.next, prune pnpm store, remove lock, install)
+bash ./scripts/clean-install.sh
+
+# 2) Docker environments (local|dev|prod) with common commands
+bash ./scripts/docker-manager.sh local up       # start local DB
+bash ./scripts/docker-manager.sh local down     # stop local services
+bash ./scripts/docker-manager.sh dev logs       # tail logs in dev stack
+bash ./scripts/docker-manager.sh prod clean     # remove containers & volumes (confirm)
+
+# 3) Run SQL files against target environment (expects files in database/)
+bash ./scripts/run-sql.sh migrate-cache-locale.sql local
+bash ./scripts/run-sql.sh migrate-cache-locale.sql dev
+bash ./scripts/run-sql.sh migrate-cache-locale.sql prod
+
+# 4) Fly.io setup and deployments
+bash ./scripts/fly-setup.sh            # one-time CLI setup & login
+bash ./scripts/fly-deploy-dev.sh       # deploy to development app from fly.toml
+bash ./scripts/fly-deploy-prod.sh      # deploy to production app from fly.prod.toml (interactive confirm)
+
+# 5) Fly.io database management
+bash ./scripts/fly-db-migrate.sh migrate dev     # run init.sql on dev DB
+bash ./scripts/fly-db-migrate.sh status prod     # show prod DB status
+# (also supports: backup <env>, restore <env> <file>)
+
+# 6) Merge dev into main (fast path)
+bash ./scripts/merge-to-main.sh
+
+# 7) Generate secure secrets
+bash ./scripts/generate-secret.sh 32    # Generate 32-character secret
+bash ./scripts/generate-secret.sh 64    # Generate 64-character secret
+bash ./scripts/generate-secret.sh      # Generate default 32-character secret
+```
+
+### Build Quality Policy (temporary)
+
+- For now, builds are non-strict to unblock workflows:
+  - TypeScript: `ignoreBuildErrors: true`
+  - ESLint: `ignoreDuringBuilds: true`
+- Continue to run `pnpm type-check` and `pnpm lint` locally/CI and fix issues proactively.
+
+### Centralized Logging System
+
+**CRITICAL: Never use console.log in production code**
+
+```typescript
+// ✅ CORRECT: Use centralized logger
+import { logger } from '@/lib/logging'
+
+logger.info('User action completed', { userId: '123', action: 'update_profile' })
+logger.error('Database connection failed', { component: 'database', error: error.message })
+logger.security('Suspicious login attempt', { ip: '192.168.1.1', email: 'test@example.com' })
+
+// ❌ WRONG: Direct console usage
+console.log('User logged in')  // ESLint will catch this
+console.info('Processing data')  // ESLint will catch this
+```
+
+**Logger Features:**
+- Single-line JSON output for Fly.io Grafana compatibility
+- Environment-aware logging levels
+- Structured context data
+- Security, auth, API, DB, and performance logging methods
+- No line endings (Grafana-friendly)
+
+**Environment Variables:**
+```bash
+LOG_LEVEL=info  # Optional: error, warn, info, debug (default: error/warn in prod)
+```
+
+### PrismaClient Browser Usage Rules
+
+**CRITICAL: PrismaClient MUST NEVER be used in client components**
+
+PrismaClient is a server-side only library and will cause runtime errors if used in browser environments.
+
+```typescript
+// ❌ WRONG: Using PrismaClient in client components
+'use client'
+import { prisma } from '@/lib/db'
+
+export function ClientComponent() {
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    // This will cause: "PrismaClient is unable to run in this browser environment"
+    prisma.post.findMany().then(setData)
+  }, [])
+  
+  return <div>{data}</div>
+}
+
+// ❌ WRONG: Using service classes that use PrismaClient in client components
+'use client'
+import { ContentService } from '@/lib/services/content-service'
+
+export function ClientComponent() {
+  useEffect(() => {
+    // This will also fail because ContentService uses PrismaClient internally
+    ContentService.getPosts().then(setData)
+  }, [])
+}
+```
+
+**Correct Patterns:**
+
+```typescript
+// ✅ CORRECT: Use API routes for data fetching in client components
+'use client'
+export function ClientComponent() {
+  const [data, setData] = useState(null)
+  
+  useEffect(() => {
+    fetch('/api/public/posts')
+      .then(res => res.json())
+      .then(data => setData(data.data))
+  }, [])
+  
+  return <div>{data}</div>
+}
+
+// ✅ CORRECT: Use server components for direct PrismaClient usage
+import { prisma } from '@/lib/db'
+
+export default async function ServerComponent() {
+  const posts = await prisma.post.findMany()
+  
+  return <div>{posts.map(post => <div key={post.id}>{post.title}</div>)}</div>
+}
+
+// ✅ CORRECT: Use server actions for client-side mutations
+'use client'
+import { createPost } from '@/lib/actions'
+
+export function ClientForm() {
+  const handleSubmit = async (formData) => {
+    await createPost(formData) // Server action uses PrismaClient server-side
+  }
+  
+  return <form action={handleSubmit}>...</form>
+}
+```
+
+**Key Rules:**
+1. **Client Components (`'use client'`)**: Use `fetch()` to call API routes
+2. **Server Components**: Can use PrismaClient directly
+3. **Server Actions**: Can use PrismaClient for mutations
+4. **Service Classes**: Only use in server-side contexts (API routes, server components, server actions)
+
+**Common Error Messages:**
+- `PrismaClient is unable to run in this browser environment`
+- `PrismaClient has been bundled for the browser`
+- `Cannot find module 'fs'` (when PrismaClient tries to access Node.js modules)
+
+## Development Workflow
+
+### Task Management
+
+1. **Check TODO.md**: Review current tasks and phases
+2. **Add New Tasks**: If not listed, add to appropriate phase
+3. **Update Progress**: Mark tasks as in-progress/completed
+4. **Track Work**: Document decisions and changes
+
+### Development Environment Setup
+
+**Required Environment Variables:**
+
+```bash
+# Database
+POSTGRES_URL="postgresql://username:password@localhost:5432/plutony"
+
+# AI Services
+ANTHROPIC_API_KEY="your-claude-api-key"
+
+# Email
+RESEND_API_KEY="your-resend-api-key"
+
+# External APIs
+GOOGLE_SEARCH_API_KEY="your-google-api-key"
+GOOGLE_SEARCH_ENGINE_ID="your-search-engine-id"
+TMDB_API_KEY="your-tmdb-api-key"
+IGDB_CLIENT_ID="your-igdb-client-id"
+IGDB_CLIENT_SECRET="your-igdb-client-secret"
+YOUTUBE_API_KEY="your-youtube-api-key"
+```
+
+### Development Process Management
+
+**CRITICAL: Always check for running development processes before starting new ones**
+
+**Before running `pnpm dev`:**
+
+```bash
+# Check for running Node.js processes
+netstat -ano | findstr :3000   # Windows
+lsof -i :3000                  # macOS/Linux
+
+# Check for running pnpm dev processes
+tasklist | findstr "node"      # Windows
+ps aux | grep "pnpm dev"       # macOS/Linux
+```
+
+**If a process is already running:**
+
+```bash
+# Kill process by port (Windows)
+netstat -ano | findstr :3000
+taskkill /PID <PID_NUMBER> /F
+
+# Kill process by port (macOS/Linux)
+lsof -ti:3000 | xargs kill -9
+
+# Kill all node processes (if needed)
+taskkill /F /IM node.exe       # Windows
+pkill -f node                  # macOS/Linux
+```
+
+**Safe development workflow:**
+
+1. **Check for existing processes** before starting development
+2. **Kill existing processes** if they're stuck or unresponsive
+3. **Start fresh development server** with `
+
+2. **Kill existing processes** if they're stuck or unresponsive
+3. **Start fresh development server** with `
+
+# Development Rules for Plutony Web Project
+
+## 📋 Pre-Development Checklist
+
+**CRITICAL: Before starting ANY task, ALWAYS:**
+
+1. Check `TODO.md` for existing tasks
+2. If your task is not listed, add it to the appropriate phase in `TODO.md`
+3. Track your progress by updating task status in `TODO.md`
+4. When completing a series of tasks, update or create `CHANGELOG.md` with semantic versioning
+5. Update the version numbers in both `@/app/lib/constants.ts` and `package.json` to reflect the new release
+6. Commit each change atomically, ensuring that each commit represents a single, focused modification
+
+### 🌐 Internationalization Checklist
+
+**CRITICAL: Before implementing ANY feature, ALWAYS check internationalization requirements:**
+
+1. **Content Internationalization:**
+   - [ ] Does this feature involve user-facing text? → Use `next-intl` translations
+   - [ ] Does this feature involve form labels/placeholders? → Add to translation files
+   - [ ] Does this feature involve error messages? → Add to translation files
+   - [ ] Does this feature involve success/notification messages? → Add to translation files
+
+2. **URL Structure:**
+   - [ ] Does this feature create new pages? → Ensure locale-aware routing (`/[locale]/...`)
+   - [ ] Does this feature involve dynamic routes? → Include locale in route parameters
+   - [ ] Does this feature generate links? → Use locale-aware URL generation
+
+3. **Data Internationalization:**
+   - [ ] Does this feature involve content from CMS/database? → Ensure locale filtering
+   - [ ] Does this feature involve author information? → Check locale-specific author data
+   - [ ] Does this feature involve dates/times? → Use locale-aware date formatting
+   - [ ] Does this feature involve numbers/currency? → Use locale-aware formatting
+
+4. **Component Internationalization:**
+   - [ ] Is this a new component? → Accept `locale` prop if needed
+   - [ ] Does this component display text? → Use `useTranslations` hook
+   - [ ] Does this component handle user input? → Ensure locale-aware validation messages
+   - [ ] Does this component generate URLs? → Use locale-aware URL generation
+
+5. **API/Service Internationalization:**
+   - [ ] Does this feature involve API calls? → Include locale in requests if needed
+   - [ ] Does this feature involve caching? → Ensure locale-specific cache keys
+   - [ ] Does this feature involve data filtering? → Filter by locale when appropriate
+
+6. **Testing Internationalization:**
+   - [ ] Test feature in both Turkish (`/tr`) and English (`/en`) locales
+   - [ ] Verify all text is properly translated
+   - [ ] Verify URLs are locale-aware
+   - [ ] Verify data filtering works correctly for each locale
+
+**Translation File Locations:**
+- `app/i18n/locales/tr/` - Turkish translations
+- `app/i18n/locales/en/` - English translations
+- `app/i18n/locales/tr/common.json` - Common Turkish translations
+- `app/i18n/locales/en/common.json` - Common English translations
+
+**Locale-Aware Development Patterns:**
+```typescript
+// ✅ Correct: Use useTranslations hook
+const t = useTranslations('namespace');
+return <div>{t('key')}</div>;
+
+// ✅ Correct: Use locale-aware URL generation
+<Link href={`/${locale}/path`}>Link</Link>
+
+// ✅ Correct: Use locale-aware date formatting
+new Date().toLocaleDateString(locale === 'tr' ? 'tr-TR' : 'en-US')
+
+// ✅ Correct: Filter data by locale
+const localeData = allData.filter(item => item.locale === locale);
+```
+
+### Version Management
+
+**When updating versions:**
+
+1. **Check current version:**
+   - `package.json` version number
+   - `@/app/lib/constants.ts` version constants
+   - `CHANGELOG.md` latest version
+
+2. **Determine version bump:**
+   - MAJOR (x.0.0): Breaking changes
+   - MINOR (0.x.0): New features, no breaking changes
+   - PATCH (0.0.x): Bug fixes, no new features
+
+3. **Update files:**
+
+   ```typescript
+   // @/app/lib/constants.ts
+   export const VERSION = '1.2.3'
+   ```
+
+   ```json
+   // package.json
+   {
+     "name": "plutony-web",
+     "version": "1.2.3"
+   }
+   ```
+
+4. **Commit version updates:**
+
+   ```bash
+   git commit -m "version: 1.2.3"
+   ```
+
+### Atomic Commits
+
+**Rules for atomic commits:**
+
+1. **Single Purpose:**
+   - Each commit should do ONE thing
+   - Changes should be logically related
+   - Easy to understand and review
+
+2. **Scope Limitation:**
+   - Limit to one feature/fix/refactor
+   - Keep changes focused and minimal
+   - Split large changes into smaller commits
+
+3. **File Organization:**
+   - Group related file changes
+   - Include all necessary dependencies
+   - Don't mix unrelated changes
+
+4. **Examples:**
+
+   ✅ **Good Atomic Commits:**
+
+   ```bash
+   # Single feature
+   feat(auth): add email verification
+   
+   # Single bug fix
+   fix(ui): resolve button alignment in navbar
+   
+   # Focused refactor
+   refactor(api): convert user endpoints to TypeScript
+   ```
+
+   ❌ **Bad Non-Atomic Commits:**
+
+   ```bash
+   # Multiple unrelated changes
+   chore: fix typos, add new feature, update deps
+   
+   # Too broad/vague
+   update: various changes and improvements
+   
+   # Mixed concerns
+   feat: add auth and update styling
+   ```
+
+5. **Commit Organization:**
+   - Write clear commit messages
+   - Use conventional commit format
+   - Reference issues/tickets when applicable
+
+### Git Usage Rules for AI Agents
+
+**CRITICAL: AI agents must follow these git rules to avoid confusion:**
+
+1. **No Git Status Checking:**
+   - ❌ NEVER run `git status`, `git diff`, or `git log` commands
+   - ❌ NEVER check git history or repository state
+   - ❌ NEVER use git commands to determine what files to commit
+
+2. **Commit Only Current Session Changes:**
+   - ✅ ONLY commit files that were modified/created in the current chat session
+   - ✅ Track changes mentally based on what you actually edited
+   - ✅ Use `git add <specific-files>` for files you know you changed
+   - ✅ Commit immediately after making changes
+
+3. **Simple Commit Process:**
+   ```bash
+   # Only use these commands:
+   git add <file1> <file2> <file3>  # Only files you modified
+   git commit -m "descriptive message"
+   ```
+
+4. **Avoid Complex Git Operations:**
+   - ❌ NO `git status --porcelain`
+   - ❌ NO `git diff` or `git log` commands
+   - ❌ NO checking for staged/unstaged changes
+   - ❌ NO git history analysis
+
+5. **Session-Based Tracking:**
+   - Keep mental track of files you modified during the session
+   - Only commit files you actually changed
+   - If unsure, ask the user which files to commit
+
+**Example of CORRECT git usage:**
+```bash
+# Agent modified these files in current session:
+git add src/lib/auth/config.ts src/middleware.ts
+git commit -m "feat(auth): implement rate limiting and CSRF protection"
+```
+
+**Example of INCORRECT git usage:**
+```bash
+# ❌ DON'T DO THIS:
+git status                    # Confusing and unnecessary
+git diff                      # Takes too long and confuses
+git log --oneline -5          # Unnecessary history check
+git add .                     # Might add unrelated files
+```
+
+## 🛠️ Technology Stack & Standards
+
+### Core Technologies
+
+- **Framework**: NextJS 15+ (App Router)
+- **React**: 19.1.0
+- **TypeScript**: 5.7.3
+- **Styling**: Tailwind CSS 3.4.17
+- **Package Manager**: PNPM (ALWAYS use pnpm, never npm or yarn)
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Database**: PostgreSQL with direct postgres client
+- **Authentication**: NextAuth.js 5.0.0-beta
+- **Email**: Resend
+- **Content**: Content Collections with MDX
+
+### Development Standards
+
+- **Code Quality**: ESLint + Prettier + TypeScript strict mode
+- **Validation**: Zod for all form validation and API input validation
+- **Build System**: Turbo for fast builds and development
+- **Git Hooks**: Husky + lint-staged for pre-commit checks
+- **Testing**: Unit tests for core functions, integration tests for APIs
+- **Performance**: Next.js 15+ optimizations, image optimization, lazy loading
+- **Logging**: Centralized logging system (no console.log in production)
+
+### Environment & Scripts
+
+**Available Scripts:**
+
+```bash
+# Development
+pnpm dev              # Start development server with Turbo
+pnpm dev:turbo        # Start development server with Turbo (explicit)
+
+# Build & Production
+pnpm build            # Build for production
+pnpm start            # Start production server
+
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm lint:fix         # Run ESLint with auto-fix
+pnpm format           # Format code with Prettier
+pnpm format:check     # Check formatting without changes
+pnpm type-check       # Run TypeScript type checking
+pnpm check            # Run all checks (lint + format + type)
+pnpm check:fix        # Run all checks with auto-fix
+```
+
+## Development Workflow
+
+### Task Management
+
+1. **Check TODO.md**: Review current tasks and phases
+2. **Add New Tasks**: If not listed, add to appropriate phase
+3. **Update Progress**: Mark tasks as in-progress/completed
+4. **Track Work**: Document decisions and changes
+
+### Development Environment Setup
+
+**Required Environment Variables:**
+
+```bash
+# Database
+POSTGRES_URL="postgresql://username:password@localhost:5432/plutony"
+```
+
+### Development Process Management
+
+**CRITICAL: Always check for running development processes before starting new ones**
+
+**Before running `pnpm dev`:**
+
+```bash
+# Check for running Node.js processes
+netstat -ano | findstr :3000   # Windows
+lsof -i :3000                  # macOS/Linux
+
+# Check for running pnpm dev processes
+tasklist | findstr "node"      # Windows
+ps aux | grep "pnpm dev"       # macOS/Linux
+```
+
+**If a process is already running:**
+
+```bash
+# Kill process by port (Windows)
+netstat -ano | findstr :3000
+taskkill /PID <PID_NUMBER> /F
+
+# Kill process by port (macOS/Linux)
+lsof -ti:3000 | xargs kill -9
+
+# Kill all node processes (if needed)
+taskkill /F /IM node.exe       # Windows
+pkill -f node                  # macOS/Linux
+```
+
+**Safe development workflow:**
+
+1. **Check for existing processes** before starting development
+2. **Kill existing processes** if they're stuck or unresponsive
+3. **Start fresh development server** with `
+
+2. **Kill existing processes** if they're stuck or unresponsive
+3. **Start fresh development server** with `

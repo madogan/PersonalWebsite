@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
-import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
 import './globals.css'
@@ -28,6 +27,16 @@ export const metadata: Metadata = {
   authors: [{ name: 'Your Name' }],
   creator: 'Your Name',
   metadataBase: new URL('https://example.com'),
+  icons: {
+    icon: [
+      { url: '/images/profile.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/profile.jpg', sizes: '16x16', type: 'image/jpeg' },
+    ],
+    apple: [
+      { url: '/images/profile.jpg', sizes: '180x180', type: 'image/jpeg' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -52,7 +61,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
-            <Header />
             <main className="flex-1">{children}</main>
             <Footer />
             <BottomNavigation />

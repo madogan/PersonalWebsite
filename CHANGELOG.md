@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-01-27
+
+### Added
+- Profile photo in hero section with circular design and dramatic lighting effects
+- Responsive profile photo display (visible on mobile and desktop)
+- Profile photo as favicon.ico with automatic generation
+- Favicon generation script (`npm run generate-favicon`)
+- Multiple favicon formats (ICO, PNG) for better browser compatibility
+
+### Changed
+- Enhanced hero section with larger, more prominent profile photo
+- Improved profile photo styling with glassmorphism effects and accent borders
+- Updated favicon generation to use secure implementation
+
+### Security
+- Fixed 10 npm package vulnerabilities (3 moderate, 2 high, 5 critical)
+- Updated to-ico package to secure version 1.0.1
+- Improved favicon generation script security
+
 ## [0.1.2] - 2025-01-27
 
 ### Added

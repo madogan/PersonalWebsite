@@ -192,6 +192,13 @@
 
 ## Completed
 
+### Home Page Enhancements
+- [x] Add profile photo to hero section with circular design
+- [x] Make profile photo responsive and visible on mobile devices
+- [x] Implement dramatic lighting effects and glassmorphism styling for profile photo
+- [x] Set up profile photo as favicon.ico with automatic generation script
+- [x] Add favicon generation script with security-focused implementation
+
 ### Blog System Improvements
 - [x] Implement pagination for blog list page with glassmorphism design
 - [x] Add configurable posts per page (default: 9)
@@ -204,4 +211,9 @@
 - [x] Remove "Open to work" indicator from resume page
 - [x] Fix alignment issues on resume page - ensure all contact links are on the same line
 - [x] Remove all Twitter-related content from the website
+
+### Security & Maintenance
+- [x] Resolve npm package vulnerabilities (10 vulnerabilities fixed)
+- [x] Update to-ico package to secure version (1.0.1)
+- [x] Improve favicon generation script security
 

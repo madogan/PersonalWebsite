@@ -10,23 +10,23 @@ export function Footer() {
       className={cn(
         'border-t border-glass-border',
         'bg-glass-bg/50 backdrop-blur-md',
-        'mt-auto'
+        'mt-auto pb-20 md:pb-6'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-foreground/60">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+          <div className="text-xs sm:text-sm text-foreground/60 text-center md:text-left">
             © {currentYear} {siteConfig.name}. All rights reserved.
           </div>
           
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             {siteConfig.links.github && (
               <Link
                 href={siteConfig.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-sm text-foreground/60 hover:text-accent',
+                  'text-xs sm:text-sm text-foreground/60 hover:text-accent',
                   'transition-colors duration-200',
                   'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
                 )}
@@ -40,7 +40,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-sm text-foreground/60 hover:text-accent',
+                  'text-xs sm:text-sm text-foreground/60 hover:text-accent',
                   'transition-colors duration-200',
                   'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
                 )}

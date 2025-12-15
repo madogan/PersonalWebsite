@@ -1,0 +1,146 @@
+{
+  "personal": {
+    "name": "Ali Doğan",
+    "title": "Senior Site Reliability Engineer – AI & MLOps Infrastructure",
+    "tagline": "",
+    "email": "muhammed.ali.dogan@outlook.com",
+    "location": "Ankara, Turkey · Remote",
+    "website": "",
+    "linkedin": "linkedin.com/me/madogan",
+    "github": "github.com/madogan"
+  },
+  "summary": "Senior Site Reliability Engineer with 6+ years of experience operating and stabilizing distributed, cloud, and on-prem systems, with a strong focus on observability, incident response, performance optimization, and reliability engineering. Background in Machine Learning systems and software engineering, now specializing in AI systems in production—including deployment readiness, monitoring, latency analysis, and cost-aware infrastructure. Known for solving complex \"gray-area\" production issues through holistic RCA across application, infrastructure, and network layers.",
+  "keyStrengths": [],
+  "workWithMe": [],
+  "coreSkills": {
+    "reliability": [
+      "SLI/SLO definition, error budgets, incident management",
+      "Root Cause Analysis (RCA), MTTR/MTTD reduction",
+      "Metrics, logs, traces (end-to-end visibility)"
+    ],
+    "cloud": [
+      "Kubernetes, Docker, OpenStack, Rancher",
+      "Azure (primary), GCP (working knowledge), on-prem & bare metal",
+      "High-availability architectures, hybrid systems"
+    ],
+    "aiMlops": [
+      "Production readiness for ML/AI services",
+      "Monitoring latency, throughput, failure modes, and cost",
+      "Observability for ML inference and data pipelines",
+      "Deployment pipelines for ML-backed services (infra focus)"
+    ],
+    "programming": [
+      "Python (APIs, automation, tooling), Bash, PowerShell",
+      "REST, gRPC, FastAPI, Flask",
+      "CI/CD with Azure DevOps, GitHub Actions, Terraform"
+    ]
+  },
+  "experience": [
+    {
+      "company": "Zoolatech (Pandora – Europe's largest jewelry retailer)",
+      "position": "Senior Site Reliability Engineer",
+      "location": "Remote",
+      "startDate": "Apr 2025",
+      "endDate": "Present",
+      "description": [
+        "Designed and operated observability platforms for large-scale retail and e-commerce systems across cloud and in-store environments.",
+        "Defined and monitored SLIs/SLOs, managed error budgets, and improved operational KPIs (MTTD/MTTR).",
+        "Participated in incident response and RCA for mission-critical systems, including hybrid cloud and on-prem integrations.",
+        "Automated deployment and monitoring workflows to reduce operational toil and improve system stability.",
+        "Collaborated with platform, application, and business teams to ensure reliable production behavior under real-world load."
+      ]
+    },
+    {
+      "company": "Destel",
+      "position": "Site Reliability Engineer (Mid/Senior)",
+      "location": "Ankara",
+      "startDate": "Jan 2022",
+      "endDate": "May 2025",
+      "description": [
+        "Solved complex, unresolved production issues (\"gray problems\") using APM, NPM, and packet-level analysis.",
+        "Built end-to-end observability pipelines using Grafana, Prometheus, InfluxDB, Loki, Tempo, ELK, and Istio.",
+        "Performed deep RCA with Wireshark, Riverbed AppResponse, Aternity, AppDynamics, correlating application, network, and infrastructure behavior.",
+        "Guided enterprise clients in adopting SRE practices, alerting strategies, and proactive monitoring.",
+        "Improved system reliability and performance by addressing latency, bottlenecks, and misconfigured dependencies in production."
+      ]
+    },
+    {
+      "company": "EHSIM (Defense Industry)",
+      "position": "Site Reliability Engineer",
+      "location": "Ankara",
+      "startDate": "Mar 2021",
+      "endDate": "Oct 2021",
+      "description": [
+        "Maintained availability and reliability of a confidential, mission-critical system in a high-compliance environment.",
+        "Managed infrastructure built on OpenStack, Rancher, Kubernetes, Zabbix, Grafana, HAProxy, and ELK.",
+        "Conducted RCA and implemented monitoring strategies to ensure continuous system availability.",
+        "Operated as part of a small SRE team with full production responsibility."
+      ]
+    },
+    {
+      "company": "Logarity (Co-Founder)",
+      "position": "DevOps & Backend Engineer",
+      "location": "İstanbul",
+      "startDate": "Apr 2020",
+      "endDate": "Sep 2020",
+      "description": [
+        "Built an ELK-based mini SIEM with scalable log ingestion and archiving.",
+        "Developed gRPC-based agents and management services for efficient data collection.",
+        "Designed backend components with scalability, observability, and performance in mind.",
+        "Gained hands-on experience with event pipelines, logging systems, and operational tooling."
+      ]
+    },
+    {
+      "company": "AllConfig (Co-Founder)",
+      "position": "Software Engineer / DevOps",
+      "location": "İstanbul",
+      "startDate": "Jul 2019",
+      "endDate": "Mar 2020",
+      "description": [
+        "Designed and developed a microservice-based network configuration management system.",
+        "Automated network device management using Python and Netmiko.",
+        "Implemented CI/CD and containerized deployments with Docker, Kubernetes, and Azure DevOps.",
+        "Strengthened expertise in distributed systems, networking, and DevOps culture."
+      ]
+    },
+    {
+      "company": "VeriUs",
+      "position": "Machine Learning Software Engineer",
+      "location": "İstanbul",
+      "startDate": "Jun 2018",
+      "endDate": "May 2019",
+      "description": [
+        "Developed ML-backed APIs for text summarization and intent detection.",
+        "Built data collection and preprocessing pipelines.",
+        "Co-authored an academic paper on Word Sense Disambiguation, providing a strong theoretical ML foundation.",
+        "Experience here informs current focus on operating ML systems reliably in production."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Marmara University",
+      "degree": "B.Sc. in Computer Science Engineering",
+      "gpa": "3.06",
+      "location": "Istanbul, Turkey"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "DevOps Institute – Site Reliability Engineering (SRE) Foundation℠",
+      "version": "v1",
+      "issuer": "DevOps Institute"
+    }
+  ],
+  "aiMlopsExperience": {
+    "title": "AI / MLOps Experience (Infrastructure Focus)",
+    "description": [
+      "Deployment and operation of ML-backed services in production environments.",
+      "Observability design for inference latency, error rates, and system behavior.",
+      "Cost and performance awareness for ML/AI workloads (infrastructure perspective).",
+      "Distinct separation between model development and production reliability ownership."
+    ]
+  },
+  "skills": {},
+  "caseStudy": null
+}

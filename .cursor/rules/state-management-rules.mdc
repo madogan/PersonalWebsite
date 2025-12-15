@@ -1,0 +1,367 @@
+# State Management and Data Handling Rules for Plutony Web Project
+
+## 🔄 State Management
+
+### State Guidelines
+
+- Use React 19 built-in state management
+- Server state with React Query/SWR for complex data
+- Form state with Server Actions + Zod validation
+- Global state sparingly with Context API
+
+### State Management Patterns
+
+**1. Local Component State:**
+
+```typescript
+// ✅ Good: Simple local state
+const [isOpen, setIsOpen] = useState(false)
+
+// ✅ Good: Derived state
+const [items, setItems] = useState<Item[]>([])
+const totalItems = useMemo(() => items.length, [items])
+
+// ❌ Bad: Complex local state
+const [state, setState] = useState({
+  isOpen: false,
+  items: [],
+  selectedItem: null,
+  loading: false,
+  error: null
+})
+```
+
+**2. Form State Management:**
+
+```typescript
+// ✅ Good: Server Actions with Zod validation
+"use server"
+async function handleSubmit(formData: FormData) {
+  const rawData = {
+    name: String(formData.get("name") || ''),
+    email: String(formData.get("email") || '')
+  }
+  
+  // Validate with Zod schema
+  const data = formSchema.parse(rawData)
+  // Process form...
+}
+
+// Client component
+function Form() {
+  const { pending } = useFormStatus()
+  const [message, setMessage] = useState<FormMessage | null>(null)
+  
+  return (
+    <form action={handleSubmit}>
+      <Input name="name" required />
+      <Input name="email" type="email" required />
+      <Button disabled={pending}>
+        {pending ? "Submitting..." : "Submit"}
+      </Button>
+    </form>
+  )
+}
+
+// ❌ Bad: Manual form state
+function Form() {
+  const [formData, setFormData] = useState({})
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    try {
+      await submitForm(formData)
+    } catch (error) {
+      setErrors(error)
+    }
+    setIsSubmitting(false)
+  }
+}
+```
+
+**3. Server State Management:**
+
+```typescript
+// ✅ Good: React Query for server state
+const { data, isLoading } = useQuery({
+  queryKey: ['todos'],
+  queryFn: fetchTodos
+})
+
+// ❌ Bad: Manual server state
+const [todos, setTodos] = useState([])
+const [loading, setLoading] = useState(false)
+const [error, setError] = useState(null)
+```
+
+### Context Usage Guidelines
+
+**When to Use Context:**
+
+1. Theme data
+2. User authentication state
+3. Feature flags
+4. Localization data
+5. Global UI state
+
+**Context Implementation:**
+
+```typescript
+// ✅ Good: Proper context structure
+export const ThemeContext = createContext<ThemeContextType | null>(null)
+
+export function ThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setTheme] = useState<Theme>('light')
+  
+  const value = useMemo(() => ({
+    theme,
+    setTheme
+  }), [theme])
+  
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
+
+// ❌ Bad: Context without memoization
+export function BadThemeProvider({ children }: PropsWithChildren) {
+  const [theme, setTheme] = useState<Theme>('light')
+  
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
+```
+
+### Data Fetching Patterns
+
+**1. Server Components:**
+
+```typescript
+// ✅ Good: Async Server Component
+async function UserProfile({ userId }: { userId: string }) {
+  const user = await fetchUser(userId)
+  return <div>{user.name}</div>
+}
+
+// ❌ Bad: Client-side fetching when unnecessary
+'use client'
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    fetchUser(userId).then(setUser)
+  }, [userId])
+  return <div>{user?.name}</div>
+}
+```
+
+**2. React Query Usage:**
+
+```typescript
+// ✅ Good: Proper query configuration
+const { data, isLoading } = useQuery({
+  queryKey: ['user', userId],
+  queryFn: () => fetchUser(userId),
+  staleTime: 5 * 60 * 1000, // 5 minutes
+  cacheTime: 30 * 60 * 1000 // 30 minutes
+})
+
+// ❌ Bad: Missing configuration
+const { data } = useQuery(['user', userId], fetchUser)
+```
+
+### State Updates
+
+**1. Immutable Updates:**
+
+```typescript
+// ✅ Good: Immutable state updates
+setItems(prev => [...prev, newItem])
+setUser(prev => ({ ...prev, name: newName }))
+
+// ❌ Bad: Mutating state directly
+setItems(items.push(newItem))
+setUser(user.name = newName)
+```
+
+**2. Batch Updates:**
+
+```typescript
+// ✅ Good: Batched updates
+function handleSubmit() {
+  setSubmitting(true)
+  setError(null)
+  setData(newData)
+}
+
+// ❌ Bad: Individual updates
+function handleSubmit() {
+  setSubmitting(true)
+  setTimeout(() => {
+    setError(null)
+  })
+  setTimeout(() => {
+    setData(newData)
+  })
+}
+```
+
+### Performance Optimization
+
+**1. Memoization:**
+
+```typescript
+// ✅ Good: Proper memoization
+const memoizedValue = useMemo(() => 
+  expensiveCalculation(props.data),
+  [props.data]
+)
+
+const memoizedCallback = useCallback(() => {
+  handleChange(props.value)
+}, [props.value])
+
+// ❌ Bad: Unnecessary memoization
+const memoizedString = useMemo(() => "static string", [])
+const simpleCalculation = useMemo(() => a + b, [a, b])
+```
+
+**2. Render Optimization:**
+
+```typescript
+// ✅ Good: Optimized rendering
+const MemoizedComponent = memo(function Component({ item }) {
+  return <div>{item.name}</div>
+}, (prev, next) => prev.item.id === next.item.id)
+
+// ❌ Bad: Unnecessary memo
+const SimpleComponent = memo(function Component({ text }) {
+  return <div>{text}</div>
+})
+```
+
+### Error Handling
+
+**1. Error Boundaries:**
+
+```typescript
+// ✅ Good: Error boundary usage
+<ErrorBoundary fallback={<ErrorFallback />}>
+  <ComponentThatMightError />
+</ErrorBoundary>
+
+// ❌ Bad: No error handling
+<ComponentThatMightError />
+```
+
+**2. Query Error Handling:**
+
+```typescript
+// ✅ Good: Proper error handling
+const { data, error, isError } = useQuery({
+  queryKey: ['data'],
+  queryFn: fetchData,
+  onError: (error) => {
+    logger.error('Data fetch failed:', error)
+  }
+})
+
+// ❌ Bad: Missing error handling
+const { data } = useQuery(['data'], fetchData)
+```
+
+### State Persistence
+
+**1. Local Storage:**
+
+```typescript
+// ✅ Good: Proper persistence
+const [theme, setTheme] = useState(() => {
+  try {
+    return localStorage.getItem('theme') || 'light'
+  } catch {
+    return 'light'
+  }
+})
+
+useEffect(() => {
+  try {
+    localStorage.setItem('theme', theme)
+  } catch (error) {
+    logger.error('Failed to save theme:', error)
+  }
+}, [theme])
+
+// ❌ Bad: Unsafe persistence
+const [theme, setTheme] = useState(localStorage.getItem('theme'))
+useEffect(() => {
+  localStorage.setItem('theme', theme)
+}, [theme])
+```
+
+**2. Form Persistence:**
+
+```typescript
+// ✅ Good: Form state persistence
+const { watch, setValue } = useForm({
+  defaultValues: async () => {
+    try {
+      const saved = await localStorage.getItem('form-draft')
+      return saved ? JSON.parse(saved) : defaultValues
+    } catch {
+      return defaultValues
+    }
+  }
+})
+
+// ❌ Bad: Unsafe form persistence
+const { watch } = useForm({
+  defaultValues: JSON.parse(localStorage.getItem('form-draft'))
+})
+```
+
+### State Reset and Cleanup
+
+**1. Effect Cleanup:**
+
+```typescript
+// ✅ Good: Proper cleanup
+useEffect(() => {
+  const subscription = subscribe(callback)
+  return () => subscription.unsubscribe()
+}, [callback])
+
+// ❌ Bad: Missing cleanup
+useEffect(() => {
+  subscribe(callback)
+}, [callback])
+```
+
+**2. State Reset:**
+
+```typescript
+// ✅ Good: Proper state reset
+function resetState() {
+  setUser(null)
+  setToken(null)
+  queryClient.clear()
+  localStorage.clear()
+}
+
+// ❌ Bad: Partial reset
+function resetState() {
+  setUser(null)
+  // Forgot to clear other state
+}
+```
+description:
+globs:
+alwaysApply: false
+---
