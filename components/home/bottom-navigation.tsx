@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Home, FileText, Briefcase, Zap, Link as LinkIcon } from 'lucide-react'
@@ -16,7 +16,9 @@ const navItems = [
 
 export function BottomNavigation() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 })
   const pathname = usePathname()
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
   useEffect(() => {
     if (pathname !== '/') return
@@ -61,17 +63,49 @@ export function BottomNavigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [pathname])
 
+  // Update indicator position when active index changes
+  useEffect(() => {
+    const updateIndicator = () => {
+      const activeItem = itemRefs.current[activeIndex]
+      const container = activeItem?.parentElement
+      
+      if (activeItem && container) {
+        const containerRect = container.getBoundingClientRect()
+        const itemRect = activeItem.getBoundingClientRect()
+        
+        setIndicatorStyle({
+          left: itemRect.left - containerRect.left,
+          width: itemRect.width,
+        })
+      }
+    }
+
+    // Update on active index change and window resize
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      updateIndicator()
+      // Also update after a small delay to catch any layout shifts
+      setTimeout(updateIndicator, 50)
+    })
+    
+    window.addEventListener('resize', updateIndicator)
+    
+    return () => {
+      window.removeEventListener('resize', updateIndicator)
+    }
+  }, [activeIndex])
+
   if (pathname !== '/') return null
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 no-print flex justify-center pb-4">
-      <div className="glass-panel px-2 py-2 flex items-center gap-1 relative rounded-2xl shadow-2xl max-w-sm w-full mx-4">
+      <div className="glass-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-2xl shadow-2xl max-w-sm md:max-w-2xl w-full mx-4">
         {/* Sliding indicator */}
         <div
           className="absolute top-2 bottom-2 bg-accent/20 rounded-lg transition-all duration-500 ease-out border border-accent/30"
           style={{
-            left: `${activeIndex * (100 / navItems.length)}%`,
-            width: `${100 / navItems.length}%`,
+            left: `${indicatorStyle.left}px`,
+            width: `${indicatorStyle.width}px`,
           }}
         />
 
@@ -82,6 +116,9 @@ export function BottomNavigation() {
           return (
             <Link
               key={item.href}
+              ref={(el) => {
+                itemRefs.current[index] = el
+              }}
               href={item.href}
               onClick={(e) => {
                 e.preventDefault()
@@ -96,16 +133,19 @@ export function BottomNavigation() {
                 }
               }}
               className={cn(
-                'relative z-10 flex items-center justify-center',
-                'p-2.5 rounded-lg transition-all duration-200',
-                'flex-1',
+                'relative z-10 flex items-center justify-center gap-1.5 md:gap-2',
+                'p-2.5 md:px-4 md:py-2.5 rounded-lg transition-all duration-200',
+                'flex-1 md:flex-none',
                 isActive
                   ? 'text-accent'
                   : 'text-foreground/60 hover:text-foreground'
               )}
               aria-label={item.label}
             >
-              <Icon className={cn('h-5 w-5 md:h-6 md:w-6 transition-transform duration-200', isActive && 'scale-110')} />
+              <Icon className={cn('h-5 w-5 md:h-5 md:w-5 transition-transform duration-200 flex-shrink-0', isActive && 'scale-110')} />
+              <span className="hidden md:inline text-xs md:text-sm font-medium whitespace-nowrap">
+                {item.label}
+              </span>
             </Link>
           )
         })}

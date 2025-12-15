@@ -27,9 +27,7 @@ async function generateFavicon() {
 
     const profileImagePath = path.join(process.cwd(), 'public', 'images', 'profile.jpg')
     const faviconPath = path.join(process.cwd(), 'app', 'favicon.ico')
-    const publicFaviconPath = path.join(process.cwd(), 'public', 'favicon.ico')
     const faviconPngPath = path.join(process.cwd(), 'app', 'icon.png')
-    const publicFaviconPngPath = path.join(process.cwd(), 'public', 'favicon.png')
 
     // Check if profile image exists
     if (!fs.existsSync(profileImagePath)) {
@@ -55,58 +53,58 @@ async function generateFavicon() {
       pngBuffers.push(buffer)
     }
 
-    // Generate PNG favicons (modern browsers support PNG)
+    // Generate PNG favicon for app directory (Next.js 15 uses app/icon.png)
     await sharp(profileImagePath)
       .resize(32, 32, {
         fit: 'cover',
         position: 'center',
       })
+      .ensureAlpha() // Ensure RGBA format
       .toFormat('png')
       .toFile(faviconPngPath)
 
-    await sharp(profileImagePath)
-      .resize(32, 32, {
-        fit: 'cover',
-        position: 'center',
-      })
-      .toFormat('png')
-      .toFile(publicFaviconPngPath)
-
     console.log(`✓ Created icon.png in app/ directory: ${faviconPngPath}`)
-    console.log(`✓ Created favicon.png in public/ directory: ${publicFaviconPngPath}`)
 
-    // Generate ICO file using a simple approach
-    // Modern approach: Copy PNG as ICO (many browsers accept PNG in ICO files)
-    // For proper ICO, we create a minimal ICO wrapper
+    // Generate ICO file - Next.js 15 requires proper ICO format
+    // We'll use the PNG data but ensure it's in RGBA format
     try {
-      const png32Buffer = pngBuffers[1] // 32x32 buffer
+      // Generate a proper 32x32 PNG in RGBA format for ICO
+      const icoPngBuffer = await sharp(profileImagePath)
+        .resize(32, 32, {
+          fit: 'cover',
+          position: 'center',
+        })
+        .ensureAlpha() // Ensure RGBA format
+        .toFormat('png')
+        .toBuffer()
       
-      // Create minimal ICO file structure
+      // Create proper ICO file structure
       // ICO Header (6 bytes)
       const icoHeader = Buffer.alloc(6)
-      icoHeader.writeUInt16LE(0, 0) // Reserved
+      icoHeader.writeUInt16LE(0, 0) // Reserved (must be 0)
       icoHeader.writeUInt16LE(1, 2) // Type (1 = ICO)
       icoHeader.writeUInt16LE(1, 4) // Number of images
       
       // ICO Directory Entry (16 bytes)
       const icoDir = Buffer.alloc(16)
-      icoDir.writeUInt8(32, 0) // Width (0 = 256px, but we use 32 for 32px)
-      icoDir.writeUInt8(32, 1) // Height (0 = 256px, but we use 32 for 32px)
+      icoDir.writeUInt8(32, 0) // Width (32px, 0 means 256px)
+      icoDir.writeUInt8(32, 1) // Height (32px, 0 means 256px)
       icoDir.writeUInt8(0, 2) // Color palette (0 = no palette)
       icoDir.writeUInt8(0, 3) // Reserved
       icoDir.writeUInt16LE(1, 4) // Color planes
-      icoDir.writeUInt16LE(32, 6) // Bits per pixel
-      icoDir.writeUInt32LE(png32Buffer.length, 8) // Image data size
+      icoDir.writeUInt16LE(32, 6) // Bits per pixel (32 for RGBA)
+      icoDir.writeUInt32LE(icoPngBuffer.length, 8) // Image data size
       icoDir.writeUInt32LE(22, 12) // Offset to image data (6 + 16 = 22)
       
-      // Combine header, directory, and PNG data
-      const icoFile = Buffer.concat([icoHeader, icoDir, png32Buffer])
+      // For ICO format, we need to embed PNG data
+      // Modern ICO format can contain PNG data directly
+      const icoFile = Buffer.concat([icoHeader, icoDir, icoPngBuffer])
       
+      // Only write to app directory (Next.js 15 convention)
       fs.writeFileSync(faviconPath, icoFile)
-      fs.writeFileSync(publicFaviconPath, icoFile)
       
       console.log(`✓ Created favicon.ico in app/ directory: ${faviconPath}`)
-      console.log(`✓ Created favicon.ico in public/ directory: ${publicFaviconPath}`)
+      console.log('ℹ Note: Next.js 15 uses app/favicon.ico (public/favicon.ico is not needed)')
     } catch (icoError) {
       console.warn('⚠ Could not generate ICO format:', icoError.message)
       console.log('ℹ PNG favicons have been created and work in all modern browsers.')

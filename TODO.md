@@ -212,6 +212,13 @@
 - [x] Fix alignment issues on resume page - ensure all contact links are on the same line
 - [x] Remove all Twitter-related content from the website
 
+### Navigation Improvements
+- [x] Add menu item labels to bottom navigation on desktop view
+- [x] Fix active indicator centering to accurately align with menu items
+- [x] Improve responsive design for bottom navigation (icon-only on mobile, labels on desktop)
+- [x] Fix favicon conflict between app/ and public/ directories
+- [x] Ensure favicon.ico uses proper RGBA format for Next.js 15 compatibility
+
 ### Security & Maintenance
 - [x] Resolve npm package vulnerabilities (10 vulnerabilities fixed)
 - [x] Update to-ico package to secure version (1.0.1)
