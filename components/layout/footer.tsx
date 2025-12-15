@@ -1,0 +1,57 @@
+import Link from 'next/link'
+import { siteConfig } from '@/lib/constants'
+import { cn } from '@/lib/utils'
+
+export function Footer() {
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer
+      className={cn(
+        'border-t border-glass-border',
+        'bg-glass-bg/50 backdrop-blur-md',
+        'mt-auto'
+      )}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-sm text-foreground/60">
+            © {currentYear} {siteConfig.name}. All rights reserved.
+          </div>
+          
+          <div className="flex items-center gap-6">
+            {siteConfig.links.github && (
+              <Link
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  'text-sm text-foreground/60 hover:text-accent',
+                  'transition-colors duration-200',
+                  'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
+                )}
+              >
+                GitHub
+              </Link>
+            )}
+            {siteConfig.links.linkedin && (
+              <Link
+                href={siteConfig.links.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  'text-sm text-foreground/60 hover:text-accent',
+                  'transition-colors duration-200',
+                  'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
+                )}
+              >
+                LinkedIn
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
