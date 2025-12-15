@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import './globals.css'
 
 const inter = Inter({
@@ -60,7 +61,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
-          <div className="flex min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col relative">
+            {/* Theme Toggle - Top Right */}
+            <div className="fixed top-4 right-4 z-50 no-print">
+              <ThemeToggle />
+            </div>
             <main className="flex-1">{children}</main>
             <Footer />
             <BottomNavigation />

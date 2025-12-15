@@ -227,4 +227,9 @@
 ### UI/UX Improvements
 - [x] Remove links section from home page
 - [x] Remove links menu item from bottom navigation
+- [x] Update color scheme from green to true turquoise tones
+- [x] Implement theme-specific profile images (profile_light.jpg and profile_dark.jpg)
+- [x] Create ProfileImage component with automatic theme-based image switching
+- [x] Remove empty spacing on right side of bottom navigation menu
+- [x] Fix hardcoded green color in status badge component
 

@@ -7,9 +7,9 @@
     /* Light Theme Colors */
     --color-background: 250 250 250; /* #FAFAFA */
     --color-foreground: 10 10 10; /* #0A0A0A */
-    --color-accent: 20 184 166; /* #14B8A6 - Teal */
-    --color-accent-secondary: 16 185 129; /* #10B981 - Soft Green */
-    --color-accent-cyan: 6 182 212; /* #06B6D4 - Cyan */
+    --color-accent: 0 128 128; /* #008080 - True Turquoise (Teal) */
+    --color-accent-secondary: 32 178 170; /* #20B2AA - Light Sea Green (Turquoise) */
+    --color-accent-cyan: 64 224 208; /* #40E0D0 - Turquoise */
     
     /* Glassmorphism */
     --glass-bg: rgba(255, 255, 255, 0.15);
@@ -43,12 +43,12 @@
   }
 
   .dark {
-    /* Dark Theme Colors */
+    /* Dark Theme Colors - Darker Turquoise Tones */
     --color-background: 10 10 10; /* #0A0A0A */
     --color-foreground: 250 250 250; /* #FAFAFA */
-    --color-accent: 45 212 191; /* #2DD4BF - Teal */
-    --color-accent-secondary: 52 211 153; /* #34D399 - Soft Green */
-    --color-accent-cyan: 34 211 238; /* #22D3EE - Cyan */
+    --color-accent: 0 128 128; /* #008080 - True Turquoise (Teal) - Darker for dark theme */
+    --color-accent-secondary: 32 178 170; /* #20B2AA - Light Sea Green (Turquoise) */
+    --color-accent-cyan: 48 213 200; /* #30D5C8 - Turquoise */
     
     /* Glassmorphism for dark theme */
     --glass-bg: rgba(0, 0, 0, 0.3);

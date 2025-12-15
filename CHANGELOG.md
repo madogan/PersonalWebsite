@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2025-01-27
+
+### Added
+- Theme-specific profile images support (profile_light.jpg and profile_dark.jpg)
+- ProfileImage component with automatic theme-based image switching
+- Smooth transitions when switching between theme-specific profile images
+
+### Changed
+- Updated color scheme from green to true turquoise tones (#008080, #20B2AA, #40E0D0)
+- Improved bottom navigation: removed empty spacing on right side (desktop view)
+- Enhanced profile image component to use theme-aware image selection
+
+### Fixed
+- Fixed hardcoded green color in status badge component (now uses accent color)
+- Fixed color scheme not applying correctly (updated CSS variables to true turquoise)
+
 ## [0.1.5] - 2025-01-27
 
 ### Removed

@@ -98,7 +98,7 @@ export function BottomNavigation() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 no-print flex justify-center pb-4">
-      <div className="glass-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-2xl shadow-2xl max-w-sm md:max-w-2xl w-full mx-4">
+      <div className="glass-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-2xl shadow-2xl w-full max-w-sm md:w-fit md:max-w-none mx-4">
         {/* Sliding indicator */}
         <div
           className="absolute top-2 bottom-2 bg-accent/20 rounded-lg transition-all duration-500 ease-out border border-accent/30"
