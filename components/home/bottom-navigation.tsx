@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, FileText, Briefcase, Zap, Link as LinkIcon } from 'lucide-react'
+import { Home, FileText, Briefcase, Zap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -11,7 +11,6 @@ const navItems = [
   { href: '#summary', label: 'Summary', icon: FileText },
   { href: '#experience', label: 'Experience', icon: Briefcase },
   { href: '#skills', label: 'Skills', icon: Zap },
-  { href: '#links', label: 'Links', icon: LinkIcon },
 ]
 
 export function BottomNavigation() {

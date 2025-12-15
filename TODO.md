@@ -224,3 +224,7 @@
 - [x] Update to-ico package to secure version (1.0.1)
 - [x] Improve favicon generation script security
 
+### UI/UX Improvements
+- [x] Remove links section from home page
+- [x] Remove links menu item from bottom navigation
+
