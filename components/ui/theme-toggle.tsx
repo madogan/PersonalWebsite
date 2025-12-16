@@ -18,7 +18,7 @@ export function ThemeToggle() {
     return (
       <button
         className={cn(
-          'relative inline-flex h-10 w-10 items-center justify-center rounded-md',
+          'relative inline-flex h-10 w-10 items-center justify-center rounded-2xl',
           'bg-glass-bg backdrop-blur-md border border-glass-border',
           'transition-all duration-200 hover:scale-105 focus:outline-none',
           'focus:ring-2 focus:ring-accent focus:ring-offset-2'
@@ -36,7 +36,7 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       className={cn(
-        'relative inline-flex h-10 w-10 items-center justify-center rounded-md',
+        'relative inline-flex h-10 w-10 items-center justify-center rounded-2xl',
         'bg-glass-bg backdrop-blur-md border border-glass-border',
         'transition-all duration-300 hover:scale-105 focus:outline-none',
         'focus:ring-2 focus:ring-accent focus:ring-offset-2',

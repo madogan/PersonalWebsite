@@ -72,6 +72,11 @@ const config: Config = {
         'slide-up': 'slideUp 0.5s ease-out',
         'slide-down': 'slideDown 0.5s ease-out',
         'slide-in-right': 'slideInRight 0.3s ease-out',
+        'glitch': 'glitch 3s infinite',
+        'glitch-scan': 'glitchScan 8s linear infinite',
+        'scan-line': 'scanLine 2s linear infinite',
+        'screen-open': 'screenOpen 1.5s ease-out forwards',
+        'blink': 'blink 2s infinite',
       },
       keyframes: {
         fadeIn: {
@@ -89,6 +94,80 @@ const config: Config = {
         slideInRight: {
           '0%': { transform: 'translateX(100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
+        },
+        glitch: {
+          '0%, 100%': { 
+            transform: 'translate(0)',
+            filter: 'hue-rotate(0deg)',
+          },
+          '20%': { 
+            transform: 'translate(-2px, 2px)',
+            filter: 'hue-rotate(90deg)',
+          },
+          '40%': { 
+            transform: 'translate(-2px, -2px)',
+            filter: 'hue-rotate(180deg)',
+          },
+          '60%': { 
+            transform: 'translate(2px, 2px)',
+            filter: 'hue-rotate(270deg)',
+          },
+          '80%': { 
+            transform: 'translate(2px, -2px)',
+            filter: 'hue-rotate(360deg)',
+          },
+        },
+        glitchScan: {
+          '0%': { 
+            transform: 'translateY(0)',
+            opacity: '0.05',
+          },
+          '50%': { 
+            transform: 'translateY(50%)',
+            opacity: '0.15',
+          },
+          '100%': { 
+            transform: 'translateY(100%)',
+            opacity: '0.05',
+          },
+        },
+        scanLine: {
+          '0%': { 
+            transform: 'translateY(-100%)',
+            opacity: '0.5',
+          },
+          '50%': { 
+            opacity: '1',
+          },
+          '100%': { 
+            transform: 'translateY(100%)',
+            opacity: '0.5',
+          },
+        },
+        screenOpen: {
+          '0%': { 
+            opacity: '0',
+            transform: 'scale(0.8)',
+            filter: 'blur(20px) brightness(0)',
+          },
+          '50%': { 
+            opacity: '0.5',
+            transform: 'scale(0.95)',
+            filter: 'blur(10px) brightness(0.5)',
+          },
+          '100%': { 
+            opacity: '1',
+            transform: 'scale(1)',
+            filter: 'blur(0px) brightness(1)',
+          },
+        },
+        blink: {
+          '0%, 100%': { 
+            opacity: '1',
+          },
+          '50%': { 
+            opacity: '0.3',
+          },
         },
       },
     },

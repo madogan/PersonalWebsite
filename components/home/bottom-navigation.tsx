@@ -3,14 +3,14 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, FileText, Briefcase, Zap } from 'lucide-react'
+import { Home, Briefcase, Zap, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '#home', label: 'Home', icon: Home },
-  { href: '#summary', label: 'Summary', icon: FileText },
-  { href: '#experience', label: 'Experience', icon: Briefcase },
   { href: '#skills', label: 'Skills', icon: Zap },
+  { href: '#experience', label: 'Experience', icon: Briefcase },
+  { href: '#blogs', label: 'Blogs', icon: FileText },
 ]
 
 export function BottomNavigation() {
@@ -29,29 +29,51 @@ export function BottomNavigation() {
       
       ticking = true
       requestAnimationFrame(() => {
-        const sections = navItems.map((item) => {
+        // Create a map of section ID to navItem index
+        const sectionIdToNavIndex = new Map<string, number>()
+        navItems.forEach((item, navIndex) => {
           const id = item.href.replace('#', '')
-          return document.getElementById(id)
-        }).filter(Boolean) as HTMLElement[]
+          sectionIdToNavIndex.set(id, navIndex)
+        })
 
-        if (sections.length === 0) {
+        // Get all sections in DOM order (not menu order)
+        const allSections = navItems
+          .map((item) => {
+            const id = item.href.replace('#', '')
+            const element = document.getElementById(id)
+            return element ? { element, id } : null
+          })
+          .filter(Boolean) as Array<{ element: HTMLElement; id: string }>
+
+        if (allSections.length === 0) {
           ticking = false
           return
         }
 
-        const scrollPosition = window.scrollY + window.innerHeight / 3
+        // Sort sections by their actual DOM position (offsetTop)
+        // This ensures we check sections in the order they appear on the page
+        allSections.sort((a, b) => a.element.offsetTop - b.element.offsetTop)
 
-        for (let i = sections.length - 1; i >= 0; i--) {
-          const section = sections[i]
+        const scrollPosition = window.scrollY + window.innerHeight / 3
+        let activeNavIndex = 0 // Default to Home
+
+        // Find the active section by checking from bottom to top
+        // This ensures we get the section the user is currently viewing
+        for (let i = allSections.length - 1; i >= 0; i--) {
+          const { element: section, id } = allSections[i]
           const sectionTop = section.offsetTop
-          const sectionHeight = section.offsetHeight
 
           if (scrollPosition >= sectionTop - 100) {
-            setActiveIndex(i)
+            // Get the correct navIndex from the map using the section ID
+            const navIndex = sectionIdToNavIndex.get(id)
+            if (navIndex !== undefined) {
+              activeNavIndex = navIndex
+            }
             break
           }
         }
 
+        setActiveIndex(activeNavIndex)
         ticking = false
       })
     }

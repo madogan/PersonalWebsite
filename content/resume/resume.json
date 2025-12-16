@@ -4,7 +4,7 @@
     "title": "Senior Site Reliability Engineer – AI & MLOps Infrastructure",
     "tagline": "",
     "email": "muhammed.ali.dogan@outlook.com",
-    "location": "Ankara, Turkey · Remote",
+    "location": "Ankara, Turkiye",
     "website": "",
     "linkedin": "linkedin.com/me/madogan",
     "github": "github.com/madogan"
@@ -41,13 +41,15 @@
       "position": "Senior Site Reliability Engineer",
       "location": "Remote",
       "startDate": "Apr 2025",
-      "endDate": "Present",
+      "endDate": "Sept 2025",
       "description": [
-        "Designed and operated observability platforms for large-scale retail and e-commerce systems across cloud and in-store environments.",
-        "Defined and monitored SLIs/SLOs, managed error budgets, and improved operational KPIs (MTTD/MTTR).",
-        "Participated in incident response and RCA for mission-critical systems, including hybrid cloud and on-prem integrations.",
-        "Automated deployment and monitoring workflows to reduce operational toil and improve system stability.",
-        "Collaborated with platform, application, and business teams to ensure reliable production behavior under real-world load."
+        "Worked as a Senior Site Reliability Engineer supporting Pandora’s large-scale retail and e-commerce platform, responsible for the reliability and operational stability of hybrid cloud and on-prem systems across multiple regions.", 
+        "Designed and operated platform-level observability and monitoring solutions using Azure Monitor, Log Analytics, and New Relic, enabling consistent visibility across cloud services and in-store systems.",
+        "Defined and monitored service-level indicators (SLIs) and objectives (SLOs), managing error budgets and using reliability data to guide operational and architectural decisions.",
+        "Participated in incident management and root cause analysis for high-impact production incidents affecting both online and in-store retail operations.",
+        "Improved deployment, monitoring, and operational workflows through automation, reducing manual intervention and increasing platform stability.",
+        "Collaborated closely with platform, application, and operations teams to ensure scalable, resilient, and secure integration between cloud services and on-prem retail infrastructure.",
+        "Contributed to platform reliability practices by standardizing monitoring, alerting, and operational runbooks across teams."
       ]
     },
     {
@@ -55,52 +57,60 @@
       "position": "Site Reliability Engineer (Mid/Senior)",
       "location": "Ankara",
       "startDate": "Jan 2022",
-      "endDate": "May 2025",
+      "endDate": "Present",
       "description": [
-        "Solved complex, unresolved production issues (\"gray problems\") using APM, NPM, and packet-level analysis.",
-        "Built end-to-end observability pipelines using Grafana, Prometheus, InfluxDB, Loki, Tempo, ELK, and Istio.",
-        "Performed deep RCA with Wireshark, Riverbed AppResponse, Aternity, AppDynamics, correlating application, network, and infrastructure behavior.",
-        "Guided enterprise clients in adopting SRE practices, alerting strategies, and proactive monitoring.",
-        "Improved system reliability and performance by addressing latency, bottlenecks, and misconfigured dependencies in production."
+        "Worked as a Site Reliability Engineer in the Digital Performance team, responsible for improving reliability, performance, and visibility of complex, distributed production systems across multiple clients.", "Automated deployment and monitoring workflows to reduce operational toil and improve system stability.",
+        "Performed advanced root cause analysis (RCA) by correlating telemetry data (logs, metrics, traces) with application, infrastructure, and network behavior, including deep packet-level analysis when required.",
+        "Used APM and NPM tools that apply analytical and AI-assisted techniques to identify anomalies, performance regressions, and behavioral patterns in production systems.",
+        "Analyzed high-volume telemetry data to identify trends, bottlenecks, and failure patterns, strengthening the foundation for data-driven system analysis and automation.",
+        "Currently developing custom analysis agents for logs, metrics, and traces, focusing on data aggregation, correlation, and automated insight generation to support faster RCA and operational decision-making.",
+        "Automated monitoring, alerting, and data collection workflows to reduce detection and response times and improve operational consistency.",
+        "Supported client teams in adopting SRE best practices, including alert design, observability standards, and operational ownership models."
       ]
     },
     {
-      "company": "EHSIM (Defense Industry)",
+      "company": "EHSIM",
       "position": "Site Reliability Engineer",
       "location": "Ankara",
       "startDate": "Mar 2021",
       "endDate": "Oct 2021",
       "description": [
-        "Maintained availability and reliability of a confidential, mission-critical system in a high-compliance environment.",
-        "Managed infrastructure built on OpenStack, Rancher, Kubernetes, Zabbix, Grafana, HAProxy, and ELK.",
-        "Conducted RCA and implemented monitoring strategies to ensure continuous system availability.",
-        "Operated as part of a small SRE team with full production responsibility."
+        "Served as one of three Site Reliability Engineers responsible for the availability and reliability of a confidential, mission-critical on-prem system operating in a high-compliance environment.", 
+        "Managed and operated infrastructure built on OpenStack, Rancher / Kubernetes, Ceph, PostgreSQL, HAProxy, Zabbix, Grafana, and the ELK stack.",
+        "Performed root cause analysis (RCA) across application, infrastructure, network, and storage layers to resolve production incidents and ensure continuous system availability.",
+        "Designed and implemented monitoring and alerting strategies to improve system visibility and reduce incident detection and response times.",
+        "Developed automation scripts to reduce operational toil and support repeatable infrastructure and maintenance tasks.",
+        "Troubleshot complex issues involving Kubernetes clusters, etcd, networking, storage (Ceph), and databases, operating with full production responsibility as part of a small SRE team."
       ]
     },
     {
-      "company": "Logarity (Co-Founder)",
-      "position": "DevOps & Backend Engineer",
+      "company": "Logarity",
+      "position": "Software Engineer & DevOps",
       "location": "İstanbul",
       "startDate": "Apr 2020",
       "endDate": "Sep 2020",
       "description": [
-        "Built an ELK-based mini SIEM with scalable log ingestion and archiving.",
-        "Developed gRPC-based agents and management services for efficient data collection.",
-        "Designed backend components with scalability, observability, and performance in mind.",
-        "Gained hands-on experience with event pipelines, logging systems, and operational tooling."
+        "Co-founded and developed Logarity, an ELK-based mini SIEM solution targeting small companies that required mandatory log retention but could not afford enterprise SIEM platforms.",
+        "Extended the ELK stack with custom components for log archiving, agent management, and long-term storage, focusing on operational scalability.",
+        "Designed and implemented high-throughput log ingestion pipelines using Kafka to handle increased data volume under load.",
+        "Developed gRPC-based agents to optimize log data transfer between endpoints and the central platform, improving efficiency and reliability.",
+        "Built backend services using Python and containerized all components with Docker for reproducible deployments.",
+        "Owned DevOps and operational responsibilities, including container orchestration, deployment workflows, and system reliability for on-prem installations."
       ]
     },
     {
-      "company": "AllConfig (Co-Founder)",
-      "position": "Software Engineer / DevOps",
+      "company": "AllConfig",
+      "position": "Software Engineer & DevOps",
       "location": "İstanbul",
       "startDate": "Jul 2019",
       "endDate": "Mar 2020",
       "description": [
-        "Designed and developed a microservice-based network configuration management system.",
-        "Automated network device management using Python and Netmiko.",
-        "Implemented CI/CD and containerized deployments with Docker, Kubernetes, and Azure DevOps.",
-        "Strengthened expertise in distributed systems, networking, and DevOps culture."
+        "Led a small development team responsible for building an on-prem, microservice-based network configuration management system.",
+        "Designed and developed Python-based backend services, exposing APIs for managing and auditing network device configurations.",
+        "Containerized services using Docker and deployed them with Docker Swarm, focusing on service isolation and operational simplicity.",
+        "Automated network device configuration and management using Netmiko, gaining hands-on experience with network protocols, device configurations, and operational networking concepts.",
+        "Owned DevOps responsibilities, including service packaging, deployment workflows, and basic CI/CD practices for on-prem environments.",
+        "Worked under the technical leadership and mentorship of Okan Eke, with guidance and collaboration from Erkun Altunbaş and Gürkan Atabay, gaining practical experience in system design and operational decision-making."
       ]
     },
     {
@@ -110,10 +120,10 @@
       "startDate": "Jun 2018",
       "endDate": "May 2019",
       "description": [
-        "Developed ML-backed APIs for text summarization and intent detection.",
-        "Built data collection and preprocessing pipelines.",
-        "Co-authored an academic paper on Word Sense Disambiguation, providing a strong theoretical ML foundation.",
-        "Experience here informs current focus on operating ML systems reliably in production."
+        "Built and maintained data collection and preprocessing pipelines for NLP systems, including web scraping, parsing, normalization, tokenization, stemming, and noise filtering.",
+        "Developed and containerized Python-based REST APIs using Flask and Docker to serve NLP functionalities for internal and client-facing use.",
+        "Conducted model training and evaluation experiments for intent detection, text summarization, and noisy text classification, focusing on data quality and performance validation.",
+        "Collaborated with Associate Professor Dr. Murat Can Ganiz on academic NLP research and contributed to a peer-reviewed publication on Word Sense Disambiguation."
       ]
     }
   ],
