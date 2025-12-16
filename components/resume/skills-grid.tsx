@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { getSkillCategoryTitle } from '@/lib/resume'
 
 type SkillsGridProps = {
   skills: {
@@ -13,8 +14,8 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {skillCategories.map(([category, items]) => (
         <div key={category} className="glass-card p-6 md:p-8 hover:scale-[1.02] transition-transform duration-300">
-          <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4 capitalize">
-            {category === 'aiMlops' ? 'AI / MLOps Systems (Infrastructure-Level)' : category === 'reliability' ? 'Reliability & Observability' : category === 'cloud' ? 'Cloud & Infrastructure' : 'Programming & Automation'}
+          <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">
+            {getSkillCategoryTitle(category)}
           </h3>
           <div className="flex flex-wrap gap-2.5">
             {items.map((skill, index) => (

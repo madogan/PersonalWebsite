@@ -17,22 +17,10 @@ export function ResumeHeader({ personal }: ResumeHeaderProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent-cyan/5 pointer-events-none" />
         
         <div className="relative z-10">
-          {/* Role Badge */}
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 bg-accent/20 text-accent font-semibold rounded-full text-sm md:text-base border border-accent/30">
-              {personal.title.split('–')[0].trim()}
-            </span>
-          </div>
-
           {/* Name */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-foreground tracking-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-foreground tracking-tight">
             {personal.name}
           </h1>
-
-          {/* Title */}
-          <p className="text-xl md:text-2xl text-foreground/80 mb-8 font-medium">
-            {personal.title.includes('–') ? personal.title.split('–')[1].trim() : personal.title}
-          </p>
 
           {/* Contact Info */}
           <div className="flex flex-wrap items-center gap-4 text-sm">

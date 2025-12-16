@@ -1,3 +1,4 @@
+import React from 'react'
 import { cn } from '@/lib/utils'
 
 type ExperienceItemProps = {
@@ -8,6 +9,43 @@ type ExperienceItemProps = {
   endDate: string
   description: string[]
   note?: string
+}
+
+// Function to parse markdown-style links [text](url) and convert to JSX
+function parseLinks(text: string): React.ReactNode {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g
+  const parts: React.ReactNode[] = []
+  let lastIndex = 0
+  let match
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    // Add text before the link
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index))
+    }
+    
+    // Add the link
+    parts.push(
+      <a
+        key={match.index}
+        href={match[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-accent hover:text-accent/80 underline transition-colors"
+      >
+        {match[1]}
+      </a>
+    )
+    
+    lastIndex = match.index + match[0].length
+  }
+  
+  // Add remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex))
+  }
+  
+  return parts.length > 0 ? parts : text
 }
 
 export function ExperienceItem({
@@ -40,13 +78,15 @@ export function ExperienceItem({
       
       <ul className="list-disc list-inside space-y-2 md:space-y-3 text-foreground/90 ml-4">
         {description.map((item, index) => (
-          <li key={index} className="leading-6 md:leading-7 text-sm sm:text-base">{item}</li>
+          <li key={index} className="leading-6 md:leading-7 text-sm sm:text-base">
+            {parseLinks(item)}
+          </li>
         ))}
       </ul>
       
       {note && (
         <div className="mt-4 md:mt-6 p-3 md:p-4 bg-accent/10 border-l-4 border-accent rounded-r-lg">
-          <p className="text-xs sm:text-sm text-foreground/80 italic leading-5 md:leading-6">{note}</p>
+          <p className="text-xs sm:text-sm text-foreground/80 italic leading-5 md:leading-6">{parseLinks(note)}</p>
         </div>
       )}
     </div>
