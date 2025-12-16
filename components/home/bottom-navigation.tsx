@@ -119,8 +119,8 @@ export function BottomNavigation() {
   if (pathname !== '/') return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 no-print flex justify-center pb-4">
-      <div className="glass-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-2xl shadow-2xl w-full max-w-sm md:w-fit md:max-w-none mx-4">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 no-print no-pdf flex justify-center pb-4">
+      <div className="glass-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-2xl w-full max-w-sm md:w-fit md:max-w-none mx-4 [box-shadow:var(--shadow-accent-xl)]">
         {/* Sliding indicator */}
         <div
           className="absolute top-2 bottom-2 bg-accent/20 rounded-lg transition-all duration-500 ease-out border border-accent/30"

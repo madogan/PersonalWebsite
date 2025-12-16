@@ -39,8 +39,9 @@ export function MobileMenu() {
           <div
             className={cn(
               'fixed top-0 right-0 h-full w-64 z-50',
-              'glass-panel p-6 shadow-xl',
-              'animate-slide-in-right'
+              'glass-panel p-6',
+              'animate-slide-in-right',
+              '[box-shadow:var(--shadow-accent-xl)]'
             )}
           >
             <div className="flex flex-col gap-4 mt-12">
