@@ -236,4 +236,7 @@
 - [x] Position profile image at bottom of glass container with top spacing
 - [x] Update contact icon containers to square shape with rounded-2xl (matching toggle switch)
 - [x] Increase glassmorphism contrast for better visibility
+- [x] Fix home page summary text to display full summary instead of truncated version
+- [x] Split summary text into two paragraphs for better readability
+- [x] Add text justification to summary paragraphs
 
