@@ -1,5 +1,5 @@
 import { getResumeData } from '@/lib/resume'
-import { Mail, MapPin, Linkedin, Github } from 'lucide-react'
+import { MapPin, Linkedin, Github } from 'lucide-react'
 import Link from 'next/link'
 import { ProfileImage } from '@/components/home/profile-image'
 import { cn } from '@/lib/utils'
@@ -9,14 +9,14 @@ export function PersonalHero() {
   const personal = resume.personal
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pb-20 md:pb-24">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pb-12 md:pb-16">
       {/* Background Gradient - Similar to image */}
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background to-accent/20 dark:to-accent/30" />
       
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-12 md:py-20">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center lg:items-center">
             {/* Left Side - Text Content */}
             <div className="space-y-6 md:space-y-8 animate-fade-in text-center lg:text-left">
               {/* Role Badge */}
@@ -43,18 +43,8 @@ export function PersonalHero() {
 
               {/* Contact Info */}
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 text-xs sm:text-sm md:text-base">
-                <a
-                  href={`mailto:${personal.email}`}
-                  className="flex items-center gap-2 md:gap-3 text-foreground/70 hover:text-accent transition-colors group"
-                >
-                  <div className="p-1.5 md:p-2 rounded-lg bg-foreground/5 group-hover:bg-accent/10 transition-colors">
-                    <Mail className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                  </div>
-                  <span className="truncate max-w-[200px] sm:max-w-none">{personal.email}</span>
-                </a>
-
                 <div className="flex items-center gap-2 md:gap-3 text-foreground/70">
-                  <div className="p-1.5 md:p-2 rounded-lg bg-foreground/5">
+                  <div className="h-8 w-8 md:h-9 md:w-9 flex items-center justify-center rounded-2xl bg-foreground/5">
                     <MapPin className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </div>
                   <span>{personal.location}</span>
@@ -67,7 +57,7 @@ export function PersonalHero() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 md:gap-3 text-foreground/70 hover:text-accent transition-colors group"
                   >
-                    <div className="p-1.5 md:p-2 rounded-lg bg-foreground/5 group-hover:bg-accent/10 transition-colors">
+                    <div className="h-8 w-8 md:h-9 md:w-9 flex items-center justify-center rounded-2xl bg-foreground/5 group-hover:bg-accent/10 transition-colors">
                       <Linkedin className="h-3.5 w-3.5 md:h-4 md:w-4" />
                     </div>
                     <span className="hidden sm:inline">LinkedIn</span>
@@ -81,7 +71,7 @@ export function PersonalHero() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 md:gap-3 text-foreground/70 hover:text-accent transition-colors group"
                   >
-                    <div className="p-1.5 md:p-2 rounded-lg bg-foreground/5 group-hover:bg-accent/10 transition-colors">
+                    <div className="h-8 w-8 md:h-9 md:w-9 flex items-center justify-center rounded-2xl bg-foreground/5 group-hover:bg-accent/10 transition-colors">
                       <Github className="h-3.5 w-3.5 md:h-4 md:w-4" />
                     </div>
                     <span className="hidden sm:inline">GitHub</span>
@@ -91,11 +81,8 @@ export function PersonalHero() {
             </div>
 
             {/* Profile Photo - Mobile & Desktop */}
-            <div className="relative flex items-center justify-center">
-              <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg flex items-center justify-center py-8 lg:py-0">
-                {/* Gradient Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-accent-cyan/10 to-transparent rounded-full blur-3xl scale-150" />
-                
+            <div className="relative flex items-center justify-center h-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px] lg:items-center">
+              <div className="relative w-full h-full flex items-center justify-center py-8 lg:py-0">
                 {/* Profile Image Container */}
                 <ProfileImage name={personal.name} title={personal.title} />
               </div>

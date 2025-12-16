@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2025-01-27
+
+### Added
+- Glassmorphism container for profile image with rounded-2xl border radius matching menu styling
+- Top spacing in profile image container to position image at bottom
+
+### Changed
+- Updated profile image container to use square glassmorphism frame instead of circular
+- Changed contact icon containers (location, LinkedIn, GitHub) from circular to square with rounded-2xl corners
+- Increased glassmorphism contrast for better visibility (light theme: bg 0.15→0.75, dark theme: bg 0.3→0.5)
+- Icon containers now use explicit square dimensions (h-8 w-8 md:h-9 md:w-9) matching toggle switch pattern
+
+### Fixed
+- Profile image now properly aligned to bottom of glass container with spacing on top
+- Icon containers now display as squares with rounded corners instead of circles
+
 ## [0.1.6] - 2025-01-27
 
 ### Added

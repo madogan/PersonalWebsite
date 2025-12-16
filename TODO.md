@@ -232,4 +232,8 @@
 - [x] Create ProfileImage component with automatic theme-based image switching
 - [x] Remove empty spacing on right side of bottom navigation menu
 - [x] Fix hardcoded green color in status badge component
+- [x] Add glassmorphism container to profile image with rounded-2xl border radius
+- [x] Position profile image at bottom of glass container with top spacing
+- [x] Update contact icon containers to square shape with rounded-2xl (matching toggle switch)
+- [x] Increase glassmorphism contrast for better visibility
 
