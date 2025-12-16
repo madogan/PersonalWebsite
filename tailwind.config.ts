@@ -77,6 +77,8 @@ const config: Config = {
         'scan-line': 'scanLine 2s linear infinite',
         'screen-open': 'screenOpen 1.5s ease-out forwards',
         'blink': 'blink 2s infinite',
+        'watercolor-paint': 'watercolorPaint 2.5s ease-in-out forwards',
+        'liquid-float': 'liquidFloat 8s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -167,6 +169,44 @@ const config: Config = {
           },
           '50%': { 
             opacity: '0.3',
+          },
+        },
+        watercolorPaint: {
+          '0%': {
+            backgroundPosition: '200% 0',
+            opacity: '0.3',
+            filter: 'blur(2px)',
+          },
+          '30%': {
+            opacity: '0.6',
+            filter: 'blur(1.5px)',
+          },
+          '60%': {
+            opacity: '0.9',
+            filter: 'blur(0.5px)',
+          },
+          '100%': {
+            backgroundPosition: '0% 0',
+            opacity: '1',
+            filter: 'blur(0px)',
+          },
+        },
+        liquidFloat: {
+          '0%, 100%': {
+            transform: 'translate(0, 0) scale(1)',
+            opacity: '0.5',
+          },
+          '25%': {
+            transform: 'translate(20px, -30px) scale(1.1)',
+            opacity: '0.6',
+          },
+          '50%': {
+            transform: 'translate(-15px, 20px) scale(0.9)',
+            opacity: '0.7',
+          },
+          '75%': {
+            transform: 'translate(30px, 10px) scale(1.05)',
+            opacity: '0.6',
           },
         },
       },

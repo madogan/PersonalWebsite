@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { PdfDownloadButton } from '@/components/ui/pdf-download-button'
 import './globals.css'
 
 const inter = Inter({
@@ -62,6 +63,10 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col relative">
+            {/* PDF Download Button - Top Left */}
+            <div className="fixed top-4 left-4 z-50 no-print">
+              <PdfDownloadButton />
+            </div>
             {/* Theme Toggle - Top Right */}
             <div className="fixed top-4 right-4 z-50 no-print">
               <ThemeToggle />
