@@ -9,63 +9,72 @@
     "linkedin": "linkedin.com/me/madogan",
     "github": "github.com/madogan"
   },
-  "summary": "Senior Site Reliability Engineer with 6+ years of experience operating and stabilizing distributed, cloud, and on-prem systems, with a strong focus on observability, incident response, performance optimization, and reliability engineering. Background in Machine Learning systems and software engineering, now specializing in AI systems in production—including deployment readiness, monitoring, latency analysis, and cost-aware infrastructure. Known for solving complex \"gray-area\" production issues through holistic RCA across application, infrastructure, and network layers.",
+  "summary": "Senior Site Reliability Engineer with 6+ years of experience operating and stabilizing distributed, cloud, and on-prem systems. I am currently focused on AI and MLOps infrastructure, applying proven SRE principles to ensure reliability, observability, performance, and operational safety of AI-enabled and data-intensive systems in production. With a strong background in observability, incident response, and deep system analysis, I approach AI workloads from a production-first perspective—prioritizing predictability, debuggability, and scalability over experimentation. Throughout my career, I have consistently used analytical and AI-assisted tools to understand complex system behavior; today, I apply that experience to building and operating the infrastructure that supports AI at scale.",
   "keyStrengths": [],
   "workWithMe": [],
   "coreSkills": {
-    "reliability": [
-      "SLI/SLO definition, error budgets, incident management",
-      "Root Cause Analysis (RCA), MTTR/MTTD reduction",
-      "Metrics, logs, traces (end-to-end visibility)"
+    "aiMlopsInfrastructure": [
+      "Preparing AI/ML-backed and data-intensive services for reliable operation in production environments.",
+      "Designing observability for model inference, data pipelines, and AI-enabled services in production.",
+      "Monitoring latency, throughput, error patterns, and cost characteristics of AI workloads.",
+      "Deploying and operating ML-backed services from an infrastructure and platform perspective, not research.",
+      "Maintaining a strict separation between model experimentation and production reliability ownership."
     ],
-    "cloud": [
-      "Kubernetes, Docker, OpenStack, Rancher",
-      "Azure (primary), GCP (working knowledge), on-prem & bare metal",
-      "High-availability architectures, hybrid systems"
+    "reliabilityAndSre": [
+      "Defining and operating SLIs/SLOs, managing error budgets, and using reliability signals to guide operational and architectural decisions.",
+      "End-to-end incident management and root cause analysis across application, infrastructure, network, database, and storage layers.",
+      "Improving detection and recovery times through observability, automation, alert quality, and disciplined operational practices.",
+      "Building and operating observability systems using metrics, logs, and traces to enable full system visibility and correlation."
     ],
-    "aiMlops": [
-      "Production readiness for ML/AI services",
-      "Monitoring latency, throughput, failure modes, and cost",
-      "Observability for ML inference and data pipelines",
-      "Deployment pipelines for ML-backed services (infra focus)"
+    "observabilityAndTelemetry": [
+      "Design and operation of observability platforms (metrics, logs, traces)",
+      "High-volume telemetry analysis to identify trends, bottlenecks, and failure patterns",
+      "Development of custom analysis agents for log, metric, and trace correlation",
+      "Alert design, signal quality improvement, and noise reduction"
     ],
-    "programming": [
-      "Python (APIs, automation, tooling), Bash, PowerShell",
-      "REST, gRPC, FastAPI, Flask",
-      "CI/CD with Azure DevOps, GitHub Actions, Terraform"
+    "automationAndEngineering": [
+      "Python for automation, analysis tooling, and backend services",
+      "REST and gRPC-based services using FastAPI and Flask",
+      "Infrastructure automation and CI/CD using Terraform, Azure DevOps, and GitHub Actions",
+      "Operational scripting with Bash and PowerShell"
+    ],
+    "cloudAndPlatform": [
+      "Kubernetes (Rancher), Docker, OpenStack, containerized and on-prem platforms",
+      "Azure (primary), GCP (working knowledge), hybrid cloud and bare-metal environments",
+      "High-availability, fault-tolerant architectures for distributed systems"
     ]
   },
   "experience": [
     {
-      "company": "Zoolatech (Pandora – Europe's largest jewelry retailer)",
+      "company": "DESTEL",
       "position": "Senior Site Reliability Engineer",
-      "location": "Remote",
-      "startDate": "Apr 2025",
-      "endDate": "Sept 2025",
-      "description": [
-        "Worked as a Senior Site Reliability Engineer supporting Pandora’s large-scale retail and e-commerce platform, responsible for the reliability and operational stability of hybrid cloud and on-prem systems across multiple regions.", 
-        "Designed and operated platform-level observability and monitoring solutions using Azure Monitor, Log Analytics, and New Relic, enabling consistent visibility across cloud services and in-store systems.",
-        "Defined and monitored service-level indicators (SLIs) and objectives (SLOs), managing error budgets and using reliability data to guide operational and architectural decisions.",
-        "Participated in incident management and root cause analysis for high-impact production incidents affecting both online and in-store retail operations.",
-        "Improved deployment, monitoring, and operational workflows through automation, reducing manual intervention and increasing platform stability.",
-        "Collaborated closely with platform, application, and operations teams to ensure scalable, resilient, and secure integration between cloud services and on-prem retail infrastructure.",
-        "Contributed to platform reliability practices by standardizing monitoring, alerting, and operational runbooks across teams."
-      ]
-    },
-    {
-      "company": "Destel",
-      "position": "Site Reliability Engineer (Mid/Senior)",
       "location": "Ankara",
       "startDate": "Jan 2022",
       "endDate": "Present",
       "description": [
-        "Worked as a Site Reliability Engineer in the Digital Performance team, responsible for improving reliability, performance, and visibility of complex, distributed production systems across multiple clients.", "Automated deployment and monitoring workflows to reduce operational toil and improve system stability.",
-        "Performed advanced root cause analysis (RCA) by correlating telemetry data (logs, metrics, traces) with application, infrastructure, and network behavior, including deep packet-level analysis when required.",
-        "Used APM and NPM tools that apply analytical and AI-assisted techniques to identify anomalies, performance regressions, and behavioral patterns in production systems.",
-        "Analyzed high-volume telemetry data to identify trends, bottlenecks, and failure patterns, strengthening the foundation for data-driven system analysis and automation.",
-        "Currently developing custom analysis agents for logs, metrics, and traces, focusing on data aggregation, correlation, and automated insight generation to support faster RCA and operational decision-making.",
-        "Automated monitoring, alerting, and data collection workflows to reduce detection and response times and improve operational consistency.",
-        "Supported client teams in adopting SRE best practices, including alert design, observability standards, and operational ownership models."
+        "Site Reliability Engineer in the Digital Performance team, responsible for improving reliability, performance, and visibility of complex, distributed production systems across multiple client engagements.",
+        "Perform advanced root cause analysis (RCA) by correlating telemetry data (logs, metrics, traces) with application, infrastructure, and network behavior, including deep packet-level analysis when required.",
+        "Use APM and NPM tools that apply analytical and AI-assisted techniques to identify anomalies, performance regressions, and behavioral patterns in production systems.",
+        "Analyze high-volume telemetry data to identify trends, bottlenecks, and failure patterns, strengthening the foundation for data-driven system analysis and automation.",
+        "Develop custom analysis agents for logs, metrics, and traces, focusing on data aggregation, correlation, and automated insight generation to support faster RCA and operational decision-making.",
+        "Automate deployment, monitoring, alerting, and data collection workflows to reduce operational toil, detection times, and response times while improving system stability and operational consistency.",
+        "Support client teams in adopting SRE best practices, including SLI/SLO definition, alert design, observability standards, and operational ownership models."
+      ]
+    },
+    {
+      "company": "Zoolatech (Contract)",
+      "position": "Senior Site Reliability Engineer",
+      "location": "Remote",
+      "startDate": "Apr 2025",
+      "endDate": "May 2025",
+      "description": [
+        "Client: Pandora (Europe's largest jewelry retailer)",
+        "Senior Site Reliability Engineer supporting Pandora's large-scale retail and e-commerce platform, responsible for the reliability and operational stability of hybrid cloud and on-prem systems across multiple regions.",
+        "Designed and operated platform-level observability and monitoring solutions using Azure Monitor, Log Analytics, and New Relic, enabling consistent visibility across cloud services and in-store systems.",
+        "Defined and monitored service-level indicators (SLIs) and objectives (SLOs), managing error budgets and using reliability data to guide operational and architectural decisions.",
+        "Participated in incident management and root cause analysis for high-impact production incidents affecting both online and in-store retail operations.",
+        "Improved deployment, monitoring, and operational workflows through automation, reducing manual intervention and increasing platform stability.",
+        "Collaborated with platform, application, and operations teams to ensure scalable, resilient, and secure integration between cloud services and on-prem retail infrastructure."
       ]
     },
     {
@@ -110,7 +119,7 @@
         "Containerized services using Docker and deployed them with Docker Swarm, focusing on service isolation and operational simplicity.",
         "Automated network device configuration and management using Netmiko, gaining hands-on experience with network protocols, device configurations, and operational networking concepts.",
         "Owned DevOps responsibilities, including service packaging, deployment workflows, and basic CI/CD practices for on-prem environments.",
-        "Worked under the technical leadership and mentorship of Okan Eke, with guidance and collaboration from Erkun Altunbaş and Gürkan Atabay, gaining practical experience in system design and operational decision-making."
+        "Worked under the technical leadership and mentorship of [Okan Eke](https://www.linkedin.com/in/okaneke), with guidance and collaboration from [Erkun Altunbaş](https://www.linkedin.com/in/erkutaltunbas) and [Gürkan Atabay](https://www.linkedin.com/in/gurkan-atabay), gaining practical experience in system design and operational decision-making."
       ]
     },
     {
@@ -123,7 +132,8 @@
         "Built and maintained data collection and preprocessing pipelines for NLP systems, including web scraping, parsing, normalization, tokenization, stemming, and noise filtering.",
         "Developed and containerized Python-based REST APIs using Flask and Docker to serve NLP functionalities for internal and client-facing use.",
         "Conducted model training and evaluation experiments for intent detection, text summarization, and noisy text classification, focusing on data quality and performance validation.",
-        "Collaborated with Associate Professor Dr. Murat Can Ganiz on academic NLP research and contributed to a peer-reviewed publication on Word Sense Disambiguation."
+        "Collaborated with Associate Professor [Dr. Murat Can Ganiz](https://www.linkedin.com/in/mganiz) on academic NLP research and contributed to a peer-reviewed publication on Word Sense Disambiguation.",
+        "Also worked with [Aydın Gerek](https://www.linkedin.com/in/aydingerek) on optimization of language models."
       ]
     }
   ],
