@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import { getAllPosts } from '@/lib/mdx'
 import { cn } from '@/lib/utils'
+import { GlassyButton } from '@/components/ui/glassy-button'
 
 export function LatestBlogsSection() {
   const allPosts = getAllPosts()
@@ -12,26 +13,13 @@ export function LatestBlogsSection() {
   }
 
   return (
-    <section id="blogs" className="py-8 md:py-12 lg:py-16 pb-12 md:pb-16">
+    <section id="blogs" className="py-8 md:py-12 lg:py-16 pb-12 md:pb-16 no-pdf">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="flex items-center justify-between mb-8 md:mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">Latest Blog Posts</h2>
-              <p className="text-foreground/60">Recent thoughts and tutorials</p>
-            </div>
-            <Link
-              href="/blog"
-              className={cn(
-                'hidden md:flex items-center gap-2 text-accent font-medium',
-                'hover:text-accent-cyan transition-colors duration-200',
-                'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
-              )}
-            >
-              View All Posts
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="mb-8 md:mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">Latest Blog Posts</h2>
+            <p className="text-foreground/60">Recent thoughts and tutorials</p>
           </div>
 
           {/* Blog Posts Grid */}
@@ -103,19 +91,9 @@ export function LatestBlogsSection() {
 
           {/* View All Link - Mobile and Desktop */}
           <div className="mt-8 text-center">
-            <Link
-              href="/blog"
-              className={cn(
-                'inline-flex items-center gap-2 px-6 py-3',
-                'bg-accent text-white rounded-lg font-medium',
-                'transition-all duration-200 hover:bg-accent/90',
-                'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-                'shadow-lg hover:shadow-xl'
-              )}
-            >
+            <GlassyButton href="/blog" size="md">
               View All Blog Posts
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            </GlassyButton>
           </div>
         </div>
       </div>

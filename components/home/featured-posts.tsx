@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, Calendar, Clock } from 'lucide-react'
 import { getAllPosts } from '@/lib/mdx'
 import { cn } from '@/lib/utils'
+import { GlassyButton } from '@/components/ui/glassy-button'
 
 export function FeaturedPosts() {
   const allPosts = getAllPosts()
@@ -21,17 +22,11 @@ export function FeaturedPosts() {
               <h2 className="text-3xl md:text-4xl font-bold mb-2">Latest Blog Posts</h2>
               <p className="text-foreground/60">Recent thoughts and tutorials</p>
             </div>
-            <Link
-              href="/blog"
-              className={cn(
-                'hidden md:flex items-center gap-2 text-accent font-medium',
-                'hover:text-accent-cyan transition-colors duration-200',
-                'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
-              )}
-            >
-              View All
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="hidden md:block">
+              <GlassyButton href="/blog" variant="subtle" size="sm">
+                View All
+              </GlassyButton>
+            </div>
           </div>
 
           {/* Blog Posts Grid */}
@@ -103,19 +98,9 @@ export function FeaturedPosts() {
 
           {/* Mobile View All Link */}
           <div className="mt-8 md:hidden text-center">
-            <Link
-              href="/blog"
-              className={cn(
-                'inline-flex items-center gap-2 px-6 py-3',
-                'bg-accent text-white rounded-lg font-medium',
-                'transition-all duration-200 hover:bg-accent/90',
-                'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-                'shadow-lg hover:shadow-xl'
-              )}
-            >
+            <GlassyButton href="/blog" size="md">
               View All Posts
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            </GlassyButton>
           </div>
         </div>
       </div>
