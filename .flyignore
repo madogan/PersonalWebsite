@@ -1,0 +1,79 @@
+# Fly.io ignore file
+# Files and directories that should not be uploaded to Fly.io
+
+# Dependencies (already in Docker image)
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Testing
+coverage
+.nyc_output
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Environment files (use fly secrets instead)
+.env
+.env*.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+CHANGELOG.md
+TODO.md
+*.md
+!package.json
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Docker (not needed in build context)
+docker-compose*.yml
+.dockerignore
+
+# Logs
+logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Misc
+.cache
+.turbo
+.vercel
+
+# Fly.io specific
+.fly
+

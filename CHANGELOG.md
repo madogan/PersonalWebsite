@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2025-01-27
+
+### Added
+- Fly.io configuration file (`fly.toml`) for cloud deployment
+- `.flyignore` file to optimize deployment uploads and reduce build context
+- Comprehensive Fly.io deployment documentation (`docs/fly-deployment.md`)
+- HTTP service configuration with health checks for Fly.io
+- Auto-scaling configuration (auto-start machines, min machines running)
+- Resource limits configuration (512MB memory, 1 shared CPU)
+
+### Changed
+- Configured Fly.io deployment with Amsterdam (ams) as primary region
+- Set up HTTPS enforcement and health check monitoring for production deployment
+
 ## [0.4.0] - 2025-01-27
 
 ### Added

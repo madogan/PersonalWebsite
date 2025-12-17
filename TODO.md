@@ -276,4 +276,7 @@
 - [x] Add .dockerignore file to optimize build context
 - [x] Create health check API endpoint for container monitoring
 - [x] Add Docker Compose example configuration file
+- [x] Create Fly.io configuration file (fly.toml) for cloud deployment
+- [x] Add .flyignore file to optimize deployment uploads
+- [x] Create comprehensive Fly.io deployment documentation
 
