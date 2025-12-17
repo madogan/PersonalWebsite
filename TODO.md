@@ -258,4 +258,5 @@
 - [x] Change search icon color to primary accent color
 - [x] Remove tag filter component from blog list page
 - [x] Remove posts count display from blog list page
+- [x] Update footer GitHub and LinkedIn links to user profiles with new tab opening
 

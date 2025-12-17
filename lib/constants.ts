@@ -1,4 +1,4 @@
-export const VERSION = '0.2.1'
+export const VERSION = '0.2.2'
 
 export const siteConfig = {
   name: 'Personal Website',
@@ -6,8 +6,8 @@ export const siteConfig = {
   url: 'https://example.com',
   author: 'Your Name',
   links: {
-    github: 'https://github.com',
-    linkedin: 'https://linkedin.com',
+    github: 'https://github.com/madogan',
+    linkedin: 'https://www.linkedin.com/in/madogan',
   },
 }
 
