@@ -1,5 +1,6 @@
 import { getAllPosts, getAllTags } from '@/lib/mdx'
 import { BlogListClient } from '@/components/blog/blog-list-client'
+import { BackButton } from '@/components/blog/back-button'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export default function BlogPage() {
   const allTags = getAllTags()
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <>
+      <BackButton />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-12 text-center">
@@ -26,6 +29,7 @@ export default function BlogPage() {
         <BlogListClient posts={posts} allTags={allTags} />
       </div>
     </div>
+    </>
   )
 }
 
