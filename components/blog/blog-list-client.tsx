@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { TagList } from '@/components/blog/tag-list'
-import { TagFilter } from '@/components/blog/tag-filter'
 import { SearchBar } from '@/components/blog/search-bar'
 import { Pagination } from '@/components/blog/pagination'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
@@ -12,26 +11,17 @@ import type { BlogPost } from '@/lib/mdx'
 
 type BlogListClientProps = {
   posts: BlogPost[]
-  allTags: string[]
   postsPerPage?: number
 }
 
 const DEFAULT_POSTS_PER_PAGE = 9
 
-export function BlogListClient({ posts: allPosts, allTags, postsPerPage = DEFAULT_POSTS_PER_PAGE }: BlogListClientProps) {
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_PER_PAGE }: BlogListClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
 
   const filteredPosts = useMemo(() => {
     let filtered = allPosts
-
-    // Filter by tags
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter((post) =>
-        selectedTags.some((tag) => post.tags.includes(tag))
-      )
-    }
 
     // Filter by search query
     if (searchQuery.trim()) {
@@ -45,7 +35,7 @@ export function BlogListClient({ posts: allPosts, allTags, postsPerPage = DEFAUL
     }
 
     return filtered
-  }, [allPosts, selectedTags, searchQuery])
+  }, [allPosts, searchQuery])
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
@@ -53,59 +43,17 @@ export function BlogListClient({ posts: allPosts, allTags, postsPerPage = DEFAUL
   const endIndex = startIndex + postsPerPage
   const posts = filteredPosts.slice(startIndex, endIndex)
 
-  // Reset to page 1 when filters change, or adjust if current page is out of bounds
+  // Reset to page 1 when search changes, or adjust if current page is out of bounds
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(1)
     }
-  }, [selectedTags, searchQuery, currentPage, totalPages])
-
-  const handleTagToggle = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    )
-  }
-
-  const handleClearFilters = () => {
-    setSelectedTags([])
-    setSearchQuery('')
-  }
+  }, [searchQuery, currentPage, totalPages])
 
   return (
     <>
       {/* Search Bar */}
       <SearchBar value={searchQuery} onChange={setSearchQuery} />
-
-      {/* Tag Filter */}
-      <TagFilter
-        tags={allTags}
-        selectedTags={selectedTags}
-        onTagToggle={handleTagToggle}
-        onClear={handleClearFilters}
-      />
-
-      {/* Results Count */}
-      <div className="mb-6 text-sm text-foreground/60">
-        {selectedTags.length > 0 || searchQuery ? (
-          <>
-            Found {filteredPosts.length} post{filteredPosts.length !== 1 ? 's' : ''}
-            {totalPages > 1 && (
-              <span className="ml-2">
-                (Page {currentPage} of {totalPages})
-              </span>
-            )}
-          </>
-        ) : (
-          <>
-            {filteredPosts.length} post{filteredPosts.length !== 1 ? 's' : ''}
-            {totalPages > 1 && (
-              <span className="ml-2">
-                (Page {currentPage} of {totalPages})
-              </span>
-            )}
-          </>
-        )}
-      </div>
 
       {/* Blog Posts Grid */}
       {posts.length > 0 ? (
@@ -164,8 +112,8 @@ export function BlogListClient({ posts: allPosts, allTags, postsPerPage = DEFAUL
       ) : (
         <div className="text-center py-12">
           <p className="text-foreground/60">
-            {selectedTags.length > 0 || searchQuery
-              ? 'No posts match your filters. Try adjusting your search or tags.'
+            {searchQuery
+              ? 'No posts match your search. Try adjusting your search query.'
               : 'No blog posts yet. Check back soon!'}
           </p>
         </div>

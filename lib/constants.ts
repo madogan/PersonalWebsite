@@ -1,3 +1,5 @@
+export const VERSION = '0.2.1'
+
 export const siteConfig = {
   name: 'Personal Website',
   description: 'Personal website with blog and resume',

@@ -1,4 +1,4 @@
-import { getAllPosts, getAllTags } from '@/lib/mdx'
+import { getAllPosts } from '@/lib/mdx'
 import { BlogListClient } from '@/components/blog/blog-list-client'
 import { BackButton } from '@/components/blog/back-button'
 import type { Metadata } from 'next'
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts()
-  const allTags = getAllTags()
 
   return (
     <>
@@ -25,8 +24,8 @@ export default function BlogPage() {
           </p>
         </div>
 
-        {/* Blog List with Search and Filters */}
-        <BlogListClient posts={posts} allTags={allTags} />
+        {/* Blog List with Search */}
+        <BlogListClient posts={posts} />
       </div>
     </div>
     </>

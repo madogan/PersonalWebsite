@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2025-01-27
+
+### Changed
+- Enhanced search bar component with primary color shadow for better visual prominence
+- Improved search input contrast with thicker primary-colored border (border-2 border-accent/30)
+- Increased placeholder text opacity for better readability
+- Enhanced focus state with stronger border and shadow effects
+- Changed search icon color to primary accent color with proper z-index and pointer-events handling
+
+### Removed
+- Removed tag filter component from blog list page
+- Removed posts count display component from blog list page
+- Simplified blog list page to focus on search functionality only
+
 ## [0.2.0] - 2025-01-27
 
 ### Added

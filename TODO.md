@@ -254,4 +254,8 @@
 - [x] Update footer copyright text format
 - [x] Improve experience section mobile layout (date next to location)
 - [x] Standardize font sizes across resume sections (summary, experience, core skills)
+- [x] Enhance search bar with primary color shadow and improved contrast
+- [x] Change search icon color to primary accent color
+- [x] Remove tag filter component from blog list page
+- [x] Remove posts count display from blog list page
 
