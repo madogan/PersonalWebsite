@@ -19,17 +19,17 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
     <button
       onClick={handleShare}
       className={cn(
-        'inline-flex items-center gap-2 px-4 py-2',
-        'bg-[#0077b5] text-white rounded-lg font-medium',
-        'transition-all duration-200 hover:bg-[#006399]',
-        'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0077b5] focus:ring-offset-2',
-        'shadow-md hover:shadow-lg',
+        'flex items-center gap-2',
+        'text-sm text-foreground/60',
+        'hover:text-foreground transition-colors duration-200',
+        'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md',
         className
       )}
       aria-label="Share on LinkedIn"
+      title="Share on LinkedIn"
     >
-      <Linkedin className="h-4 w-4" />
-      Share on LinkedIn
+      <Linkedin className="h-5 w-5" />
+      <span>Share</span>
     </button>
   )
 }

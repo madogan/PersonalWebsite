@@ -4,6 +4,7 @@ import { TagList } from '@/components/blog/tag-list'
 import { ShareButton } from '@/components/blog/share-button'
 import { RelatedPosts } from '@/components/blog/related-posts'
 import { JsonLd } from '@/components/blog/json-ld'
+import { BackButton } from '@/components/blog/back-button'
 import { Calendar, Clock } from 'lucide-react'
 import { MDXContent } from '@/components/blog/mdx-content'
 import { cn } from '@/lib/utils'
@@ -11,7 +12,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/constants'
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -22,7 +23,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
     return {
@@ -30,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const url = `${siteConfig.url}/blog/${params.slug}`
+  const url = `${siteConfig.url}/blog/${slug}`
 
   return {
     title: post.title,
@@ -47,19 +49,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
 
   if (!post) {
     notFound()
   }
 
-  const url = `${siteConfig.url}/blog/${params.slug}`
+  const url = `${siteConfig.url}/blog/${slug}`
 
   return (
     <>
-      <JsonLd slug={params.slug} />
-      <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <JsonLd slug={slug} />
+      <BackButton />
+      <article className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 md:pb-20">
         <div className="max-w-4xl mx-auto">
         {/* Post Header */}
         <header className="mb-8 md:mb-12">
@@ -89,10 +93,6 @@ export default function BlogPostPage({ params }: Props) {
               <Clock className="h-5 w-5" />
               <span>{post.readingTime} min read</span>
             </div>
-          </div>
-
-          {/* Share Button */}
-          <div className="mb-8">
             <ShareButton url={url} title={post.title} />
           </div>
 
@@ -104,8 +104,9 @@ export default function BlogPostPage({ params }: Props) {
         <div
           className={cn(
             'prose prose-lg max-w-none',
+            'text-justify md:text-left',
             'prose-headings:text-foreground',
-            'prose-p:text-foreground/90',
+            'prose-p:text-foreground/90 prose-p:text-justify md:prose-p:text-left',
             'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
             'prose-strong:text-foreground',
             'prose-code:text-foreground prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
@@ -119,7 +120,7 @@ export default function BlogPostPage({ params }: Props) {
         </div>
 
         {/* Related Posts */}
-        <RelatedPosts currentSlug={params.slug} />
+        <RelatedPosts currentSlug={slug} />
         </div>
       </article>
     </>
