@@ -47,6 +47,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p
         className={cn(
           'text-base leading-7 mb-4 text-foreground/90',
+          'text-left',
           className
         )}
         {...props}
