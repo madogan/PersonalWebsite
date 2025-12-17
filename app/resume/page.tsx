@@ -45,7 +45,7 @@ export default function ResumePage() {
             
             {/* Content with high contrast */}
             <div className="relative z-10">
-              <p className="text-base md:text-lg leading-8 text-white font-medium drop-shadow-md whitespace-normal">
+              <p className="text-xs sm:text-sm md:text-base leading-6 md:leading-7 text-white font-medium drop-shadow-md whitespace-normal">
                 {(() => {
                   const parts = resume.summary.split('Senior Site Reliability Engineer')
                   const highlightedText = (

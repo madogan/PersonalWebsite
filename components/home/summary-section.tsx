@@ -10,7 +10,7 @@ export function SummarySection() {
         <div className="max-w-5xl mx-auto">
           <ResumeSection title="Professional Summary">
             <div className="glass-card p-4 sm:p-6 md:p-8">
-              <p className="text-sm sm:text-base md:text-lg leading-7 md:leading-8 text-foreground/90">{resume.summary}</p>
+              <p className="text-xs sm:text-sm md:text-base leading-6 md:leading-7 text-foreground/90">{resume.summary}</p>
             </div>
           </ResumeSection>
         </div>

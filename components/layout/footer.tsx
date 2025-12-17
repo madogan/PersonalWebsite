@@ -16,7 +16,7 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
           <div className="text-xs sm:text-sm text-foreground/60 text-center md:text-left">
-            © {currentYear} {siteConfig.name}. All rights reserved.
+            All Rights Reserved © {currentYear}
           </div>
           
           <div className="flex items-center gap-4 md:gap-6">

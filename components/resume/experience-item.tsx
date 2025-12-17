@@ -65,11 +65,24 @@ export function ExperienceItem({
             {position}
           </h3>
           <p className="text-base sm:text-lg md:text-xl text-accent font-semibold mb-2">{company}</p>
-          <p className="text-xs sm:text-sm text-foreground/60 flex items-center gap-1">
-            <span>{location}</span>
+          {/* Mobile: location and date together */}
+          <div className="flex items-center gap-2 md:hidden">
+            <span className="inline-block px-2 py-1 bg-foreground/5 rounded-md text-xs sm:text-sm text-foreground/70">
+              {location}
+            </span>
+            <span className="inline-block px-2 py-1 bg-foreground/5 rounded-md text-xs sm:text-sm text-foreground/70">
+              {startDate} - {endDate}
+            </span>
+          </div>
+          {/* Desktop: location only */}
+          <p className="hidden md:block text-xs sm:text-sm text-foreground/60">
+            <span className="inline-block px-2 py-1 md:px-3 md:py-1 bg-foreground/5 rounded-md text-xs sm:text-sm text-foreground/70">
+              {location}
+            </span>
           </p>
         </div>
-        <div className="text-xs sm:text-sm md:text-base font-semibold text-foreground/70 mt-2 md:mt-0 md:text-right md:ml-4">
+        {/* Desktop: date on the right */}
+        <div className="hidden md:block text-xs sm:text-sm md:text-base font-semibold text-foreground/70 mt-2 md:mt-0 md:text-right md:ml-4">
           <span className="inline-block px-2 py-1 md:px-3 md:py-1 bg-foreground/5 rounded-md text-xs sm:text-sm">
             {startDate} - {endDate}
           </span>
@@ -78,7 +91,7 @@ export function ExperienceItem({
       
       <ul className="list-disc list-inside space-y-2 md:space-y-3 text-foreground/90 ml-4">
         {description.map((item, index) => (
-          <li key={index} className="leading-6 md:leading-7 text-sm sm:text-base">
+          <li key={index} className="leading-6 md:leading-7 text-xs sm:text-sm md:text-base">
             {parseLinks(item)}
           </li>
         ))}
