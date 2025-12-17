@@ -4,6 +4,7 @@
 #
 
 app = 'personal-website-proud-smoke-781'
+org = 'omnipreneur-466'
 primary_region = 'ams'
 
 [build]
