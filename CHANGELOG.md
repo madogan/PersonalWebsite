@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.9] - 2025-01-27
+
+### Added
+- Added 6 comprehensive technical blog posts covering AI/ML production systems:
+  - Why AI Systems Fail in Production (And Why It's Rarely the Model)
+  - Designing Observability for AI/ML Services: Metrics That Actually Matter
+  - From PoC to Production: What Breaks When You Ship LLM-Based Systems
+  - Azure for AI: An SRE's Guide to Provisioning for High Availability
+  - The AWS AI Stack: Moving Beyond Proof-of-Concept to Five-Nines Reliability
+  - Observing the Stochastic: Tuning the LGTM Stack for AI Infrastructure
+- All blog posts formatted with proper MDX frontmatter, tags, and markdown structure
+
 ## [0.1.8] - 2025-01-27
 
 ### Fixed
