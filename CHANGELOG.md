@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2025-01-27
+
+### Added
+- Back button component for blog detail pages
+- Conditional PDF button wrapper to hide download button on blog pages
+
+### Changed
+- Redesigned share button to match metadata style and positioned next to reading time
+- Updated footer copyright text format to "All Rights Reserved © {year}"
+- Improved experience section mobile layout: date and location now appear side-by-side with badge styling
+- Standardized font sizes across resume sections (summary, experience, core skills) to `text-xs sm:text-sm md:text-base`
+- Added text justification for blog content on mobile devices
+
+### Fixed
+- Fixed Next.js 15 params Promise requirement - updated blog detail page to await params
+- Fixed spacing issues on blog detail pages (buttons overlapping with content)
+- Fixed text justification not applying to blog paragraphs on mobile
+
 ## [0.1.9] - 2025-01-27
 
 ### Added

@@ -245,3 +245,13 @@
 - [x] Create 6 technical blog posts focused on SRE and MLOps topics
 - [x] Format all blog posts with proper MDX frontmatter and markdown structure
 
+### Blog & UI Improvements
+- [x] Hide PDF download button on blog detail pages
+- [x] Add back button to blog detail pages with proper spacing
+- [x] Redesign share button to match metadata style and position next to reading time
+- [x] Add text justification for blog content on mobile devices
+- [x] Fix Next.js 15 params Promise requirement for blog detail pages
+- [x] Update footer copyright text format
+- [x] Improve experience section mobile layout (date next to location)
+- [x] Standardize font sizes across resume sections (summary, experience, core skills)
+
