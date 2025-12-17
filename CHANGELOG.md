@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2025-01-27
+
+### Added
+- Secure multi-stage Dockerfile optimized for Next.js 15 standalone output
+- .dockerignore file to reduce build context size and improve build performance
+- Health check API endpoint (`/api/health`) for container orchestration and monitoring
+- Docker Compose example configuration file for easy local development and testing
+- Non-root user security configuration in Docker image
+- Health check configuration with proper intervals and timeouts
+
+### Security
+- Docker image runs as non-root user (nextjs:nodejs) for enhanced security
+- Alpine Linux base image with security updates applied
+- Minimal attack surface with only runtime dependencies in final image
+- Proper file ownership and permissions set in Docker container
+
 ## [0.3.0] - 2025-01-27
 
 ### Removed
