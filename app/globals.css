@@ -162,40 +162,6 @@
     }
   }
 
-  /* PDF Mode Styles - Applied during PDF generation */
-  body.pdf-mode {
-    background: #ffffff !important;
-  }
-
-  body.pdf-mode [class*="bg-accent/95"],
-  body.pdf-mode [class*="bg-accent/"] {
-    background-color: #00CED1 !important;
-    backdrop-filter: none !important;
-    opacity: 1 !important;
-  }
-
-  body.pdf-mode [class*="text-transparent"],
-  body.pdf-mode [style*="text-transparent"] {
-    color: #ffffff !important;
-    background-image: none !important;
-    -webkit-text-stroke: none !important;
-    text-shadow: none !important;
-  }
-
-  body.pdf-mode .glass-card,
-  body.pdf-mode .glass-panel,
-  body.pdf-mode [class*="backdrop-blur"] {
-    backdrop-filter: none !important;
-  }
-
-  body.pdf-mode [class*="backdrop-blur"] {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-  }
-
-  body.pdf-mode .dark [class*="backdrop-blur"] {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-  }
-
   /* Print Styles */
   @media print {
     @page {

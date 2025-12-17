@@ -192,6 +192,17 @@
 
 ## Completed
 
+### Resume Page Removal
+- [x] Remove resume page and all related functionality
+- [x] Remove PDF download button components
+- [x] Remove print button component
+- [x] Remove resume header component
+- [x] Remove resume API route
+- [x] Remove resume link from navigation
+- [x] Remove resume link from hero section
+- [x] Remove PDF-related CSS styles
+- [x] Update metadata to remove resume references
+
 ### Home Page Enhancements
 - [x] Add profile photo to hero section with circular design
 - [x] Make profile photo responsive and visible on mobile devices

@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-01-27
+
+### Removed
+- Removed resume page (`/resume` route)
+- Removed PDF download button functionality and components
+- Removed print resume button component
+- Removed resume header component (only used on resume page)
+- Removed resume API route (`/api/resume`)
+- Removed resume link from navigation menu
+- Removed resume link from hero section
+- Removed PDF mode CSS styles from globals.css
+- Updated metadata to remove resume references
+
+### Changed
+- Updated site description to remove resume mention
+- Simplified hero section by removing resume CTA button
+
 ## [0.2.2] - 2025-01-27
 
 ### Fixed

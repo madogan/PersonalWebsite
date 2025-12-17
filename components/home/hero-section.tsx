@@ -19,7 +19,7 @@ export function HeroSection() {
             
             <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto animate-slide-up">
               I'm a developer passionate about creating beautiful, functional, and accessible web experiences.
-              Explore my blog posts, view my resume, and learn more about my work.
+              Explore my blog posts and learn more about my work.
             </p>
 
             {/* CTA Buttons */}
@@ -35,20 +35,6 @@ export function HeroSection() {
                 )}
               >
                 Read My Blog
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-              
-              <Link
-                href="/resume"
-                className={cn(
-                  'group inline-flex items-center gap-2 px-6 py-3',
-                  'bg-glass-bg backdrop-blur-md border border-glass-border text-foreground rounded-lg font-medium',
-                  'transition-all duration-200 hover:bg-foreground/10',
-                  'hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-                  'shadow-md hover:shadow-lg'
-                )}
-              >
-                View Resume
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>

@@ -4,7 +4,6 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
-import { ConditionalPdfButton } from '@/components/ui/conditional-pdf-button'
 import './globals.css'
 
 const inter = Inter({
@@ -24,8 +23,8 @@ export const metadata: Metadata = {
     default: 'Personal Website',
     template: '%s | Personal Website',
   },
-  description: 'Personal website with blog and resume',
-  keywords: ['blog', 'resume', 'portfolio', 'personal website'],
+  description: 'Personal website with blog',
+  keywords: ['blog', 'portfolio', 'personal website'],
   authors: [{ name: 'Your Name' }],
   creator: 'Your Name',
   metadataBase: new URL('https://example.com'),
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     url: 'https://example.com',
     siteName: 'Personal Website',
     title: 'Personal Website',
-    description: 'Personal website with blog and resume',
+    description: 'Personal website with blog',
   },
   robots: {
     index: true,
@@ -63,8 +62,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col relative">
-            {/* PDF Download Button - Top Left (hidden on blog detail pages) */}
-            <ConditionalPdfButton />
             {/* Theme Toggle - Top Right */}
             <div className="fixed top-4 right-4 z-50 no-print">
               <ThemeToggle />
