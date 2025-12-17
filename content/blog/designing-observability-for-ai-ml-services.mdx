@@ -1,0 +1,175 @@
+---
+title: "Designing Observability for AI/ML Services: Metrics That Actually Matter"
+description: "Most ML observability today is borrowed from traditional services, and it breaks down exactly when you need it most. This article identifies the signals that tell you an AI system is drifting toward failure—technical, operational, or economic—before your pager proves it."
+date: "2025-01-27"
+tags: ["AI", "MLOps", "Observability", "SRE", "Monitoring", "Metrics"]
+---
+
+When I review observability stacks for AI/ML services, the first thing I usually see is enthusiasm. Dashboards everywhere. Heatmaps. Percentiles. A dedicated panel for "model accuracy."
+
+What I rarely see is confidence.
+
+As a veteran SRE, I've learned to separate observability that looks impressive from observability that actually predicts failure. As I've been specializing more deeply in AI/ML infrastructure, one thing has become clear: most ML observability today is borrowed from traditional services, and it breaks down exactly when you need it most.
+
+This article is not about adding more dashboards. It's about identifying the signals that tell you an AI system is drifting toward failure—technical, operational, or economic—before your pager proves it.
+
+## The Golden Signals, Revisited (and Slightly Broken)
+
+SREs live by a small set of metrics for a reason: latency, error rate, and throughput work. They compress complex system behavior into signals we can reason about under stress.
+
+AI/ML services don't invalidate these signals—but they mutate them.
+
+### Latency Is No Longer a Single Number
+
+In traditional services, latency is usually end-to-end request time. In ML inference systems, that number hides multiple failure modes.
+
+Through my recent research into LLM and inference architectures, I've found that latency needs to be decomposed:
+
+- **Time to First Token (TTFT)**: User-perceived responsiveness.
+- **Total Inference Time**: Infrastructure cost and throughput pressure.
+- **Queueing Delay**: Often invisible until saturation.
+- **Warm vs. Cold Path Latency**: Model loading and cache effects.
+
+Averages here are dangerous. P95 TTFT can look healthy while total inference time creeps upward, silently destroying throughput and cost efficiency.
+
+From an SRE standpoint, this is classic tail latency behavior—just expressed in a new domain.
+
+### Error Rate Lies More Often Than You Think
+
+ML services are extremely good at returning HTTP 200.
+
+That doesn't mean they're healthy.
+
+Most AI failures are semantic errors, not transport errors. The model returns an answer. The system doesn't crash. Nothing triggers an alert.
+
+From a reliability perspective, this is the worst kind of failure: the system is up but wrong.
+
+Traditional error rate metrics must be augmented with:
+
+- Invalid or low-confidence responses
+- Fallback execution rates
+- Retry amplification
+- Downstream rejection rates
+
+If your error rate dashboard is flat but your business metrics are falling, your observability is lying to you.
+
+### Throughput Without Context Is Useless
+
+Throughput in ML systems is constrained by things traditional services rarely worry about:
+
+- GPU memory fragmentation
+- Batch sizing tradeoffs
+- Model parallelism overhead
+- Hardware heterogeneity
+
+You can be "meeting throughput" while quietly starving your system of headroom.
+
+In practice, throughput only becomes meaningful when correlated with resource efficiency, which brings us to the most underappreciated metric in AI systems.
+
+## Cost Is a Reliability Metric (Whether You Like It or Not)
+
+In AI infrastructure, cost behaves like a failure domain.
+
+This isn't philosophical—it's operational reality.
+
+I've seen systems that were technically stable but economically unsustainable. No crashes. No alerts. Just a GPU bill that made leadership pull the plug.
+
+From an SRE perspective, that's an outage.
+
+### The Metrics That Matter
+
+Cost observability must operate at service semantics, not billing abstraction:
+
+- Cost per inference
+- GPU utilization vs. effective throughput
+- Idle GPU time
+- Batch efficiency
+- Cache hit ratio vs. cost savings
+
+If GPU utilization is high but cost-per-inference is increasing, something is wrong—even if latency and error rates look fine.
+
+This is the AI equivalent of a memory leak that only shows up on your cloud invoice.
+
+Preventing "economic outages" requires treating cost like latency: something you monitor continuously, not retroactively.
+
+## Infrastructure-Level Drift: The Silent Killer
+
+Most discussions of "drift" focus on data. That's important—but incomplete.
+
+What my SRE instincts keep flagging is infrastructure drift.
+
+AI systems are unusually sensitive to low-level changes:
+
+- CUDA version updates
+- Driver mismatches
+- Library upgrades
+- Kernel scheduling differences
+- Mixed GPU hardware generations
+
+None of these changes break deployments. They degrade performance quietly.
+
+Latency increases by 5–10%. GPU utilization drops slightly. Queueing increases under load. Nothing trips an alarm.
+
+Weeks later, someone asks why the system feels "slower."
+
+From a reliability standpoint, this is configuration drift with a longer half-life and worse visibility.
+
+The only defense is correlated observability:
+
+- Performance metrics tied to deployment versions
+- Hardware-aware dashboards
+- Change-event overlays on latency and cost graphs
+
+If you can't answer "what changed" when performance degrades, you don't have observability—you have telemetry.
+
+## Why Health Checks Fail in ML Systems
+
+Traditional health checks assume determinism. If a request succeeds, the system is healthy.
+
+That assumption collapses in ML services.
+
+An ML endpoint can be:
+
+- Reachable
+- Fast
+- Error-free
+
+…and still be effectively broken.
+
+### Toward Semantic Health Checks
+
+From an SRE perspective, a meaningful ML health check answers a different question:
+
+"Is the system behaving predictably?"
+
+Examples of semantic health checks:
+
+- Stability of outputs for known reference inputs
+- Distribution checks on embeddings or logits
+- Confidence score variance over time
+- Drift indicators on feature statistics at inference time
+
+These checks don't replace traditional probes—they complement them. The goal isn't to prove correctness, but to detect behavioral instability.
+
+That's the signal that matters.
+
+## Observability Is About Predictability, Not Accuracy
+
+As I continue transitioning deeper into AI/ML infrastructure, one conclusion keeps resurfacing: accuracy is a data science concern; predictability is a reliability concern.
+
+SREs don't keep systems reliable by chasing perfection. We do it by bounding uncertainty.
+
+The best observability setups for AI systems are not the ones with the most dashboards. They're the ones that answer uncomfortable questions early:
+
+- Is this system becoming harder to reason about?
+- Is variance increasing?
+- Are small changes having outsized effects?
+- Is cost scaling differently than traffic?
+
+When those answers become unclear, failure is already incubating.
+
+The future of MLOps observability isn't about proving models are "smart."
+It's about ensuring the systems that serve them remain boringly predictable.
+
+And boring, in my experience, is the highest compliment a production system can earn.
+

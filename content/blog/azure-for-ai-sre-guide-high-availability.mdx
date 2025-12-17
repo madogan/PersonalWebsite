@@ -1,0 +1,236 @@
+---
+title: "Azure for AI: An SRE's Guide to Provisioning for High Availability"
+description: "Azure can run LLM-backed systems with uptime expectations comparable to Tier-1 services, but the path runs through quotas, networking, and observability—not prompts and SDKs. This is an evaluation of what actually holds up under load, failure, and budget scrutiny."
+date: "2025-01-27"
+tags: ["Azure", "AI", "SRE", "MLOps", "High Availability", "Infrastructure"]
+---
+
+When teams ask whether Azure is "ready" for serious AI workloads, my answer as an SRE is usually: yes—but only if you treat it like critical infrastructure, not a demo platform.
+
+I'm writing this as someone with deep experience operating high-traffic cloud systems, now specializing in Azure's AI and MLOps ecosystem. This is not a tutorial. It's an evaluation of what actually holds up under load, failure, and budget scrutiny—as of late 2025.
+
+If your goal is to run LLM-backed systems with uptime expectations comparable to Tier-1 services, Azure can do it. But the path runs through quotas, networking, and observability—not prompts and SDKs.
+
+## Development vs Production: Draw the Line Early
+
+Before diving into components, one hard rule:
+
+**Azure AI Studio / Foundry is a development and control plane.**
+**High availability lives elsewhere.**
+
+Studio makes it easy to experiment. Production reliability depends on:
+
+- VM quotas and regional capacity
+- Network topology (Private Link, VNet injection)
+- Multi-region deployment patterns
+- Infrastructure-as-Code (IaC)
+- Observability beyond "model accuracy"
+
+Conflating these layers is the fastest way to ship something fragile.
+
+## Compute & Silicon: Why "Standard" VMs Don't Survive AI Load
+
+### ND-Series and Why It Matters
+
+For serious AI workloads—training or high-throughput inference—ND-series GPUs are not optional. Azure's ND families (H100 today, Blackwell-class accelerators emerging) exist for one reason: predictable performance at scale.
+
+From an SRE standpoint, the key advantages are:
+
+- Dedicated GPUs with predictable scheduling
+- High memory bandwidth, which dominates LLM latency
+- InfiniBand networking, which fundamentally changes distributed workloads
+
+Trying to run LLMs on general-purpose VM SKUs usually fails quietly:
+
+- Tail latency explodes under concurrency
+- CPU bottlenecks mask GPU underutilization
+- Autoscaling reacts too late to be useful
+
+### InfiniBand Is Not a Luxury
+
+InfiniBand isn't about peak performance benchmarks. It's about variance control.
+
+For distributed inference or training:
+
+- Cross-node synchronization becomes deterministic
+- Tail latency narrows
+- GPU utilization becomes predictable
+
+From an SRE lens, InfiniBand reduces unknown unknowns. That alone justifies the cost.
+
+### Azure Cobalt CPUs: The Supporting Cast
+
+Azure's Cobalt CPUs matter less for raw AI compute and more for:
+
+- Control plane services
+- Pre/post-processing
+- Vector search
+- Inference gateways
+
+They offer better performance-per-watt and tighter integration with Azure's SDN, which shows up as lower jitter and more stable networking under load.
+
+## Azure AI Foundry: The Control Plane, Not the Runtime
+
+Azure AI Foundry (the evolution of AI Studio) should be viewed as a control plane for MLOps, not the place where reliability is enforced.
+
+### Prompt Flow for CI/CD (Not Experimentation)
+
+Prompt Flow's real value is not visual authoring—it's versioned, testable prompt pipelines.
+
+Used correctly, it enables:
+
+- Prompt versioning tied to releases
+- Canary deployments of prompt logic
+- Regression testing against fixed evaluation sets
+
+From an SRE perspective, this turns prompts from "tribal knowledge" into deployable artifacts.
+
+### Registry: Treat Models Like Binaries
+
+Foundry's Registry becomes useful when you treat models the same way you treat container images:
+
+- Immutable versions
+- Explicit promotion between environments
+- Rollback as a first-class operation
+
+This matters operationally. When something degrades, you want to answer: what changed—and "the model" should never be a mystery.
+
+## Observability: Azure Monitor + Managed Grafana (or You're Flying Blind)
+
+Most AI failures don't show up as crashes. They show up as variance.
+
+Azure's observability stack works—but only if you wire it correctly.
+
+### What to Measure (That Actually Predicts Failure)
+
+From an SRE standpoint, these signals matter more than accuracy charts:
+
+**Time to First Token (TTFT)**
+User-perceived responsiveness; sensitive to queuing and cold starts.
+
+**Total Inference Time**
+Capacity and cost driver; correlates with GPU saturation.
+
+**GPU Health Metrics**
+Memory pressure, throttling, ECC errors—these fail silently until they don't.
+
+**Queue Depth & Wait Time**
+The earliest indicator of overload.
+
+Azure Monitor can collect these; Managed Grafana makes them usable. The mistake I see is stopping at platform metrics and ignoring application-level instrumentation.
+
+### Integrating Foundry Signals
+
+Foundry provides metadata—model versions, deployments, prompt flows. Correlating that with latency and cost metrics is where observability becomes actionable.
+
+If latency regresses after a prompt or model change, you should see it immediately—not in a weekly review.
+
+## Data & Vector Storage: Treat Retrieval as Tier-0
+
+Retrieval-augmented systems fail when their data layer degrades. This is not theoretical.
+
+### Azure AI Search
+
+**Strengths:**
+
+- Fully managed
+- Tight Azure integration
+- Fast to get started
+
+**SRE Concerns:**
+
+- Index rebuild costs
+- Scaling limits under write-heavy workloads
+- Less control over memory behavior
+
+Good for moderate-scale RAG. Less forgiving at high throughput.
+
+### Azure Database for PostgreSQL (Hyperscale/Citus)
+
+When teams use PostgreSQL-based approaches (often with extensions or external vector layers), they gain:
+
+- Explicit control over indexing
+- Predictable memory usage
+- Clear scaling boundaries
+
+The trade-off is operational responsibility—but for Tier-1 systems, that's often acceptable.
+
+### Zero-Copy with Fabric (Where It Helps)
+
+Fabric-style zero-copy integration reduces data duplication and pipeline latency, but from an SRE view:
+
+- It simplifies data movement
+- It does not eliminate runtime dependencies
+- It still requires capacity planning
+
+Zero-copy reduces failure surfaces—it doesn't remove them.
+
+## Networking: Private Links, or Don't Bother
+
+If your AI system is production-critical:
+
+- Private Endpoints are mandatory
+- Public networking is a risk multiplier
+- SDN isolation is part of your threat model and reliability story
+
+Azure's Software Defined Networking is one of its strongest assets. Used correctly, it provides:
+
+- Predictable latency
+- Blast-radius containment
+- Cleaner multi-region failover patterns
+
+Ignoring this layer is how "secure demos" become operational liabilities.
+
+## Quotas: The Real Availability Constraint
+
+Azure outages are rarely what take AI systems down. Quota exhaustion does.
+
+GPU quotas, regional capacity, and SKU availability must be treated as:
+
+- Design inputs
+- Not afterthoughts
+
+High availability requires:
+
+- Pre-approved quotas
+- Multi-region capacity planning
+- IaC that can fail over without human intervention
+
+If your runbook includes "open a support ticket," you don't have HA.
+
+## Agentic Operations: Early, Promising, Not Autonomous (Yet)
+
+Azure's emerging SRE and Copilot agents are interesting—but they are assistive, not autonomous.
+
+**Where they help today:**
+
+- Triage assistance
+- Suggested remediation
+- Faster diagnostics
+
+**Where they don't replace humans:**
+
+- Capacity planning
+- Architectural decisions
+- Incident command
+
+As an SRE, I see them as force multipliers—not replacements. Used well, they reduce cognitive load during incidents. Used blindly, they add noise.
+
+## Closing Thought
+
+Azure's biggest strength for AI is not its models.
+
+It's the Software Defined Networking, global footprint, and enterprise-grade control plane that let LLM-based systems behave like traditional Tier-1 services.
+
+When provisioned with:
+
+- The right silicon
+- Proper networking
+- Explicit quotas
+- Real observability
+
+LLMs stop feeling "experimental" and start behaving like infrastructure.
+
+And from an SRE's perspective, that's the real milestone:
+not intelligence—but predictability at scale.
+

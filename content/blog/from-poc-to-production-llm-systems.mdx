@@ -1,0 +1,223 @@
+---
+title: "From PoC to Production: What Breaks When You Ship LLM-Based Systems"
+description: "The gap between a Proof of Concept and a production system is not primarily about model quality. It's about everything that happens after the first successful response. LLM systems don't fail because the prompt is wrong. They fail because production is hostile to assumptions."
+date: "2025-01-27"
+tags: ["AI", "LLM", "Production", "SRE", "MLOps", "Systems Engineering"]
+---
+
+Every LLM project I've seen starts the same way.
+
+A Python script.
+A clean prompt.
+A single request.
+A surprisingly good answer.
+
+The demo works. Confidence rises. Someone says, "Let's ship it."
+
+And that's usually the moment the real engineering work begins.
+
+As a Senior SRE who has spent years operating high-traffic production systems—and is now specializing in the operationalization of LLM-based applications—I've come to see a familiar pattern. The gap between a Proof of Concept and a production system is not primarily about model quality. It's about everything that happens after the first successful response.
+
+LLM systems don't fail because the prompt is wrong. They fail because production is hostile to assumptions.
+
+## The PoC Illusion
+
+A PoC is optimized for correctness under ideal conditions:
+
+- Single user
+- No concurrency
+- Warm model
+- No rate limits
+- Infinite patience
+
+Production optimizes for none of those.
+
+In traditional systems, we already know this gap well. "It worked on my machine" usually means "it was never exposed to reality." LLM systems just add new dimensions to the same failure modes—and amplify them.
+
+What follows are the places where things consistently break when you cross that line.
+
+## The Latency Trap
+
+LLM latency behaves differently than most REST APIs, and treating it the same is a mistake.
+
+In a PoC, a request takes three seconds. No one cares. In production, three seconds under concurrency is a crisis.
+
+### Why LLM Latency Is Different
+
+LLM inference time is:
+
+- Input-dependent (prompt length matters)
+- Output-dependent (token count matters)
+- Resource-dependent (batching, GPU scheduling)
+- Non-interruptible (once started, it usually runs to completion)
+
+Traditional "fail fast" patterns don't translate cleanly. Killing an in-flight inference can waste GPU time without freeing capacity in a meaningful way. Aggressive timeouts often increase load instead of reducing it, due to retries.
+
+From an SRE perspective, the key insight is this:
+
+**LLM latency is not just a response-time metric; it's a capacity-consumption signal.**
+
+You don't just measure latency—you budget it.
+
+Production systems need:
+
+- Separate budgets for time to first token vs total inference time
+- Concurrency caps that account for GPU saturation
+- Backpressure instead of blind retries
+
+If you treat LLM calls like regular HTTP requests, your tail latency will eat your throughput alive.
+
+## Caching: Edge vs. Semantics
+
+The first instinct when latency is high is caching. That instinct is correct—but dangerously incomplete.
+
+### Edge Caching Hits a Wall Fast
+
+CDN-style caching assumes:
+
+- Deterministic outputs
+- High cache hit ratios
+- Low variance in requests
+
+LLMs violate all three.
+
+A single token difference in a prompt yields a cache miss. Even identical prompts may not produce identical outputs unless you enforce determinism—and determinism has its own trade-offs.
+
+### Semantic Caching Is Not Free
+
+Semantic caching (embedding similarity, approximate matches) helps, but it shifts the problem:
+
+- More compute (embedding generation)
+- More state (vector storage)
+- More complexity (similarity thresholds, false positives)
+
+You trade GPU inference for vector search and memory pressure.
+
+From a systems perspective, caching becomes an economic optimization problem, not a simple performance trick. You must measure:
+
+- Cache hit rate vs. embedding cost
+- Latency saved vs. added complexity
+- Incorrect cache hits vs. user trust
+
+Caching LLM outputs is possible—but never "set and forget."
+
+## The Cold Start Problem (on Steroids)
+
+Cold starts exist in every system. LLMs make them painful.
+
+### What "Cold" Really Means Here
+
+A cold LLM service may involve:
+
+- GPU provisioning
+- Model weight loading (often tens of GB)
+- Kernel compilation
+- Memory warm-up
+- Cache population
+
+This is not milliseconds. This is minutes.
+
+Standard auto-scaling triggers—CPU usage, request rate—fire after users are already waiting. By the time a new instance is ready, the spike is gone or the damage is done.
+
+### Production Reality
+
+To survive this, teams end up:
+
+- Pre-warming capacity
+- Keeping "idle" GPUs alive
+- Accepting baseline cost for readiness
+
+From an SRE lens, this is a classic availability vs. cost trade-off. The mistake is pretending it doesn't exist.
+
+If your scaling policy assumes instant readiness, your first traffic spike will be indistinguishable from an outage.
+
+## Vector Databases Are Tier-0 Dependencies
+
+Vector databases are often introduced casually—"we'll just add RAG later." In production, they are anything but casual.
+
+A vector DB is:
+
+- Stateful
+- Memory-intensive
+- Latency-sensitive
+- Often poorly understood operationally
+
+Treating it like a cache or sidecar is a reliability mistake.
+
+### Common Failure Modes
+
+In real systems, I've seen:
+
+- Index rebuilds blocking reads
+- Memory pressure causing unpredictable latency
+- Inconsistent embeddings after model updates
+- Slow writes cascading into inference timeouts
+
+When your LLM depends on retrieval, the vector DB becomes Tier-0 infrastructure. If it degrades, your entire system degrades—often without obvious errors.
+
+Operationally, this means:
+
+- Backup and restore plans
+- Capacity planning
+- Versioning strategies
+- Consistency guarantees you actually understand
+
+RAG systems don't remove complexity. They relocate it.
+
+## Quotas, Rate Limits, and External Reality
+
+Most PoCs assume infinite upstream capacity. Production never gets that luxury.
+
+LLM providers enforce:
+
+- Requests per minute (RPM)
+- Tokens per minute (TPM)
+- Burst limits
+- Account-level quotas
+
+Hitting these limits doesn't look like a clean failure. It looks like partial degradation, retries, and cascading delays.
+
+### What Works in Practice
+
+Surviving this requires old-school resilience patterns:
+
+- Token-aware rate limiting
+- Circuit breakers that trip early
+- Work queues instead of synchronous fan-out
+- Graceful degradation paths
+
+From an SRE standpoint, upstream LLM APIs are unreliable dependencies. You don't argue with that reality—you design around it.
+
+## Day 2 Is Where Most Systems Die
+
+The most dangerous assumption in LLM projects is that "shipping" is the hard part.
+
+Shipping is Day 0.
+Operating is Day 2.
+
+Day 2 brings:
+
+- Traffic you didn't predict
+- Prompts you didn't expect
+- Costs you didn't model
+- Dependencies you didn't instrument
+
+As I've been transitioning deeper into this space, the pattern is clear: LLM systems don't collapse suddenly. They erode.
+
+Latency creeps up. Costs drift. Retrieval quality degrades. By the time someone declares an incident, the root cause is weeks old.
+
+## Closing Thought
+
+After years in production engineering, and now applying those lessons to LLM-based systems, my conclusion is simple:
+
+**Shipping LLMs is 10% prompt engineering and 90% traditional systems engineering.**
+
+The novelty is real—but the failure modes are familiar.
+
+Concurrency, backpressure, caching, state, cold starts, quotas, and cost controls have always defined whether a system survives production. LLMs don't replace these concerns. They amplify them.
+
+If your PoC is impressive, that's good.
+If your system is predictable under load, that's what matters.
+
+Everything else is just a demo.
+

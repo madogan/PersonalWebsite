@@ -1,0 +1,277 @@
+---
+title: "Observing the Stochastic: Tuning the LGTM Stack for AI Infrastructure"
+description: "LGTM—Loki, Grafana, Tempo, Mimir—has earned its place in production environments. This article explores how well this stack holds up when pushed into one of the most hostile observability environments: LLM and ML production systems."
+date: "2025-01-27"
+tags: ["Observability", "LGTM", "Grafana", "AI", "SRE", "MLOps", "Monitoring"]
+---
+
+I've trusted the Grafana ecosystem for a long time.
+
+LGTM—Loki, Grafana, Tempo, Mimir—has earned its place in production environments where uptime matters, cardinality is ugly, and dashboards are only as good as the signals behind them. What I didn't fully appreciate until recently is how well this stack holds up when pushed into one of the most hostile observability environments we've had so far: LLM and ML production systems.
+
+This article is not about adopting new tools. It's about stretching familiar ones until they expose the failure modes that actually matter in AI infrastructure. I'm writing this as an SRE and observability specialist who is now architecting systems for stochastic, resource-heavy, non-deterministic services—and discovering that the "old" SRE brain still works, if you apply it carefully.
+
+## The Core Problem: AI Breaks Comfortable Assumptions
+
+AI systems don't fail loudly.
+
+They return HTTP 200.
+They emit logs.
+They keep GPUs busy.
+
+And yet, users complain. Latency drifts. Costs explode. Quality degrades. Nothing pages you—until it's too late.
+
+From an observability perspective, the problem isn't lack of data. It's signal collapse:
+
+- Metric cardinality explodes
+- Logs are technically "successful"
+- Traces show everything worked… eventually
+
+LGTM doesn't magically fix this. But it gives you the primitives to correlate behavior across layers—which is exactly what AI systems need.
+
+## Mimir & Metrics: Surviving High Cardinality Without Melting Down
+
+### Accepting Cardinality as a Design Constraint
+
+If you try to observe AI systems with low-cardinality thinking, you will either:
+
+- Drop the metrics you need, or
+- Take your metrics backend down with you
+
+In AI infrastructure, cardinality is not an accident. It's structural:
+
+- Model version
+- Adapter / LoRA ID
+- Deployment environment
+- Customer tier
+- Prompt class
+- Token bucket
+
+The trick is controlling cardinality, not eliminating it.
+
+### Label Strategy That Actually Scales
+
+What's worked for me is a strict label taxonomy:
+
+**Allowed as labels**
+
+- model_version
+- deployment
+- customer_tier
+- gpu_type
+- region
+
+**Never as labels**
+
+- raw prompt IDs
+- user IDs
+- request IDs
+- free-form metadata
+
+Anything request-scoped belongs in logs or traces, not metrics.
+
+Mimir handles this well if you:
+
+- Enforce label limits at ingestion
+- Use relabeling aggressively
+- Separate "fleet-level" metrics from "per-model" metrics
+
+### Custom Exporters: GPU and Inference Are First-Class Signals
+
+Out of the box metrics aren't enough.
+
+Two exporters become essential:
+
+**1. DCGM-based GPU Exporter**
+
+- GPU memory usage
+- SM occupancy
+- Power draw
+- Throttling indicators
+
+These are not "nice to have." They explain why latency changed when nothing else did.
+
+**2. Inference Metrics Exporter**
+
+I usually expose:
+
+- inference_ttft_seconds
+- inference_tokens_per_second
+- inference_total_latency_seconds
+- inference_token_count
+
+These metrics turn the model from a black box into a measurable service. TTFT in particular is the earliest indicator of saturation.
+
+## Loki & Logs: Treat Logs as Structured Telemetry
+
+### Logs Are Not Just for Errors Anymore
+
+In AI systems, logs often contain the only visibility into semantic behavior.
+
+Using Loki effectively means logging less text and more structure.
+
+**What I log intentionally:**
+
+- Prompt class (not content)
+- Response length
+- Safeguard / policy triggers
+- Retry reason
+- CUDA warnings
+
+**What I avoid:**
+
+- Full prompts
+- Full responses
+- User-generated content
+
+### Catching Silent Failures Early
+
+One of the most valuable Loki queries I've used is filtering for CUDA OOM warnings before the process crashes.
+
+These often appear as warnings:
+
+- Memory fragmentation
+- Allocation retries
+- Context eviction
+
+By the time the process dies, the damage is already done. Loki lets you:
+
+- Detect patterns
+- Correlate them with rising latency
+- Act before Kubernetes does something "helpful"
+
+That's observability doing its job.
+
+## Tempo & Distributed Tracing: Finding Semantic Bottlenecks
+
+Tracing is where most AI observability setups fall apart—or become truly useful.
+
+### Trace the Entire Semantic Path
+
+A single user request typically touches:
+
+- API Gateway
+- Authentication
+- Vector DB lookup
+- Prompt assembly
+- LLM inference
+- Post-processing
+
+If you only trace infrastructure hops, you'll miss the real bottlenecks.
+
+What matters is semantic spans:
+
+- vector_search
+- prompt_build
+- model_inference
+- output_filtering
+
+Once you add these spans, something interesting happens: you stop guessing where time goes.
+
+### Identifying Semantic Bottlenecks
+
+In multiple systems I've observed:
+
+- Vector DB latency was flat
+- Network was healthy
+- CPU usage was fine
+
+And yet p99 latency climbed.
+
+Tempo made it obvious: model inference time scaled non-linearly with token count, and batching thresholds were misaligned.
+
+That's not an infra problem or a model problem. It's a systems problem—and tracing makes it visible.
+
+## Grafana Dashboards: The AI Single Pane of Glass
+
+Dashboards are dangerous when they try to show everything. For AI systems, I've settled on a layered layout.
+
+**Top Row: User-Perceived Health**
+
+- p50 / p95 / p99 TTFT
+- p95 total latency
+- Error rate (real errors, not HTTP status)
+
+**Middle Row: Inference Behavior**
+
+- Tokens per second
+- Token count distribution
+- Latency by token bucket
+
+**Bottom Row: Infrastructure Reality**
+
+- GPU memory usage
+- GPU temperature
+- Throttling events
+- Node-level saturation
+
+The goal is simple: see cause and effect on one screen.
+
+If latency spikes and GPU memory is flat, you look elsewhere. If both spike together, you know where to dig.
+
+## Alerting Strategy: Avoiding Pager Self-Harm
+
+Alerting is where AI observability usually becomes toxic.
+
+### Two Classes of Alerts (Do Not Mix Them)
+
+**Actionable Infrastructure Alerts**
+
+- GPU node down
+- Exporter missing
+- Queue saturation
+- Inference backlog growth
+
+These page humans.
+
+**Informational ML Alerts**
+
+- Quality metrics drifting
+- Confidence distribution changes
+- Guardrail triggers increasing
+
+These notify. They do not page.
+
+Blurring this line is how you teach your on-call rotation to ignore you.
+
+### Use Burn Rates, Not Thresholds
+
+Static thresholds don't work well for stochastic systems. Burn-rate-style alerts tied to SLOs still do.
+
+If TTFT error budget is burning too fast, page.
+If accuracy dipped slightly at 3 a.m., don't.
+
+## Treat the Model Like a Microservice (Because It Is)
+
+One of the most useful mental shifts I've made is this:
+
+**The model is just another microservice—**
+extremely expensive, non-deterministic, and sensitive to resource contention.
+
+Once you accept that, LGTM fits naturally:
+
+- Metrics describe behavior
+- Logs explain anomalies
+- Traces connect intent to execution
+
+No hype required.
+
+## Closing Thought
+
+After pushing LGTM into AI infrastructure, my conclusion surprised me a bit:
+
+**The LGTM stack is better suited for AI observability than many specialized MLOps tools.**
+
+Not because it understands models—but because it understands systems.
+
+AI failures rarely live in isolation. They emerge from the interaction between:
+
+- Infrastructure pressure
+- Data behavior
+- Model characteristics
+- Cost constraints
+
+LGTM lets you see all of that on a single timeline.
+
+And in production, correlation beats specialization every time.
+

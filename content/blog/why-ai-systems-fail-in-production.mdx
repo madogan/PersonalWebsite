@@ -1,0 +1,117 @@
+---
+title: "Why AI Systems Fail in Production (And Why It's Rarely the Model)"
+description: "When an AI system fails in production, the postmortem almost always starts by blaming the model. But the data suggests AI systems rarely fail because of a single bad algorithmic decision. They fail because of plumbing, dependencies, and fragile assumptions about data, scale, and determinism."
+date: "2025-01-27"
+tags: ["AI", "MLOps", "Production", "SRE", "Systems Engineering", "Reliability"]
+---
+
+In my recent deep-dives into MLOps architectures, one pattern keeps repeating itself with almost boring consistency: when an AI system fails in production, the postmortem almost always starts by blaming the model. The accuracy dropped. The predictions became weird. The model "hallucinated."
+
+And almost every time, that diagnosis is wrong.
+
+This is not because models are perfect. They aren't. It's because, as an industry, we've carried a comforting but dangerous fallacy from traditional software engineering into AI systems: the idea that the model is the black box, and black boxes are where failures live. From an SRE perspective, that framing is not just inaccurate—it actively prevents us from finding the real failure modes.
+
+What the data suggests, and what repeated production incidents confirm, is that AI systems rarely fail because of a single bad algorithmic decision. They fail because of plumbing. Because of dependencies. Because of fragile assumptions about data, scale, and determinism that simply don't hold once machine learning enters the picture.
+
+This is an exploration of that gap—from the perspective of an SRE who has spent years debugging distributed systems, and is now actively researching the reliability frontier of AI and MLOps infrastructure.
+
+## The Black Box Fallacy
+
+There is a seductive simplicity in blaming the model. Models are mathematically dense, opaque to most stakeholders, and conveniently isolated from the rest of the system. When something goes wrong, saying "the model degraded" feels intellectually honest, even sophisticated.
+
+But in practice, the model is often the most stable component in the entire stack.
+
+In traditional SRE work, we learned early on that outages blamed on "bad code" were frequently caused by configuration drift, hidden dependencies, or load patterns the code was never designed to handle. AI systems repeat this lesson, but with higher stakes and worse observability.
+
+In many incidents I've reviewed, the model artifact deployed to production had not changed at all. What had changed was upstream data distribution, feature availability, schema shape, or timing. The model did exactly what it was trained to do—just on inputs it was never meant to see.
+
+Calling that a "model failure" is like blaming a database engine because the application sent corrupted queries.
+
+The black box is not the model. The black box is the system around it.
+
+## Infrastructure Fragility Meets ML Reality
+
+Traditional SRE assumptions break quickly once ML workloads enter production.
+
+We are used to services that scale more or less linearly. CPU-bound services can be autoscaled. Memory usage is predictable. Latency correlates with load. When these assumptions fail, we know where to look: locks, queues, garbage collection, I/O.
+
+ML workloads violate these intuitions in subtle ways.
+
+Inference latency may not scale linearly with traffic due to batching, GPU scheduling, or cache behavior. A small increase in request rate can cause disproportionate latency spikes. Resource contention becomes multidimensional: CPU, GPU, memory bandwidth, and even PCIe lanes can become bottlenecks.
+
+From an SRE lens, this creates a dangerous illusion. The system looks "healthy" at the infrastructure level—pods are running, nodes are alive, error rates are low—while user-facing quality quietly degrades. Predictions still return HTTP 200. Nothing crashes. No alert fires.
+
+This is not resilience. It is fragility disguised as stability.
+
+## Data Is a Dependency, Not an Input
+
+One of the hardest mindset shifts when transitioning into ML infrastructure is accepting that data is not just input—it is a first-class dependency.
+
+In classical systems, dependencies tend to fail loudly. A database goes down. A downstream API returns 500. Timeouts trigger retries. Alerts fire.
+
+Data dependencies fail silently.
+
+Data drift does not throw exceptions. Training-serving skew does not page you at 3 a.m. Feature leakage does not show up in error budgets. Instead, the system continues to function while gradually becoming wrong.
+
+From a reliability perspective, this is terrifying.
+
+In several production cases I've studied, the incident timeline looked like this:
+
+A seemingly innocuous upstream change altered data distribution.
+
+The model continued serving predictions without errors.
+
+Business metrics degraded slowly over days or weeks.
+
+By the time humans noticed, rollback was no longer trivial.
+
+What makes these failures especially dangerous is that they bypass our traditional SRE defenses. There is no spike in error rate. No obvious latency anomaly. Just incorrectness accumulating quietly.
+
+Silent failures are not just harder to debug. They are harder to notice.
+
+## Observability Stops at the Model Boundary
+
+Another recurring theme in my research is how observability often collapses at the model boundary.
+
+We instrument request counts, latencies, error codes. We build beautiful dashboards showing infrastructure health. But once a request enters the model, our visibility often ends.
+
+We rarely ask:
+
+- Are feature distributions changing?
+- Are prediction confidences shifting?
+- Are outputs becoming less stable over time?
+- Is the model behaving differently under identical inputs?
+
+Part of the problem is cultural. SRE teams are comfortable with deterministic systems. ML systems are probabilistic by nature. The same input can yield different outputs. "Correctness" is statistical, not binary.
+
+But avoiding the problem does not make it go away.
+
+The feedback loop in AI systems is fundamentally more complex. Outputs influence future inputs. Predictions change user behavior, which changes data, which retrains the model, which changes predictions again. This is a closed loop, and closed loops amplify small errors.
+
+Monitoring such systems requires new mental models, not just new tools.
+
+## The Feedback Loop Is the Real Failure Domain
+
+In traditional systems, we can usually isolate cause and effect. A bad deploy leads to errors. Roll back the deploy, errors disappear.
+
+AI systems resist this neat causality.
+
+The feedback loop between data, model, and users introduces time-delayed failures. By the time you observe degraded performance, the root cause may be several system states in the past. The model you're serving now may already be trained on compromised data.
+
+From an SRE standpoint, this feels uncomfortably familiar. It resembles distributed systems with eventual consistency, hidden coupling, and delayed propagation of errors. The difference is that in AI systems, the coupling is semantic, not just technical.
+
+What the data suggests is that many AI incidents are not single-point failures. They are systemic drifts that accumulate until reliability collapses—not as an outage, but as a loss of trust.
+
+## The New Frontier of Reliability
+
+It's important to be honest here. While my background is firmly rooted in SRE—observability, incident response, performance analysis—I am actively transitioning into the AI/MLOps infrastructure domain. This is not a claim of mastery. It is an exploration of a new reliability frontier.
+
+What excites and concerns me is how familiar these problems feel, despite their novelty. AI systems fail for the same reasons distributed systems always have: hidden dependencies, weak feedback signals, and overconfidence in abstractions.
+
+The difference is that the abstractions are now probabilistic, the failures are quieter, and the blast radius is often business-critical rather than purely technical.
+
+Blaming the model is easy. Building systems that make model behavior observable, debuggable, and resilient is hard. But if SRE has taught us anything, it's that reliability emerges from systems thinking, not component worship.
+
+AI systems are not fragile because models are mysterious. They are fragile because we are still learning how to operate them as production systems.
+
+And that, more than any algorithmic breakthrough, is where the real work lies.
