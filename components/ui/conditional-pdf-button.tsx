@@ -6,8 +6,8 @@ import { PdfDownloadButton } from './pdf-download-button'
 export function ConditionalPdfButton() {
   const pathname = usePathname()
   
-  // Hide PDF button on blog detail pages
-  if (pathname?.startsWith('/blog/') && pathname !== '/blog') {
+  // Hide PDF button on all blog pages (list and detail pages)
+  if (pathname?.startsWith('/blog')) {
     return null
   }
 
