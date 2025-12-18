@@ -30,7 +30,7 @@ export function CertificationsSection() {
 
   const getLogoPath = (issuer: string): string | null => {
     const logoMap: Record<string, string> = {
-      'Grafana Labs': '/grafana.png',
+      'Grafana Labs': '/grafana.svg',
       'DevOps Institute': '/devops-institute.png',
       'Riverbed Technology': '/riverbed.png',
     }
