@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.2] - 2025-01-27
+
+### Added
+- Project version display in footer with small font size (10px)
+- Version positioned in center of footer using three-column grid layout
+- Version automatically updates from VERSION constant in lib/constants.ts
+
+### Changed
+- Footer layout restructured to use grid system (grid-cols-1 md:grid-cols-3) for better alignment
+- Version display uses subtle styling (text-[10px] text-foreground/40) for minimal visual impact
+
 ## [0.6.1] - 2025-01-27
 
 ### Changed

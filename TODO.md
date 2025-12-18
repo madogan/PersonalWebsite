@@ -288,3 +288,7 @@
 - [x] Update TypeScript types to support extended certification data
 - [x] Hide expiration date display for expired certificates
 
+### Footer Enhancements
+- [x] Add project version display to footer with small font size
+- [x] Center version display in footer layout using grid system
+
