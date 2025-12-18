@@ -131,9 +131,86 @@
   ],
   "certifications": [
     {
-      "name": "DevOps Institute – Site Reliability Engineering (SRE) Foundation℠",
-      "version": "v1",
-      "issuer": "DevOps Institute"
+      "name": "Trailblazer Technical Practitioner",
+      "issuer": "Grafana Labs",
+      "issueDate": "2025-11",
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": "https://www.credly.com/badges/9418fe6c-c91f-47bb-a88f-5754b515a15a",
+      "skills": ["Grafana", "Observability"]
+    },
+    {
+      "name": "Site Reliability Engineering (SRE) Foundation™",
+      "version": "v1.1",
+      "issuer": "DevOps Institute",
+      "issueDate": "2022-12",
+      "expirationDate": "2024-12",
+      "credentialId": "23833559",
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Site Reliability Engineering"]
+    },
+    {
+      "name": "End-to-End Visibility",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Network Performance", "Application Performance"]
+    },
+    {
+      "name": "RCPE Associate: AppResponse",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Application Performance", "APM"]
+    },
+    {
+      "name": "RCPE Associate: Introduction to NPM",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Network Performance", "NPM"]
+    },
+    {
+      "name": "RCPE Certified Professional",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Network Performance", "Application Performance"]
+    },
+    {
+      "name": "RCPE Foundation: Performance Foundations",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Performance Analysis", "System Monitoring"]
+    },
+    {
+      "name": "RCPE Professional: AppResponse 11",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Application Performance", "APM", "AppResponse"]
+    },
+    {
+      "name": "RCPE Professional: Packet Analyzer Plus (PA+)",
+      "issuer": "Riverbed Technology",
+      "issueDate": null,
+      "expirationDate": null,
+      "credentialId": null,
+      "credentialUrl": null,
+      "skills": ["Troubleshooting", "Observability", "Packet Analysis", "Network Analysis", "Deep Packet Inspection"]
     }
   ],
   "aiMlopsExperience": {

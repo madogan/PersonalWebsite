@@ -280,3 +280,10 @@
 - [x] Add .flyignore file to optimize deployment uploads
 - [x] Create comprehensive Fly.io deployment documentation
 
+### Certifications Section
+- [x] Add certifications section component to home page
+- [x] Update resume.json with all certifications from Credly profile
+- [x] Display company logos in fixed-size containers with Next.js Image optimization
+- [x] Show certification details (name, issuer, issue date, expiration date, skills, credential links)
+- [x] Update TypeScript types to support extended certification data
+

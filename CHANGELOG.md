@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2025-01-27
+
+### Added
+- Certifications section component on home page displaying professional certifications and badges
+- Company logo support for certifications (Grafana Labs, DevOps Institute, Riverbed Technology)
+- Fixed-size logo containers (64x64px) with Next.js Image optimization for PNG/SVG formats
+- Extended certification data structure with issue dates, expiration dates, credential IDs, credential URLs, and skills
+- Automatic expiration date detection and visual indication for expired certifications
+- Individual credential links for certifications with external URLs
+
+### Changed
+- Updated resume.json with 9 certifications from Credly profile
+- Extended TypeScript types in lib/resume.ts to support additional certification fields
+- Certifications section positioned after blogs section on home page
+
 ## [0.5.0] - 2025-01-27
 
 ### Added

@@ -39,6 +39,11 @@ export type ResumeData = {
     name: string
     version?: string
     issuer: string
+    issueDate?: string | null
+    expirationDate?: string | null
+    credentialId?: string | null
+    credentialUrl?: string | null
+    skills?: string[]
   }>
   skills: {
     [key: string]: string[]
