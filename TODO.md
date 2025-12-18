@@ -286,4 +286,5 @@
 - [x] Display company logos in fixed-size containers with Next.js Image optimization
 - [x] Show certification details (name, issuer, issue date, expiration date, skills, credential links)
 - [x] Update TypeScript types to support extended certification data
+- [x] Hide expiration date display for expired certificates
 

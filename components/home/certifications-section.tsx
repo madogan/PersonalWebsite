@@ -109,15 +109,11 @@ export function CertificationsSection() {
                     )}
 
                     {/* Expiration Date */}
-                    {expirationDateFormatted && (
-                      <div className={cn(
-                        'flex items-center gap-1.5 text-sm',
-                        expired ? 'text-red-500' : 'text-foreground/60'
-                      )}>
+                    {expirationDateFormatted && !expired && (
+                      <div className="flex items-center gap-1.5 text-sm text-foreground/60">
                         <Calendar className="h-3.5 w-3.5" />
                         <span>
-                          {expired ? 'Expired: ' : 'Expires: '}
-                          {expirationDateFormatted}
+                          Expires: {expirationDateFormatted}
                         </span>
                       </div>
                     )}
