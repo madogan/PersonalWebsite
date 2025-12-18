@@ -62,6 +62,22 @@
       ]
     },
     {
+      "company": "Zoolatech (Contract)",
+      "position": "Senior Site Reliability Engineer",
+      "location": "Remote",
+      "startDate": "Apr 2025",
+      "endDate": "May 2025",
+      "description": [
+        "Client: Pandora (Europe's largest jewelry retailer)",
+        "Senior Site Reliability Engineer supporting Pandora's large-scale retail and e-commerce platform, responsible for the reliability and operational stability of hybrid cloud and on-prem systems across multiple regions.",
+        "Designed and operated platform-level observability and monitoring solutions using Azure Monitor, Log Analytics, and New Relic, enabling consistent visibility across cloud services and in-store systems.",
+        "Defined and monitored service-level indicators (SLIs) and objectives (SLOs), managing error budgets and using reliability data to guide operational and architectural decisions.",
+        "Participated in incident management and root cause analysis for high-impact production incidents affecting both online and in-store retail operations.",
+        "Improved deployment, monitoring, and operational workflows through automation, reducing manual intervention and increasing platform stability.",
+        "Collaborated with platform, application, and operations teams to ensure scalable, resilient, and secure integration between cloud services and on-prem retail infrastructure."
+      ]
+    },
+    {
       "company": "EHSIM",
       "position": "Site Reliability Engineer",
       "location": "Ankara",
