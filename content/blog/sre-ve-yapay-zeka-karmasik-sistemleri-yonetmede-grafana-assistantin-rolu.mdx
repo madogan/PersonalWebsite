@@ -1,0 +1,59 @@
+---
+title: "SRE ve Yapay Zeka: Karmaşık Sistemleri Yönetmede Grafana Assistant'ın Rolü"
+description: "SpotOn'un Grafana Cloud ve Grafana Assistant kullanarak karmaşık mikro hizmet mimarisini nasıl daha dirençli hale getirdiğini ve yapay zekanın SRE süreçlerini nasıl dönüştürdüğünü keşfedin."
+date: "2026-01-20"
+tags: ["SRE", "AI", "Grafana", "Observability", "SpotOn", "Production", "DevOps"]
+locale: "tr"
+---
+
+# Giriş
+
+Restoran sektörü gibi saniyelerin kritik olduğu bir alanda, teknolojik aksaklıklar sadece bir yazılım hatası değil, doğrudan müşteri kaybı ve ciro zararı anlamına gelir. Fintech devi SpotOn, binlerce restoranın ödeme ve sipariş altyapısını yönetirken, özellikle hafta sonu yoğunluklarında sistem sürekliliğini sağlamak zorundadır. Bu yazıda, SpotOn'un Grafana Cloud ve Grafana Assistant kullanarak karmaşık mikro hizmet mimarisini nasıl daha dirençli hale getirdiğini ve yapay zekanın SRE (Site Reliability Engineering) süreçlerini nasıl dönüştürdüğünü inceleyeceğiz.
+
+## Anahtar Çıkarımlar
+
+- **Proaktif Müdahale**: Yapay zeka, potansiyel darboğazları arızaya dönüşmeden tespit etmeyi kolaylaştırır.
+
+- **Sorgu Demokratikleşmesi**: Doğal dil işleme sayesinde, karmaşık sorgu dillerini bilmeyen ekipler bile verilere erişebilir.
+
+- **Hızlı Kök Neden Analizi**: AI Assistant, loglar ve metrikler arasındaki ilişkiyi kurarak teşhis süresini (MTTR) minimize eder.
+
+- **Operasyonel Ölçeklenebilirlik**: Küçük bir SRE ekibi, AI desteğiyle çok daha büyük ve karmaşık bir altyapıyı yönetebilir.
+
+## Yoğun Trafik ve Ölçeklenebilirlik Zorlukları
+
+SpotOn için en büyük zorluk, restoran trafiğinin öngörülebilir ancak devasa dalgalanmalarıdır. Cumartesi akşamları yaşanan trafik patlamaları, sistem üzerinde aşırı bir yük oluşturur. Geleneksel izleme yöntemleri bu ölçekte bazen "veri yorgunluğuna" neden olabilir.
+
+Ekip, bu yükü yönetmek için sadece metrik toplamakla kalmayıp, bu veriyi anlamlı birer aksiyona dönüştürmek zorundaydı. Grafana Cloud'un merkezi yapısı, farklı bulut sağlayıcılarından gelen verileri tek bir noktada birleştirerek ekiplerin "tek bir gerçeklik kaynağına" sahip olmasını sağladı.
+
+## Grafana Assistant ile Gözlemlenebilirlik
+
+SpotOn'un operasyonel stratejisindeki en büyük değişim, Grafana Assistant'ın (yapay zeka asistanı) devreye girmesiyle yaşandı. Bu araç, mühendislerin teknik bariyerlerini aşmalarına şu şekilde yardımcı oluyor:
+
+### Doğal Dilden Sorgu Üretimi
+
+PromQL veya LogQL yazmak, özellikle baskı altındaki bir olay müdahale anında hataya açık bir süreçtir. Mühendisler artık "X servisi için son 15 dakikadaki hata oranlarını göster" gibi basit komutlarla karmaşık dashboard'lar oluşturabiliyor. Bu durum, teknik bilgi düzeyinden bağımsız olarak tüm ekibin veriye dayalı karar vermesini sağlıyor.
+
+### Karmaşık Log Analizi
+
+Milyonlarca satır log içerisinde bir hata desenini bulmak saatler sürebilir. AI Assistant, log kayıtlarını otomatik olarak gruplandırır ve olağan dışı sapmaları belirginleştirir. Bu özellik, SpotOn ekibinin hataları daha kullanıcılar fark etmeden yakalamasına olanak tanır.
+
+## Veri Erişiminin Demokratikleşmesi
+
+Yapay zeka desteği, gözlemlenebilirliği sadece SRE ekiplerinin tekelinden çıkarıp yazılım geliştiricilere ve hatta ürün yöneticilerine kadar yaygınlaştırdı. Gözlemlenebilirlik kültürü, tüm organizasyonun sistem sağlığından sorumlu olduğu bir yapıya dönüştü. Bu şeffaflık, ekipler arasındaki iletişimi güçlendirirken "sorun kimin tarafında?" tartışmalarını sonlandırarak çözüme odaklanılmasını sağlar.
+
+## Nasıl Uygulanır: Operasyonel Adımlar
+
+Sistemlerinize yapay zeka destekli gözlemlenebilirlik katmanını eklemek için şu stratejiyi izleyebilirsiniz:
+
+1. **Merkezi Veri Toplama**: Önce metrik, log ve trace verilerinizi Grafana Cloud gibi merkezi bir platformda konsolide edin.
+
+2. **Yapay Zeka Asistanını Entegre Edin**: Mevcut dashboard'larınıza AI Assistant'ı tanımlayarak ekibinizin doğal dilde sorgular yapmasını teşvik edin.
+
+3. **Yük Testlerini Otomatize Edin**: SpotOn'un yaptığı gibi, k6 gibi araçlarla sisteminizi test edin ve bu testlerin sonuçlarını AI ile analiz ederek zayıf noktaları önceden belirleyin.
+
+4. **Standart Operasyon Prosedürleri (SOP) Oluşturun**: AI'nın sunduğu önerileri olay müdahale süreçlerinize (Incident Response) resmi bir adım olarak ekleyin.
+
+## Sonuç
+
+SpotOn örneği, yapay zekanın sadece bir "trend" olmadığını, aksine modern yazılım operasyonlarının ayrılmaz bir parçası haline geldiğini kanıtlıyor. Grafana Assistant kullanımı, teknik ekiplerin bilişsel yükünü azaltırken, restoranların en yoğun saatlerinde bile sorunsuz hizmet almasını sağlıyor. Gözlemlenebilirlik ve yapay zekanın bu birleşimi, sistem güvenilirliğini artırmak isteyen her ölçekteki işletme için kritik bir yol haritası sunuyor.

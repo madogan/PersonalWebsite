@@ -1,0 +1,67 @@
+---
+title: "Grafana Assistant Genel Erişime Açıldı: AI Destekli Gözlemlenebilirlikte Yeni Dönem"
+description: "Grafana Assistant'ın genel erişime açılması ve Assistant Investigations özelliği ile AI destekli gözlemlenebilirlikte yeni dönem. Doğal dil sorguları ve otomatik kök neden analizi."
+date: "2026-01-25"
+tags: ["Grafana", "AI", "Observability", "SRE", "DevOps", "Incident Response"]
+locale: "tr"
+---
+
+# Giriş
+
+Karmaşık sistemlerde bir sorun oluştuğunda, mühendislerin önündeki en büyük engel "bağlam" eksikliğidir. Bir metrikteki ani yükselişin hangi log kaydıyla ilişkili olduğunu bulmak dakikalar, hatta saatler alabilir. Grafana Labs, bu süreci kökten değiştirecek olan Grafana Assistant'ın genel erişime (GA) açıldığını ve daha derinlemesine analizler sunan Assistant Investigations özelliğinin ön izlemeye sunulduğunu duyurdu. Bu yazıda, yapay zekanın sadece sorgu yazmakla kalmayıp, bir dedektif gibi olayların kök nedenini nasıl araştırdığını öğreneceksiniz.
+
+## Anahtar Çıkarımlar
+
+- **Genel Erişim (GA)**: Grafana Assistant artık tüm Grafana Cloud kullanıcıları için tam sürüm olarak yayında.
+
+- **Assistant Investigations**: Olay anında metrikleri, logları ve trace'leri otomatik olarak analiz eden yeni bir yetenek.
+
+- **Doğal Dil Gücü**: Karmaşık PromQL ve LogQL sorguları yazmak yerine, sistemle Türkçe dahil doğal dilde etkileşim kurma imkanı.
+
+- **Hız ve Verimlilik**: Manuel araştırma süreçlerinde yaşanan zaman kaybını minimize ederek MTTR (Ortalama Onarım Süresi) değerlerini iyileştirme.
+
+## Grafana Assistant: Artık Daha Güçlü ve Erişilebilir
+
+Grafana Assistant, beta sürecinden çıkarak Genel Erişime (GA) açıldı. Bu, aracın artık üretim ortamlarında güvenle kullanılabilecek olgunluğa eriştiği anlamına geliyor. Asistan, sadece dashboard oluşturmanıza yardımcı olmakla kalmıyor, aynı zamanda sisteminizdeki karmaşık verileri anlamlandırmanız için bir rehber görevi görüyor.
+
+### Karmaşık Sorguları Basitleştirin
+
+Birçok mühendis için PromQL veya LogQL yazmak öğrenme eğrisi yüksek bir süreçtir. Grafana Assistant, doğal dildeki sorularınızı doğrudan teknik sorgulara dönüştürür. Örneğin, "Son bir saatteki 500 hatalarının kaynağını göster" dediğinizde, asistan ilgili logları ve metrikleri sizin için anında hazırlar.
+
+## Assistant Investigations: Akıllı Kök Neden Analizi
+
+Duyurunun en heyecan verici parçası olan Assistant Investigations, şu an ön izleme (preview) aşamasında. Bu özellik, bir olay (incident) meydana geldiğinde sadece veri sunmak yerine, veriler arasındaki korelasyonu inceler.
+
+- **Otomatik Telemetri Analizi**: Asistan, bir uyarı tetiklendiğinde ilgili tüm telemetri verilerini tarar.
+
+- **Özet Raporlama**: Nelerin yanlış gittiğine dair kısa, net ve aksiyon alınabilir bir özet sunar.
+
+- **Veri Bağlantıları**: Loglardaki bir hatanın, hangi mikro hizmetteki gecikmeyle (latency) ilişkili olduğunu otomatik olarak eşleştirir.
+
+### Demo Videosunu İzleyin
+
+Grafana Assistant ve Investigations özelliklerinin nasıl çalıştığını canlı olarak görmek için bu videoyu inceleyebilirsiniz: [Grafana Assistant Demo Video](https://grafana.com)
+
+## Teknik Ekipler İçin Bilişsel Yükü Azaltmak
+
+Modern SRE ekipleri üzerinde ciddi bir "uyarı yorgunluğu" (alert fatigue) bulunmaktadır. Grafana Assistant, anomali tespiti ve açıklama yetenekleri sayesinde mühendislerin sadece en kritik verilere odaklanmasını sağlar.
+
+### Grafik Açıklamaları
+
+Bir grafikteki ani düşüşün ne anlama geldiğini anlamak için artık tüm geçmiş verileri manuel taramanıza gerek yok. Asistan, "Bu grafikte ne görüyorsun?" sorusuna, sistemdeki diğer değişiklikleri de (örneğin yeni bir deployment) hesaba katarak yanıt verir. **Bold işaretlenen bu kritik bulgular**, müdahale ekibinin odak noktasını anında doğru yöne çevirir.
+
+## Nasıl Uygulanır: Adım Adım Başlangıç Rehberi
+
+Grafana Assistant özelliklerini kullanmaya başlamak için şu adımları takip edebilirsiniz:
+
+1. **Grafana Cloud'a Geçiş Yapın**: Bu özellikler şu an için Grafana Cloud kullanıcılarına sunulmaktadır.
+
+2. **Özelliği Etkinleştirin**: Grafana yönetim panelinden "Assistant" sekmesine giderek yapay zeka desteğini aktif hale getirin.
+
+3. **Investigations Ön İzlemesine Kaydolun**: Yeni inceleme özelliklerini denemek için ön izleme programına başvuru yapın.
+
+4. **Doğal Dil Sorgularını Deneyin**: Mevcut dashboard'larınızda sağ taraftaki asistan ikonuna tıklayarak ilk sorunuzu sorun ve sorgu oluşturma sürecini test edin.
+
+## Sonuç
+
+Grafana Assistant'ın genel erişime açılması, gözlemlenebilirlik dünyasında yapay zekanın "yardımcı bir araçtan" "temel bir bileşene" dönüştüğünün kanıtıdır. Assistant Investigations ise manuel hata arama dönemini kapatmaya hazırlanıyor. Verileriniz arasındaki gizli bağlantıları bulan bir yapay zeka desteği, ekiplerinize sadece zaman kazandırmakla kalmayacak, aynı zamanda sistem dayanıklılığını (resilience) yeni bir seviyeye taşıyacaktır.
