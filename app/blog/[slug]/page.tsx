@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts } from '@/lib/mdx'
 import { TagList } from '@/components/blog/tag-list'
 import { ShareButton } from '@/components/blog/share-button'
+import { LanguageSwitcher } from '@/components/blog/language-switcher'
 import { RelatedPosts } from '@/components/blog/related-posts'
 import { JsonLd } from '@/components/blog/json-ld'
 import { BackButton } from '@/components/blog/back-button'
@@ -10,6 +11,7 @@ import { MDXContent } from '@/components/blog/mdx-content'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/constants'
+import { detectUserLocale } from '@/lib/locale'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -34,9 +36,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const url = `${siteConfig.url}/blog/${slug}`
 
+  // Build alternates for hreflang (only if bilingual post)
+  const alternates: Metadata['alternates'] = {}
+  if (post.alternateLocale && post.alternateSlug) {
+    alternates.languages = {
+      [post.locale]: `${siteConfig.url}/blog/${slug}`,
+      [post.alternateLocale]: `${siteConfig.url}/blog/${post.alternateSlug}`,
+    }
+  }
+
   return {
     title: post.title,
     description: post.description,
+    alternates,
     openGraph: {
       title: post.title,
       description: post.description,
@@ -58,12 +70,22 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const url = `${siteConfig.url}/blog/${slug}`
+  const preferredLocale = await detectUserLocale()
+
+  // Translation map for reading time
+  const readingTimeText = {
+    en: 'min read',
+    tr: 'dakika okuma',
+  }
 
   return (
     <>
       <JsonLd slug={slug} />
       <BackButton />
-      <article className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 md:pb-20">
+      <article 
+        lang={post.locale === 'tr' ? 'tr' : 'en'}
+        className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 md:pb-20"
+      >
         <div className="max-w-4xl mx-auto">
         {/* Post Header */}
         <header className="mb-8 md:mb-12">
@@ -82,18 +104,27 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
               <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
+                {new Date(post.date).toLocaleDateString(
+                  post.locale === 'tr' ? 'tr-TR' : 'en-US',
+                  {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }
+                )}
               </time>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-5 w-5" />
-              <span>{post.readingTime} min read</span>
+              <span>{post.readingTime} {readingTimeText[post.locale]}</span>
             </div>
             <ShareButton url={url} title={post.title} />
+            <LanguageSwitcher
+              currentLocale={post.locale}
+              alternateLocale={post.alternateLocale}
+              alternateSlug={post.alternateSlug}
+              preferredLocale={preferredLocale}
+            />
           </div>
 
           {/* Divider */}

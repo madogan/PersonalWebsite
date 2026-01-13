@@ -293,3 +293,22 @@
 - [x] Add project version display to footer with small font size
 - [x] Center version display in footer layout using grid system
 
+### Blog Language Switcher & Multi-Language Support
+- [x] Extended BlogPost type with locale, alternateLocale, and alternateSlug fields
+- [x] Updated getAllPosts() and getPostBySlug() to extract locale fields from frontmatter
+- [x] Added getPostsByLocale() helper function for locale filtering
+- [x] Created detectUserLocale() utility using Next.js 15 headers() API
+- [x] Implemented prioritizePostsByLocale() function for smart post prioritization
+- [x] Created LanguageSwitcher component with accessibility features and preferred locale emphasis
+- [x] Integrated language switcher into blog post page with locale detection
+- [x] Added dynamic HTML lang attribute to article elements
+- [x] Added hreflang tags in metadata for bilingual posts
+- [x] Updated JSON-LD with inLanguage and translations array
+- [x] Implemented locale-aware date formatting (tr-TR for Turkish, en-US for English)
+- [x] Localized reading time text ("min read" / "dakika okuma")
+- [x] Updated blog list page to prioritize user's preferred locale
+- [x] Added locale badges (EN/TR) to blog post cards
+- [x] Updated related posts to prioritize user's preferred locale
+- [x] Added locale filtering dropdown component with "All Languages", "English", "Turkish" options
+- [x] Updated example blog post with locale field
+

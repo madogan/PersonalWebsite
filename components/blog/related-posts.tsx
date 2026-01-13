@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { getAllPosts, getPostBySlug } from '@/lib/mdx'
+import { getAllPosts, getPostBySlug, prioritizePostsByLocale } from '@/lib/mdx'
 import { TagList } from '@/components/blog/tag-list'
+import { detectUserLocale } from '@/lib/locale'
 import { cn } from '@/lib/utils'
 
 type RelatedPostsProps = {
@@ -9,14 +10,15 @@ type RelatedPostsProps = {
   maxPosts?: number
 }
 
-export function RelatedPosts({ currentSlug, maxPosts = 3 }: RelatedPostsProps) {
+export async function RelatedPosts({ currentSlug, maxPosts = 3 }: RelatedPostsProps) {
   const currentPost = getPostBySlug(currentSlug)
   if (!currentPost) return null
 
+  const preferredLocale = await detectUserLocale()
   const allPosts = getAllPosts()
   
   // Find related posts by matching tags
-  const relatedPosts = allPosts
+  const relatedPostsWithTags = allPosts
     .filter((post) => post.slug !== currentSlug)
     .map((post) => {
       const commonTags = post.tags.filter((tag) => currentPost.tags.includes(tag))
@@ -24,15 +26,20 @@ export function RelatedPosts({ currentSlug, maxPosts = 3 }: RelatedPostsProps) {
     })
     .filter(({ commonTags }) => commonTags > 0)
     .sort((a, b) => b.commonTags - a.commonTags)
-    .slice(0, maxPosts)
     .map(({ post }) => post)
 
-  // If not enough related posts by tags, fill with recent posts
+  // Prioritize by locale
+  const prioritizedRelated = prioritizePostsByLocale(relatedPostsWithTags, preferredLocale)
+  
+  // Take top posts after prioritization
+  let relatedPosts = prioritizedRelated.slice(0, maxPosts)
+
+  // If not enough related posts by tags, fill with recent posts (also prioritized)
   if (relatedPosts.length < maxPosts) {
     const recentPosts = allPosts
       .filter((post) => post.slug !== currentSlug && !relatedPosts.find((rp) => rp.slug === post.slug))
-      .slice(0, maxPosts - relatedPosts.length)
-    relatedPosts.push(...recentPosts)
+    const prioritizedRecent = prioritizePostsByLocale(recentPosts, preferredLocale)
+    relatedPosts.push(...prioritizedRecent.slice(0, maxPosts - relatedPosts.length))
   }
 
   if (relatedPosts.length === 0) {

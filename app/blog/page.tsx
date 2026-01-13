@@ -1,6 +1,7 @@
-import { getAllPosts } from '@/lib/mdx'
+import { getAllPosts, prioritizePostsByLocale } from '@/lib/mdx'
 import { BlogListClient } from '@/components/blog/blog-list-client'
 import { BackButton } from '@/components/blog/back-button'
+import { detectUserLocale } from '@/lib/locale'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,8 +9,10 @@ export const metadata: Metadata = {
   description: 'Read my latest blog posts about web development, programming, and more.',
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
+export default async function BlogPage() {
+  const allPosts = getAllPosts()
+  const preferredLocale = await detectUserLocale()
+  const posts = prioritizePostsByLocale(allPosts, preferredLocale)
 
   return (
     <>

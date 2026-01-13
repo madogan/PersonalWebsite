@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2025-01-27
+
+### Added
+- Multi-language support for blog posts with Turkish (tr) and English (en) locales
+- Language switcher component for bilingual blog posts with visual emphasis for preferred locale
+- Locale detection utility using Next.js 15 headers() API to detect user's preferred language from browser
+- Post prioritization system that shows user's preferred locale first in blog listings
+- Locale filtering dropdown on blog list page with "All Languages", "English", "Turkish" options
+- Locale badges (EN/TR) on blog post cards for quick language identification
+- Extended BlogPost type with locale, alternateLocale, and alternateSlug fields
+- Helper functions: getPostsByLocale() and prioritizePostsByLocale() for locale-based filtering and sorting
+- SEO enhancements: hreflang tags in metadata and JSON-LD translations array for bilingual posts
+- Locale-aware date formatting (tr-TR for Turkish, en-US for English)
+- Localized reading time text ("min read" / "dakika okuma")
+
+### Changed
+- Blog post frontmatter now supports locale field (defaults to 'en' for backward compatibility)
+- Blog list page prioritizes posts in user's preferred locale
+- Related posts prioritize user's preferred locale while maintaining tag-based relevance
+- Blog post pages include dynamic HTML lang attribute based on post locale
+- Date formatting respects post locale (Turkish vs English formats)
+- JSON-LD structured data includes inLanguage property and translations array for bilingual posts
+
+### Technical
+- Server-side locale detection using Next.js 15 headers() API
+- Smart prioritization algorithm groups bilingual posts and maintains date sorting
+- All locale-related functions are async-compatible with Next.js 15 App Router
+- Backward compatible: existing posts without locale field default to 'en'
+
 ## [0.6.3] - 2025-01-27
 
 ### Changed

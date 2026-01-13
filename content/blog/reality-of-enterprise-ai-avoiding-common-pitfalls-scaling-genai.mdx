@@ -1,0 +1,99 @@
+---
+title: "The Reality of Enterprise AI: Avoiding Common Pitfalls When Scaling GenAI"
+description: "Moving from a Generative AI pilot to an enterprise-wide rollout is not a linear process. Learn the lessons learned by technical leaders at Liberty Mutual during their journey of deploying GenAI at scale, including adoption strategies, cost management, and RAG complexity."
+date: "2026-12-01"
+tags: ["AI", "GenAI", "Enterprise", "MLOps", "RAG", "Strategy", "Adoption"]
+locale: "en"
+---
+
+Moving from a Generative AI (GenAI) pilot to an enterprise-wide rollout is not a linear process. For a Fortune 100 company like Liberty Mutual, managing 5,000 developers requires more than just distributing licenses; it demands a robust strategy for governance, cost, and adoption.
+
+This article outlines the "warts-and-all" lessons learned by technical leaders Garth Gilmour and Stuart Greenlees during their journey of deploying GenAI at scale. You will learn why shipping a tool does not guarantee adoption, how to manage spiraling API costs, and why your custom-built solutions may have a shorter shelf life than expected.
+
+## Key Takeaways
+
+- **Adoption Requires Education**: Providing access to tools like GitHub Copilot is only the first step; users must be taught to move from "task execution" to a "thought partner" mindset.
+
+- **Platform-First Approach**: Scaling requires "shared rails"—a centralized platform that manages security, legal compliance, and model plurality.
+
+- **Focus on Groundedness**: Retrieval-Augmented Generation (RAG) is significantly more complex than tutorials suggest, requiring automated evaluation pipelines and strict citation standards.
+
+- **Embrace Imperfection**: High-velocity iteration is more valuable than a perfect initial architecture.
+
+## 1. Strategy and Culture: Preparing for the Pivot
+
+The landscape of GenAI shifts rapidly. Organizations must build the agility to pivot when new "frontier models" or vendor tools render current research obsolete.
+
+### Research is a Continuous Process
+
+Initial research often serves as a foundation rather than a final destination. The goal is to "stay on top of the wave" by constantly evaluating emerging technologies, even if they are not immediate winners. Leveraging existing partnerships with major providers (like Microsoft or AWS) allows large enterprises to maintain necessary governance and legal guardrails while experimenting.
+
+### Shipping is Not Adoption
+
+A common mistake is assuming that technical availability equals user fluency. Liberty Mutual found that while they could reach high distribution rates for tools like "Liberty GPT," actual effective usage lagged.
+
+To bridge this gap, technical leads should implement:
+
+- **Formal Learning Missions**: Structured streams for different roles, such as architects, people leaders, and engineers.
+
+- **Community Engagement**: Spontaneous "promptathons" and unconferences where developers share real-world successes and failures.
+
+## 2. Technical Architecture: Building the Platform
+
+When scaling GenAI, adoption differs significantly from traditional cloud migration. It involves navigating gated access, limited GPU quotas, and evolving security threats like prompt injection.
+
+### The Plurality of Models
+
+Organizations should not treat models as interchangeable commodities. Different models excel at different tasks; for example, some are better at technical jargon, while others are optimized for image processing or code completion. Currently, industry leaders may support dozens of different models to balance performance against specific use cases.
+
+### Scaffolding and the Tech Graveyard
+
+The "half-life" of a GenAI solution is remarkably short. Many custom services built today—such as custom summarizers—will be replicated by vendors within months.
+
+Engineering teams must:
+
+- Build with a composite architecture that allows for components to be swapped out.
+
+- Focus development time on unique business logic rather than generic utility services.
+
+- Be prepared to "kill your darlings" as vendor features mature.
+
+## 3. Operations: Cost, Performance, and RAG
+
+In a serverless and API-driven world, "increasing performance increases the ability of your system to incur cost."
+
+### Cost Control and Observability
+
+Frontier models are expensive. A single inefficient use case can burn through tens of thousands of dollars in hours if left unmonitored.
+
+- **Implement Dashboards**: Centralized cost tracking and automated alerting are non-negotiable for enterprise scale.
+
+- **Design for Trade-offs**: Use high-end models for complex reasoning and cheaper, smaller models for routine tasks or batch processing.
+
+### The Complexity of RAG
+
+Retrieval-Augmented Generation (RAG) is a "complexity beast." Off-the-shelf libraries only solve about 65% of the problem. Moving beyond that requires deep knowledge of embeddings, vector stores, and re-ranking.
+
+The most critical component of a RAG system is groundedness. Users need traceability and citations to trust that the AI is using the provided data rather than hallucinating. This requires an automated evaluation pipeline and a "golden data set" to measure how changes to the system affect response quality.
+
+### Latency and User Perception
+
+Users will not wait indefinitely for "shiny" AI features. If a GenAI tool takes 15 seconds to respond, users will return to legacy manual processes.
+
+- **Optimization**: Use techniques like GPU compute and vector database upgrades to bring latency down to acceptable levels (e.g., 3 seconds).
+
+- **UI/UX Cues**: Keep the user engaged with progress indicators or allow for asynchronous task completion.
+
+## How to Implement: Next Steps
+
+- **Establish a Northstar Architecture**: Create a high-level technical vision but time-box the debate. Aim for "good enough" to start iterating.
+
+- **Build Shared Rails**: Create a centralized internal platform to manage API keys, security guardrails, and cost observability.
+
+- **Launch a Literacy Program**: Don't just hand out licenses. Create personas and learning paths to ensure employees understand how to use GenAI as a "thought partner."
+
+- **Monitor Your "Tech Graveyard"**: Regularly audit custom AI services to see if they should be replaced by more efficient vendor-native features.
+
+## Conclusion
+
+Scaling Generative AI in a large organization is a messy, non-linear process. It requires technical leads to accept that they will "skin their knees" along the way. Success is found not by waiting for the perfect model or architecture, but by building a flexible platform that can adapt as the technology matures. Focus on adoption, control your costs, and prioritize groundedness to turn GenAI into a genuine enterprise asset.

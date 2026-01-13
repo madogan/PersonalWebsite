@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { TagList } from '@/components/blog/tag-list'
 import { SearchBar } from '@/components/blog/search-bar'
+import { LocaleFilter } from '@/components/blog/locale-filter'
 import { Pagination } from '@/components/blog/pagination'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -18,10 +19,16 @@ const DEFAULT_POSTS_PER_PAGE = 9
 
 export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_PER_PAGE }: BlogListClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
+  const [localeFilter, setLocaleFilter] = useState<'all' | 'en' | 'tr'>('all')
   const [currentPage, setCurrentPage] = useState(1)
 
   const filteredPosts = useMemo(() => {
     let filtered = allPosts
+
+    // Filter by locale
+    if (localeFilter !== 'all') {
+      filtered = filtered.filter((post) => post.locale === localeFilter)
+    }
 
     // Filter by search query
     if (searchQuery.trim()) {
@@ -35,7 +42,7 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
     }
 
     return filtered
-  }, [allPosts, searchQuery])
+  }, [allPosts, searchQuery, localeFilter])
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
@@ -43,17 +50,20 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
   const endIndex = startIndex + postsPerPage
   const posts = filteredPosts.slice(startIndex, endIndex)
 
-  // Reset to page 1 when search changes, or adjust if current page is out of bounds
+  // Reset to page 1 when search or locale filter changes, or adjust if current page is out of bounds
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(1)
     }
-  }, [searchQuery, currentPage, totalPages])
+  }, [searchQuery, localeFilter, currentPage, totalPages])
 
   return (
     <>
-      {/* Search Bar */}
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
+      {/* Search and Filter Controls */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        <LocaleFilter value={localeFilter} onChange={setLocaleFilter} />
+      </div>
 
       {/* Blog Posts Grid */}
       {posts.length > 0 ? (
@@ -70,7 +80,20 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
               )}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
+                {/* Locale Badge */}
+                <div className="absolute top-0 right-0">
+                  <span
+                    className={cn(
+                      'px-2 py-1 text-xs font-medium rounded-md',
+                      'bg-foreground/10 text-foreground/60',
+                      'border border-foreground/20'
+                    )}
+                  >
+                    {post.locale.toUpperCase()}
+                  </span>
+                </div>
+
                 {/* Tags */}
                 <TagList tags={post.tags.slice(0, 2)} />
 
@@ -112,8 +135,8 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
       ) : (
         <div className="text-center py-12">
           <p className="text-foreground/60">
-            {searchQuery
-              ? 'No posts match your search. Try adjusting your search query.'
+            {searchQuery || localeFilter !== 'all'
+              ? 'No posts match your filters. Try adjusting your search query or language filter.'
               : 'No blog posts yet. Check back soon!'}
           </p>
         </div>

@@ -12,7 +12,7 @@ export function JsonLd({ slug }: JsonLdProps) {
   const url = `${siteConfig.url}/blog/${slug}`
   const imageUrl = `${siteConfig.url}/og-image.jpg` // You can customize this
 
-  const jsonLd = {
+  const jsonLd: any = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
@@ -20,6 +20,7 @@ export function JsonLd({ slug }: JsonLdProps) {
     image: imageUrl,
     datePublished: post.date,
     dateModified: post.date,
+    inLanguage: post.locale === 'tr' ? 'tr-TR' : 'en-US',
     author: {
       '@type': 'Person',
       name: siteConfig.author,
@@ -35,6 +36,22 @@ export function JsonLd({ slug }: JsonLdProps) {
       '@id': url,
     },
     keywords: post.tags.join(', '),
+  }
+
+  // Add translations array only if alternate language exists
+  if (post.alternateLocale && post.alternateSlug) {
+    jsonLd.translations = [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${siteConfig.url}/blog/${slug}`,
+        inLanguage: post.locale === 'tr' ? 'tr-TR' : 'en-US',
+      },
+      {
+        '@type': 'BlogPosting',
+        '@id': `${siteConfig.url}/blog/${post.alternateSlug}`,
+        inLanguage: post.alternateLocale === 'tr' ? 'tr-TR' : 'en-US',
+      },
+    ]
   }
 
   return (
