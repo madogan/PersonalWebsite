@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2025-01-27
+
+### Fixed
+- Fixed bullet list text wrapping under dots in blog reading page by changing from `list-inside` to `list-outside`
+- Fixed title text alignment: all headings (h1-h4) are now explicitly left-aligned instead of justified
+- Improved list indentation: replaced `ml-4` with `pl-6` for proper spacing with `list-outside`
+- Added `prose-headings:text-left` to prose container to ensure headings remain left-aligned
+
+### Changed
+- Updated `ul` and `ol` MDX components to use `list-outside` for better text wrapping behavior
+- All heading components (h1, h2, h3, h4) now explicitly include `text-left` class
+- List items maintain proper indentation without text wrapping under bullet points
+
 ## [0.7.0] - 2025-01-27
 
 ### Added

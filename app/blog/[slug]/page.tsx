@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: Props) {
           className={cn(
             'prose prose-lg max-w-none',
             'text-justify md:text-left',
-            'prose-headings:text-foreground',
+            'prose-headings:text-foreground prose-headings:text-left',
             'prose-p:text-foreground/90 prose-p:text-justify md:prose-p:text-left',
             'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
             'prose-strong:text-foreground',

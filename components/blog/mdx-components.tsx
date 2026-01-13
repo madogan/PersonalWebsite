@@ -7,7 +7,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h1
         className={cn(
           'text-4xl md:text-5xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground',
+          'text-foreground text-left',
           className
         )}
         {...props}
@@ -17,7 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2
         className={cn(
           'text-3xl md:text-4xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground border-b border-glass-border pb-2',
+          'text-foreground border-b border-glass-border pb-2 text-left',
           className
         )}
         {...props}
@@ -27,7 +27,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h3
         className={cn(
           'text-2xl md:text-3xl font-semibold tracking-tight mt-6 mb-3',
-          'text-foreground',
+          'text-foreground text-left',
           className
         )}
         {...props}
@@ -37,7 +37,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h4
         className={cn(
           'text-xl md:text-2xl font-semibold mt-4 mb-2',
-          'text-foreground',
+          'text-foreground text-left',
           className
         )}
         {...props}
@@ -66,8 +66,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: ({ className, ...props }) => (
       <ul
         className={cn(
-          'list-disc list-inside mb-4 space-y-2 text-foreground/90',
-          'ml-4',
+          'list-disc list-outside mb-4 space-y-2 text-foreground/90',
+          'pl-6',
           className
         )}
         {...props}
@@ -76,8 +76,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: ({ className, ...props }) => (
       <ol
         className={cn(
-          'list-decimal list-inside mb-4 space-y-2 text-foreground/90',
-          'ml-4',
+          'list-decimal list-outside mb-4 space-y-2 text-foreground/90',
+          'pl-6',
           className
         )}
         {...props}
