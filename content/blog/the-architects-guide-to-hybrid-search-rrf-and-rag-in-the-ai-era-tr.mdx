@@ -1,0 +1,85 @@
+---
+title: "Türkiye'deki Geliştiriciler İçin Hibrit Arama, RRF ve RAG Mimarisi"
+description: "Geleneksel arama motorları tam eşleşmeleri bulma konusunda başarılı olsa da, çoğu zaman kullanıcının gerçek niyetini anlamakta yetersiz kalır. Hibrit aramanın leksikal ve vektör yöntemlerini RRF ile nasıl birleştirdiğini öğrenin."
+date: "2026-01-09"
+tags: ["AI", "RAG", "Arama", "Vektör Arama", "MLOps", "Mimari", "Elasticsearch"]
+locale: "tr"
+---
+
+# Giriş
+
+Geleneksel arama motorları tam eşleşmeleri bulma konusunda başarılı olsa da, çoğu zaman kullanıcının gerçek niyetini anlamakta yetersiz kalır. Türkiye'deki e-ticaret ve SaaS ekosistemi genişledikçe, "yalnızca anahtar kelime" odaklı sistemler yerini yapay zeka destekli deneyimlere bırakıyor. Bu makale, temel leksikal (sözcük tabanlı) aramadan vektör tabanlı anlamsal aramaya kadar arama teknolojilerinin evrimini inceliyor. Hem hassas hem de bağlamı anlayan hibrit arama sistemlerini nasıl kuracağınızı öğreneceksiniz.
+
+## Temel Çıkarımlar
+
+- **Leksikal Arama**, tam terim eşleşmesine (BM25) dayanır ve kesinlik gerektiren sorgular için kritiktir.
+
+- **Vektör Arama**, anlamsal anlamı ve niyeti yakalamak için matematiksel yerleştirmeler (embeddings) kullanır.
+
+- **Hibrit Arama**, her iki yöntemi birleştirerek "kelime hazinesi uyuşmazlığı" sorununu çözer.
+
+- **Reciprocal Rank Fusion (RRF)**, manuel ayar gerektirmeden sonuçları harmanlamak için en sağlam yöntemdir.
+
+- **Bağlam Mühendisliği**, RAG sistemlerinde LLM'lerin (Büyük Dil Modelleri) yanlış bilgi üretmesini (hallucination) engelleyen köprüdür.
+
+## Temel Taş: Leksikal Arama ve BM25
+
+Leksikal arama; ürün isimleri, seri numaraları veya belirli teknik terimler gibi tam eşleşme gerektiren durumlar için endüstri standardıdır. Bu sistem, dokümanlardaki kelimelerin konumlarını haritalayan bir ters dizin (inverted index) yapısı üzerinde çalışır.
+
+Elasticsearch gibi güçlü motorlar, Türkçe gibi eklemeli dillerde verimliliği artırmak için üç aşamalı bir süreç izler:
+
+1. **Karakter Filtreleme**: HTML etiketleri gibi gürültülerin temizlenmesi.
+
+2. **Tokenizasyon**: Metnin boşluk veya noktalama işaretlerine göre parçalara ayrılması.
+
+3. **Token Filtreleme**: Küçük harfe dönüştürme ve gövdeleme (stemming) işlemi. Türkçe için "kitapçılık" kelimesinin kökü olan "kitap"a indirgenmesi, arama doğruluğu için hayati önem taşır.
+
+Bu sürecin merkezindeki BM25 algoritması, sıralama yaparken kelime sıklığını hesaplar. Ancak "en son vizyona giren filmler" diye arayan bir kullanıcıya, dokümanda "güncel sinema yapımları" yazıyorsa sonuç döndüremeyebilir; bu durum kelime hazinesi uyuşmazlığı olarak adlandırılır.
+
+## Anlamsal Devrim: Vektör Arama
+
+Vektör arama, verileri çok boyutlu vektör uzaylarında temsil ederek bu kısıtlamayı aşar. Bu sistemde kelimeler değil, kavramların matematiksel karşılıkları depolanır.
+
+Vektör tabanlı sistemlerin ana bileşenleri şunlardır:
+
+- **Gömme Modelleri (Embedding Models)**: Hugging Face veya OpenAI modelleri, metin veya görselleri uzun sayı dizilerine dönüştürür.
+
+- **Benzerlik Metrikleri**: Kosinüs Benzerliği gibi algoritmalar, kullanıcı sorgusu ile doküman arasındaki "mesafeyi" ölçer.
+
+- **HNSW (Hierarchical Navigable Small Worlds)**: Milyonlarca veri arasında en yakın komşuyu (ANN) hızlıca bulmayı sağlayan, veriyi katmanlı bir şekilde organize eden bir algoritmadır.
+
+Vektör arama niyeti anlasa da, geleneksel yöntemlere göre daha fazla bellek (RAM) tüketir ve indeksleme süreci daha maliyetlidir.
+
+## Hibrit Avantajı: İki Dünyanın Birleşimi
+
+Modern mimariler artık leksikal veya vektör arasında bir seçim yapmıyor; bunun yerine Hibrit Arama kullanarak her iki yöntemin avantajlarını birleştiriyor.
+
+Sonuçları harmanlamak için yaygın olarak kullanılan iki yöntem vardır:
+
+1. **Lineer Kombinasyon**: Geliştiricinin manuel olarak "leksikal %40, vektör %60 etkili olsun" gibi ağırlıklar atamasıdır. Bu yöntem sürekli test ve optimizasyon gerektirir.
+
+2. **Reciprocal Rank Fusion (RRF)**: Bu yöntem, her iki listedeki sıralamaları alır ve karmaşık bir manuel ayar gerektirmeden matematiksel bir formülle yeniden sıralar.
+
+RRF, varsayılan ayarlarıyla çoğu senaryoda mükemmel sonuç verdiği ve geliştirici üzerindeki "en doğru ağırlığı bulma" yükünü aldığı için profesyonel sistemlerde öncelikli tercih edilmektedir.
+
+## Yapay Zeka Çağında Arama: RAG ve Bağlam
+
+Arama sistemleri artık Retrieval-Augmented Generation (RAG) mimarisinin omurgasını oluşturuyor. Büyük Dil Modelleri (LLM), ellerinde güncel veri olmadığında "halüsinasyon" görmeye meyillidir. Bu sorunu aşmak için Bağlam Mühendisliği devreye girer.
+
+Verimli bir RAG sistemi, hibrit arama ile getirilen ilk 50–100 dokümanı bir Yeniden Sıralama (Reranker) modelinden geçirir. Bu model, en alakalı içeriğin en üstte yer almasını sağlayarak LLM'e beslenen bağlamın kalitesini maksimize eder.
+
+## Nasıl Uygulanır?
+
+Arama altyapınızı modernize etmek için şu adımları izleyin:
+
+1. **Hata Noktalarını Belirleyin**: Kullanıcılarınızın tam eşleşmelerde mi yoksa kavramsal aramalarda mı sorun yaşadığını analiz edin.
+
+2. **Hazır Modellerle Başlayın**: Kendi modelinizi eğitmeden önce Hugging Face üzerindeki Türkçe destekli gömme modellerini test edin.
+
+3. **Önce RRF'i Deneyin**: Hibrit sonuçları birleştirmek için manuel ağırlıklandırma yerine RRF kullanarak zaman kazanın.
+
+4. **Performansı Optimize Edin**: Bellek maliyetlerini düşürmek için vektörleri sıkıştıran Quantization tekniklerini uygulayın.
+
+## Sonuç
+
+Aramanın geleceği, anahtar kelimeler ile yapay zeka arasında bir seçim yapmak değil, bu iki gücü stratejik olarak birleştirmektir. Elasticsearch gibi araçlarla hibrit arama uygulamak ve RRF ile sonuçları optimize etmek, teknik ekiplerin hem kesin hem de sezgisel sistemler kurmasını sağlar. Doğru filtrelenmiş bağlam sunma yeteneği, önümüzdeki dönemde yapay zeka uygulamalarının başarısındaki en büyük belirleyici olacaktır.
