@@ -21,6 +21,13 @@ const config: Config = {
           bg: 'var(--glass-bg)',
           border: 'var(--glass-border)',
         },
+        // Notebook design system colors
+        'cream-paper': '#F9F7F2',
+        'obsidian-leather': '#141414',
+        'fountain-ink': '#0F172A',
+        'grey-metallic': '#6B7280', /* Slate grey metallic - replaces deep-gold */
+        'notebook-divider': 'rgb(var(--notebook-divider) / <alpha-value>)',
+        'notebook-binding': 'rgb(var(--notebook-binding) / <alpha-value>)',
       },
       borderRadius: {
         sm: 'var(--radius-sm)',
@@ -38,10 +45,26 @@ const config: Config = {
         md: 'var(--shadow-md)',
         lg: 'var(--shadow-lg)',
         xl: 'var(--shadow-xl)',
+        // Layered paper shadows for notebook aesthetic
+        'paper-sm': '0 1px 3px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-md': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-lg': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-xl': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 30px 40px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.01)',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
         mono: ['var(--font-mono)', 'monospace'],
+      },
+      rotate: {
+        '0.5': '0.5deg',
+        '1': '1deg',
+        '1.5': '1.5deg',
+        '2': '2deg',
+        '-0.5': '-0.5deg',
+        '-1': '-1deg',
+        '-1.5': '-1.5deg',
+        '-2': '-2deg',
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],

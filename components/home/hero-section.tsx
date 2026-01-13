@@ -7,10 +7,10 @@ export function HeroSection() {
     <section className="relative min-h-[70vh] flex items-center justify-center py-20 md:py-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Content with Glassmorphism */}
-          <div className="glass-card p-8 md:p-12 text-center space-y-6 animate-fade-in">
+          {/* Hero Content with Notebook Aesthetic */}
+          <div className="loose-leaf-card p-8 md:p-12 text-center space-y-6 animate-fade-in paper-texture">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span className="bg-gradient-to-r from-accent to-accent-cyan bg-clip-text text-transparent">
+              <span className="text-accent">
                 Welcome
               </span>
               <br />
@@ -18,7 +18,7 @@ export function HeroSection() {
             </h1>
             
             <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto animate-slide-up">
-              I'm a developer passionate about creating beautiful, functional, and accessible web experiences.
+              I&apos;m a developer passionate about creating beautiful, functional, and accessible web experiences.
               Explore my blog posts and learn more about my work.
             </p>
 

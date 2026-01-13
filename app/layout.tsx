@@ -1,21 +1,32 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { NotebookBinding } from '@/components/layout/notebook-binding'
+import { PageTransition } from '@/components/transitions/page-transition'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'swap',
+  preload: false, // Less critical, load on demand
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+  preload: true, // Important for headings
 })
 
 export const metadata: Metadata = {
@@ -30,11 +41,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://example.com'),
   icons: {
     icon: [
-      { url: '/images/profile.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/images/profile.jpg', sizes: '16x16', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon.png', sizes: '192x192' },
     ],
     apple: [
-      { url: '/images/profile.jpg', sizes: '180x180', type: 'image/jpeg' },
+      { url: '/icon.png', sizes: '180x180' },
     ],
     shortcut: '/favicon.ico',
   },
@@ -59,14 +70,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} font-sans antialiased paper-texture`}>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col relative">
+            {/* Notebook Binding - Left Edge */}
+            <NotebookBinding />
             {/* Theme Toggle - Top Right */}
             <div className="fixed top-4 right-4 z-50 no-print">
               <ThemeToggle />
             </div>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
             <Footer />
             <BottomNavigation />
           </div>

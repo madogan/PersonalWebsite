@@ -30,8 +30,8 @@ export function TagFilter({ tags, selectedTags, onTagToggle, onClear }: TagFilte
                 'px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200',
                 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                 isSelected
-                  ? 'bg-accent text-white hover:bg-accent/90'
-                  : 'bg-glass-bg backdrop-blur-md border border-glass-border text-foreground/80 hover:text-foreground hover:border-accent/50'
+                  ? 'bg-accent text-foreground hover:bg-accent/90'
+                  : 'bg-background border border-notebook-divider text-foreground/80 hover:text-foreground hover:border-accent/50 shadow-paper-sm hover:shadow-paper-md'
               )}
             >
               {tag}

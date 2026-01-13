@@ -8,9 +8,9 @@ export function Footer() {
   return (
     <footer
       className={cn(
-        'border-t border-glass-border',
-        'bg-glass-bg/50 backdrop-blur-md',
-        'mt-auto pb-20 md:pb-6 no-pdf'
+        'border-t border-notebook-divider pencil-divider',
+        'bg-background/95 backdrop-blur-sm',
+        'mt-auto pb-20 md:pb-6 no-pdf paper-texture'
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">

@@ -18,18 +18,15 @@ export function Navigation() {
             key={item.href}
             href={item.href}
             className={cn(
-              'relative px-3 py-2 text-sm font-medium transition-colors duration-200',
+              'relative px-3 py-2 text-sm font-medium transition-all duration-300',
               'hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md',
-              isActive ? 'text-accent' : 'text-foreground/80 hover:text-foreground'
+              'border-b-2 border-transparent hover:border-notebook-divider',
+              isActive 
+                ? 'text-accent border-accent' 
+                : 'text-foreground/80 hover:text-foreground'
             )}
           >
             {item.label}
-            {isActive && (
-              <span
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full"
-                aria-hidden="true"
-              />
-            )}
           </Link>
         )
       })}

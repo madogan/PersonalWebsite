@@ -12,7 +12,7 @@ type SearchBarProps = {
 export function SearchBar({ value, onChange, placeholder = 'Search posts...' }: SearchBarProps) {
   return (
     <div className="relative mb-8">
-      <div className="relative shadow-[var(--shadow-accent-lg)] rounded-lg">
+      <div className="relative shadow-[var(--shadow-lg)] rounded-lg">
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-accent z-10 pointer-events-none" />
         <input
           type="text"
@@ -21,11 +21,12 @@ export function SearchBar({ value, onChange, placeholder = 'Search posts...' }: 
           placeholder={placeholder}
           className={cn(
             'w-full pl-12 pr-12 py-3 rounded-lg relative',
-            'bg-glass-bg backdrop-blur-md border-2 border-accent/30',
-            'text-foreground placeholder:text-foreground/50',
+            'bg-background border-2 border-notebook-divider',
+            'text-foreground placeholder:text-foreground/50 font-sans',
             'focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent/60',
-            'focus:shadow-[var(--shadow-accent-xl)]',
-            'transition-all duration-200'
+            'focus:shadow-[var(--shadow-xl)]',
+            'transition-all duration-200',
+            'shadow-paper-sm hover:shadow-paper-md'
           )}
         />
         {value && (

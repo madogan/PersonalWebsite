@@ -12,10 +12,11 @@ export function BackButton() {
       onClick={() => router.back()}
       className={cn(
         'fixed top-4 left-4 z-50 no-print',
-        'inline-flex h-10 w-10 items-center justify-center rounded-2xl',
-        'bg-glass-bg backdrop-blur-md border border-glass-border',
-        'transition-all duration-300 hover:scale-105 focus:outline-none',
+        'inline-flex h-10 w-10 items-center justify-center rounded-lg',
+        'bg-background border border-notebook-divider',
+        'transition-all duration-200 hover:scale-[0.98] active:scale-[0.96] focus:outline-none',
         'focus:ring-2 focus:ring-accent focus:ring-offset-2',
+        'shadow-paper-sm hover:shadow-paper-md',
         'group'
       )}
       aria-label="Go back"

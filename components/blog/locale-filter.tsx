@@ -19,11 +19,12 @@ export function LocaleFilter({ value, onChange, className }: LocaleFilterProps) 
           onChange={(e) => onChange(e.target.value as 'all' | 'en' | 'tr')}
           className={cn(
             'w-full pl-12 pr-10 py-3 rounded-lg appearance-none',
-            'bg-glass-bg backdrop-blur-md border-2 border-accent/30',
-            'text-foreground',
+            'bg-background border-2 border-notebook-divider',
+            'text-foreground font-sans',
             'focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent/60',
-            'focus:shadow-[var(--shadow-accent-xl)]',
+            'focus:shadow-[var(--shadow-xl)]',
             'transition-all duration-200',
+            'shadow-paper-sm hover:shadow-paper-md',
             'cursor-pointer'
           )}
           aria-label="Filter posts by language"

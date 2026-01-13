@@ -73,9 +73,9 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
               key={post.slug}
               href={`/blog/${post.slug}`}
               className={cn(
-                'group glass-card p-6 md:p-8',
-                'transition-all duration-300 hover:scale-[1.02]',
-                'hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+                'group loose-leaf-card p-6 md:p-8 paper-texture',
+                'transition-all duration-300',
+                'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                 'animate-slide-up'
               )}
               style={{ animationDelay: `${index * 0.1}s` }}

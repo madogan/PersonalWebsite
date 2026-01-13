@@ -42,8 +42,8 @@ export function CertificationsSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">Certifications & Badges</h2>
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Certifications & Badges</h2>
             <p className="text-foreground/60">Professional certifications and learning achievements</p>
           </div>
 
@@ -58,9 +58,9 @@ export function CertificationsSection() {
                 <div
                   key={index}
                   className={cn(
-                    'group glass-card p-6 md:p-8',
-                    'transition-all duration-300 hover:scale-[1.02]',
-                    'hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+                    'group loose-leaf-card p-6 md:p-8 paper-texture',
+                    'transition-all duration-300',
+                    'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                     'animate-slide-up'
                   )}
                   style={{ animationDelay: `${index * 0.1}s` }}

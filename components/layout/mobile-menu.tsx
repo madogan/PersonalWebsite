@@ -19,9 +19,10 @@ export function MobileMenu() {
       <button
         onClick={toggleMenu}
         className={cn(
-          'p-2 rounded-md transition-colors duration-200',
-          'hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent',
-          'text-foreground'
+          'p-2 rounded-lg transition-all duration-200',
+          'hover:bg-foreground/10 hover:scale-[0.98] active:scale-[0.96]',
+          'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+          'text-foreground border border-transparent hover:border-notebook-divider'
         )}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -39,9 +40,9 @@ export function MobileMenu() {
           <div
             className={cn(
               'fixed top-0 right-0 h-full w-64 z-50',
-              'glass-panel p-6',
+              'notebook-panel border-l border-notebook-divider p-6',
               'animate-slide-in-right',
-              '[box-shadow:var(--shadow-accent-xl)]'
+              'shadow-paper-xl paper-texture'
             )}
           >
             <div className="flex flex-col gap-4 mt-12">
@@ -54,11 +55,13 @@ export function MobileMenu() {
                     href={item.href}
                     onClick={closeMenu}
                     className={cn(
-                      'px-4 py-3 rounded-md text-base font-medium transition-all duration-200',
-                      'hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent',
+                      'px-4 py-3 rounded-lg text-base font-medium transition-all duration-200',
+                      'hover:bg-foreground/10 hover:scale-[0.98] active:scale-[0.96]',
+                      'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+                      'border-l-2 border-transparent',
                       isActive
-                        ? 'text-accent bg-accent/10'
-                        : 'text-foreground/80 hover:text-foreground'
+                        ? 'text-accent bg-accent/10 border-l-accent font-semibold'
+                        : 'text-foreground/80 hover:text-foreground hover:border-l-notebook-divider'
                     )}
                   >
                     {item.label}

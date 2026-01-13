@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2025-01-27
+
+### Added
+- Enhanced notebook aesthetic with improved paper texture (increased opacity, enhanced grain pattern)
+- Enhanced notebook binding (increased width to 7px, added gradient and shadow)
+- Journal-like elements: enhanced pencil dividers with gradient overlay, page edge shadows
+- Typography utility classes: `.text-heading`, `.text-body`, `.text-code` for consistent font usage
+- Distinct component styles: refined notebook-panel, loose-leaf-card, and button styles with paper texture overlays
+
+### Changed
+- **Design System Refinement**: Replaced gold/brass accent color with grey metallic (#6B7280) for sophisticated look
+- **Shadow System**: Removed all accent-colored shadows, using only paper shadows for depth
+- **Typography Standardization**: All headings (h1-h6) use serif font (Playfair Display), all body text uses sans-serif (Inter)
+- **Padding Standardization**: Standardized section title padding (mb-6), container padding (px-4 sm:px-6 lg:px-8), and card padding (p-6 md:p-8)
+- **Component Styles**: 
+  - Notebook panels: Flat style with paper texture, no rotation
+  - Loose-leaf cards: Enhanced with rotation effects (0.5deg default, 1deg on hover) and paper texture
+  - Buttons: Added paper texture overlay and enhanced press effects (scale 0.98 hover, 0.96 active)
+- **Paper Texture**: Increased opacity (0.03→0.05 for light, 0.02→0.03 for dark) and enhanced grain pattern
+- **Notebook Binding**: Updated to match grey metallic accent color, increased width to 7px with gradient and shadow
+
+### Fixed
+- Removed all glassmorphism styling remnants (glass-panel, glass-card classes)
+- Fixed asymmetric padding in section titles and cards
+- Fixed font inconsistency across components
+- Fixed linting errors: escaped apostrophes in JSX, added eslint-disable comment for MDX components
+
+### Technical
+- Updated 20+ components to use standardized typography and padding
+- Enhanced CSS with distinct styles for panels, cards, and buttons
+- All components now use consistent notebook aesthetic with paper texture overlays
+- Verified no glassmorphism styling remains in codebase
+
 ## [0.7.1] - 2025-01-27
 
 ### Fixed

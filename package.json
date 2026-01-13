@@ -1,9 +1,9 @@
 {
   "name": "personal-website",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3232",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

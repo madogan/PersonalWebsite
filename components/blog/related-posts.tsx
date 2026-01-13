@@ -47,7 +47,7 @@ export async function RelatedPosts({ currentSlug, maxPosts = 3 }: RelatedPostsPr
   }
 
   return (
-    <section className="mt-16 pt-12 border-t border-glass-border">
+    <section className="mt-16 pt-12 pencil-divider">
       <h2 className="text-2xl md:text-3xl font-bold mb-8">Related Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {relatedPosts.map((post, index) => (
@@ -55,9 +55,9 @@ export async function RelatedPosts({ currentSlug, maxPosts = 3 }: RelatedPostsPr
             key={post.slug}
             href={`/blog/${post.slug}`}
             className={cn(
-              'group glass-card p-6',
-              'transition-all duration-300 hover:scale-[1.02]',
-              'hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+              'group loose-leaf-card p-6 md:p-8 paper-texture',
+              'transition-all duration-300',
+              'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
               'animate-slide-up'
             )}
             style={{ animationDelay: `${index * 0.1}s` }}

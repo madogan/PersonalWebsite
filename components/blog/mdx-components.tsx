@@ -7,7 +7,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h1
         className={cn(
           'text-4xl md:text-5xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground text-left',
+          'text-foreground text-left font-serif',
           className
         )}
         {...props}
@@ -17,7 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2
         className={cn(
           'text-3xl md:text-4xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground border-b border-glass-border pb-2 text-left',
+          'text-foreground border-b border-notebook-divider pencil-divider pb-2 text-left font-serif',
           className
         )}
         {...props}
@@ -27,7 +27,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h3
         className={cn(
           'text-2xl md:text-3xl font-semibold tracking-tight mt-6 mb-3',
-          'text-foreground text-left',
+          'text-foreground text-left font-serif',
           className
         )}
         {...props}
@@ -37,7 +37,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h4
         className={cn(
           'text-xl md:text-2xl font-semibold mt-4 mb-2',
-          'text-foreground text-left',
+          'text-foreground text-left font-serif',
           className
         )}
         {...props}
@@ -47,7 +47,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p
         className={cn(
           'text-base leading-7 mb-4 text-foreground/90',
-          'text-left',
+          'text-left font-sans',
           className
         )}
         {...props}
@@ -110,7 +110,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <pre
         className={cn(
           'overflow-x-auto rounded-lg bg-foreground/5 p-4 mb-4',
-          'border border-glass-border',
+          'border border-notebook-divider font-mono',
           className
         )}
         {...props}
@@ -119,7 +119,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     hr: ({ className, ...props }) => (
       <hr
         className={cn(
-          'my-8 border-t border-glass-border',
+          'my-8 pencil-divider',
           className
         )}
         {...props}

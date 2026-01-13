@@ -13,7 +13,7 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {skillCategories.map(([category, items]) => (
-        <div key={category} className="glass-card p-6 md:p-8 hover:scale-[1.02] transition-transform duration-300">
+        <div key={category} className="loose-leaf-card p-6 md:p-8 paper-texture">
           <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">
             {getSkillCategoryTitle(category)}
           </h3>

@@ -84,12 +84,13 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={handlePrevious}
         disabled={currentPage === 1}
         className={cn(
-          'glass-panel px-4 py-2 rounded-lg',
+          'notebook-panel px-4 py-2 rounded-lg',
           'transition-all duration-200',
           'flex items-center gap-2',
           'disabled:opacity-50 disabled:cursor-not-allowed',
-          'hover:bg-accent/10 hover:border-accent/30',
+          'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+          'shadow-paper-sm hover:shadow-paper-md',
           currentPage === 1
             ? 'text-foreground/40'
             : 'text-foreground hover:text-accent'
@@ -122,13 +123,14 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
               key={pageNum}
               onClick={() => handlePageClick(pageNum)}
               className={cn(
-                'glass-panel px-4 py-2 rounded-lg min-w-[2.5rem]',
+                'notebook-panel px-4 py-2 rounded-lg min-w-[2.5rem]',
                 'transition-all duration-200',
                 'font-medium',
-                'hover:bg-accent/10 hover:border-accent/30',
+                'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
                 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+                'shadow-paper-sm hover:shadow-paper-md',
                 isActive
-                  ? 'bg-accent/20 border-accent/40 text-accent shadow-lg'
+                  ? 'bg-accent/20 border-accent/40 text-accent shadow-paper-md'
                   : 'text-foreground hover:text-accent'
               )}
               aria-label={`Go to page ${pageNum}`}
@@ -145,12 +147,13 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={handleNext}
         disabled={currentPage === totalPages}
         className={cn(
-          'glass-panel px-4 py-2 rounded-lg',
+          'notebook-panel px-4 py-2 rounded-lg',
           'transition-all duration-200',
           'flex items-center gap-2',
           'disabled:opacity-50 disabled:cursor-not-allowed',
-          'hover:bg-accent/10 hover:border-accent/30',
+          'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+          'shadow-paper-sm hover:shadow-paper-md',
           currentPage === totalPages
             ? 'text-foreground/40'
             : 'text-foreground hover:text-accent'

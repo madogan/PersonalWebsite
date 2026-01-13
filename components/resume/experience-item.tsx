@@ -58,8 +58,8 @@ export function ExperienceItem({
   note,
 }: ExperienceItemProps) {
   return (
-    <div className="glass-card p-4 sm:p-6 md:p-8 mb-4 md:mb-6 hover:shadow-xl transition-all duration-300">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 md:mb-6">
+    <div className="loose-leaf-card p-6 md:p-8 mb-6 paper-texture">
+      <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
         <div className="flex-1">
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2">
             {position}
@@ -98,7 +98,7 @@ export function ExperienceItem({
       </ul>
       
       {note && (
-        <div className="mt-4 md:mt-6 p-3 md:p-4 bg-accent/10 border-l-4 border-accent rounded-r-lg">
+        <div className="mt-4 md:mt-6 p-3 md:p-4 bg-accent/10 border-l-4 border-accent rounded-r-lg border-notebook-divider">
           <p className="text-xs sm:text-sm text-foreground/80 italic leading-5 md:leading-6">{parseLinks(note)}</p>
         </div>
       )}

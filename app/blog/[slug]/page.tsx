@@ -91,11 +91,11 @@ export default async function BlogPostPage({ params }: Props) {
         <header className="mb-8 md:mb-12">
           <TagList tags={post.tags} className="mb-4" />
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif">
             {post.title}
           </h1>
 
-          <p className="text-xl md:text-2xl text-foreground/80 mb-6">
+          <p className="text-xl md:text-2xl text-foreground/80 mb-6 font-sans">
             {post.description}
           </p>
 
@@ -128,22 +128,23 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {/* Divider */}
-          <hr className="border-t border-glass-border" />
+          <hr className="pencil-divider" />
         </header>
 
         {/* Post Content */}
         <div
           className={cn(
-            'prose prose-lg max-w-none',
+            'prose prose-lg max-w-none paper-texture',
             'text-justify md:text-left',
-            'prose-headings:text-foreground prose-headings:text-left',
-            'prose-p:text-foreground/90 prose-p:text-justify md:prose-p:text-left',
+            'prose-headings:text-foreground prose-headings:text-left prose-headings:font-serif',
+            'prose-p:text-foreground/90 prose-p:text-justify md:prose-p:text-left prose-p:font-sans',
             'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
             'prose-strong:text-foreground',
-            'prose-code:text-foreground prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded',
-            'prose-pre:bg-foreground/5 prose-pre:border prose-pre:border-glass-border',
+            'prose-code:text-foreground prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono',
+            'prose-pre:bg-foreground/5 prose-pre:border prose-pre:border-notebook-divider',
             'prose-blockquote:border-accent prose-blockquote:bg-accent/5',
             'prose-img:rounded-lg',
+            'prose-hr:border-notebook-divider prose-hr:pencil-divider',
             'dark:prose-invert'
           )}
         >

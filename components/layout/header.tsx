@@ -9,9 +9,9 @@ export function Header() {
     <header
       className={cn(
         'sticky top-0 z-50 w-full',
-        'glass-panel border-b border-glass-border',
-        'backdrop-blur-md bg-glass-bg/80',
-        'transition-all duration-300'
+        'notebook-panel border-b border-notebook-divider',
+        'bg-background/95 backdrop-blur-sm',
+        'transition-all duration-300 paper-texture'
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

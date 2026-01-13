@@ -39,19 +39,19 @@ export function GlassyButton({
   }
 
   const variantClasses = {
-    default: 'bg-glass-bg border-glass-border text-foreground hover:bg-glass-bg/80 hover:border-accent/40',
+    default: 'bg-background border-notebook-divider text-foreground hover:bg-background/95 hover:border-accent/40',
     subtle: 'bg-accent/10 border-accent/20 text-accent hover:bg-accent/20 hover:border-accent/40',
   }
 
   const baseClasses = cn(
-    'relative inline-flex items-center gap-2 rounded-xl font-medium',
-    'backdrop-blur-lg border',
-    'transition-all duration-300',
-    'hover:scale-105',
+    'relative inline-flex items-center gap-2 rounded-lg font-medium',
+    'border',
+    'transition-all duration-200',
+    'hover:scale-[0.98] active:scale-[0.96]',
     'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
     'overflow-hidden',
-    '[box-shadow:var(--shadow-accent-lg)]',
-    'hover:[box-shadow:var(--shadow-accent-xl)]',
+    'shadow-paper-md',
+    'hover:shadow-paper-lg active:shadow-paper-sm',
     sizeClasses[size],
     variantClasses[variant],
     className
@@ -59,23 +59,8 @@ export function GlassyButton({
 
   const content = (
     <>
-      {/* Animated liquid blobs background */}
-      {animated && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute -top-10 -right-10 w-32 h-32 bg-accent-cyan rounded-full blur-2xl opacity-20 animate-liquid-float"
-            style={{ animationDuration: '8s' }}
-          />
-          <div
-            className="absolute top-1/2 -left-10 w-24 h-24 bg-accent-secondary rounded-full blur-2xl opacity-20 animate-liquid-float"
-            style={{ animationDuration: '10s', animationDelay: '1.5s' }}
-          />
-          <div
-            className="absolute -bottom-10 right-1/3 w-20 h-20 bg-accent rounded-full blur-2xl opacity-20 animate-liquid-float"
-            style={{ animationDuration: '12s', animationDelay: '3s' }}
-          />
-        </div>
-      )}
+      {/* Paper texture overlay */}
+      <div className="absolute inset-0 paper-texture pointer-events-none opacity-30" />
 
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">

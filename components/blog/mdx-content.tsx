@@ -12,6 +12,8 @@ export async function MDXContent({ content }: MDXContentProps) {
     development: false,
   })
 
+  // useMDXComponents is not a React hook, it's a regular function despite the naming
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const components = useMDXComponents({})
 
   return <MDXComponent components={components} />

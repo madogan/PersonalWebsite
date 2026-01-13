@@ -186,9 +186,35 @@
   }
   */
 
+  /* Stamped Button Style - Distinct pressed/stamped effect */
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    position: relative;
+    overflow: hidden;
+  }
+  
   .btn-primary {
-    @apply px-4 py-2 bg-accent text-foreground rounded-lg font-medium font-sans transition-all duration-200 hover:bg-accent/90 active:bg-accent/95 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+    @apply px-4 py-2 bg-accent text-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 active:bg-accent/95 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+  }
+  
+  /* Add subtle paper texture to buttons */
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    opacity: 0.1;
+    border-radius: inherit;
+  }
+  
+  .btn-primary > * {
+    position: relative;
+    z-index: 1;
   }
   
   .btn-primary:hover {
@@ -202,8 +228,25 @@
   }
 
   .btn-secondary {
-    @apply px-4 py-2 bg-accent/10 border border-accent/20 text-accent rounded-lg font-medium font-sans transition-all duration-200 hover:bg-accent/20 hover:border-accent/40 active:bg-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+    @apply px-4 py-2 bg-accent/10 border border-accent/20 text-accent rounded-lg font-medium transition-all duration-200 hover:bg-accent/20 hover:border-accent/40 active:bg-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+  }
+  
+  .btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    opacity: 0.1;
+    border-radius: inherit;
+  }
+  
+  .btn-secondary > * {
+    position: relative;
+    z-index: 1;
   }
   
   .btn-secondary:hover {
@@ -217,7 +260,24 @@
   }
 
   .btn-ghost {
-    @apply px-4 py-2 text-foreground rounded-lg font-medium font-sans transition-all duration-200 hover:bg-foreground/10 active:bg-foreground/15 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+    @apply px-4 py-2 text-foreground rounded-lg font-medium transition-all duration-200 hover:bg-foreground/10 active:bg-foreground/15 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+  
+  .btn-ghost::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    opacity: 0.05;
+    border-radius: inherit;
+  }
+  
+  .btn-ghost > * {
+    position: relative;
+    z-index: 1;
   }
   
   .btn-ghost:hover {
@@ -266,17 +326,72 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Notebook Panel - Alternative to glass-panel */
+  /* Notebook Panel - Flat panel style (distinct from cards) */
   .notebook-panel {
     @apply bg-background border border-notebook-divider rounded-lg;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+    position: relative;
+    /* No rotation - flat panel style */
+    transform: rotate(0deg);
+  }
+  
+  /* Add subtle paper texture to panels */
+  .notebook-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    opacity: 0.03;
+    border-radius: inherit;
+  }
+  
+  .dark .notebook-panel::before {
+    opacity: 0.02;
+    mix-blend-mode: soft-light;
+  }
+  
+  .notebook-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .notebook-panel:hover {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    border-color: rgb(var(--notebook-divider) / 0.8);
   }
 
-  /* Loose-Leaf Card - Cards with subtle rotation */
+  /* Loose-Leaf Card - Cards with subtle rotation (distinct from panels) */
   .loose-leaf-card {
-    @apply notebook-panel p-6 transition-all duration-300;
+    @apply bg-background border border-notebook-divider rounded-lg p-6 transition-all duration-300;
+    position: relative;
     transform: rotate(0deg); /* No rotation on mobile */
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+  }
+  
+  /* Add paper texture to cards */
+  .loose-leaf-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    opacity: 0.05;
+    border-radius: inherit;
+  }
+  
+  .dark .loose-leaf-card::before {
+    opacity: 0.03;
+    mix-blend-mode: soft-light;
+  }
+  
+  .loose-leaf-card > * {
+    position: relative;
+    z-index: 1;
   }
   
   /* Add rotation on larger screens */
@@ -287,13 +402,19 @@
   }
   
   .loose-leaf-card:hover {
-    transform: rotate(0deg) translateY(-2px); /* Reduced effect on mobile */
     box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    border-color: rgb(var(--notebook-divider) / 0.8);
   }
   
   @media (min-width: 768px) {
     .loose-leaf-card:hover {
       transform: rotate(1deg) translateY(-4px); /* Full effect on desktop */
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .loose-leaf-card:hover {
+      transform: translateY(-2px); /* Reduced effect on mobile */
     }
   }
 

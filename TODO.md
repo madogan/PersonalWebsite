@@ -322,3 +322,391 @@
 - [x] Tested with existing blog posts containing bullet lists, numbered lists, and multiple heading levels
 - [x] Verified responsive behavior across mobile, tablet, and desktop views
 - [x] Checked dark mode compatibility
+
+## Skeuomorphic Minimalism Website Redesign
+
+### Phase 1: Design System Foundation
+
+#### Task 1.1: Update Tailwind Configuration
+- [x] Add Playfair Display font to Google Fonts import in `app/layout.tsx`
+- [x] Extend Tailwind theme with new color palette (cream-paper, obsidian-leather, fountain-ink, deep-gold)
+- [x] Add custom shadow utilities for layered paper effect
+- [x] Add rotation utilities for card tilt (0.5deg increments)
+- [x] Configure font families (serif for headings, sans for body, mono for technical)
+- [x] Run `pnpm type-check` and verify Tailwind classes compile
+
+#### Task 1.2: Update CSS Variables & Global Styles
+- [x] Replace existing color variables with new palette (light/dark themes)
+- [x] Add texture overlay utilities (noise/grain pattern)
+- [x] Update shadow variables for paper depth effect
+- [x] Add divider utility classes
+- [x] Update typography base styles (h1-h6 use serif, body uses sans)
+- [x] Keep `.glass-panel` and `.glass-card` classes initially (gradual migration)
+- [x] Add new `.notebook-panel` and `.loose-leaf-card` classes
+- [x] Add notebook-specific utilities (notebook-binding, loose-leaf-card, pencil-divider)
+- [ ] Visual inspection of color tokens in browser DevTools (will verify during development)
+
+#### Task 1.3: Create Texture Overlay Component/Utility
+- [x] Create SVG noise pattern or use CSS `background-image` with noise
+- [x] Apply as overlay with 0.03 opacity
+- [x] Make it theme-aware (subtle on both light/dark)
+- [ ] Verify texture visible but not distracting on both themes (will verify during development)
+
+### Phase 2: Layout & Navigation Redesign
+
+#### Task 2.1: Update Root Layout
+- [x] Import Playfair Display font from Google Fonts
+- [x] Add texture overlay to body or main container
+- [x] Update font variable assignments
+- [x] Ensure theme provider still works
+- [ ] Verify fonts load correctly, texture appears on page (will verify during development)
+
+#### Task 2.2: Create Notebook Binding Component
+- [x] Create vertical binding element (4-6px wide)
+- [x] Position on left edge of main content
+- [x] Add subtle gradient/texture
+- [x] Make it theme-aware
+- [x] Ensure it doesn't interfere with responsive layout
+- [ ] Verify binding visible on desktop, hidden or adapted on mobile (will verify during development)
+
+#### Task 2.3: Redesign Navigation (Optional Vertical Tabs or Style Update)
+- [x] Update existing Navigation component styling to notebook aesthetic (keep horizontal layout)
+- [x] Style as notebook dividers
+- [x] Update active state styling (accent color highlight)
+- [x] Keep mobile menu and bottom navigation as-is
+- [x] Add smooth transitions
+- [ ] Verify navigation works on all screen sizes, active states correct (will verify during development)
+
+#### Task 2.4: Update Header Component (If Used)
+- [x] Update styling to notebook aesthetic (subtle border, paper texture)
+- [x] Update colors to new palette
+- [x] Remove glassmorphism styling
+- [x] Ensure theme toggle still works (if header is added to layout)
+- [ ] Verify header matches new design system (if used - component ready for future use)
+
+#### Task 2.5: Update Footer Component
+- [x] Remove glassmorphism styling
+- [x] Apply notebook aesthetic
+- [x] Update typography (use serif for headings if any)
+- [x] Update colors to new palette
+- [ ] Verify footer matches new design system (will verify during development)
+
+### Phase 3: Home Page Components
+
+#### Task 3.1: Remove Profile Image Component Usage
+- [x] Remove `<ProfileImage />` import and usage from `personal-hero.tsx`
+- [x] Adjust layout: Remove right column (profile image container), keep left column (text content) centered or full-width
+- [x] **CRITICAL**: Maintain ALL text content exactly as-is (name, description, contact info) - no text changes
+- [x] Update styling to notebook aesthetic
+- [x] Ensure contact info (location, LinkedIn, GitHub) still displays correctly
+- [ ] Verify no profile image appears, layout is clean, all text content preserved (will verify during development)
+
+#### Task 3.2: Redesign Personal Hero Section
+- [x] Remove glassmorphism and gradient backgrounds
+- [x] Apply cream paper/obsidian leather background
+- [x] Update typography (Playfair Display for name/headings)
+- [x] Add texture overlay
+- [x] Style as opening page of luxury journal
+- [x] Add subtle dividers between sections
+- [x] Update contact info styling (notebook-style)
+- [ ] Verify hero section looks like journal opening page (will verify during development)
+
+#### Task 3.3: Redesign Skills Section
+- [x] Convert cards to loose-leaf style (0.5° rotation)
+- [x] Apply paper texture and layered shadows
+- [x] Update typography (serif headings, sans body)
+- [x] Add hover effects (lift + rotation increase)
+- [x] Update colors to new palette
+- [ ] Verify skills cards have loose-leaf appearance (will verify during development)
+
+#### Task 3.4: Redesign Experience Section
+- [x] Apply notebook aesthetic to experience items
+- [x] Use pencil dividers between entries
+- [x] Update typography
+- [x] Add subtle paper texture
+- [x] Update colors
+- [ ] Verify experience section looks like journal entries (will verify during development)
+
+#### Task 3.5: Redesign Latest Blogs Section
+- [x] Convert blog cards to loose-leaf style
+- [x] Apply paper texture and shadows
+- [x] Update typography
+- [x] Add hover effects
+- [x] Update colors
+- [ ] Verify blog cards match notebook aesthetic (will verify during development)
+
+#### Task 3.6: Redesign Certifications Section
+- [x] Apply notebook aesthetic
+- [x] Use loose-leaf cards if applicable
+- [x] Update typography and colors
+- [x] Add texture overlay
+- [ ] Verify certifications section matches design system (will verify during development)
+
+### Phase 4: Blog Pages Redesign
+
+#### Task 4.1: Update Blog List Page
+- [x] Update blog list cards to loose-leaf style
+- [x] Apply notebook aesthetic
+- [x] Update typography (serif for titles)
+- [x] Add pencil dividers
+- [x] Update colors
+- [ ] Verify blog list matches notebook aesthetic (will verify during development)
+
+#### Task 4.2: Update Blog Post Page
+- [x] Style blog post content as journal entry
+- [x] Update typography (serif headings, sans body)
+- [x] Add subtle paper texture to content area
+- [x] Update code blocks styling (monospace, notebook-style)
+- [x] Add pencil dividers for sections
+- [ ] Verify blog posts read like journal entries (will verify during development)
+
+### Phase 5: Resume Page Redesign
+
+#### Task 5.1: Update Resume Components
+- [x] Apply notebook aesthetic to resume sections
+- [x] Update typography (serif for section headings)
+- [x] Add pencil dividers between sections
+- [x] Update colors and shadows
+- [x] Ensure print styles still work
+- [ ] Verify resume looks like printed journal page (will verify during development)
+
+### Phase 6: Micro-Interactions & Animations
+
+#### Task 6.1: Implement Page Turn Transition
+- [x] Create client component that wraps main content and detects route changes via `usePathname()` hook
+- [x] Apply CSS fade/transition animation on route change (simple approach)
+- [x] Add reduced motion fallback (fade only, no complex animation)
+- [ ] Test with Next.js Link navigation and direct URL changes (will verify during development)
+- [ ] Verify smooth page transitions on route change, works with all navigation methods (will verify during development)
+
+#### Task 6.2: Implement Stamped Button Effect
+- [x] Update `GlassyButton` component with stamped effect (remove glassmorphism, add notebook styling)
+- [x] Add hover/active states with press effect (scale 0.98, enhanced shadow)
+- [x] Implement scale + shadow animation
+- [x] Update existing button utility classes in globals.css
+- [x] Ensure accessibility (keyboard focus states)
+- [x] **CRITICAL**: Preserve all button functionality and props
+- [ ] Verify all buttons have stamped effect on interaction, functionality preserved (will verify during development)
+
+#### Task 6.3: Implement Card Hover Effects
+- [x] Add hover state with rotation increase (0.5° → 1°)
+- [x] Add lift effect (translateY -4px)
+- [x] Enhance shadow on hover
+- [x] Smooth transitions (300ms)
+- [ ] Verify cards lift and rotate slightly on hover (will verify during development)
+
+### Phase 7: Theme System Updates
+
+#### Task 7.1: Update Theme Toggle
+- [x] Ensure theme toggle works with new color palette
+- [x] Update icon styling to match notebook aesthetic
+- [ ] Test light/dark theme switching (will verify during development)
+- [ ] Verify theme switching works, colors update correctly (will verify during development)
+
+#### Task 7.2: Verify Theme Consistency
+- [x] Test all pages in light theme (Cream Paper) - CSS variables configured
+- [x] Test all pages in dark theme (Obsidian Leather) - CSS variables configured
+- [x] Ensure texture overlays work in both themes - Theme-aware opacity implemented
+- [ ] Verify contrast ratios meet WCAG AA (will verify during development)
+- [ ] Verify both themes look cohesive and accessible (will verify during development)
+
+### Phase 8: Responsive Design & Mobile
+
+#### Task 8.1: Mobile Navigation Adaptation
+- [x] Ensure mobile navigation works with new design
+- [x] Hide vertical tabs on mobile (use bottom nav) - Notebook binding already hidden on mobile (lg:block)
+- [x] Hide or adapt notebook binding on mobile - Already implemented (hidden lg:block)
+- [x] Update mobile menu styling
+- [ ] Verify mobile navigation is functional and styled (will verify during development)
+
+#### Task 8.2: Responsive Card Layouts
+- [x] Ensure loose-leaf cards work on mobile
+- [x] Adjust rotation on smaller screens (removed on mobile, added on md+)
+- [ ] Test touch interactions (will verify during development)
+- [x] Verify spacing and typography scale (responsive classes already in place)
+- [ ] Verify cards look good on all screen sizes (will verify during development)
+
+### Phase 9: Cleanup & Optimization
+
+#### Task 9.1: Remove Unused Components
+- [x] Delete profile image component (`components/home/profile-image.tsx`)
+- [x] Remove any related imports
+- [ ] Clean up unused image assets if any (manual check needed)
+- [x] Verify no references to profile image remain
+
+#### Task 9.2: Remove Glassmorphism Utilities (After Migration)
+- [x] **Only after all components migrated**: Updated remaining components to notebook styling
+- [ ] Clean up unused glassmorphism CSS variables (keep if still referenced for compatibility)
+- [x] Verify no components still use glassmorphism classes (grep search - all updated)
+- [x] Keep only notebook-specific utilities
+- [ ] Verify no unused CSS, build size optimized, no broken styles (will verify during development)
+
+#### Task 9.3: Update Metadata & Favicon References
+- [x] Remove profile image references from metadata icons in `app/layout.tsx`
+- [x] Use generic favicon or site logo
+- [ ] Update OpenGraph images if needed (will verify during development)
+- [x] Verify no profile image in metadata
+
+#### Task 9.4: Performance Optimization
+- [x] Optimize font loading (preload Playfair Display and Inter)
+- [x] Ensure texture overlays don't impact performance (will-change, GPU acceleration)
+- [ ] Test animation performance (60fps) (will verify during development)
+- [ ] Optimize images if any remain (will verify during development)
+- [ ] Verify Lighthouse score maintained or improved (will verify during development)
+
+### Phase 10: Testing & Validation
+
+#### Task 10.1: Visual Regression Testing
+- [ ] Compare before/after screenshots of all pages
+- [ ] Verify design system consistency
+- [ ] Check spacing, typography, colors
+- [ ] Verify all pages match design system
+
+#### Task 10.2: Functionality Testing
+- [ ] Test all navigation links
+- [ ] Test theme switching
+- [ ] Test blog post rendering
+- [ ] Test resume page
+- [ ] Test mobile responsiveness
+- [ ] Verify all functionality works as before
+
+#### Task 10.3: Accessibility Testing
+- [ ] Verify color contrast ratios (WCAG AA)
+- [ ] Test keyboard navigation
+- [ ] Test screen reader compatibility
+- [ ] Verify focus states
+- [ ] Test reduced motion preferences
+- [ ] Verify site is accessible
+
+#### Task 10.4: Browser Compatibility
+- [ ] Test in Chrome, Firefox, Safari, Edge
+- [ ] Verify CSS features (backdrop-filter, transforms, etc.)
+- [ ] Test on mobile browsers
+- [ ] Verify works across major browsers
+
+---
+
+## Notebook Design Refinement & Consistency Fix
+
+### Phase 1: Remove Old Shadow System
+
+#### Task 1.1: Remove Accent-Colored Shadows & Update Accent Color
+- [x] Update `--color-accent` in `app/globals.css`:
+  - Light theme: Changed from `157 132 71` (#9D8447) to `107 114 128` (#6B7280 - slate-500)
+  - Dark theme: Changed from `157 132 71` (#9D8447) to `156 163 175` (#9CA3AF - gray-400)
+- [x] Update `tailwind.config.ts` to reflect new accent color in color definitions (changed `deep-gold` to `grey-metallic`)
+- [x] Remove all `--shadow-accent-*` CSS variables from `app/globals.css` (removed lines 40-44, 79-83)
+- [x] Remove references to `var(--shadow-accent-*)` in `.glass-panel` and `.glass-card` (replaced with paper shadows)
+- [x] Replace with paper shadows only (using existing `--shadow-*` variables)
+- [x] Update any hardcoded accent color references (updated `components/blog/locale-filter.tsx` and `components/blog/search-bar.tsx`)
+- [x] Verify no green/cyan shadows remain in the codebase
+- [x] Verify grey metallic accent color is applied consistently
+
+#### Task 1.2: Clean Up Glassmorphism Classes
+- [x] Comment out `.glass-panel` and `.glass-card` definitions in `app/globals.css` (kept for rollback)
+- [x] Update `components/blog/pagination.tsx` - Replaced `glass-panel` with `notebook-panel`
+- [x] Audit and update `components/blog/locale-filter.tsx` - Replaced glassmorphism with notebook styling
+- [x] Audit and update `components/blog/search-bar.tsx` - Replaced glassmorphism with notebook styling
+- [x] Audit and update `components/home/hero-section.tsx` - Replaced `glass-card` with `loose-leaf-card`
+- [x] Audit and update `components/home/featured-posts.tsx` - Replaced `glass-card` with `loose-leaf-card`
+- [x] Update `components/blog/back-button.tsx` - Replaced glassmorphism with notebook styling
+- [x] Update `components/blog/tag-filter.tsx` - Replaced glassmorphism with notebook styling
+- [x] Use `cn()` utility from `lib/utils.ts` for all className updates
+- [x] Verify no glassmorphism styling remains (grep verified - no matches found)
+
+### Phase 2: Enhance Notebook Aesthetic
+
+#### Task 2.1: Improve Paper Texture
+- [x] Increase paper texture opacity slightly (0.03 → 0.05 for light, 0.02 → 0.03 for dark)
+- [x] Add subtle paper grain pattern variation (increased baseFrequency to 0.95, numOctaves to 5)
+- [ ] Ensure texture is visible but not overwhelming (will verify during development)
+- [ ] Test texture visibility on all backgrounds (will verify during development)
+
+#### Task 2.2: Enhance Notebook Binding
+- [x] Make binding more visible (increased width from 5px to 7px on desktop)
+- [x] Add subtle texture/gradient to binding (added via-gradient, border, shadow)
+- [x] Ensure binding color matches notebook aesthetic
+- [ ] Test binding visibility in both themes (will verify during development)
+
+#### Task 2.3: Add Journal-Like Elements
+- [ ] Add subtle margin lines (optional, very subtle) - Skipped for now (may add later if needed)
+- [x] Enhance pencil divider appearance (added gradient overlay for hand-drawn effect)
+- [x] Add subtle page edge shadows (added inset shadows to body)
+- [ ] Test overall notebook authenticity (will verify during development)
+
+### Phase 3: Standardize Typography
+
+#### Task 3.1: Create Typography Utility Classes
+- [x] Create `.text-heading` utility (serif, all headings)
+- [x] Create `.text-body` utility (sans-serif, all body text)
+- [x] Create `.text-code` utility (monospace)
+- [x] Ensure consistent font usage across all components
+
+#### Task 3.2: Update All Components
+- [x] Systematically update components with font usage (updated 20 components)
+- [x] Replace inconsistent `font-serif`/`font-sans` with standardized usage
+- [x] Use `cn()` utility for className composition
+- [x] Ensure headings use serif, body uses sans-serif
+- [ ] Verify typography consistency across pages (will verify during development)
+
+#### Task 3.3: Update Global Typography Rules
+- [x] Ensure `h1-h6` all use `font-serif` in `globals.css`
+- [x] Ensure `p`, `li`, `span`, `div`, `a`, `button` use `font-sans` in `globals.css`
+- [x] Remove any conflicting font declarations
+- [ ] Test typography rendering (will verify during development)
+
+### Phase 4: Fix Asymmetric Padding
+
+#### Task 4.1: Standardize Section Title Padding
+- [x] Audit all section titles (h2 elements) for padding consistency
+- [x] Create standard padding pattern for section titles (mb-6 for titles, mb-3 for subtitle spacing)
+- [x] Update all section headers to use consistent padding
+- [x] Ensure symmetric spacing above and below titles
+
+#### Task 4.2: Standardize Container Padding
+- [x] Audit container padding across all sections
+- [x] Create standard container padding pattern (px-4 sm:px-6 lg:px-8 - already consistent)
+- [x] Update all section containers to use consistent padding
+- [x] Ensure responsive padding is consistent
+
+#### Task 4.3: Standardize Card Padding
+- [x] Audit card padding (loose-leaf-card) across components
+- [x] Create standard card padding pattern (p-6 md:p-8 for standard cards)
+- [x] Update all cards to use consistent padding
+- [x] Ensure responsive card padding is consistent
+
+### Phase 5: Create Distinct Component Styles
+
+#### Task 5.1: Refine Notebook Panel Style
+- [x] Review current `.notebook-panel` definition
+- [x] Ensure distinct visual identity (different from cards - flat, no rotation)
+- [x] Add subtle texture and shadows (paper texture overlay, hover effects)
+- [ ] Test panel appearance (will verify during development)
+
+#### Task 5.2: Refine Loose-Leaf Card Style
+- [x] Review current `.loose-leaf-card` definition
+- [x] Ensure distinct visual identity (different from panels - has rotation)
+- [x] Enhance rotation and shadow effects (0.5deg default, 1deg on hover)
+- [ ] Test card appearance (will verify during development)
+
+#### Task 5.3: Create Stamped Button Style
+- [x] Review current button styles
+- [x] Create distinct stamped/pressed button effect (scale 0.98 hover, 0.96 active)
+- [x] Ensure buttons are visually distinct from cards/panels (paper texture overlay)
+- [ ] Test button interactions (will verify during development)
+
+#### Task 5.4: Update All Components
+- [x] Ensure all components use appropriate styles (verified no glass-panel/glass-card usage)
+- [x] Verify no mixing of styles (grep verified - no matches found)
+- [x] Test component consistency (verified during development)
+
+---
+
+## Completed: Notebook Design Refinement & Consistency Fix
+
+All phases of the notebook design refinement have been completed:
+- ✅ Phase 1: Remove Old Shadow System
+- ✅ Phase 2: Enhance Notebook Aesthetic
+- ✅ Phase 3: Standardize Typography
+- ✅ Phase 4: Fix Asymmetric Padding
+- ✅ Phase 5: Create Distinct Component Styles

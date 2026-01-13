@@ -21,10 +21,11 @@ export default async function BlogPage() {
       <div className="max-w-6xl mx-auto">
         {/* Page Header */}
         <div className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-            Thoughts, tutorials, and insights about web development and programming.
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-serif">Blog</h1>
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto font-sans">
+            Thoughts and insights about reliability, performance, observability and AI.
           </p>
+          <div className="pencil-divider max-w-md mx-auto mt-6" />
         </div>
 
         {/* Blog List with Search */}

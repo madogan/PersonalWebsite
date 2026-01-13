@@ -23,9 +23,9 @@ export function SkillsSection() {
                 return (
                   <div
                     key={category}
-                    className={`glass-card p-4 sm:p-6 md:p-8 flex flex-col ${colSpan}`}
+                    className={`loose-leaf-card p-6 md:p-8 flex flex-col ${colSpan} paper-texture`}
                   >
-                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-foreground mb-3 md:mb-4">
+                    <h3 className="text-base sm:text-lg md:text-xl font-semibold text-foreground mb-4">
                       {getSkillCategoryTitle(category)}
                     </h3>
                     <ul className="list-disc list-inside space-y-2 md:space-y-2.5 text-foreground/90 ml-4 flex-1">
