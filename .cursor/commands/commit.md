@@ -1,6 +1,6 @@
 # Commit Command
 
-Create a semantic commit following THOF's commit rules. This command ensures correct formatting, atomic commits, and scope-aware commit messages.
+Create a semantic commit following the project's commit rules. This command ensures correct formatting, atomic commits, and scope-aware commit messages.
 
 ## Purpose
 
@@ -28,29 +28,27 @@ Use this command when finalizing a task to:
 Scopes help categorize changes by area of the codebase:
 
 * `app` - Next.js App Router pages and routes
-* `components` - UI components (ui, public, admin, shared)
-* `lib` - Library utilities (db, auth, services, utils, logging, monitoring)
-* `i18n` - Internationalization and translations
+* `components` - UI components (blog, home, layout, resume, ui)
+* `lib` - Library utilities (constants, mdx, resume, utils)
 * `types` - TypeScript type definitions
 * `api` - API routes and endpoints
-* `auth` - Authentication and authorization
-* `db` - Database schema, migrations, Prisma
 * `ui` - UI components and styling
-* `config` - Configuration files
+* `config` - Configuration files (next.config.ts, tailwind.config.ts, etc.)
 * `deps` - Dependency updates
 * `ci` - CI/CD configurations
 * `docs` - Documentation
+* `content` - Content files (blog posts, resume data)
 
 **Note**: For simple changes that don't fit a specific scope, you can omit the scope.
 
 Correct examples:
 
 ```
-feat(api): add refresh token endpoint
+feat(components): add blog card component
 fix(ui): resolve dark-mode hover bug
-chore(deps): update next-auth to 5.0.0-beta.25
-feat(components): add language switcher component
-fix(db): resolve migration conflict
+chore(deps): update next to 15.1.0
+feat(app): add resume page
+fix(lib): resolve MDX parsing issue
 docs: update deployment guide
 ```
 
@@ -104,33 +102,12 @@ refactor(components): optimize image gallery rendering
 
 ### Library (`lib`)
 
-Use for utilities, services, and library code:
+Use for utilities and library code:
 
 ```
-feat(lib:auth): implement JWT refresh flow
-fix(lib:db): resolve connection pool leak
-refactor(lib:services): restructure content service
-log(lib:logging): standardize request-id propagation
-```
-
-### Internationalization (`i18n`)
-
-Use for translation and locale-related changes:
-
-```
-feat(i18n): add English translations for events
-fix(i18n): correct Turkish date formatting
-refactor(i18n): restructure translation namespaces
-```
-
-### Database (`db`)
-
-Use for Prisma schema, migrations, and database-related changes:
-
-```
-db(migrations): add index to competitions.created_at
-db(schema): add event registration table
-fix(db): resolve migration conflict
+feat(lib): add resume data parser
+fix(lib): resolve MDX frontmatter parsing
+refactor(lib): restructure constants
 ```
 
 ### API Routes (`api`)
@@ -141,16 +118,6 @@ Use for API route handlers:
 feat(api): add competition registration endpoint
 fix(api): resolve authentication middleware issue
 refactor(api): optimize event list response
-```
-
-### Authentication (`auth`)
-
-Use for authentication and authorization:
-
-```
-feat(auth): add email verification flow
-fix(auth): resolve session expiration bug
-refactor(auth): optimize token validation
 ```
 
 ### UI/Styling (`ui`)
@@ -185,21 +152,21 @@ docs: update deployment guide
 ### Features
 
 ```
-feat(api): add competition registration endpoint
-feat(components): add event calendar component
-feat(i18n): add English translations for admin panel
-feat(app): add competition detail page with live updates
-feat(lib:services): implement content caching service
+feat(components): add blog card component
+feat(app): add resume page
+feat(lib): add MDX content parser
+feat(components): add certifications section
+feat(content): add new blog post
 ```
 
 ### Bug Fixes
 
 ```
 fix(ui): resolve dark mode hover state
-fix(auth): resolve session expiration bug
-fix(db): resolve migration conflict on competitions table
-fix(api): handle null values in event list response
 fix(components): resolve image gallery layout shift
+fix(lib): resolve MDX frontmatter parsing issue
+fix(app): handle missing blog post gracefully
+fix(components): resolve responsive layout breakpoint
 ```
 
 ### Documentation
@@ -213,33 +180,19 @@ docs: update README with new environment variables
 ### Refactoring
 
 ```
-refactor(lib:services): restructure content service
-refactor(components): optimize image gallery rendering
-refactor(app): restructure admin layout structure
-refactor(i18n): consolidate translation namespaces
-```
-
-### Database
-
-```
-db(migrations): add index to competitions.created_at
-db(schema): add event registration table
-db(migrations): add foreign key constraint to participants
+refactor(lib): restructure resume data types
+refactor(components): optimize blog list rendering
+refactor(app): restructure layout structure
+refactor(components): consolidate UI components
 ```
 
 ### Chores
 
 ```
-chore(deps): update next-auth to 5.0.0-beta.25
+chore(deps): update next to 15.1.0
 chore(config): update next.config.ts with new image domains
 chore(ci): add GitHub Actions workflow for testing
-```
-
-### Logging
-
-```
-log(lib:logging): standardize request-id propagation
-log(lib:logging): add performance metrics logging
+chore(release): bump version to 0.6.4
 ```
 
 ---
@@ -248,9 +201,9 @@ log(lib:logging): add performance metrics logging
 
 1. **Code Quality**
 
-   * Run `pnpm check` (lint + format + type-check)
+   * Run `pnpm lint` and `pnpm type-check`
    * Fix any linting or type errors
-   * No raw `console.log`; use centralized logger from `@/lib/logging`
+   * Run `pnpm format:check` to ensure code formatting
 
 2. **Atomicity**
 
@@ -330,17 +283,17 @@ git commit -m "feat(auth): implement email verification flow"
 
 ### Version Files
 
-THOF maintains version in two places:
+The project maintains version in two places:
 
-1. `package.json` - `"version": "1.8.2"`
-2. `src/lib/constants/version.ts` - `export const VERSION = '1.8.19'`
+1. `package.json` - `"version": "0.6.3"`
+2. `lib/constants.ts` - `export const VERSION = '0.6.3'`
 
 ### Version Update Process
 
 1. Determine the correct bump type (major/minor/patch)
 2. Manually update both version files:
    - `package.json`
-   - `src/lib/constants/version.ts`
+   - `lib/constants.ts`
 3. Commit version changes with:
 
 ```
@@ -356,9 +309,9 @@ git tag -a vX.Y.Z -m "Release version X.Y.Z"
 ### Version Update Examples
 
 ```
-chore(release): bump version to 1.9.0
-chore(release): bump version to 1.8.20
-chore(release): bump version to 2.0.0
+chore(release): bump version to 0.7.0
+chore(release): bump version to 0.6.4
+chore(release): bump version to 1.0.0
 ```
 
 ---
@@ -372,23 +325,11 @@ chore(release): bump version to 2.0.0
 * Follow App Router structure
 * Implement error.tsx and not-found.tsx for route segments
 
-### Database Changes
+### Content Changes
 
-* Use `db(migrations):` for Prisma migrations
-* Use `db(schema):` for schema-only changes
-* Always test migrations locally before committing
-
-### Internationalization
-
-* Use `i18n` scope for translation changes
-* Update both `src/messages/tr.json` and `src/messages/en.json`
-* Test in both locales
-
-### Logging
-
-* Use `log(lib:logging):` for logging system updates
-* Never use `console.log` in production code
-* Use centralized logger from `@/lib/logging`
+* Use `content` scope for blog posts and resume data changes
+* Ensure MDX frontmatter is properly formatted
+* Test content rendering after changes
 
 ---
 
@@ -398,9 +339,9 @@ chore(release): bump version to 2.0.0
 * Mixing unrelated changes in one commit
 * Incorrect semantic version decision
 * Manually editing version files without committing
-* Raw console.log usage (use centralized logger)
 * Using package prefixes (backend/web/mobile) - not needed for single project
 * Vague commit messages without scope
+* Forgetting to update both `package.json` and `lib/constants.ts` for version bumps
 
 ---
 
@@ -425,3 +366,15 @@ docs: clarify commit message guidelines
 Generate git commands and other commands for Windows environment (CMD or PowerShell).
 
 **Important**: Do not use `git status` or `git diff` commands to understand changes. Look at your changes in your chat context. Only commit files you actually modified during the session.
+
+---
+
+# Project-Specific Notes
+
+### Next.js 15+ Patterns
+
+* Use Server Components by default
+* Client Components only when needed (`'use client'`)
+* Follow App Router structure
+* Implement error.tsx and not-found.tsx for route segments
+* Use MDX for blog content with proper frontmatter
