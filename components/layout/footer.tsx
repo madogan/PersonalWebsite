@@ -8,31 +8,31 @@ export function Footer() {
   return (
     <footer
       className={cn(
-        'border-t border-notebook-divider pencil-divider',
+        'pencil-divider border-t border-notebook-divider',
         'bg-background/95 backdrop-blur-sm',
-        'mt-auto pb-20 md:pb-6 no-pdf paper-texture'
+        'no-pdf paper-texture mt-auto pb-20 md:pb-6'
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4">
-          <div className="text-xs sm:text-sm text-foreground/60 text-center md:text-left">
+      <div className="container mx-auto px-4 py-6 sm:px-6 md:py-8 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-3 md:grid-cols-3 md:gap-4">
+          <div className="text-center text-xs text-foreground/60 sm:text-sm md:text-left">
             All Rights Reserved © {currentYear}
           </div>
-          
-          <div className="text-[10px] text-foreground/40 text-center">
+
+          <div className="text-center text-[10px] text-foreground/40">
             v{VERSION}
           </div>
-          
-          <div className="flex items-center justify-center md:justify-end gap-4 md:gap-6">
+
+          <div className="flex items-center justify-center gap-4 md:justify-end md:gap-6">
             {siteConfig.links.github && (
               <Link
                 href={siteConfig.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-xs sm:text-sm text-foreground/60 hover:text-accent',
+                  'text-xs text-foreground/60 hover:text-accent sm:text-sm',
                   'transition-colors duration-200',
-                  'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
+                  'rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
                 )}
               >
                 GitHub
@@ -44,9 +44,9 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  'text-xs sm:text-sm text-foreground/60 hover:text-accent',
+                  'text-xs text-foreground/60 hover:text-accent sm:text-sm',
                   'transition-colors duration-200',
-                  'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
+                  'rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
                 )}
               >
                 LinkedIn
@@ -58,4 +58,3 @@ export function Footer() {
     </footer>
   )
 }
-

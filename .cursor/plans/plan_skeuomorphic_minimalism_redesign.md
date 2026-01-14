@@ -12,7 +12,7 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
 - **Language**: TypeScript 5.7.2
 - **Styling**: Tailwind CSS 3.4.17
 - **Package Manager**: PNPM
-- **Current Dependencies**: 
+- **Current Dependencies**:
   - `next-themes` for theme management
   - `lucide-react` for icons
   - `gsap` for animations (can be leveraged for micro-interactions)
@@ -24,6 +24,7 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
 ### 1. Color Palette
 
 #### Light Theme (Cream Paper)
+
 ```typescript
 {
   base: '#F9F7F2',        // Cream Paper background
@@ -36,6 +37,7 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
 ```
 
 #### Dark Theme (Obsidian Leather)
+
 ```typescript
 {
   base: '#141414',        // Obsidian Leather background
@@ -50,6 +52,7 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
 ### 2. Typography System
 
 #### Font Stack
+
 - **Headings (Serif)**: Playfair Display (Google Fonts)
   - Mimics printed ink on paper
   - High contrast, sophisticated
@@ -60,6 +63,7 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
   - "Engineered" feel
 
 #### Typography Scale
+
 ```typescript
 {
   h1: 'Playfair Display, serif', // 4xl-7xl, bold
@@ -73,23 +77,26 @@ Transform the personal website from a glassmorphism/futuristic design to a **Ske
 ### 3. Texture & Visual Effects
 
 #### Paper Texture
+
 - **Noise/Grain Overlay**: CSS `background-image` with SVG noise pattern
 - **Opacity**: 0.03 (very subtle)
 - **Blend Mode**: `overlay` or `multiply`
 - Applied to main content containers
 
 #### Shadows (Layered Paper Effect)
+
 ```css
 /* Soft, layered shadows for paper depth */
-box-shadow: 
-  0 1px 3px rgba(0,0,0,0.05),
-  0 10px 20px rgba(0,0,0,0.02),
-  0 2px 4px rgba(0,0,0,0.01);
+box-shadow:
+  0 1px 3px rgba(0, 0, 0, 0.05),
+  0 10px 20px rgba(0, 0, 0, 0.02),
+  0 2px 4px rgba(0, 0, 0, 0.01);
 ```
 
 ### 4. UI Component Specifications
 
 #### Notebook Binding
+
 - **Location**: Left edge of main container
 - **Width**: 4-6px
 - **Style**: Vertical line/texture
@@ -97,12 +104,14 @@ box-shadow:
 - **Visual**: Subtle gradient or texture to mimic book binding
 
 #### Dividers
+
 - **Style**: Very thin horizontal lines (0.5-1px)
 - **Color**: Subtle pencil mark color (divider color)
 - **Spacing**: Between major sections
 - **Effect**: Hand-drawn, slightly imperfect feel
 
 #### Cards (Loose-Leaf Inserts)
+
 - **Rotation**: 0.5 degrees (subtle organic feel)
 - **Shadow**: Layered paper shadows
 - **Background**: Base color with texture overlay
@@ -110,6 +119,7 @@ box-shadow:
 - **Hover**: Slight lift (translateY -2px) with enhanced shadow
 
 #### Navigation (Vertical Tabs - Optional Enhancement)
+
 - **Current Structure**: No header in root layout; BottomNavigation for home page sections; MobileMenu for full navigation
 - **Proposed Enhancement**: Add optional vertical tabs on right edge (desktop only) for main navigation
 - **Style**: Vertical tab system resembling notebook dividers
@@ -121,6 +131,7 @@ box-shadow:
 ### 5. Micro-Interactions
 
 #### Page Turn Transition
+
 - **Trigger**: Route changes (Next.js App Router navigation)
 - **Effect**: Simulate page turning animation or subtle fade
 - **Duration**: 600-800ms
@@ -132,16 +143,18 @@ box-shadow:
 - **Note**: Next.js 15 App Router doesn't have built-in page transitions. Implementation requires client-side route change detection.
 
 #### Stamped Button Effect
+
 - **Trigger**: Button hover/click
-- **Effect**: 
+- **Effect**:
   - Slight "press" animation (scale down 0.98)
   - Subtle shadow increase (deeper impression)
   - Optional: Brief ink bleed effect
 - **Duration**: 200-300ms
 
 #### Card Hover (Loose-Leaf Lift)
+
 - **Trigger**: Card hover
-- **Effect**: 
+- **Effect**:
   - Slight rotation increase (0.5° → 1°)
   - Lift effect (translateY -4px)
   - Enhanced shadow depth
@@ -152,6 +165,7 @@ box-shadow:
 ### Phase 1: Design System Foundation
 
 #### Task 1.1: Update Tailwind Configuration
+
 - **File**: `tailwind.config.ts`
 - **Actions**:
   - Add Playfair Display font to Google Fonts import in `app/layout.tsx`
@@ -162,6 +176,7 @@ box-shadow:
 - **Verification**: Run `pnpm type-check` and verify Tailwind classes compile
 
 #### Task 1.2: Update CSS Variables & Global Styles
+
 - **File**: `app/globals.css`
 - **Actions**:
   - Replace existing color variables with new palette (light/dark themes)
@@ -169,7 +184,7 @@ box-shadow:
   - Update shadow variables for paper depth effect
   - Add divider utility classes
   - Update typography base styles (h1-h6 use serif, body uses sans)
-  - **Gradual Migration Strategy**: 
+  - **Gradual Migration Strategy**:
     - Keep `.glass-panel` and `.glass-card` classes initially
     - Add new `.notebook-panel` and `.loose-leaf-card` classes
     - Migrate components one by one, then remove glassmorphism utilities in Phase 9
@@ -177,6 +192,7 @@ box-shadow:
 - **Verification**: Visual inspection of color tokens in browser DevTools, both old and new classes work during migration
 
 #### Task 1.3: Create Texture Overlay Component/Utility
+
 - **File**: `components/ui/texture-overlay.tsx` (optional) or CSS utility
 - **Actions**:
   - Create SVG noise pattern or use CSS `background-image` with noise
@@ -187,6 +203,7 @@ box-shadow:
 ### Phase 2: Layout & Navigation Redesign
 
 #### Task 2.1: Update Root Layout
+
 - **File**: `app/layout.tsx`
 - **Actions**:
   - Import Playfair Display font from Google Fonts
@@ -196,6 +213,7 @@ box-shadow:
 - **Verification**: Fonts load correctly, texture appears on page
 
 #### Task 2.2: Create Notebook Binding Component
+
 - **File**: `components/layout/notebook-binding.tsx`
 - **Actions**:
   - Create vertical binding element (4-6px wide)
@@ -206,6 +224,7 @@ box-shadow:
 - **Verification**: Binding visible on desktop, hidden or adapted on mobile
 
 #### Task 2.3: Redesign Navigation (Optional Vertical Tabs or Style Update)
+
 - **File**: `components/layout/navigation.tsx`
 - **Current State**: Component exists but is NOT used in root layout (Header component not imported)
 - **Actions**:
@@ -219,6 +238,7 @@ box-shadow:
 - **Note**: Since Header is not in root layout, vertical tabs would need to be added separately if desired
 
 #### Task 2.4: Update Header Component (If Used)
+
 - **File**: `components/layout/header.tsx`
 - **Current State**: Component exists but is NOT imported/used in root layout or any page
 - **Actions**:
@@ -230,6 +250,7 @@ box-shadow:
 - **Note**: Header component is currently unused. Update it for future use or if user wants to add it to layout.
 
 #### Task 2.5: Update Footer Component
+
 - **File**: `components/layout/footer.tsx`
 - **Actions**:
   - Remove glassmorphism styling
@@ -241,6 +262,7 @@ box-shadow:
 ### Phase 3: Home Page Components
 
 #### Task 3.1: Remove Profile Image Component Usage
+
 - **File**: `components/home/personal-hero.tsx`
 - **Actions**:
   - Remove `<ProfileImage />` import and usage (line 4 and line 139)
@@ -251,6 +273,7 @@ box-shadow:
 - **Verification**: No profile image appears, layout is clean, all text content preserved
 
 #### Task 3.2: Redesign Personal Hero Section
+
 - **File**: `components/home/personal-hero.tsx`
 - **Actions**:
   - Remove glassmorphism and gradient backgrounds
@@ -263,6 +286,7 @@ box-shadow:
 - **Verification**: Hero section looks like journal opening page
 
 #### Task 3.3: Redesign Skills Section
+
 - **File**: `components/home/skills-section.tsx`
 - **Actions**:
   - Convert cards to loose-leaf style (0.5° rotation)
@@ -273,6 +297,7 @@ box-shadow:
 - **Verification**: Skills cards have loose-leaf appearance
 
 #### Task 3.4: Redesign Experience Section
+
 - **File**: `components/home/experience-section.tsx`
 - **Actions**:
   - Apply notebook aesthetic to experience items
@@ -283,6 +308,7 @@ box-shadow:
 - **Verification**: Experience section looks like journal entries
 
 #### Task 3.5: Redesign Latest Blogs Section
+
 - **File**: `components/home/latest-blogs-section.tsx`
 - **Actions**:
   - Convert blog cards to loose-leaf style
@@ -293,6 +319,7 @@ box-shadow:
 - **Verification**: Blog cards match notebook aesthetic
 
 #### Task 3.6: Redesign Certifications Section
+
 - **File**: `components/home/certifications-section.tsx`
 - **Actions**:
   - Apply notebook aesthetic
@@ -304,6 +331,7 @@ box-shadow:
 ### Phase 4: Blog Pages Redesign
 
 #### Task 4.1: Update Blog List Page
+
 - **File**: `app/blog/page.tsx` and related components
 - **Actions**:
   - Update blog list cards to loose-leaf style
@@ -314,6 +342,7 @@ box-shadow:
 - **Verification**: Blog list matches notebook aesthetic
 
 #### Task 4.2: Update Blog Post Page
+
 - **File**: `app/blog/[slug]/page.tsx` and MDX components
 - **Actions**:
   - Style blog post content as journal entry
@@ -326,6 +355,7 @@ box-shadow:
 ### Phase 5: Resume Page Redesign
 
 #### Task 5.1: Update Resume Components
+
 - **Files**: `components/resume/*.tsx`
 - **Actions**:
   - Apply notebook aesthetic to resume sections
@@ -338,6 +368,7 @@ box-shadow:
 ### Phase 6: Micro-Interactions & Animations
 
 #### Task 6.1: Implement Page Turn Transition
+
 - **File**: Create `components/transitions/page-turn.tsx` or client wrapper component
 - **Actions**:
   - **Implementation Approach**: Create client component that wraps main content and detects route changes via `usePathname()` hook
@@ -349,7 +380,8 @@ box-shadow:
 - **Note**: Next.js 15 App Router doesn't have built-in page transitions. This requires custom implementation.
 
 #### Task 6.2: Implement Stamped Button Effect
-- **Files**: 
+
+- **Files**:
   - `components/ui/glassy-button.tsx` (update existing component)
   - `app/globals.css` (update button utility classes: `.btn-primary`, `.btn-secondary`, `.btn-ghost`)
 - **Actions**:
@@ -362,6 +394,7 @@ box-shadow:
 - **Verification**: All buttons have stamped effect on interaction, functionality preserved
 
 #### Task 6.3: Implement Card Hover Effects
+
 - **File**: Update card components
 - **Actions**:
   - Add hover state with rotation increase (0.5° → 1°)
@@ -373,6 +406,7 @@ box-shadow:
 ### Phase 7: Theme System Updates
 
 #### Task 7.1: Update Theme Toggle
+
 - **File**: `components/ui/theme-toggle.tsx`
 - **Actions**:
   - Ensure theme toggle works with new color palette
@@ -381,6 +415,7 @@ box-shadow:
 - **Verification**: Theme switching works, colors update correctly
 
 #### Task 7.2: Verify Theme Consistency
+
 - **Files**: All components
 - **Actions**:
   - Test all pages in light theme (Cream Paper)
@@ -392,6 +427,7 @@ box-shadow:
 ### Phase 8: Responsive Design & Mobile
 
 #### Task 8.1: Mobile Navigation Adaptation
+
 - **File**: `components/layout/mobile-menu.tsx` and `components/home/bottom-navigation.tsx`
 - **Actions**:
   - Ensure mobile navigation works with new design
@@ -401,6 +437,7 @@ box-shadow:
 - **Verification**: Mobile navigation is functional and styled
 
 #### Task 8.2: Responsive Card Layouts
+
 - **Files**: All card components
 - **Actions**:
   - Ensure loose-leaf cards work on mobile
@@ -412,6 +449,7 @@ box-shadow:
 ### Phase 9: Cleanup & Optimization
 
 #### Task 9.1: Remove Unused Components
+
 - **Files**: `components/home/profile-image.tsx`
 - **Actions**:
   - Delete profile image component (no longer used)
@@ -420,6 +458,7 @@ box-shadow:
 - **Verification**: No references to profile image remain
 
 #### Task 9.2: Remove Glassmorphism Utilities (After Migration)
+
 - **File**: `app/globals.css`
 - **Actions**:
   - **Only after all components migrated**: Remove `.glass-panel`, `.glass-card` classes
@@ -430,6 +469,7 @@ box-shadow:
 - **Note**: This is a cleanup task. Keep glassmorphism utilities until all components are migrated.
 
 #### Task 9.3: Update Metadata & Favicon References
+
 - **File**: `app/layout.tsx`
 - **Actions**:
   - Remove profile image references from metadata icons
@@ -438,6 +478,7 @@ box-shadow:
 - **Verification**: No profile image in metadata
 
 #### Task 9.4: Performance Optimization
+
 - **Files**: All
 - **Actions**:
   - Optimize font loading (preload Playfair Display)
@@ -449,6 +490,7 @@ box-shadow:
 ### Phase 10: Testing & Validation
 
 #### Task 10.1: Visual Regression Testing
+
 - **Actions**:
   - Compare before/after screenshots of all pages
   - Verify design system consistency
@@ -456,6 +498,7 @@ box-shadow:
 - **Verification**: All pages match design system
 
 #### Task 10.2: Functionality Testing
+
 - **Actions**:
   - Test all navigation links
   - Test theme switching
@@ -465,6 +508,7 @@ box-shadow:
 - **Verification**: All functionality works as before
 
 #### Task 10.3: Accessibility Testing
+
 - **Actions**:
   - Verify color contrast ratios (WCAG AA)
   - Test keyboard navigation
@@ -474,6 +518,7 @@ box-shadow:
 - **Verification**: Site is accessible
 
 #### Task 10.4: Browser Compatibility
+
 - **Actions**:
   - Test in Chrome, Firefox, Safari, Edge
   - Verify CSS features (backdrop-filter, transforms, etc.)
@@ -483,6 +528,7 @@ box-shadow:
 ## Layout & Flow Compatibility Review
 
 ### Current Layout Structure
+
 - **Root Layout** (`app/layout.tsx`):
   - ThemeToggle (fixed top-right)
   - Main content area (`<main>`)
@@ -496,6 +542,7 @@ box-shadow:
   - Desktop: Navigation component (horizontal, but not currently used)
 
 ### Design Compatibility
+
 - **Notebook Binding**: Can be added to main container without breaking layout
 - **Vertical Tabs**: Optional enhancement - can be added as fixed right-side element
 - **Texture Overlay**: Applied to body/main container - compatible with existing structure
@@ -503,6 +550,7 @@ box-shadow:
 - **Profile Image Removal**: Layout will shift from 2-column to 1-column (centered) - compatible
 
 ### Flow Preservation
+
 - ✅ All routes remain unchanged
 - ✅ Component hierarchy preserved
 - ✅ Data flow unchanged (all data fetching remains server-side)
@@ -513,23 +561,27 @@ box-shadow:
 ## Technical Considerations
 
 ### Font Loading Strategy
+
 - Use Next.js `next/font/google` for Playfair Display
 - Preload critical fonts
 - Use `display: swap` for performance
 
 ### Texture Implementation
+
 - Option 1: SVG noise pattern (inline or data URI)
 - Option 2: CSS `background-image` with generated noise
 - Option 3: Canvas-generated noise (if needed for performance)
 - **Recommendation**: Start with SVG/CSS, optimize if needed
 
 ### Animation Performance
+
 - Use CSS transforms (GPU-accelerated)
 - Use `will-change` sparingly
 - Respect `prefers-reduced-motion`
 - Test on lower-end devices
 
 ### Theme System
+
 - Leverage existing `next-themes` setup
 - Update CSS variables for new palette
 - Ensure smooth theme transitions
@@ -537,9 +589,11 @@ box-shadow:
 ## Dependencies
 
 ### New Dependencies
+
 - None required (all fonts via Google Fonts, animations via CSS/GSAP)
 
 ### Existing Dependencies to Leverage
+
 - `next-themes`: Theme management
 - `gsap`: Advanced animations (if needed for page turn)
 - `lucide-react`: Icons (keep existing)
@@ -561,18 +615,22 @@ box-shadow:
 ## Risk Mitigation
 
 ### Risk: Texture Overlay Performance
+
 - **Mitigation**: Start with CSS-only solution, optimize if needed
 - **Fallback**: Remove texture if performance issues
 
 ### Risk: Complex Page Turn Animation
+
 - **Mitigation**: Start with simple fade, enhance if time permits
 - **Fallback**: Use Next.js default transitions
 
 ### Risk: Vertical Navigation on Mobile
+
 - **Mitigation**: Hide on mobile, use existing bottom nav
 - **Fallback**: Horizontal nav on all screens
 
 ### Risk: Font Loading Delay
+
 - **Mitigation**: Preload fonts, use `display: swap`
 - **Fallback**: System serif font as fallback
 

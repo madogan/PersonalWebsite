@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   // Production optimizations
   output: 'standalone',
   compress: true,
-  
+
   // Image configuration
   images: {
     unoptimized: false,
@@ -17,10 +17,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  
+
   // MDX configuration
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  
+
   // Build quality policy
   typescript: {
     ignoreBuildErrors: true,
@@ -35,4 +35,3 @@ const withMDX = createMDX({
 })
 
 export default withMDX(nextConfig)
-

@@ -26,7 +26,7 @@ export function BottomNavigation() {
 
     const handleScroll = () => {
       if (ticking) return
-      
+
       ticking = true
       requestAnimationFrame(() => {
         // Create a map of section ID to navItem index
@@ -89,11 +89,11 @@ export function BottomNavigation() {
     const updateIndicator = () => {
       const activeItem = itemRefs.current[activeIndex]
       const container = activeItem?.parentElement
-      
+
       if (activeItem && container) {
         const containerRect = container.getBoundingClientRect()
         const itemRect = activeItem.getBoundingClientRect()
-        
+
         setIndicatorStyle({
           left: itemRect.left - containerRect.left,
           width: itemRect.width,
@@ -108,9 +108,9 @@ export function BottomNavigation() {
       // Also update after a small delay to catch any layout shifts
       setTimeout(updateIndicator, 50)
     })
-    
+
     window.addEventListener('resize', updateIndicator)
-    
+
     return () => {
       window.removeEventListener('resize', updateIndicator)
     }
@@ -119,11 +119,11 @@ export function BottomNavigation() {
   if (pathname !== '/') return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 no-print no-pdf flex justify-center pb-4">
-      <div className="notebook-panel px-2 py-2 md:px-4 md:py-3 flex items-center gap-1 md:gap-2 relative rounded-lg w-full max-w-sm md:w-fit md:max-w-none mx-4 shadow-paper-lg paper-texture">
+    <nav className="no-print no-pdf fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-4">
+      <div className="notebook-panel paper-texture relative mx-4 flex w-full max-w-sm items-center gap-1 rounded-lg px-2 py-2 shadow-paper-lg md:w-fit md:max-w-none md:gap-2 md:px-4 md:py-3">
         {/* Sliding indicator */}
         <div
-          className="absolute top-2 bottom-2 bg-accent/20 rounded-lg transition-all duration-500 ease-out border border-accent/30"
+          className="absolute bottom-2 top-2 rounded-lg border border-accent/30 bg-accent/20 transition-all duration-500 ease-out"
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,
@@ -143,9 +143,14 @@ export function BottomNavigation() {
               href={item.href}
               onClick={(e) => {
                 e.preventDefault()
-                const element = document.getElementById(item.href.replace('#', ''))
+                const element = document.getElementById(
+                  item.href.replace('#', '')
+                )
                 if (element) {
-                  const offsetPosition = element.getBoundingClientRect().top + window.pageYOffset - 20
+                  const offsetPosition =
+                    element.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    20
 
                   window.scrollTo({
                     top: offsetPosition,
@@ -155,7 +160,7 @@ export function BottomNavigation() {
               }}
               className={cn(
                 'relative z-10 flex items-center justify-center gap-1.5 md:gap-2',
-                'p-2.5 md:px-4 md:py-2.5 rounded-lg transition-all duration-200',
+                'rounded-lg p-2.5 transition-all duration-200 md:px-4 md:py-2.5',
                 'flex-1 md:flex-none',
                 isActive
                   ? 'text-accent'
@@ -163,8 +168,13 @@ export function BottomNavigation() {
               )}
               aria-label={item.label}
             >
-              <Icon className={cn('h-5 w-5 md:h-5 md:w-5 transition-transform duration-200 flex-shrink-0', isActive && 'scale-110')} />
-              <span className="hidden md:inline text-xs md:text-sm font-medium whitespace-nowrap">
+              <Icon
+                className={cn(
+                  'h-5 w-5 flex-shrink-0 transition-transform duration-200 md:h-5 md:w-5',
+                  isActive && 'scale-110'
+                )}
+              />
+              <span className="hidden whitespace-nowrap text-xs font-medium md:inline md:text-sm">
                 {item.label}
               </span>
             </Link>
@@ -174,4 +184,3 @@ export function BottomNavigation() {
     </nav>
   )
 }
-

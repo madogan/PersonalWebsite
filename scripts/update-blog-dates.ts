@@ -34,8 +34,9 @@ const posts: BlogPostFile[] = fileNames
     const fullPath = path.join(postsDirectory, fileName)
     const stats = fs.statSync(fullPath)
     // Use birthtime (creation time) if available, otherwise use mtime (modification time)
-    const createdTime = stats.birthtime.getTime() > 0 ? stats.birthtime : stats.mtime
-    
+    const createdTime =
+      stats.birthtime.getTime() > 0 ? stats.birthtime : stats.mtime
+
     return {
       fileName,
       fullPath,
@@ -53,24 +54,26 @@ console.log('\nUpdating dates starting from 2026-01-14 going backwards...\n')
 posts.forEach((post, index) => {
   const targetDate = subtractDays(startDate, index)
   const newDate = formatDate(targetDate)
-  
+
   // Read file
   const fileContents = fs.readFileSync(post.fullPath, 'utf8')
   const parsed = matter(fileContents)
-  
+
   // Get old date
   const oldDate = (parsed.data.date as string) || 'N/A'
-  
+
   // Update date
   parsed.data.date = newDate
-  
+
   // Write back
   const updatedContent = matter.stringify(parsed.content, parsed.data)
   fs.writeFileSync(post.fullPath, updatedContent, 'utf8')
-  
+
   console.log(`${index + 1}. ${post.fileName}`)
   console.log(`   Old date: ${oldDate} → New date: ${newDate}`)
 })
 
 console.log(`\n✅ Successfully updated ${posts.length} blog posts!`)
-console.log(`\nDate range: ${formatDate(subtractDays(startDate, posts.length - 1))} to ${formatDate(startDate)}`)
+console.log(
+  `\nDate range: ${formatDate(subtractDays(startDate, posts.length - 1))} to ${formatDate(startDate)}`
+)

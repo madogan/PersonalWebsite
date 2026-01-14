@@ -84,7 +84,7 @@
       "startDate": "Mar 2021",
       "endDate": "Oct 2021",
       "description": [
-        "Served as one of three Site Reliability Engineers responsible for the availability and reliability of a confidential, mission-critical on-prem system operating in a high-compliance environment.", 
+        "Served as one of three Site Reliability Engineers responsible for the availability and reliability of a confidential, mission-critical on-prem system operating in a high-compliance environment.",
         "Managed and operated infrastructure built on OpenStack, Rancher / Kubernetes, Ceph, PostgreSQL, HAProxy, Zabbix, Grafana, and the ELK stack.",
         "Performed root cause analysis (RCA) across application, infrastructure, network, and storage layers to resolve production incidents and ensure continuous system availability.",
         "Designed and implemented monitoring and alerting strategies to improve system visibility and reduce incident detection and response times.",

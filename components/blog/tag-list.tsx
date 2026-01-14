@@ -16,7 +16,7 @@ export function TagList({ tags, className }: TagListProps) {
         <span
           key={tag}
           className={cn(
-            'px-2 py-1 text-xs font-medium rounded-md',
+            'rounded-md px-2 py-1 text-xs font-medium',
             'bg-accent/10 text-accent',
             'border border-accent/20',
             'transition-colors duration-200'
@@ -28,4 +28,3 @@ export function TagList({ tags, className }: TagListProps) {
     </div>
   )
 }
-

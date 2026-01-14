@@ -1,8 +1,8 @@
 If task is not provided pick a new task from `TODO.md` and follow these rules:
 
 1. Eligible tasks:
-   * Not labeled `@workingon`
-   * Not marked as completed
+   - Not labeled `@workingon`
+   - Not marked as completed
 2. From the eligible tasks, choose the smallest and simplest task.
 
 For the task:

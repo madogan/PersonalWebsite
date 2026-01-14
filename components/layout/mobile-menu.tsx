@@ -19,10 +19,10 @@ export function MobileMenu() {
       <button
         onClick={toggleMenu}
         className={cn(
-          'p-2 rounded-lg transition-all duration-200',
-          'hover:bg-foreground/10 hover:scale-[0.98] active:scale-[0.96]',
+          'rounded-lg p-2 transition-all duration-200',
+          'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-          'text-foreground border border-transparent hover:border-notebook-divider'
+          'border border-transparent text-foreground hover:border-notebook-divider'
         )}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -33,35 +33,37 @@ export function MobileMenu() {
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40"
+            className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm"
             onClick={closeMenu}
             aria-hidden="true"
           />
           <div
             className={cn(
-              'fixed top-0 right-0 h-full w-64 z-50',
+              'fixed right-0 top-0 z-50 h-full w-64',
               'notebook-panel border-l border-notebook-divider p-6',
               'animate-slide-in-right',
-              'shadow-paper-xl paper-texture'
+              'paper-texture shadow-paper-xl'
             )}
           >
-            <div className="flex flex-col gap-4 mt-12">
+            <div className="mt-12 flex flex-col gap-4">
               {navItems.map((item) => {
-                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-                
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== '/' && pathname.startsWith(item.href))
+
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={closeMenu}
                     className={cn(
-                      'px-4 py-3 rounded-lg text-base font-medium transition-all duration-200',
-                      'hover:bg-foreground/10 hover:scale-[0.98] active:scale-[0.96]',
+                      'rounded-lg px-4 py-3 text-base font-medium transition-all duration-200',
+                      'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
                       'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                       'border-l-2 border-transparent',
                       isActive
-                        ? 'text-accent bg-accent/10 border-l-accent font-semibold'
-                        : 'text-foreground/80 hover:text-foreground hover:border-l-notebook-divider'
+                        ? 'border-l-accent bg-accent/10 font-semibold text-accent'
+                        : 'text-foreground/80 hover:border-l-notebook-divider hover:text-foreground'
                     )}
                   >
                     {item.label}
@@ -75,4 +77,3 @@ export function MobileMenu() {
     </div>
   )
 }
-

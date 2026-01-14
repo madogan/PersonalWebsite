@@ -68,7 +68,7 @@
       "startDate": "Mar 2021",
       "endDate": "Oct 2021",
       "description": [
-        "Served as one of three Site Reliability Engineers responsible for the availability and reliability of a confidential, mission-critical on-prem system operating in a high-compliance environment.", 
+        "Served as one of three Site Reliability Engineers responsible for the availability and reliability of a confidential, mission-critical on-prem system operating in a high-compliance environment.",
         "Managed and operated infrastructure built on OpenStack, Rancher / Kubernetes, Ceph, PostgreSQL, HAProxy, Zabbix, Grafana, and the ELK stack.",
         "Performed root cause analysis (RCA) across application, infrastructure, network, and storage layers to resolve production incidents and ensure continuous system availability.",
         "Designed and implemented monitoring and alerting strategies to improve system visibility and reduce incident detection and response times.",
@@ -147,7 +147,11 @@
       "expirationDate": "2024-12",
       "credentialId": "23833559",
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Site Reliability Engineering"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Site Reliability Engineering"
+      ]
     },
     {
       "name": "End-to-End Visibility",
@@ -156,7 +160,12 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Network Performance", "Application Performance"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Network Performance",
+        "Application Performance"
+      ]
     },
     {
       "name": "RCPE Associate: AppResponse",
@@ -165,7 +174,12 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Application Performance", "APM"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Application Performance",
+        "APM"
+      ]
     },
     {
       "name": "RCPE Associate: Introduction to NPM",
@@ -174,7 +188,12 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Network Performance", "NPM"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Network Performance",
+        "NPM"
+      ]
     },
     {
       "name": "RCPE Certified Professional",
@@ -183,7 +202,12 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Network Performance", "Application Performance"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Network Performance",
+        "Application Performance"
+      ]
     },
     {
       "name": "RCPE Foundation: Performance Foundations",
@@ -192,7 +216,12 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Performance Analysis", "System Monitoring"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Performance Analysis",
+        "System Monitoring"
+      ]
     },
     {
       "name": "RCPE Professional: AppResponse 11",
@@ -201,7 +230,13 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Application Performance", "APM", "AppResponse"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Application Performance",
+        "APM",
+        "AppResponse"
+      ]
     },
     {
       "name": "RCPE Professional: Packet Analyzer Plus (PA+)",
@@ -210,7 +245,13 @@
       "expirationDate": null,
       "credentialId": null,
       "credentialUrl": null,
-      "skills": ["Troubleshooting", "Observability", "Packet Analysis", "Network Analysis", "Deep Packet Inspection"]
+      "skills": [
+        "Troubleshooting",
+        "Observability",
+        "Packet Analysis",
+        "Network Analysis",
+        "Deep Packet Inspection"
+      ]
     }
   ],
   "aiMlopsExperience": {

@@ -82,80 +82,81 @@ export default async function BlogPostPage({ params }: Props) {
     <>
       <JsonLd slug={slug} />
       <BackButton />
-      <article 
+      <article
         lang={post.locale === 'tr' ? 'tr' : 'en'}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 md:pt-24 pb-12 md:pb-20"
+        className="container mx-auto px-4 pb-12 pt-20 sm:px-6 md:pb-20 md:pt-24 lg:px-8"
       >
-        <div className="max-w-4xl mx-auto">
-        {/* Post Header */}
-        <header className="mb-8 md:mb-12">
-          <TagList tags={post.tags} className="mb-4" />
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-serif">
-            {post.title}
-          </h1>
+        <div className="mx-auto max-w-4xl">
+          {/* Post Header */}
+          <header className="mb-8 md:mb-12">
+            <TagList tags={post.tags} className="mb-4" />
 
-          <p className="text-xl md:text-2xl text-foreground/80 mb-6 font-sans">
-            {post.description}
-          </p>
+            <h1 className="mb-6 font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+              {post.title}
+            </h1>
 
-          {/* Metadata */}
-          <div className="flex flex-wrap items-center gap-6 text-sm text-foreground/60 mb-6">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString(
-                  post.locale === 'tr' ? 'tr-TR' : 'en-US',
-                  {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  }
-                )}
-              </time>
+            <p className="mb-6 font-sans text-xl text-foreground/80 md:text-2xl">
+              {post.description}
+            </p>
+
+            {/* Metadata */}
+            <div className="mb-6 flex flex-wrap items-center gap-6 text-sm text-foreground/60">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString(
+                    post.locale === 'tr' ? 'tr-TR' : 'en-US',
+                    {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    }
+                  )}
+                </time>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5" />
+                <span>
+                  {post.readingTime} {readingTimeText[post.locale]}
+                </span>
+              </div>
+              <ShareButton url={url} title={post.title} />
+              <LanguageSwitcher
+                currentLocale={post.locale}
+                alternateLocale={post.alternateLocale}
+                alternateSlug={post.alternateSlug}
+                preferredLocale={preferredLocale}
+              />
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
-              <span>{post.readingTime} {readingTimeText[post.locale]}</span>
-            </div>
-            <ShareButton url={url} title={post.title} />
-            <LanguageSwitcher
-              currentLocale={post.locale}
-              alternateLocale={post.alternateLocale}
-              alternateSlug={post.alternateSlug}
-              preferredLocale={preferredLocale}
-            />
+
+            {/* Divider */}
+            <hr className="pencil-divider" />
+          </header>
+
+          {/* Post Content */}
+          <div
+            className={cn(
+              'paper-texture prose prose-lg max-w-none',
+              'text-justify md:text-left',
+              'prose-headings:text-left prose-headings:font-serif prose-headings:text-foreground',
+              'prose-p:text-justify prose-p:font-sans prose-p:text-foreground/90 md:prose-p:text-left',
+              'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
+              'prose-strong:text-foreground',
+              'prose-code:rounded prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-foreground',
+              'prose-pre:border prose-pre:border-notebook-divider prose-pre:bg-foreground/5',
+              'prose-blockquote:border-accent prose-blockquote:bg-accent/5',
+              'prose-img:rounded-lg',
+              'prose-hr:pencil-divider prose-hr:border-notebook-divider',
+              'dark:prose-invert'
+            )}
+          >
+            <MDXContent content={post.content} />
           </div>
 
-          {/* Divider */}
-          <hr className="pencil-divider" />
-        </header>
-
-        {/* Post Content */}
-        <div
-          className={cn(
-            'prose prose-lg max-w-none paper-texture',
-            'text-justify md:text-left',
-            'prose-headings:text-foreground prose-headings:text-left prose-headings:font-serif',
-            'prose-p:text-foreground/90 prose-p:text-justify md:prose-p:text-left prose-p:font-sans',
-            'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
-            'prose-strong:text-foreground',
-            'prose-code:text-foreground prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono',
-            'prose-pre:bg-foreground/5 prose-pre:border prose-pre:border-notebook-divider',
-            'prose-blockquote:border-accent prose-blockquote:bg-accent/5',
-            'prose-img:rounded-lg',
-            'prose-hr:border-notebook-divider prose-hr:pencil-divider',
-            'dark:prose-invert'
-          )}
-        >
-          <MDXContent content={post.content} />
-        </div>
-
-        {/* Related Posts */}
-        <RelatedPosts currentSlug={slug} />
+          {/* Related Posts */}
+          <RelatedPosts currentSlug={slug} />
         </div>
       </article>
     </>
   )
 }
-

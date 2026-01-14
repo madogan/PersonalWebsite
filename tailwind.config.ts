@@ -25,7 +25,8 @@ const config: Config = {
         'cream-paper': '#F9F7F2',
         'obsidian-leather': '#141414',
         'fountain-ink': '#0F172A',
-        'grey-metallic': '#6B7280', /* Slate grey metallic - replaces deep-gold */
+        'grey-metallic':
+          '#6B7280' /* Slate grey metallic - replaces deep-gold */,
         'notebook-divider': 'rgb(var(--notebook-divider) / <alpha-value>)',
         'notebook-binding': 'rgb(var(--notebook-binding) / <alpha-value>)',
       },
@@ -47,9 +48,12 @@ const config: Config = {
         xl: 'var(--shadow-xl)',
         // Layered paper shadows for notebook aesthetic
         'paper-sm': '0 1px 3px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.01)',
-        'paper-md': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01)',
-        'paper-lg': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01)',
-        'paper-xl': '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 30px 40px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-md':
+          '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-lg':
+          '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01)',
+        'paper-xl':
+          '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 30px 40px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.01)',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -95,11 +99,11 @@ const config: Config = {
         'slide-up': 'slideUp 0.5s ease-out',
         'slide-down': 'slideDown 0.5s ease-out',
         'slide-in-right': 'slideInRight 0.3s ease-out',
-        'glitch': 'glitch 3s infinite',
+        glitch: 'glitch 3s infinite',
         'glitch-scan': 'glitchScan 8s linear infinite',
         'scan-line': 'scanLine 2s linear infinite',
         'screen-open': 'screenOpen 1.5s ease-out forwards',
-        'blink': 'blink 2s infinite',
+        blink: 'blink 2s infinite',
         'watercolor-paint': 'watercolorPaint 2.5s ease-in-out forwards',
         'liquid-float': 'liquidFloat 8s ease-in-out infinite',
       },
@@ -121,76 +125,76 @@ const config: Config = {
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
         glitch: {
-          '0%, 100%': { 
+          '0%, 100%': {
             transform: 'translate(0)',
             filter: 'hue-rotate(0deg)',
           },
-          '20%': { 
+          '20%': {
             transform: 'translate(-2px, 2px)',
             filter: 'hue-rotate(90deg)',
           },
-          '40%': { 
+          '40%': {
             transform: 'translate(-2px, -2px)',
             filter: 'hue-rotate(180deg)',
           },
-          '60%': { 
+          '60%': {
             transform: 'translate(2px, 2px)',
             filter: 'hue-rotate(270deg)',
           },
-          '80%': { 
+          '80%': {
             transform: 'translate(2px, -2px)',
             filter: 'hue-rotate(360deg)',
           },
         },
         glitchScan: {
-          '0%': { 
+          '0%': {
             transform: 'translateY(0)',
             opacity: '0.05',
           },
-          '50%': { 
+          '50%': {
             transform: 'translateY(50%)',
             opacity: '0.15',
           },
-          '100%': { 
+          '100%': {
             transform: 'translateY(100%)',
             opacity: '0.05',
           },
         },
         scanLine: {
-          '0%': { 
+          '0%': {
             transform: 'translateY(-100%)',
             opacity: '0.5',
           },
-          '50%': { 
+          '50%': {
             opacity: '1',
           },
-          '100%': { 
+          '100%': {
             transform: 'translateY(100%)',
             opacity: '0.5',
           },
         },
         screenOpen: {
-          '0%': { 
+          '0%': {
             opacity: '0',
             transform: 'scale(0.8)',
             filter: 'blur(20px) brightness(0)',
           },
-          '50%': { 
+          '50%': {
             opacity: '0.5',
             transform: 'scale(0.95)',
             filter: 'blur(10px) brightness(0.5)',
           },
-          '100%': { 
+          '100%': {
             opacity: '1',
             transform: 'scale(1)',
             filter: 'blur(0px) brightness(1)',
           },
         },
         blink: {
-          '0%, 100%': { 
+          '0%, 100%': {
             opacity: '1',
           },
-          '50%': { 
+          '50%': {
             opacity: '0.3',
           },
         },
@@ -238,4 +242,3 @@ const config: Config = {
   plugins: [require('@tailwindcss/typography')],
 }
 export default config
-

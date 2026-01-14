@@ -44,9 +44,7 @@ export const metadata: Metadata = {
       { url: '/favicon.ico', sizes: '32x32' },
       { url: '/icon.png', sizes: '192x192' },
     ],
-    apple: [
-      { url: '/icon.png', sizes: '180x180' },
-    ],
+    apple: [{ url: '/icon.png', sizes: '180x180' }],
     shortcut: '/favicon.ico',
   },
   openGraph: {
@@ -70,13 +68,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} font-sans antialiased paper-texture`}>
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} paper-texture font-sans antialiased`}
+      >
         <ThemeProvider>
-          <div className="flex min-h-screen flex-col relative">
+          <div className="relative flex min-h-screen flex-col">
             {/* Notebook Binding - Left Edge */}
             <NotebookBinding />
             {/* Theme Toggle - Top Right */}
-            <div className="fixed top-4 right-4 z-50 no-print">
+            <div className="no-print fixed right-4 top-4 z-50">
               <ThemeToggle />
             </div>
             <main className="flex-1">
@@ -90,4 +90,3 @@ export default function RootLayout({
     </html>
   )
 }
-

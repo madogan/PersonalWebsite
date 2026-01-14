@@ -11,7 +11,7 @@ export function Header() {
         'sticky top-0 z-50 w-full',
         'notebook-panel border-b border-notebook-divider',
         'bg-background/95 backdrop-blur-sm',
-        'transition-all duration-300 paper-texture'
+        'paper-texture transition-all duration-300'
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,7 +23,7 @@ export function Header() {
               'text-xl font-bold tracking-tight',
               'text-foreground hover:text-accent',
               'transition-colors duration-200',
-              'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md'
+              'rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2'
             )}
           >
             Personal Website
@@ -42,4 +42,3 @@ export function Header() {
     </header>
   )
 }
-

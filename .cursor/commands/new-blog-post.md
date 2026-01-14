@@ -16,11 +16,11 @@ When the user requests to add a new blog post, follow these instructions to ensu
 
 ```yaml
 ---
-title: "Blog Post Title"           # Required: Post title
-description: "Post description"     # Required: SEO description (150-160 chars recommended)
-date: "YYYY-MM-DD"                  # Required: Publication date (ISO format)
-tags: ["tag1", "tag2", "tag3"]     # Required: Array of tags (at least 1 tag)
-locale: "en"                        # Required: "en" or "tr" (defaults to "en" if omitted)
+title: 'Blog Post Title' # Required: Post title
+description: 'Post description' # Required: SEO description (150-160 chars recommended)
+date: 'YYYY-MM-DD' # Required: Publication date (ISO format)
+tags: ['tag1', 'tag2', 'tag3'] # Required: Array of tags (at least 1 tag)
+locale: 'en' # Required: "en" or "tr" (defaults to "en" if omitted)
 ---
 ```
 
@@ -28,8 +28,8 @@ locale: "en"                        # Required: "en" or "tr" (defaults to "en" i
 
 ```yaml
 ---
-alternateLocale: "tr"               # Optional: Alternate language ("en" or "tr")
-alternateSlug: "turkish-post-slug"  # Optional: Slug of alternate language post
+alternateLocale: 'tr' # Optional: Alternate language ("en" or "tr")
+alternateSlug: 'turkish-post-slug' # Optional: Slug of alternate language post
 ---
 ```
 
@@ -53,15 +53,16 @@ alternateSlug: "turkish-post-slug"  # Optional: Slug of alternate language post
 
 ```yaml
 ---
-title: "Post Title"
-description: "Post description for SEO"
-date: "2026-12-01"
-tags: ["AI", "MLOps", "Production"]
-locale: "en"
+title: 'Post Title'
+description: 'Post description for SEO'
+date: '2026-12-01'
+tags: ['AI', 'MLOps', 'Production']
+locale: 'en'
 ---
 ```
 
 **Characteristics:**
+
 - No language switcher will appear
 - Default locale is "en" if omitted
 - Most common post type
@@ -70,47 +71,51 @@ locale: "en"
 
 ```yaml
 ---
-title: "Post Başlığı"
-description: "Post açıklaması"
-date: "2026-12-01"
-tags: ["AI", "MLOps", "Üretim"]
-locale: "tr"
+title: 'Post Başlığı'
+description: 'Post açıklaması'
+date: '2026-12-01'
+tags: ['AI', 'MLOps', 'Üretim']
+locale: 'tr'
 ---
 ```
 
 **Characteristics:**
+
 - No language switcher will appear
 - Must explicitly set `locale: "tr"`
 
 ### 3. Bilingual Post (Both Languages)
 
 **English Version:**
+
 ```yaml
 ---
-title: "Post Title"
-description: "Post description"
-date: "2026-12-01"
-tags: ["AI", "MLOps"]
-locale: "en"
-alternateLocale: "tr"
-alternateSlug: "turkish-post-slug"
+title: 'Post Title'
+description: 'Post description'
+date: '2026-12-01'
+tags: ['AI', 'MLOps']
+locale: 'en'
+alternateLocale: 'tr'
+alternateSlug: 'turkish-post-slug'
 ---
 ```
 
 **Turkish Version:**
+
 ```yaml
 ---
-title: "Post Başlığı"
-description: "Post açıklaması"
-date: "2026-12-01"
-tags: ["AI", "MLOps"]
-locale: "tr"
-alternateLocale: "en"
-alternateSlug: "english-post-slug"
+title: 'Post Başlığı'
+description: 'Post açıklaması'
+date: '2026-12-01'
+tags: ['AI', 'MLOps']
+locale: 'tr'
+alternateLocale: 'en'
+alternateSlug: 'english-post-slug'
 ---
 ```
 
 **Important:** Both posts must link to each other:
+
 - English post references Turkish post via `alternateSlug`
 - Turkish post references English post via `alternateSlug`
 - Language switcher appears on both posts
@@ -123,11 +128,11 @@ After the frontmatter, write content using standard Markdown:
 
 ```markdown
 ---
-title: "My Blog Post"
-description: "A great blog post"
-date: "2026-12-01"
-tags: ["Web", "Development"]
-locale: "en"
+title: 'My Blog Post'
+description: 'A great blog post'
+date: '2026-12-01'
+tags: ['Web', 'Development']
+locale: 'en'
 ---
 
 # Introduction
@@ -136,7 +141,7 @@ Your blog post content here using Markdown.
 
 ## Section 1
 
-Content with **bold**, *italic*, and [links](https://example.com).
+Content with **bold**, _italic_, and [links](https://example.com).
 
 ### Subsection
 
@@ -168,23 +173,27 @@ Wrap up your thoughts.
 ## Best Practices
 
 ### 1. Title Guidelines
+
 - Keep titles concise (50-60 characters ideal)
 - Use title case
 - Make them descriptive and SEO-friendly
 - Avoid clickbait
 
 ### 2. Description Guidelines
+
 - 150-160 characters for optimal SEO
 - Summarize the post's main value proposition
 - Include relevant keywords naturally
 - Write in complete sentences
 
 ### 3. Date Guidelines
+
 - Use ISO format: `YYYY-MM-DD`
 - Use the actual publication date
 - Posts are sorted by date (newest first)
 
 ### 4. Tags Guidelines
+
 - Use 3-7 tags per post
 - Capitalize tag names (e.g., "AI", "MLOps", "SRE")
 - Use existing tags when possible for consistency
@@ -192,12 +201,14 @@ Wrap up your thoughts.
 - Common tags: `["AI", "MLOps", "SRE", "Production", "Reliability", "Systems Engineering"]`
 
 ### 5. Slug Guidelines
+
 - Create slug from title: lowercase, hyphens for spaces
 - Example: "Why AI Systems Fail" → `why-ai-systems-fail`
 - Keep slugs concise but descriptive
 - Use consistent naming patterns
 
 ### 6. Locale Guidelines
+
 - Always include `locale` field explicitly
 - For bilingual posts, ensure both versions link to each other
 - Use same tags in both languages (or translate appropriately)
@@ -236,11 +247,11 @@ When adding a new blog post:
 
 ```markdown
 ---
-title: "Understanding Next.js 15 Server Components"
-description: "A deep dive into Next.js 15 Server Components, their benefits, and best practices for building performant React applications."
-date: "2026-01-15"
-tags: ["Next.js", "React", "Web Development", "Performance"]
-locale: "en"
+title: 'Understanding Next.js 15 Server Components'
+description: 'A deep dive into Next.js 15 Server Components, their benefits, and best practices for building performant React applications.'
+date: '2026-01-15'
+tags: ['Next.js', 'React', 'Web Development', 'Performance']
+locale: 'en'
 ---
 
 # Introduction
@@ -271,28 +282,30 @@ Server Components represent a major shift in React development...
 ## Example: Bilingual Post Pair
 
 **English Version (`understanding-nextjs-server-components.mdx`):**
+
 ```yaml
 ---
-title: "Understanding Next.js 15 Server Components"
-description: "A deep dive into Next.js 15 Server Components..."
-date: "2026-01-15"
-tags: ["Next.js", "React", "Web Development"]
-locale: "en"
-alternateLocale: "tr"
-alternateSlug: "nextjs-15-server-componentleri-anlamak"
+title: 'Understanding Next.js 15 Server Components'
+description: 'A deep dive into Next.js 15 Server Components...'
+date: '2026-01-15'
+tags: ['Next.js', 'React', 'Web Development']
+locale: 'en'
+alternateLocale: 'tr'
+alternateSlug: 'nextjs-15-server-componentleri-anlamak'
 ---
 ```
 
 **Turkish Version (`nextjs-15-server-componentleri-anlamak.mdx`):**
+
 ```yaml
 ---
-title: "Next.js 15 Server Componentlerini Anlamak"
-description: "Next.js 15 Server Componentlerine derinlemesine bakış..."
-date: "2026-01-15"
-tags: ["Next.js", "React", "Web Geliştirme"]
-locale: "tr"
-alternateLocale: "en"
-alternateSlug: "understanding-nextjs-server-components"
+title: 'Next.js 15 Server Componentlerini Anlamak'
+description: 'Next.js 15 Server Componentlerine derinlemesine bakış...'
+date: '2026-01-15'
+tags: ['Next.js', 'React', 'Web Geliştirme']
+locale: 'tr'
+alternateLocale: 'en'
+alternateSlug: 'understanding-nextjs-server-components'
 ---
 ```
 

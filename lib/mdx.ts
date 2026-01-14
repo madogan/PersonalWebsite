@@ -42,7 +42,10 @@ export function getAllPosts(): BlogPost[] {
         readingTime: Math.ceil(readingTimeResult.minutes),
         content,
         locale: (data.locale === 'tr' ? 'tr' : 'en') as 'en' | 'tr', // Default to 'en' for backward compatibility
-        alternateLocale: data.alternateLocale === 'tr' || data.alternateLocale === 'en' ? data.alternateLocale : undefined,
+        alternateLocale:
+          data.alternateLocale === 'tr' || data.alternateLocale === 'en'
+            ? data.alternateLocale
+            : undefined,
         alternateSlug: data.alternateSlug || undefined,
       } as BlogPost
     })
@@ -77,7 +80,10 @@ export function getPostBySlug(slug: string): BlogPost | null {
       readingTime: Math.ceil(readingTimeResult.minutes),
       content,
       locale: (data.locale === 'tr' ? 'tr' : 'en') as 'en' | 'tr', // Default to 'en' for backward compatibility
-      alternateLocale: data.alternateLocale === 'tr' || data.alternateLocale === 'en' ? data.alternateLocale : undefined,
+      alternateLocale:
+        data.alternateLocale === 'tr' || data.alternateLocale === 'en'
+          ? data.alternateLocale
+          : undefined,
       alternateSlug: data.alternateSlug || undefined,
     } as BlogPost
   } catch (error) {
@@ -88,11 +94,11 @@ export function getPostBySlug(slug: string): BlogPost | null {
 export function getAllTags(): string[] {
   const posts = getAllPosts()
   const tagsSet = new Set<string>()
-  
+
   posts.forEach((post) => {
     post.tags.forEach((tag) => tagsSet.add(tag))
   })
-  
+
   return Array.from(tagsSet).sort()
 }
 
@@ -114,12 +120,12 @@ export function prioritizePostsByLocale(
   // Key: slug or alternateSlug, Value: array of posts in the group
   const postMap = new Map<string, BlogPost>()
   const groups = new Map<string, BlogPost[]>()
-  
+
   // First pass: index all posts by slug
   posts.forEach((post) => {
     postMap.set(post.slug, post)
   })
-  
+
   // Second pass: group posts that are linked via alternateSlug
   posts.forEach((post) => {
     if (post.alternateSlug && postMap.has(post.alternateSlug)) {
@@ -138,7 +144,7 @@ export function prioritizePostsByLocale(
       }
     }
   })
-  
+
   // Create a set of posts that are in groups
   const groupedPostSlugs = new Set<string>()
   groups.forEach((group) => {
@@ -146,11 +152,11 @@ export function prioritizePostsByLocale(
       groupedPostSlugs.add(post.slug)
     })
   })
-  
+
   // Separate grouped and ungrouped posts
   const groupedPosts: BlogPost[] = []
   const ungroupedPosts: BlogPost[] = []
-  
+
   posts.forEach((post) => {
     if (groupedPostSlugs.has(post.slug)) {
       groupedPosts.push(post)
@@ -158,7 +164,7 @@ export function prioritizePostsByLocale(
       ungroupedPosts.push(post)
     }
   })
-  
+
   // Process groups: prioritize preferred locale
   const prioritizedGroups: BlogPost[] = []
   groups.forEach((group) => {
@@ -180,20 +186,20 @@ export function prioritizePostsByLocale(
       }
       return 0
     })
-    
+
     // Add the first post (preferred locale if available) to prioritized list
     prioritizedGroups.push(sortedGroup[0])
   })
-  
+
   // Combine prioritized groups with ungrouped posts
   const allPrioritized = [...prioritizedGroups, ...ungroupedPosts]
-  
+
   // Final sort: maintain date sorting (newest first) as secondary sort
   return allPrioritized.sort((a, b) => {
     // First, prioritize preferred locale (but only if not already grouped)
     const aInGroup = groupedPostSlugs.has(a.slug)
     const bInGroup = groupedPostSlugs.has(b.slug)
-    
+
     // If one is in a group and already prioritized, keep it
     // Otherwise, prefer posts matching preferred locale
     if (!aInGroup && !bInGroup) {
@@ -204,7 +210,7 @@ export function prioritizePostsByLocale(
         return 1
       }
     }
-    
+
     // Sort by date (newest first)
     if (a.date < b.date) {
       return 1

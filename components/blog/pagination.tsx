@@ -9,7 +9,11 @@ type PaginationProps = {
   onPageChange: (page: number) => void
 }
 
-export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
   if (totalPages <= 1) return null
 
   const getPageNumbers = () => {
@@ -76,7 +80,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
 
   return (
     <nav
-      className="flex items-center justify-center gap-2 mt-12"
+      className="mt-12 flex items-center justify-center gap-2"
       aria-label="Blog pagination"
     >
       {/* Previous Button */}
@@ -84,11 +88,11 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={handlePrevious}
         disabled={currentPage === 1}
         className={cn(
-          'notebook-panel px-4 py-2 rounded-lg',
+          'notebook-panel rounded-lg px-4 py-2',
           'transition-all duration-200',
           'flex items-center gap-2',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          'hover:scale-[0.98] hover:border-accent/30 hover:bg-accent/10 active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
           'shadow-paper-sm hover:shadow-paper-md',
           currentPage === 1
@@ -123,14 +127,14 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
               key={pageNum}
               onClick={() => handlePageClick(pageNum)}
               className={cn(
-                'notebook-panel px-4 py-2 rounded-lg min-w-[2.5rem]',
+                'notebook-panel min-w-[2.5rem] rounded-lg px-4 py-2',
                 'transition-all duration-200',
                 'font-medium',
-                'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
+                'hover:scale-[0.98] hover:border-accent/30 hover:bg-accent/10 active:scale-[0.96]',
                 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                 'shadow-paper-sm hover:shadow-paper-md',
                 isActive
-                  ? 'bg-accent/20 border-accent/40 text-accent shadow-paper-md'
+                  ? 'border-accent/40 bg-accent/20 text-accent shadow-paper-md'
                   : 'text-foreground hover:text-accent'
               )}
               aria-label={`Go to page ${pageNum}`}
@@ -147,11 +151,11 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         onClick={handleNext}
         disabled={currentPage === totalPages}
         className={cn(
-          'notebook-panel px-4 py-2 rounded-lg',
+          'notebook-panel rounded-lg px-4 py-2',
           'transition-all duration-200',
           'flex items-center gap-2',
-          'disabled:opacity-50 disabled:cursor-not-allowed',
-          'hover:bg-accent/10 hover:border-accent/30 hover:scale-[0.98] active:scale-[0.96]',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          'hover:scale-[0.98] hover:border-accent/30 hover:bg-accent/10 active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
           'shadow-paper-sm hover:shadow-paper-md',
           currentPage === totalPages
@@ -166,4 +170,3 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
     </nav>
   )
 }
-

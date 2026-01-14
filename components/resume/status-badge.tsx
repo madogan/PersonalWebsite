@@ -6,7 +6,10 @@ type StatusBadgeProps = {
   variant?: 'available' | 'busy' | 'away'
 }
 
-export function StatusBadge({ text = 'Open to work', variant = 'available' }: StatusBadgeProps) {
+export function StatusBadge({
+  text = 'Open to work',
+  variant = 'available',
+}: StatusBadgeProps) {
   const colorClasses = {
     available: 'text-accent',
     busy: 'text-red-500',
@@ -20,4 +23,3 @@ export function StatusBadge({ text = 'Open to work', variant = 'available' }: St
     </div>
   )
 }
-

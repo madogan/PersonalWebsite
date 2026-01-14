@@ -24,7 +24,8 @@ export function GlassyButton({
   className,
   animated = true,
 }: GlassyButtonProps) {
-  const IconComponent = typeof icon === 'boolean' ? (icon ? ArrowRight : undefined) : icon
+  const IconComponent =
+    typeof icon === 'boolean' ? (icon ? ArrowRight : undefined) : icon
 
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm',
@@ -39,8 +40,10 @@ export function GlassyButton({
   }
 
   const variantClasses = {
-    default: 'bg-background border-notebook-divider text-foreground hover:bg-background/95 hover:border-accent/40',
-    subtle: 'bg-accent/10 border-accent/20 text-accent hover:bg-accent/20 hover:border-accent/40',
+    default:
+      'bg-background border-notebook-divider text-foreground hover:bg-background/95 hover:border-accent/40',
+    subtle:
+      'bg-accent/10 border-accent/20 text-accent hover:bg-accent/20 hover:border-accent/40',
   }
 
   const baseClasses = cn(
@@ -60,17 +63,19 @@ export function GlassyButton({
   const content = (
     <>
       {/* Paper texture overlay */}
-      <div className="absolute inset-0 paper-texture pointer-events-none opacity-30" />
+      <div className="paper-texture pointer-events-none absolute inset-0 opacity-30" />
 
       {/* Content */}
       <span className="relative z-10 flex items-center gap-2">
         {children}
         {IconComponent && (
-          <IconComponent className={cn(
-            iconSizes[size],
-            'transition-transform duration-200',
-            'group-hover:translate-x-1'
-          )} />
+          <IconComponent
+            className={cn(
+              iconSizes[size],
+              'transition-transform duration-200',
+              'group-hover:translate-x-1'
+            )}
+          />
         )}
       </span>
     </>
@@ -85,9 +90,12 @@ export function GlassyButton({
   }
 
   return (
-    <button onClick={onClick} className={cn(baseClasses, 'group')} type="button">
+    <button
+      onClick={onClick}
+      className={cn(baseClasses, 'group')}
+      type="button"
+    >
       {content}
     </button>
   )
 }
-

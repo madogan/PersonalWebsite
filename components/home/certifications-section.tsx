@@ -38,17 +38,24 @@ export function CertificationsSection() {
   }
 
   return (
-    <section id="certifications" className="py-8 md:py-12 lg:py-16 pb-12 md:pb-16 no-pdf">
+    <section
+      id="certifications"
+      className="no-pdf py-8 pb-12 md:py-12 md:pb-16 lg:py-16"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="mx-auto max-w-6xl">
           {/* Section Header */}
           <div className="mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Certifications & Badges</h2>
-            <p className="text-foreground/60">Professional certifications and learning achievements</p>
+            <h2 className="mb-3 text-3xl font-bold md:text-4xl">
+              Certifications & Badges
+            </h2>
+            <p className="text-foreground/60">
+              Professional certifications and learning achievements
+            </p>
           </div>
 
           {/* Certifications Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
             {certifications.map((cert, index) => {
               const issueDateFormatted = formatDate(cert.issueDate)
               const expirationDateFormatted = formatDate(cert.expirationDate)
@@ -58,7 +65,7 @@ export function CertificationsSection() {
                 <div
                   key={index}
                   className={cn(
-                    'group loose-leaf-card p-6 md:p-8 paper-texture',
+                    'loose-leaf-card paper-texture group p-6 md:p-8',
                     'transition-all duration-300',
                     'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                     'animate-slide-up'
@@ -68,7 +75,7 @@ export function CertificationsSection() {
                   <div className="space-y-4">
                     {/* Logo and Title */}
                     <div className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-16 h-16 rounded-lg bg-background border border-accent/20 flex items-center justify-center overflow-hidden">
+                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent/20 bg-background">
                         {getLogoPath(cert.issuer) ? (
                           <Image
                             src={getLogoPath(cert.issuer)!}
@@ -79,21 +86,21 @@ export function CertificationsSection() {
                             unoptimized={false}
                           />
                         ) : (
-                          <div className="p-2 rounded-lg bg-accent/10 border border-accent/20 w-full h-full flex items-center justify-center">
+                          <div className="flex h-full w-full items-center justify-center rounded-lg border border-accent/20 bg-accent/10 p-2">
                             <Award className="h-6 w-6 text-accent" />
                           </div>
                         )}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg md:text-xl font-bold text-foreground group-hover:text-accent transition-colors duration-200 line-clamp-2">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="line-clamp-2 text-lg font-bold text-foreground transition-colors duration-200 group-hover:text-accent md:text-xl">
                           {cert.name}
                           {cert.version && (
-                            <span className="text-sm font-normal text-foreground/60 ml-1">
+                            <span className="ml-1 text-sm font-normal text-foreground/60">
                               {cert.version}
                             </span>
                           )}
                         </h3>
-                        <div className="flex items-center gap-1.5 mt-1 text-sm text-foreground/60">
+                        <div className="mt-1 flex items-center gap-1.5 text-sm text-foreground/60">
                           <Building2 className="h-3.5 w-3.5" />
                           <span className="line-clamp-1">{cert.issuer}</span>
                         </div>
@@ -112,9 +119,7 @@ export function CertificationsSection() {
                     {expirationDateFormatted && !expired && (
                       <div className="flex items-center gap-1.5 text-sm text-foreground/60">
                         <Calendar className="h-3.5 w-3.5" />
-                        <span>
-                          Expires: {expirationDateFormatted}
-                        </span>
+                        <span>Expires: {expirationDateFormatted}</span>
                       </div>
                     )}
 
@@ -132,7 +137,7 @@ export function CertificationsSection() {
                           <span
                             key={skillIndex}
                             className={cn(
-                              'px-2 py-1 text-xs font-medium rounded-md',
+                              'rounded-md px-2 py-1 text-xs font-medium',
                               'bg-accent/10 text-accent',
                               'border border-accent/20'
                             )}
@@ -157,7 +162,7 @@ export function CertificationsSection() {
                           rel="noopener noreferrer"
                           className={cn(
                             'inline-flex items-center gap-1.5 text-sm text-accent',
-                            'hover:underline transition-colors duration-200'
+                            'transition-colors duration-200 hover:underline'
                           )}
                         >
                           View Credential
@@ -175,4 +180,3 @@ export function CertificationsSection() {
     </section>
   )
 }
-

@@ -17,7 +17,10 @@ type BlogListClientProps = {
 
 const DEFAULT_POSTS_PER_PAGE = 9
 
-export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_PER_PAGE }: BlogListClientProps) {
+export function BlogListClient({
+  posts: allPosts,
+  postsPerPage = DEFAULT_POSTS_PER_PAGE,
+}: BlogListClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [localeFilter, setLocaleFilter] = useState<'all' | 'en' | 'tr'>('all')
   const [currentPage, setCurrentPage] = useState(1)
@@ -60,32 +63,32 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
   return (
     <>
       {/* Search and Filter Controls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         <SearchBar value={searchQuery} onChange={setSearchQuery} />
         <LocaleFilter value={localeFilter} onChange={setLocaleFilter} />
       </div>
 
       {/* Blog Posts Grid */}
       {posts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {posts.map((post, index) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
               className={cn(
-                'group loose-leaf-card p-6 md:p-8 paper-texture',
+                'loose-leaf-card paper-texture group p-6 md:p-8',
                 'transition-all duration-300',
                 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                 'animate-slide-up'
               )}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="space-y-4 relative">
+              <div className="relative space-y-4">
                 {/* Locale Badge */}
-                <div className="absolute top-0 right-0">
+                <div className="absolute right-0 top-0">
                   <span
                     className={cn(
-                      'px-2 py-1 text-xs font-medium rounded-md',
+                      'rounded-md px-2 py-1 text-xs font-medium',
                       'bg-foreground/10 text-foreground/60',
                       'border border-foreground/20'
                     )}
@@ -98,15 +101,17 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
                 <TagList tags={post.tags.slice(0, 2)} />
 
                 {/* Title */}
-                <h2 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-200">
+                <h2 className="text-xl font-bold text-foreground transition-colors duration-200 group-hover:text-accent md:text-2xl">
                   {post.title}
                 </h2>
 
                 {/* Description */}
-                <p className="text-foreground/70 line-clamp-3">{post.description}</p>
+                <p className="line-clamp-3 text-foreground/70">
+                  {post.description}
+                </p>
 
                 {/* Metadata */}
-                <div className="flex items-center gap-4 text-sm text-foreground/60 pt-2">
+                <div className="flex items-center gap-4 pt-2 text-sm text-foreground/60">
                   <div className="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
                     <time dateTime={post.date}>
@@ -124,7 +129,7 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
                 </div>
 
                 {/* Read More */}
-                <div className="flex items-center gap-2 text-accent font-medium text-sm pt-2">
+                <div className="flex items-center gap-2 pt-2 text-sm font-medium text-accent">
                   Read more
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </div>
@@ -133,7 +138,7 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
+        <div className="py-12 text-center">
           <p className="text-foreground/60">
             {searchQuery || localeFilter !== 'all'
               ? 'No posts match your filters. Try adjusting your search query or language filter.'
@@ -153,4 +158,3 @@ export function BlogListClient({ posts: allPosts, postsPerPage = DEFAULT_POSTS_P
     </>
   )
 }
-

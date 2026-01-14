@@ -11,10 +11,10 @@ export function BackButton() {
     <button
       onClick={() => router.back()}
       className={cn(
-        'fixed top-4 left-4 z-50 no-print',
+        'no-print fixed left-4 top-4 z-50',
         'inline-flex h-10 w-10 items-center justify-center rounded-lg',
-        'bg-background border border-notebook-divider',
-        'transition-all duration-200 hover:scale-[0.98] active:scale-[0.96] focus:outline-none',
+        'border border-notebook-divider bg-background',
+        'transition-all duration-200 hover:scale-[0.98] focus:outline-none active:scale-[0.96]',
         'focus:ring-2 focus:ring-accent focus:ring-offset-2',
         'shadow-paper-sm hover:shadow-paper-md',
         'group'
@@ -23,12 +23,9 @@ export function BackButton() {
       title="Go back"
     >
       <ArrowLeft
-        className={cn(
-          'h-5 w-5 text-foreground transition-all duration-300'
-        )}
+        className={cn('h-5 w-5 text-foreground transition-all duration-300')}
       />
       <span className="sr-only">Go back</span>
     </button>
   )
 }
-

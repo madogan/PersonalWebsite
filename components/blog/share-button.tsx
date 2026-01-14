@@ -21,8 +21,8 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
       className={cn(
         'flex items-center gap-2',
         'text-sm text-foreground/60',
-        'hover:text-foreground transition-colors duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md',
+        'transition-colors duration-200 hover:text-foreground',
+        'rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
         className
       )}
       aria-label="Share on LinkedIn"
@@ -33,4 +33,3 @@ export function ShareButton({ url, title, className }: ShareButtonProps) {
     </button>
   )
 }
-

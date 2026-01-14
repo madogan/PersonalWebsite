@@ -82,7 +82,6 @@ export function getSkillCategoryTitle(category: string): string {
     reliability: 'Reliability & Observability',
     cloud: 'Cloud & Infrastructure',
   }
-  
+
   return titleMap[category] || 'Programming & Automation'
 }
-

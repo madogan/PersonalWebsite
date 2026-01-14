@@ -15,12 +15,16 @@ export function FeaturedPosts() {
   return (
     <section className="py-12 md:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="mx-auto max-w-6xl">
           {/* Section Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="mb-8 flex items-center justify-between">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">Latest Blog Posts</h2>
-              <p className="text-foreground/60">Recent thoughts and tutorials</p>
+              <h2 className="mb-3 text-3xl font-bold md:text-4xl">
+                Latest Blog Posts
+              </h2>
+              <p className="text-foreground/60">
+                Recent thoughts and tutorials
+              </p>
             </div>
             <div className="hidden md:block">
               <GlassyButton href="/blog" variant="subtle" size="sm">
@@ -30,13 +34,13 @@ export function FeaturedPosts() {
           </div>
 
           {/* Blog Posts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             {featuredPosts.map((post, index) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 className={cn(
-                  'group loose-leaf-card p-6 md:p-8 paper-texture',
+                  'loose-leaf-card paper-texture group p-6 md:p-8',
                   'transition-all duration-300',
                   'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
                   'animate-slide-up'
@@ -50,7 +54,7 @@ export function FeaturedPosts() {
                       <span
                         key={tag}
                         className={cn(
-                          'px-2 py-1 text-xs font-medium rounded-md',
+                          'rounded-md px-2 py-1 text-xs font-medium',
                           'bg-accent/10 text-accent',
                           'border border-accent/20'
                         )}
@@ -61,12 +65,14 @@ export function FeaturedPosts() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-200">
+                  <h3 className="text-xl font-bold text-foreground transition-colors duration-200 group-hover:text-accent md:text-2xl">
                     {post.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-foreground/70 line-clamp-2">{post.description}</p>
+                  <p className="line-clamp-2 text-foreground/70">
+                    {post.description}
+                  </p>
 
                   {/* Metadata */}
                   <div className="flex items-center gap-4 text-sm text-foreground/60">
@@ -87,7 +93,7 @@ export function FeaturedPosts() {
                   </div>
 
                   {/* Read More Indicator */}
-                  <div className="flex items-center gap-2 text-accent font-medium text-sm pt-2">
+                  <div className="flex items-center gap-2 pt-2 text-sm font-medium text-accent">
                     Read more
                     <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
@@ -97,7 +103,7 @@ export function FeaturedPosts() {
           </div>
 
           {/* Mobile View All Link */}
-          <div className="mt-8 md:hidden text-center">
+          <div className="mt-8 text-center md:hidden">
             <GlassyButton href="/blog" size="md">
               View All Posts
             </GlassyButton>
@@ -107,4 +113,3 @@ export function FeaturedPosts() {
     </section>
   )
 }
-

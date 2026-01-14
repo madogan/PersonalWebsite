@@ -6,8 +6,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ className, ...props }) => (
       <h1
         className={cn(
-          'text-4xl md:text-5xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground text-left font-serif',
+          'mb-4 mt-8 text-4xl font-bold tracking-tight md:text-5xl',
+          'text-left font-serif text-foreground',
           className
         )}
         {...props}
@@ -16,8 +16,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ className, ...props }) => (
       <h2
         className={cn(
-          'text-3xl md:text-4xl font-bold tracking-tight mt-8 mb-4',
-          'text-foreground border-b border-notebook-divider pencil-divider pb-2 text-left font-serif',
+          'mb-4 mt-8 text-3xl font-bold tracking-tight md:text-4xl',
+          'pencil-divider border-b border-notebook-divider pb-2 text-left font-serif text-foreground',
           className
         )}
         {...props}
@@ -26,8 +26,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ className, ...props }) => (
       <h3
         className={cn(
-          'text-2xl md:text-3xl font-semibold tracking-tight mt-6 mb-3',
-          'text-foreground text-left font-serif',
+          'mb-3 mt-6 text-2xl font-semibold tracking-tight md:text-3xl',
+          'text-left font-serif text-foreground',
           className
         )}
         {...props}
@@ -36,8 +36,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h4: ({ className, ...props }) => (
       <h4
         className={cn(
-          'text-xl md:text-2xl font-semibold mt-4 mb-2',
-          'text-foreground text-left font-serif',
+          'mb-2 mt-4 text-xl font-semibold md:text-2xl',
+          'text-left font-serif text-foreground',
           className
         )}
         {...props}
@@ -46,7 +46,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ className, ...props }) => (
       <p
         className={cn(
-          'text-base leading-7 mb-4 text-foreground/90',
+          'mb-4 text-base leading-7 text-foreground/90',
           'text-left font-sans',
           className
         )}
@@ -56,7 +56,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ className, ...props }) => (
       <a
         className={cn(
-          'text-accent hover:text-accent-cyan underline underline-offset-4',
+          'text-accent underline underline-offset-4 hover:text-accent-cyan',
           'transition-colors duration-200',
           className
         )}
@@ -66,7 +66,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: ({ className, ...props }) => (
       <ul
         className={cn(
-          'list-disc list-outside mb-4 space-y-2 text-foreground/90',
+          'mb-4 list-outside list-disc space-y-2 text-foreground/90',
           'pl-6',
           className
         )}
@@ -76,7 +76,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: ({ className, ...props }) => (
       <ol
         className={cn(
-          'list-decimal list-outside mb-4 space-y-2 text-foreground/90',
+          'mb-4 list-outside list-decimal space-y-2 text-foreground/90',
           'pl-6',
           className
         )}
@@ -89,8 +89,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     blockquote: ({ className, ...props }) => (
       <blockquote
         className={cn(
-          'border-l-4 border-accent pl-4 py-2 my-4',
-          'bg-accent/5 rounded-r-md italic text-foreground/80',
+          'my-4 border-l-4 border-accent py-2 pl-4',
+          'rounded-r-md bg-accent/5 italic text-foreground/80',
           className
         )}
         {...props}
@@ -109,7 +109,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     pre: ({ className, ...props }) => (
       <pre
         className={cn(
-          'overflow-x-auto rounded-lg bg-foreground/5 p-4 mb-4',
+          'mb-4 overflow-x-auto rounded-lg bg-foreground/5 p-4',
           'border border-notebook-divider font-mono',
           className
         )}
@@ -117,21 +117,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
     hr: ({ className, ...props }) => (
-      <hr
-        className={cn(
-          'my-8 pencil-divider',
-          className
-        )}
-        {...props}
-      />
+      <hr className={cn('pencil-divider my-8', className)} {...props} />
     ),
     img: ({ className, ...props }) => (
-      <img
-        className={cn('rounded-lg my-4', className)}
-        {...props}
-      />
+      <img className={cn('my-4 rounded-lg', className)} {...props} />
     ),
     ...components,
   }
 }
-

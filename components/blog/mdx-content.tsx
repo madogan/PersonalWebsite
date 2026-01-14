@@ -18,4 +18,3 @@ export async function MDXContent({ content }: MDXContentProps) {
 
   return <MDXComponent components={components} />
 }
-

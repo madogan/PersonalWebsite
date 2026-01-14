@@ -5,6 +5,7 @@ This guide covers deploying the Personal Website to Fly.io.
 ## Prerequisites
 
 1. **Install Fly CLI**
+
    ```bash
    # macOS/Linux
    curl -L https://fly.io/install.sh | sh
@@ -23,10 +24,13 @@ This guide covers deploying the Personal Website to Fly.io.
 ### 1. Create or Launch App
 
 **Option A: Launch (Interactive Setup)**
+
 ```bash
 fly launch
 ```
+
 This will:
+
 - Detect your Dockerfile
 - Ask for app name
 - Ask for region
@@ -34,6 +38,7 @@ This will:
 - Optionally set up a database
 
 **Option B: Manual Setup**
+
 ```bash
 # Create app
 fly apps create personal-website
@@ -45,6 +50,7 @@ fly regions set iad --app personal-website
 ### 2. Configure App Name
 
 Edit `fly.toml` and change the app name:
+
 ```toml
 app = "your-app-name"
 ```
@@ -52,6 +58,7 @@ app = "your-app-name"
 ### 3. Set Environment Variables/Secrets
 
 Set secrets using Fly CLI (recommended for sensitive data):
+
 ```bash
 fly secrets set NODE_ENV=production --app personal-website
 fly secrets set NEXT_TELEMETRY_DISABLED=1 --app personal-website
@@ -69,6 +76,7 @@ fly deploy
 ```
 
 This will:
+
 - Build the Docker image
 - Push to Fly.io
 - Deploy the application
@@ -77,16 +85,19 @@ This will:
 ## Common Commands
 
 ### View Logs
+
 ```bash
 fly logs --app personal-website
 ```
 
 ### SSH into Container
+
 ```bash
 fly ssh console --app personal-website
 ```
 
 ### Scale Application
+
 ```bash
 # Scale to 2 instances
 fly scale count 2 --app personal-website
@@ -96,11 +107,13 @@ fly scale memory 1024 --app personal-website
 ```
 
 ### View App Status
+
 ```bash
 fly status --app personal-website
 ```
 
 ### Open App in Browser
+
 ```bash
 fly open --app personal-website
 ```
@@ -110,6 +123,7 @@ fly open --app personal-website
 ### Regions
 
 Available regions include:
+
 - `iad` - Washington, D.C. (US)
 - `ord` - Chicago (US)
 - `dfw` - Dallas (US)
@@ -122,6 +136,7 @@ Available regions include:
 - `syd` - Sydney (AU)
 
 Change in `fly.toml`:
+
 ```toml
 primary_region = "iad"
 ```
@@ -129,15 +144,18 @@ primary_region = "iad"
 ### Resource Limits
 
 Current configuration in `fly.toml`:
+
 - CPU: 1 shared CPU
 - Memory: 512 MB
 
 To change:
+
 ```bash
 fly scale vm shared-cpu-2x --memory 1024 --app personal-website
 ```
 
 Or edit `fly.toml`:
+
 ```toml
 [[vm]]
   cpu_kind = "shared"
@@ -148,6 +166,7 @@ Or edit `fly.toml`:
 ### Health Checks
 
 The app includes a health check endpoint at `/api/health`:
+
 - Interval: 30 seconds
 - Timeout: 5 seconds
 - Grace period: 10 seconds
@@ -159,6 +178,7 @@ Configured in `fly.toml` under `[http_service.checks]`.
 ### Build Failures
 
 1. **Check Dockerfile**
+
    ```bash
    docker build -t test-build .
    ```
@@ -171,11 +191,13 @@ Configured in `fly.toml` under `[http_service.checks]`.
 ### App Not Starting
 
 1. **Check logs**
+
    ```bash
    fly logs --app personal-website
    ```
 
 2. **SSH into container**
+
    ```bash
    fly ssh console --app personal-website
    ```
@@ -189,6 +211,7 @@ Configured in `fly.toml` under `[http_service.checks]`.
 ### Health Check Failures
 
 1. **Verify health endpoint**
+
    ```bash
    curl https://your-app.fly.dev/api/health
    ```
@@ -198,6 +221,7 @@ Configured in `fly.toml` under `[http_service.checks]`.
 ### High Memory Usage
 
 1. **Monitor usage**
+
    ```bash
    fly status --app personal-website
    ```
@@ -235,6 +259,7 @@ jobs:
 ## Cost Optimization
 
 1. **Auto-stop machines** (configured in `fly.toml`)
+
    ```toml
    auto_stop_machines = true
    auto_start_machines = true
@@ -251,11 +276,13 @@ jobs:
 ## Security Best Practices
 
 1. **Use secrets for sensitive data**
+
    ```bash
    fly secrets set SECRET_KEY=value
    ```
 
 2. **Enable HTTPS** (configured in `fly.toml`)
+
    ```toml
    force_https = true
    ```
@@ -270,4 +297,3 @@ jobs:
 - [Fly.io Documentation](https://fly.io/docs/)
 - [Fly.io Pricing](https://fly.io/docs/about/pricing/)
 - [Fly.io Status](https://status.fly.io/)
-

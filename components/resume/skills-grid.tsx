@@ -11,10 +11,13 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
   const skillCategories = Object.entries(skills)
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
       {skillCategories.map(([category, items]) => (
-        <div key={category} className="loose-leaf-card p-6 md:p-8 paper-texture">
-          <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4">
+        <div
+          key={category}
+          className="loose-leaf-card paper-texture p-6 md:p-8"
+        >
+          <h3 className="mb-4 text-lg font-semibold text-foreground md:text-xl">
             {getSkillCategoryTitle(category)}
           </h3>
           <div className="flex flex-wrap gap-2.5">
@@ -22,10 +25,10 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
               <span
                 key={index}
                 className={cn(
-                  'px-3 py-1.5 text-sm font-medium rounded-lg',
+                  'rounded-lg px-3 py-1.5 text-sm font-medium',
                   'bg-accent/10 text-accent',
                   'border border-accent/20',
-                  'hover:bg-accent/20 hover:border-accent/40 transition-colors'
+                  'transition-colors hover:border-accent/40 hover:bg-accent/20'
                 )}
               >
                 {skill}
@@ -37,4 +40,3 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
     </div>
   )
 }
-

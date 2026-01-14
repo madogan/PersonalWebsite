@@ -27,17 +27,17 @@ Use this command when finalizing a task to:
 
 Scopes help categorize changes by area of the codebase:
 
-* `app` - Next.js App Router pages and routes
-* `components` - UI components (blog, home, layout, resume, ui)
-* `lib` - Library utilities (constants, mdx, resume, utils)
-* `types` - TypeScript type definitions
-* `api` - API routes and endpoints
-* `ui` - UI components and styling
-* `config` - Configuration files (next.config.ts, tailwind.config.ts, etc.)
-* `deps` - Dependency updates
-* `ci` - CI/CD configurations
-* `docs` - Documentation
-* `content` - Content files (blog posts, resume data)
+- `app` - Next.js App Router pages and routes
+- `components` - UI components (blog, home, layout, resume, ui)
+- `lib` - Library utilities (constants, mdx, resume, utils)
+- `types` - TypeScript type definitions
+- `api` - API routes and endpoints
+- `ui` - UI components and styling
+- `config` - Configuration files (next.config.ts, tailwind.config.ts, etc.)
+- `deps` - Dependency updates
+- `ci` - CI/CD configurations
+- `docs` - Documentation
+- `content` - Content files (blog posts, resume data)
 
 **Note**: For simple changes that don't fit a specific scope, you can omit the scope.
 
@@ -63,18 +63,18 @@ fix(web:ui): resolve issue (no package prefix needed)
 
 # Commit Types
 
-* **feat**: New feature or enhancement
-* **fix**: Bug fix
-* **docs**: Documentation only
-* **style**: Format-only changes (whitespace, formatting)
-* **refactor**: Code modification without feature/fix
-* **perf**: Performance improvements
-* **test**: Test additions or updates
-* **chore**: Tooling, build, dependency updates
-* **ci**: CI/CD implementations
-* **revert**: Reverting a previous commit
-* **db**: Database schema/migration changes
-* **log**: Centralized logging changes
+- **feat**: New feature or enhancement
+- **fix**: Bug fix
+- **docs**: Documentation only
+- **style**: Format-only changes (whitespace, formatting)
+- **refactor**: Code modification without feature/fix
+- **perf**: Performance improvements
+- **test**: Test additions or updates
+- **chore**: Tooling, build, dependency updates
+- **ci**: CI/CD implementations
+- **revert**: Reverting a previous commit
+- **db**: Database schema/migration changes
+- **log**: Centralized logging changes
 
 ---
 
@@ -134,10 +134,10 @@ style(ui): update button hover states
 
 # Subject Rules
 
-* Use imperative mood ("add" not "added", "fix" not "fixed")
-* Max 72 characters
-* No ending period
-* Start with lowercase
+- Use imperative mood ("add" not "added", "fix" not "fixed")
+- Max 72 characters
+- No ending period
+- Start with lowercase
 
 ```
 feat(api): add refresh token endpoint
@@ -200,29 +200,25 @@ chore(release): bump version to 0.6.4
 # Pre-Commit Checklist
 
 1. **Code Quality**
-
-   * Run `pnpm lint` and `pnpm type-check`
-   * Fix any linting or type errors
-   * Run `pnpm format:check` to ensure code formatting
+   - Run `pnpm lint` and `pnpm type-check`
+   - Fix any linting or type errors
+   - Run `pnpm format:check` to ensure code formatting
 
 2. **Atomicity**
-
-   * Commit only one logical change
-   * Add only relevant files
-   * Group related changes together
+   - Commit only one logical change
+   - Add only relevant files
+   - Group related changes together
 
 3. **Message Validity**
-
-   * Correct type (feat, fix, docs, etc.)
-   * Appropriate scope (if applicable)
-   * Imperative subject
-   * Max 72 characters
+   - Correct type (feat, fix, docs, etc.)
+   - Appropriate scope (if applicable)
+   - Imperative subject
+   - Max 72 characters
 
 4. **Documentation**
-
-   * Update docs when needed
-   * Update `CHANGELOG.md` for user-facing impacts
-   * Update version if releasing
+   - Update docs when needed
+   - Update `CHANGELOG.md` for user-facing impacts
+   - Update version if releasing
 
 ---
 
@@ -251,10 +247,10 @@ chore: various updates
 
 # Git Usage Rules for AI Agents
 
-* Commit only files modified during this task session
-* Do not inspect `git status` or history
-* Always specify explicit file paths
-* Track changes mentally based on what you actually edited
+- Commit only files modified during this task session
+- Do not inspect `git status` or history
+- Always specify explicit file paths
+- Track changes mentally based on what you actually edited
 
 Example:
 
@@ -265,9 +261,9 @@ git commit -m "feat(auth): implement email verification flow"
 
 **Windows Environment Notes:**
 
-* Use CMD or PowerShell commands
-* Paths use backslashes: `src\app\page.tsx`
-* Git commands work the same across platforms
+- Use CMD or PowerShell commands
+- Paths use backslashes: `src\app\page.tsx`
+- Git commands work the same across platforms
 
 ---
 
@@ -277,9 +273,9 @@ git commit -m "feat(auth): implement email verification flow"
 
 `MAJOR.MINOR.PATCH`
 
-* **MAJOR**: Breaking changes
-* **MINOR**: New features
-* **PATCH**: Fixes, docs, small changes
+- **MAJOR**: Breaking changes
+- **MINOR**: New features
+- **PATCH**: Fixes, docs, small changes
 
 ### Version Files
 
@@ -320,28 +316,28 @@ chore(release): bump version to 1.0.0
 
 ### Next.js 15+ Patterns
 
-* Use Server Components by default
-* Client Components only when needed (`'use client'`)
-* Follow App Router structure
-* Implement error.tsx and not-found.tsx for route segments
+- Use Server Components by default
+- Client Components only when needed (`'use client'`)
+- Follow App Router structure
+- Implement error.tsx and not-found.tsx for route segments
 
 ### Content Changes
 
-* Use `content` scope for blog posts and resume data changes
-* Ensure MDX frontmatter is properly formatted
-* Test content rendering after changes
+- Use `content` scope for blog posts and resume data changes
+- Ensure MDX frontmatter is properly formatted
+- Test content rendering after changes
 
 ---
 
 # Common Mistakes to Avoid
 
-* Missing or incorrect scope
-* Mixing unrelated changes in one commit
-* Incorrect semantic version decision
-* Manually editing version files without committing
-* Using package prefixes (backend/web/mobile) - not needed for single project
-* Vague commit messages without scope
-* Forgetting to update both `package.json` and `lib/constants.ts` for version bumps
+- Missing or incorrect scope
+- Mixing unrelated changes in one commit
+- Incorrect semantic version decision
+- Manually editing version files without committing
+- Using package prefixes (backend/web/mobile) - not needed for single project
+- Vague commit messages without scope
+- Forgetting to update both `package.json` and `lib/constants.ts` for version bumps
 
 ---
 
@@ -373,8 +369,8 @@ Generate git commands and other commands for Windows environment (CMD or PowerSh
 
 ### Next.js 15+ Patterns
 
-* Use Server Components by default
-* Client Components only when needed (`'use client'`)
-* Follow App Router structure
-* Implement error.tsx and not-found.tsx for route segments
-* Use MDX for blog content with proper frontmatter
+- Use Server Components by default
+- Client Components only when needed (`'use client'`)
+- Follow App Router structure
+- Implement error.tsx and not-found.tsx for route segments
+- Use MDX for blog content with proper frontmatter

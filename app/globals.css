@@ -10,34 +10,38 @@
     --color-accent: 107 114 128; /* #6B7280 - Slate Grey Metallic */
     --color-accent-secondary: 64 224 208; /* #40E0D0 - Turquoise (keep for compatibility) */
     --color-accent-cyan: 72 209 204; /* #48D1CC - Medium Turquoise (keep for compatibility) */
-    
+
     /* Notebook Design System Colors */
     --notebook-divider: 229 224 214; /* #E5E0D6 - Subtle pencil mark */
     --notebook-binding: 107 114 128; /* #6B7280 - Slate Grey Metallic */
-    
+
     /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.50);
+    --glass-bg: rgba(255, 255, 255, 0.5);
     --glass-border: rgba(255, 255, 255, 0.01);
-    
+
     /* Border Radius */
     --radius-sm: 0.375rem; /* 6px */
     --radius-md: 0.5rem; /* 8px */
     --radius-lg: 0.75rem; /* 12px */
     --radius-xl: 1rem; /* 16px */
-    
+
     /* Blur */
     --blur-sm: 4px;
     --blur-md: 8px;
     --blur-lg: 16px;
-    
+
     /* Shadows - Layered Paper Effect */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 1px 3px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.01);
-    --shadow-lg: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
-    --shadow-xl: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
-    
+    --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.01);
+    --shadow-lg:
+      0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.01);
+    --shadow-xl:
+      0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.02),
+      0 20px 30px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.01);
+
     /* Accent-colored shadows removed - using paper shadows only */
-    
+
     /* Spacing Scale (using Tailwind defaults) */
     --spacing-xs: 0.25rem; /* 4px */
     --spacing-sm: 0.5rem; /* 8px */
@@ -55,21 +59,25 @@
     --color-accent: 156 163 175; /* #9CA3AF - Grey Metallic (lighter for dark theme) */
     --color-accent-secondary: 64 224 208; /* #40E0D0 - Turquoise (keep for compatibility) */
     --color-accent-cyan: 72 209 204; /* #48D1CC - Medium Turquoise (keep for compatibility) */
-    
+
     /* Notebook Design System Colors - Dark Theme */
     --notebook-divider: 42 42 42; /* #2A2A2A - Subtle divider on dark */
     --notebook-binding: 156 163 175; /* #9CA3AF - Grey Metallic (lighter for dark theme) */
-    
+
     /* Glassmorphism for dark theme */
-    --glass-bg: rgba(0, 0, 0, 0.50);
+    --glass-bg: rgba(0, 0, 0, 0.5);
     --glass-border: rgba(255, 255, 255, 0.01);
-    
+
     /* Shadows adjusted for dark theme - Layered Paper Effect */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 1px 3px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
-    --shadow-lg: 0 1px 3px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.1);
-    --shadow-xl: 0 1px 3px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.15), 0 20px 30px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
-    
+    --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-lg:
+      0 1px 3px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-xl:
+      0 1px 3px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.15),
+      0 20px 30px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1);
+
     /* Accent-colored shadows removed - using paper shadows only */
   }
 
@@ -79,11 +87,15 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     position: relative;
   }
-  
+
   /* Subtle page edge shadows for notebook authenticity */
   body::before {
     content: '';
@@ -94,17 +106,17 @@
     height: 100%;
     pointer-events: none;
     z-index: 0;
-    box-shadow: 
+    box-shadow:
       inset 0 0 20px rgba(0, 0, 0, 0.02),
       inset 0 0 40px rgba(0, 0, 0, 0.01);
   }
-  
+
   .dark body::before {
-    box-shadow: 
+    box-shadow:
       inset 0 0 20px rgba(0, 0, 0, 0.3),
       inset 0 0 40px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* Ensure main content is above page edge shadows */
   main {
     position: relative;
@@ -115,56 +127,67 @@
   .text-heading {
     @apply font-serif;
   }
-  
+
   .text-body {
     @apply font-sans;
   }
-  
+
   .text-code {
     @apply font-mono;
   }
 
   /* Typography Scale - Serif for headings, Sans for body */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
-  
+
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight;
+    @apply text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+    @apply text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight;
+    @apply text-2xl font-semibold tracking-tight md:text-3xl lg:text-4xl;
   }
 
   h4 {
-    @apply text-xl md:text-2xl font-semibold;
+    @apply text-xl font-semibold md:text-2xl;
   }
 
   h5 {
-    @apply text-lg md:text-xl font-medium;
+    @apply text-lg font-medium md:text-xl;
   }
 
   h6 {
-    @apply text-base md:text-lg font-medium;
+    @apply text-base font-medium md:text-lg;
   }
 
-  p, li, span, div, a, button {
+  p,
+  li,
+  span,
+  div,
+  a,
+  button {
     @apply font-sans;
   }
-  
+
   p {
     @apply text-base leading-7;
   }
-  
-  code, pre {
+
+  code,
+  pre {
     @apply font-mono;
   }
-  
+
   code {
     @apply text-sm;
   }
@@ -193,12 +216,15 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .btn-primary {
-    @apply px-4 py-2 bg-accent text-foreground rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 active:bg-accent/95 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+    @apply rounded-lg bg-accent px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 active:bg-accent/95;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
-  
+
   /* Add subtle paper texture to buttons */
   .btn-primary::before {
     content: '';
@@ -211,27 +237,36 @@
     opacity: 0.1;
     border-radius: inherit;
   }
-  
+
   .btn-primary > * {
     position: relative;
     z-index: 1;
   }
-  
+
   .btn-primary:hover {
     transform: scale(0.98);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 20px 30px rgba(0, 0, 0, 0.03),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
-  
+
   .btn-primary:active {
     transform: scale(0.96);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
 
   .btn-secondary {
-    @apply px-4 py-2 bg-accent/10 border border-accent/20 text-accent rounded-lg font-medium transition-all duration-200 hover:bg-accent/20 hover:border-accent/40 active:bg-accent/25 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+    @apply rounded-lg border border-accent/20 bg-accent/10 px-4 py-2 font-medium text-accent transition-all duration-200 hover:border-accent/40 hover:bg-accent/20 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 active:bg-accent/25;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
-  
+
   .btn-secondary::before {
     content: '';
     position: absolute;
@@ -243,26 +278,32 @@
     opacity: 0.1;
     border-radius: inherit;
   }
-  
+
   .btn-secondary > * {
     position: relative;
     z-index: 1;
   }
-  
+
   .btn-secondary:hover {
     transform: scale(0.98);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 20px 30px rgba(0, 0, 0, 0.03),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
-  
+
   .btn-secondary:active {
     transform: scale(0.96);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
 
   .btn-ghost {
-    @apply px-4 py-2 text-foreground rounded-lg font-medium transition-all duration-200 hover:bg-foreground/10 active:bg-foreground/15 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+    @apply rounded-lg px-4 py-2 font-medium text-foreground transition-all duration-200 hover:bg-foreground/10 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 active:bg-foreground/15;
   }
-  
+
   .btn-ghost::before {
     content: '';
     position: absolute;
@@ -274,27 +315,27 @@
     opacity: 0.05;
     border-radius: inherit;
   }
-  
+
   .btn-ghost > * {
     position: relative;
     z-index: 1;
   }
-  
+
   .btn-ghost:hover {
     transform: scale(0.98);
   }
-  
+
   .btn-ghost:active {
     transform: scale(0.96);
   }
 
   /* Notebook Design System Utilities */
-  
+
   /* Paper Texture Overlay - SVG noise pattern (theme-aware) */
   .paper-texture {
     position: relative;
   }
-  
+
   .paper-texture::before {
     content: '';
     position: absolute;
@@ -307,17 +348,17 @@
     opacity: 0.05; /* Increased from 0.03 for better visibility */
     will-change: opacity; /* Optimize for theme transitions */
   }
-  
+
   .dark .paper-texture::before {
     opacity: 0.03; /* Increased from 0.02 for better visibility in dark theme */
     mix-blend-mode: soft-light; /* Better blend mode for dark theme */
   }
-  
+
   .paper-texture > * {
     position: relative;
     z-index: 1;
   }
-  
+
   /* Performance: Use GPU acceleration for transforms */
   .loose-leaf-card,
   .notebook-panel {
@@ -328,13 +369,16 @@
 
   /* Notebook Panel - Flat panel style (distinct from cards) */
   .notebook-panel {
-    @apply bg-background border border-notebook-divider rounded-lg;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+    @apply rounded-lg border border-notebook-divider bg-background;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.01);
     position: relative;
     /* No rotation - flat panel style */
     transform: rotate(0deg);
   }
-  
+
   /* Add subtle paper texture to panels */
   .notebook-panel::before {
     content: '';
@@ -347,30 +391,37 @@
     opacity: 0.03;
     border-radius: inherit;
   }
-  
+
   .dark .notebook-panel::before {
     opacity: 0.02;
     mix-blend-mode: soft-light;
   }
-  
+
   .notebook-panel > * {
     position: relative;
     z-index: 1;
   }
-  
+
   .notebook-panel:hover {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 20px 30px rgba(0, 0, 0, 0.03),
+      0 2px 4px rgba(0, 0, 0, 0.01);
     border-color: rgb(var(--notebook-divider) / 0.8);
   }
 
   /* Loose-Leaf Card - Cards with subtle rotation (distinct from panels) */
   .loose-leaf-card {
-    @apply bg-background border border-notebook-divider rounded-lg p-6 transition-all duration-300;
+    @apply rounded-lg border border-notebook-divider bg-background p-6 transition-all duration-300;
     position: relative;
     transform: rotate(0deg); /* No rotation on mobile */
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.01);
   }
-  
+
   /* Add paper texture to cards */
   .loose-leaf-card::before {
     content: '';
@@ -383,35 +434,39 @@
     opacity: 0.05;
     border-radius: inherit;
   }
-  
+
   .dark .loose-leaf-card::before {
     opacity: 0.03;
     mix-blend-mode: soft-light;
   }
-  
+
   .loose-leaf-card > * {
     position: relative;
     z-index: 1;
   }
-  
+
   /* Add rotation on larger screens */
   @media (min-width: 768px) {
     .loose-leaf-card {
       transform: rotate(0.5deg);
     }
   }
-  
+
   .loose-leaf-card:hover {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      0 10px 20px rgba(0, 0, 0, 0.02),
+      0 20px 30px rgba(0, 0, 0, 0.03),
+      0 2px 4px rgba(0, 0, 0, 0.01);
     border-color: rgb(var(--notebook-divider) / 0.8);
   }
-  
+
   @media (min-width: 768px) {
     .loose-leaf-card:hover {
       transform: rotate(1deg) translateY(-4px); /* Full effect on desktop */
     }
   }
-  
+
   @media (max-width: 767px) {
     .loose-leaf-card:hover {
       transform: translateY(-2px); /* Reduced effect on mobile */
@@ -422,7 +477,7 @@
   .notebook-binding {
     position: relative;
   }
-  
+
   .notebook-binding::before {
     content: '';
     position: absolute;
@@ -430,7 +485,11 @@
     top: 0;
     bottom: 0;
     width: 5px;
-    background: linear-gradient(to right, rgb(var(--notebook-binding)), transparent);
+    background: linear-gradient(
+      to right,
+      rgb(var(--notebook-binding)),
+      transparent
+    );
     z-index: 0;
   }
 
@@ -440,7 +499,7 @@
     border-width: 1px;
     position: relative;
   }
-  
+
   /* Add subtle texture to divider to make it look more hand-drawn */
   .pencil-divider::after {
     content: '';
@@ -468,7 +527,7 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-    
+
     /* Disable page transitions for reduced motion */
     .page-transition {
       transition: none !important;
@@ -497,11 +556,11 @@
       transform: none !important;
       page-break-inside: avoid;
     }
-    
+
     .paper-texture::before {
       display: none !important;
     }
-    
+
     .notebook-binding {
       display: none !important;
     }
@@ -534,4 +593,3 @@
     }
   }
 }
-

@@ -9,19 +9,23 @@ type LocaleFilterProps = {
   className?: string
 }
 
-export function LocaleFilter({ value, onChange, className }: LocaleFilterProps) {
+export function LocaleFilter({
+  value,
+  onChange,
+  className,
+}: LocaleFilterProps) {
   return (
     <div className={cn('relative', className)}>
       <div className="relative">
-        <Languages className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-accent z-10 pointer-events-none" />
+        <Languages className="pointer-events-none absolute left-4 top-1/2 z-10 h-5 w-5 -translate-y-1/2 transform text-accent" />
         <select
           value={value}
           onChange={(e) => onChange(e.target.value as 'all' | 'en' | 'tr')}
           className={cn(
-            'w-full pl-12 pr-10 py-3 rounded-lg appearance-none',
-            'bg-background border-2 border-notebook-divider',
-            'text-foreground font-sans',
-            'focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent/60',
+            'w-full appearance-none rounded-lg py-3 pl-12 pr-10',
+            'border-2 border-notebook-divider bg-background',
+            'font-sans text-foreground',
+            'focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent',
             'focus:shadow-[var(--shadow-xl)]',
             'transition-all duration-200',
             'shadow-paper-sm hover:shadow-paper-md',
@@ -33,7 +37,7 @@ export function LocaleFilter({ value, onChange, className }: LocaleFilterProps) 
           <option value="en">English</option>
           <option value="tr">Turkish</option>
         </select>
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+        <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 transform">
           <svg
             className="h-4 w-4 text-foreground/60"
             fill="none"

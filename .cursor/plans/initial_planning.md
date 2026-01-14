@@ -77,12 +77,14 @@ PersonalWebsite/
 ### Color Palette
 
 **Light Theme:**
+
 - Base: `#FAFAFA` (off-white)
 - Text: `#0A0A0A` (near-black)
 - Accent: Teal/Cyan (`#14B8A6`, `#06B6D4`)
 - Accent Secondary: Soft Green (`#10B981`)
 
 **Dark Theme:**
+
 - Base: `#0A0A0A` (near-black)
 - Text: `#FAFAFA` (off-white)
 - Accent: Teal/Cyan (`#2DD4BF`, `#22D3EE`)
@@ -119,18 +121,21 @@ PersonalWebsite/
 ### Phase 1: Project Setup & Foundation
 
 #### 1.1 Initialize Next.js 15 Project
+
 - [ ] Create Next.js 15 project with TypeScript
 - [ ] Configure Tailwind CSS
 - [ ] Set up ESLint + Prettier
 - [ ] Configure path aliases (`@/components`, `@/lib`, etc.)
 
 #### 1.2 Design System Setup
+
 - [ ] Create CSS variables for theme tokens (colors, radii, blur, shadows)
 - [ ] Configure Tailwind with custom theme values
 - [ ] Set up typography scale
 - [ ] Create base component styles
 
 #### 1.3 Theme System
+
 - [ ] Install and configure `next-themes`
 - [ ] Create theme provider component
 - [ ] Implement CSS variable-based theming
@@ -140,12 +145,14 @@ PersonalWebsite/
 ### Phase 2: Core Layout & Navigation
 
 #### 2.1 Root Layout
+
 - [ ] Create root layout with theme provider
 - [ ] Set up global styles and CSS variables
 - [ ] Configure metadata and SEO defaults
 - [ ] Add font loading (Inter, JetBrains Mono)
 
 #### 2.2 Header & Navigation
+
 - [ ] Create Header component with glassmorphism
 - [ ] Build Navigation component with smooth transitions
 - [ ] Implement active route highlighting
@@ -153,6 +160,7 @@ PersonalWebsite/
 - [ ] Add subtle animations (fade-in, underline on hover)
 
 #### 2.3 Footer
+
 - [ ] Create Footer component
 - [ ] Add social links (if applicable)
 - [ ] Add copyright and metadata
@@ -160,12 +168,14 @@ PersonalWebsite/
 ### Phase 3: Home Page
 
 #### 3.1 Hero Section
+
 - [ ] Design hero with glassmorphism panel
 - [ ] Add introduction text
 - [ ] Implement subtle animations (fade-in, slide-up)
 - [ ] Add CTA buttons to key pages
 
 #### 3.2 Featured Content
+
 - [ ] Display latest blog posts preview
 - [ ] Add "View All" link to blog
 - [ ] Implement card hover effects
@@ -173,18 +183,21 @@ PersonalWebsite/
 ### Phase 4: Blog System
 
 #### 4.1 MDX Setup
+
 - [ ] Configure MDX in Next.js 15
 - [ ] Set up MDX components (headings, paragraphs, code blocks, etc.)
 - [ ] Install and configure Shiki/rehype-pretty-code for syntax highlighting
 - [ ] Create custom MDX components (blockquotes, callouts, etc.)
 
 #### 4.2 Blog Content Structure
+
 - [ ] Define blog post frontmatter schema (title, date, tags, description, etc.)
 - [ ] Create sample blog posts in `content/blog/`
 - [ ] Set up blog post reading time calculation
 - [ ] Create blog post metadata extraction utility
 
 #### 4.3 Blog List Page
+
 - [ ] Create blog list page (`/blog`)
 - [ ] Implement blog post card component with glassmorphism
 - [ ] Add filtering by tags
@@ -193,6 +206,7 @@ PersonalWebsite/
 - [ ] Add smooth page transitions
 
 #### 4.4 Blog Post Page
+
 - [ ] Create dynamic blog post page (`/blog/[slug]`)
 - [ ] Implement blog post layout with excellent typography
 - [ ] Add metadata display (date, reading time, tags)
@@ -202,6 +216,7 @@ PersonalWebsite/
 - [ ] Add smooth scroll behavior
 
 #### 4.5 Blog SEO & Metadata
+
 - [ ] Generate dynamic metadata for each blog post
 - [ ] Add Open Graph tags
 - [ ] Add Twitter Card tags
@@ -210,11 +225,13 @@ PersonalWebsite/
 ### Phase 5: Resume Page
 
 #### 5.1 Resume Data Structure
+
 - [ ] Define resume JSON schema
 - [ ] Create resume data file (`content/resume/resume.json`)
 - [ ] Include sections: Experience, Education, Skills, Projects, etc.
 
 #### 5.2 Resume Components
+
 - [ ] Create ResumeSection component
 - [ ] Build timeline/chronological layout
 - [ ] Add printable-friendly styles
@@ -222,6 +239,7 @@ PersonalWebsite/
 - [ ] Add subtle animations on scroll
 
 #### 5.3 Resume Page
+
 - [ ] Create resume page (`/resume`)
 - [ ] Implement responsive layout
 - [ ] Add print stylesheet
@@ -230,12 +248,14 @@ PersonalWebsite/
 ### Phase 6: About & Contact Pages
 
 #### 6.1 About Page
+
 - [ ] Create about page (`/about`)
 - [ ] Design with glassmorphism panels
 - [ ] Add personal information sections
 - [ ] Implement smooth animations
 
 #### 6.2 Contact Page
+
 - [ ] Create contact page (`/contact`)
 - [ ] Add contact form (optional) or contact information
 - [ ] Implement glassmorphism form design
@@ -244,16 +264,19 @@ PersonalWebsite/
 ### Phase 7: SEO & Performance
 
 #### 7.1 Sitemap
+
 - [ ] Generate dynamic sitemap (`app/sitemap.ts`)
 - [ ] Include all pages and blog posts
 - [ ] Update on build
 
 #### 7.2 RSS Feed
+
 - [ ] Create RSS feed generator
 - [ ] Include blog posts with metadata
 - [ ] Add RSS route (`/feed.xml`)
 
 #### 7.3 Performance Optimization
+
 - [ ] Optimize images (Next.js Image component)
 - [ ] Implement code splitting
 - [ ] Add loading states
@@ -261,6 +284,7 @@ PersonalWebsite/
 - [ ] Test Lighthouse scores
 
 #### 7.4 Accessibility
+
 - [ ] Add ARIA labels where needed
 - [ ] Ensure keyboard navigation
 - [ ] Test with screen readers
@@ -270,17 +294,20 @@ PersonalWebsite/
 ### Phase 8: Motion & Polish
 
 #### 8.1 Page Transitions
+
 - [ ] Implement page transition animations (fade + slight translate)
 - [ ] Add loading states between pages
 - [ ] Ensure smooth navigation
 
 #### 8.2 Micro-interactions
+
 - [ ] Add hover effects on cards
 - [ ] Implement button hover states
 - [ ] Add focus states with accent colors
 - [ ] Create subtle scroll animations
 
 #### 8.3 Motion Preferences
+
 - [ ] Respect `prefers-reduced-motion`
 - [ ] Provide fallbacks for animations
 - [ ] Test with reduced motion enabled
@@ -288,12 +315,14 @@ PersonalWebsite/
 ### Phase 9: Content & Final Touches
 
 #### 9.1 Content Creation
+
 - [ ] Write initial blog posts
 - [ ] Complete resume data
 - [ ] Write about page content
 - [ ] Add contact information
 
 #### 9.2 Testing
+
 - [ ] Test all pages on multiple devices
 - [ ] Test theme switching
 - [ ] Test blog post rendering
@@ -302,6 +331,7 @@ PersonalWebsite/
 - [ ] Cross-browser testing
 
 #### 9.3 Documentation
+
 - [ ] Update README with setup instructions
 - [ ] Document content structure
 - [ ] Add comments to complex components
@@ -310,6 +340,7 @@ PersonalWebsite/
 ## Key Features Checklist
 
 ### Pages
+
 - [x] Home
 - [ ] Blog (list)
 - [ ] Blog post (dynamic)
@@ -318,6 +349,7 @@ PersonalWebsite/
 - [ ] Contact
 
 ### Blog Features
+
 - [ ] MDX-based content
 - [ ] Tags
 - [ ] Published date
@@ -328,6 +360,7 @@ PersonalWebsite/
 - [ ] Share on LinkedIn button
 
 ### Design Features
+
 - [ ] Light/dark themes
 - [ ] Glassmorphism effects
 - [ ] Minimal + futuristic style
@@ -337,6 +370,7 @@ PersonalWebsite/
 - [ ] Accessible (WCAG AA)
 
 ### Technical Features
+
 - [ ] TypeScript
 - [ ] Static site generation
 - [ ] Local file-based content
@@ -347,17 +381,19 @@ PersonalWebsite/
 ## Content Structure Examples
 
 ### Blog Post Frontmatter
+
 ```yaml
 ---
-title: "Post Title"
-description: "Post description for SEO"
-date: "2024-01-15"
-tags: ["nextjs", "typescript", "web-dev"]
+title: 'Post Title'
+description: 'Post description for SEO'
+date: '2024-01-15'
+tags: ['nextjs', 'typescript', 'web-dev']
 readingTime: 5
 ---
 ```
 
 ### Resume JSON Structure
+
 ```json
 {
   "personal": {
@@ -389,4 +425,3 @@ readingTime: 5
 - Focus on minimal, clean design with subtle futuristic accents
 - Ensure excellent typography for blog reading experience
 - Prioritize accessibility and performance
-

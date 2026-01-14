@@ -15,7 +15,7 @@ export function PageTransition({ children }: PageTransitionProps) {
 
   useEffect(() => {
     setIsTransitioning(true)
-    
+
     const timer = setTimeout(() => {
       setDisplayChildren(children)
       setIsTransitioning(false)

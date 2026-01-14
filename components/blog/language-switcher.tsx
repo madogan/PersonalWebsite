@@ -25,8 +25,9 @@ export function LanguageSwitcher({
   }
 
   // Determine display text based on alternate locale
-  const displayText = alternateLocale === 'tr' ? 'Read in Turkish' : 'Türkçe oku'
-  
+  const displayText =
+    alternateLocale === 'tr' ? 'Read in Turkish' : 'Türkçe oku'
+
   // Check if alternate locale matches preferred locale for visual emphasis
   const isPreferred = preferredLocale === alternateLocale
 
@@ -37,10 +38,10 @@ export function LanguageSwitcher({
         'flex items-center gap-2',
         'text-sm',
         isPreferred
-          ? 'text-accent font-medium' // Emphasize preferred locale
+          ? 'font-medium text-accent' // Emphasize preferred locale
           : 'text-foreground/60',
-        'hover:text-foreground transition-colors duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-md',
+        'transition-colors duration-200 hover:text-foreground',
+        'rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
         className
       )}
       aria-label={`Read this post in ${alternateLocale === 'tr' ? 'Turkish' : 'English'}`}
