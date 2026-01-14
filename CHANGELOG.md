@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1] - 2026-01-14
+
+### Added
+- TypeScript version of blog date update script (`scripts/update-blog-dates.ts`)
+- `update-blog-dates` npm script command for easy blog date management
+- TypeScript type definitions for blog post file operations
+
+### Changed
+- Converted blog date update script from JavaScript to TypeScript for better type safety
+- Added tsx as dev dependency for running TypeScript scripts directly
+- Updated all blog post dates to be distributed one per day starting from 2026-01-14 going backwards
+
+### Technical
+- Script now uses proper TypeScript types and interfaces
+- Improved type safety for file operations and date handling
+- Script automatically sorts posts by creation time (newest first) and assigns dates accordingly
+
 ## [0.8.0] - 2025-01-27
 
 ### Added

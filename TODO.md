@@ -710,3 +710,11 @@ All phases of the notebook design refinement have been completed:
 - ✅ Phase 3: Standardize Typography
 - ✅ Phase 4: Fix Asymmetric Padding
 - ✅ Phase 5: Create Distinct Component Styles
+
+### Blog Date Management Script
+- [x] Convert blog date update script from JavaScript to TypeScript
+- [x] Add TypeScript types and interfaces for type safety
+- [x] Install tsx as dev dependency for running TypeScript scripts
+- [x] Add `update-blog-dates` command to package.json
+- [x] Update blog post dates starting from 2026-01-14 going backwards (one post per day)
+- [x] Ensure latest created blog post gets the latest date
