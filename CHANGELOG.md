@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.3] - 2026-01-14
+
+### Fixed
+- **Persistent Badge Borders**: Added explicit Tailwind utility overrides to completely remove any inherited badge styles from location and date elements
+  - Added `bg-transparent border-0 rounded-none p-0 m-0` utilities to all location/date elements in Experience Item component
+  - Used `cn()` utility for proper className composition following project patterns
+  - Ensures no borders, backgrounds, padding, or margins are applied regardless of CSS specificity or inheritance
+  - Verified no conflicting global CSS rules or Tailwind plugin conflicts
+
+### Technical
+- Updated `components/resume/experience-item.tsx` with explicit style overrides using Tailwind utilities
+- Investigated and verified no global CSS rules, Tailwind typography plugin, or parent component styles causing conflicts
+- All changes maintain responsive behavior, text styling, and theme compatibility
+- Code quality checks passed (TypeScript, ESLint, Prettier)
+
 ## [0.8.2] - 2026-01-14
 
 ### Changed

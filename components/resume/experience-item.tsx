@@ -69,20 +69,40 @@ export function ExperienceItem({
           </p>
           {/* Mobile: location and date together */}
           <div className="flex items-center gap-2 md:hidden">
-            <span className="text-xs text-foreground/70 sm:text-sm">
+            <span
+              className={cn(
+                'bg-transparent border-0 rounded-none p-0 m-0',
+                'text-xs text-foreground/70 sm:text-sm'
+              )}
+            >
               {location}
             </span>
-            <span className="text-xs text-foreground/70 sm:text-sm">
+            <span
+              className={cn(
+                'bg-transparent border-0 rounded-none p-0 m-0',
+                'text-xs text-foreground/70 sm:text-sm'
+              )}
+            >
               {startDate} - {endDate}
             </span>
           </div>
           {/* Desktop: location only */}
-          <p className="hidden text-xs text-foreground/70 sm:text-sm md:block">
+          <p
+            className={cn(
+              'bg-transparent border-0 rounded-none p-0 m-0',
+              'hidden text-xs text-foreground/70 sm:text-sm md:block'
+            )}
+          >
             {location}
           </p>
         </div>
         {/* Desktop: date on the right */}
-        <div className="mt-2 hidden text-xs font-semibold text-foreground/70 sm:text-sm md:ml-4 md:mt-0 md:block md:text-right md:text-base">
+        <div
+          className={cn(
+            'bg-transparent border-0 rounded-none p-0',
+            'mt-2 hidden text-xs font-semibold text-foreground/70 sm:text-sm md:ml-4 md:mt-0 md:block md:text-right md:text-base'
+          )}
+        >
           {startDate} - {endDate}
         </div>
       </div>

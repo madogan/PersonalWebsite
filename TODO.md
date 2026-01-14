@@ -905,3 +905,170 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify code is properly formatted
 - [x] Verify no unused code or imports
 - [x] Verify no runtime errors or warnings
+
+## Investigate and Remove Persistent Badge Borders
+
+### Phase 1: CSS Source Audit
+
+#### Task 1.1: Check Global CSS for Card Child Styles
+- [x] Search for CSS rules targeting `.loose-leaf-card span` or `.loose-leaf-card p`
+- [x] Check for `@apply` directives that might add badge styles
+- [x] Review `.loose-leaf-card > *` rules (line 443) - verify only sets position and z-index
+- [x] Check for any `@layer` rules that might add default styles
+- [x] Search for CSS rules with selectors like `.loose-leaf-card span`, `.loose-leaf-card p`, `.loose-leaf-card [class*="badge"]`
+- [x] Verify no global CSS rules targeting span/p inside loose-leaf-card with badge styles
+- [x] Verify no @apply directives adding badge styles
+- [x] Verify no inherited styles from parent selectors
+- [x] Verify `.loose-leaf-card > *` rule only affects positioning
+
+#### Task 1.2: Check Tailwind Typography Plugin
+- [x] Review `@tailwindcss/typography` plugin configuration in `tailwind.config.ts`
+- [x] Check for `prose` classes or typography defaults
+- [x] Verify if typography plugin adds styles to span/p elements
+- [x] Check for any custom prose configurations
+- [x] Verify typography plugin not adding unwanted styles
+- [x] Verify no prose classes applied to experience section
+- [x] Verify typography defaults don't conflict
+
+#### Task 1.3: Check Parent Component Styles
+- [x] Review parent component className props in `components/home/experience-section.tsx`
+- [x] Review parent component className props in `components/resume/resume-section.tsx`
+- [x] Check for any wrapper divs with styles
+- [x] Verify no inline styles or style props
+- [x] Check for CSS modules or styled components
+- [x] Verify no dynamic class injection or runtime style manipulation
+- [x] Verify no parent component styles affecting children
+- [x] Verify no wrapper divs with badge-related classes
+- [x] Verify no inline styles or style props
+- [x] Verify no runtime class manipulation
+
+#### Task 1.4: Check for Browser Extensions and Injected Styles
+- [ ] Inspect element in browser DevTools
+- [ ] Check for styles marked as "user agent stylesheet" (browser defaults)
+- [ ] Look for styles from browser extensions (often marked in DevTools)
+- [ ] Check if styles are being injected by ad blockers, dark mode extensions, developer tools, or accessibility extensions
+- [ ] Test in incognito/private mode (disables most extensions)
+- [ ] Test in different browser (Chrome, Firefox, Safari, Edge)
+- [ ] Identify if styles come from browser extensions
+- [ ] Test in incognito mode (extensions disabled)
+- [ ] Test in multiple browsers
+- [ ] Document source of injected styles if found
+
+### Phase 2: Browser DevTools Investigation
+
+#### Task 2.1: Inspect Computed Styles
+- [ ] Use browser DevTools (F12) to inspect location/date elements
+- [ ] Right-click on element → "Inspect" or use element picker
+- [ ] Check Computed Styles tab for all applied CSS properties
+- [ ] Look specifically for background-color, background, border, border-*, border-radius, padding properties
+- [ ] Identify which CSS rules are adding these properties
+- [ ] Note the source file and line number of conflicting rules
+- [ ] Check if styles come from User Agent stylesheet, Global CSS, Tailwind utilities, or Browser extensions
+- [ ] Identify exact CSS properties causing borders/backgrounds
+- [ ] Identify source file(s) of conflicting rules
+- [ ] Document specificity of conflicting selectors
+- [ ] Check for browser extension interference
+
+#### Task 2.2: Check CSS Cascade and Specificity
+- [ ] In DevTools, review the Styles panel (not just Computed)
+- [ ] Check CSS specificity scores for conflicting rules
+- [ ] Look for `!important` declarations (red underline in DevTools)
+- [ ] Verify cascade order: inline > ID > class > element > universal
+- [ ] Identify which rule is winning the cascade
+- [ ] Check if styles are being applied via pseudo-classes, media queries, or CSS custom properties
+- [ ] Understand why certain styles are winning
+- [ ] Identify if specificity needs to be increased
+- [ ] Determine if !important is needed (last resort)
+- [ ] Check for pseudo-class and media query conflicts
+
+### Phase 3: Code-Level Fixes
+
+#### Task 3.1: Add Explicit Style Overrides Using Tailwind Utilities
+- [x] Use `cn()` utility from `@/lib/utils` for className composition (follows project pattern)
+- [x] Add explicit Tailwind utility classes to location/date elements:
+  - `bg-transparent` - explicitly remove backgrounds
+  - `border-0` - explicitly remove borders
+  - `rounded-none` - explicitly remove border radius
+  - `p-0` - explicitly remove padding
+  - `m-0` - explicitly remove margins (if needed)
+- [x] Avoid `!important` - Use Tailwind's specificity through utility classes first
+- [x] Only use `!important` as absolute last resort with clear documentation
+- [x] Preserve existing text styling classes (`text-xs`, `text-foreground/70`, etc.)
+- [x] Apply to mobile location/date spans (lines 72-77)
+- [x] Apply to desktop location paragraph (line 80)
+- [x] Apply to desktop date div (line 85)
+- [x] Verify styles explicitly override any global rules using Tailwind utilities
+- [x] Verify `cn()` utility used for className composition (project pattern)
+- [x] Verify borders and backgrounds completely removed
+- [x] Verify text remains readable and properly styled
+- [x] Verify no `!important` used unless absolutely necessary and documented
+
+#### Task 3.2: Remove Conflicting Global CSS Rules
+- [ ] Remove or modify any global CSS rules causing conflicts in `app/globals.css`
+- [ ] Update `.loose-leaf-card > *` rules if they add unwanted styles
+- [ ] Remove any @apply directives that add badge styles
+- [ ] Ensure no base styles for span/p inside cards
+- [ ] Verify no conflicting global CSS rules remain
+- [ ] Verify card child elements have clean base styles
+- [ ] Verify no unintended style inheritance
+
+#### Task 3.3: Add Targeted CSS Reset (If Tailwind Utilities Fail)
+- [ ] Only if Step 3.1 (Tailwind utilities) fails: Add targeted CSS reset in global CSS
+- [ ] Use specific selectors: `.loose-leaf-card span[data-metadata]` or similar data attribute pattern
+- [ ] Prefer data attributes for scoping rather than complex selectors
+- [ ] Ensure reset has appropriate specificity (higher than conflicting rules)
+- [ ] Document why global CSS reset is needed (should be rare)
+- [ ] Use `@layer utilities` to ensure proper Tailwind integration
+- [ ] Alternative: Add `data-metadata` attribute to location/date elements and use Tailwind's arbitrary variants
+- [ ] Verify CSS reset only added if Tailwind utilities insufficient
+- [ ] Verify reset uses data attributes or specific selectors for scoping
+- [ ] Verify reset doesn't break other components
+- [ ] Verify reset is properly scoped and documented
+
+### Phase 4: Build and Cache Investigation
+
+#### Task 4.1: Clear All Build Caches
+- [ ] Stop dev server if running
+- [ ] Delete `.next` directory (Next.js build cache)
+- [ ] Delete `node_modules/.cache` if exists
+- [ ] Clear Tailwind CSS cache (usually in `.next` or `node_modules/.cache`)
+- [ ] Optional: Run `pnpm clean-install.sh` script if available
+- [ ] Restart dev server: `pnpm dev`
+- [ ] Verify all caches cleared
+- [ ] Verify fresh build generated
+- [ ] Verify styles reflect code changes
+- [ ] Verify dev server restarted successfully
+
+#### Task 4.2: Verify Production Build
+- [ ] Run `pnpm build` to create production build
+- [ ] Check built CSS files for badge-related classes
+- [ ] Verify no unexpected classes in output
+- [ ] Test production build locally
+- [ ] Verify production build doesn't include badge classes
+- [ ] Verify built CSS matches source code
+- [ ] Verify production build displays correctly
+
+### Phase 5: Alternative Solutions
+
+#### Task 5.1: Use CSS Modules (Last Resort - Not Recommended)
+- [ ] Only if all previous steps fail: Create CSS module (project doesn't currently use CSS modules)
+- [ ] Use scoped styles to override global rules
+- [ ] Import and apply module classes with TypeScript support
+- [ ] Note: This deviates from project's Tailwind-first approach
+- [ ] Document why CSS modules are necessary
+- [ ] Verify CSS module only created if Tailwind utilities and global CSS fail
+- [ ] Verify module successfully isolates styles
+- [ ] Verify no style conflicts with global CSS
+- [ ] Verify component renders correctly
+- [ ] Verify deviation from project pattern is documented
+
+#### Task 5.2: Use Inline Styles (Absolute Last Resort)
+- [ ] Only if all other solutions fail: Apply inline styles using React `style` prop
+- [ ] Use explicit CSS values: `style={{ background: 'transparent', border: 'none', borderRadius: 0, padding: 0 }}`
+- [ ] Override any CSS cascade issues
+- [ ] Strongly document why inline styles are necessary (should be extremely rare)
+- [ ] Consider this a temporary workaround until root cause is fixed
+- [ ] Verify inline styles only used if all other methods fail
+- [ ] Verify borders and backgrounds removed
+- [ ] Verify solution is thoroughly documented with root cause analysis
+- [ ] Verify plan to migrate away from inline styles is documented
