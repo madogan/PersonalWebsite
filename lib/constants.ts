@@ -1,4 +1,4 @@
-export const VERSION = '0.8.1'
+export const VERSION = '0.8.2'
 
 export const siteConfig = {
   name: 'Personal Website',
@@ -17,4 +17,3 @@ export const navItems = [
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ] as const
-
