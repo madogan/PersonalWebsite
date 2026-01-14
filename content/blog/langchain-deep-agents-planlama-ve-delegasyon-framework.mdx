@@ -1,0 +1,73 @@
+---
+title: "LangChain Deep Agents: Karmaşık Görevler İçin Planlama ve Delegasyon Framework'ü"
+description: "LangChain Deep Agents ile otonom araştırma süreçlerini otomatize edin. Planlama, bilgisayar erişimi ve alt ajan delegasyonu gibi yeteneklerin nasıl entegre edileceğini öğrenin."
+date: "2026-01-20"
+tags: ["AI", "LangChain", "Agents", "Machine Learning", "Automation", "Framework"]
+locale: "tr"
+---
+
+# Giriş
+
+Yapay zeka ajanları geliştirirken karşılaşılan en büyük zorluklardan biri, ajanın karmaşık bir görevi planlaması, araçları doğru sırayla kullanması ve "sonsuz döngüye" girmeden sonuç üretmesidir. LangChain tarafından geliştirilen Deep Agents, bu süreci standartlaştıran açık kaynaklı bir "harness" (koşum takımı) sunar. Bu makalede, otonom araştırma süreçlerini otomatize etmek için planlama, bilgisayar erişimi ve alt ajan delegasyonu gibi yeteneklerin nasıl entegre edileceğini öğreneceksiniz.
+
+## Temel Çıkarımlar
+
+- **Açık Kaynaklı Altyapı**: Deep Agents; planlama, dosya sistemi erişimi ve alt ajan yönetimi için hazır araçlar sunan özelleştirilebilir bir framework'tür.
+
+- **Bağlam İzolasyonu**: Karmaşık görevler, ana ajanın bellek (context) sınırlarını zorlamamak için alt ajanlara (sub-agents) delege edilebilir.
+
+- **Hata Önleme (Spin-out Prevention)**: Ajanın gereksiz araç çağrıları yapmasını önlemek için bütçeleme ve durdurma kuralları uygulanabilir.
+
+- **Middleware Desteği**: Özetleme, insan onayı ve token yönetimi gibi işlemler ara katman yazılımları ile otomatikleştirilir.
+
+## Deep Agents Nedir ve Neden Önemlidir?
+
+Deep Agents, popüler yapay zeka ajanlarının (Claude Code, MemGPT vb.) kullandığı planlama ve bilgisayar etkileşimi gibi yetenekleri her geliştiricinin kullanımına açan bir yapıdır. Geleneksel basit sohbet botlarının aksine, bu sistemler kendi yapılacaklar listesini oluşturabilir ve dosya sistemi üzerinde operasyon yürütebilir.
+
+Sistem, LangGraph üzerine inşa edilmiştir ve bu sayede ajanın tüm adımları bir "state" (durum) nesnesi içinde saklanır. Bu yapı, ajanın geçmişteki hatalarından ders çıkarmasını ve karmaşık araştırma görevlerini mantıklı bir sırayla tamamlamasını sağlar.
+
+## Temel Araç Setleri ve Atomik Yetenekler
+
+Deep Agents, kutudan çıktığı haliyle ajana geniş bir yetki alanı tanır. Bu araçlar, ajanın çevreyle etkileşime girmesini sağlayan temel taşlarıdır:
+
+- **Planlama**: `write_to_dos` ve `read_to_dos` araçları ile ajan kendi iş akışını yönetir.
+
+- **Dosya Sistemi**: `read_file`, `write_file` ve `edit_file` komutları ile verileri kalıcı hale getirir veya analiz eder.
+
+- **Kabuk Komutları**: `execute_shell` ile terminal üzerinden dış dünya ile etkileşime geçer.
+
+- **Delegasyon**: `task_tool` ile iş yükünü başka uzman ajanlara aktarır.
+
+## Alt Ajanlar (Sub-agents) ile Bağlam İzolasyonu
+
+Araştırma görevleri genellikle yüksek miktarda veri ve token tüketimi gerektirir. Deep Agents, bu yükü yönetmek için alt ajan delegasyonu yöntemini kullanır. Ana ajan, spesifik bir soruyu araştırması için bir alt ajan oluşturur.
+
+Alt ajan, web aramalarını yapar ve bulguları sentezleyerek ana ajana sadece sonucu döndürür. Bu yöntem, ana ajanın "context window" (bağlam penceresi) kapasitesinin dolmasını engeller ve ajanın odak noktasını korur.
+
+## Middleware ve Süreç Denetimi
+
+Ajanların döngüsel çalışması (agent loop), kontrol edilmediğinde maliyetli ve verimsiz olabilir. Deep Agents, bu süreci yönetmek için middleware (ara katman yazılımı) konseptini kullanır:
+
+- **Summarization Middleware**: Bağlam 170.000 tokenı aştığında otomatik özetleme yaparak belleği temizler.
+
+- **Human-in-the-loop**: Kritik adımlarda ajanı durdurarak insan onayı bekler.
+
+- **Heuristics (Sezgisel Kurallar)**: "Sonsuz döngüleri" (spin-out) önlemek için araç çağrısı sayısı sınırlandırılabilir. Ajanın yeterli bilgiye ulaştığında durması açıkça komutlarla belirtilir.
+
+## Nasıl Uygulanır?
+
+Kendi araştırma ajanınızı kurmak için şu adımları izleyebilirsiniz:
+
+1. **Depoyu Klonlayın**: Deep Agents Quickstart reposunu yerel bilgisayarınıza indirin.
+
+2. **Araçları Tanımlayın**: Arama (Tavily vb.) ve düşünme (think) araçlarını sisteme entegre edin.
+
+3. **Talimatları (Prompts) Optimize Edin**: Ajanınıza bir araştırma görevlisi gibi düşünmesi için spesifik "bütçe" ve "format" kuralları verin.
+
+4. **Sunucuyu Başlatın**: `langraph dev` komutu ile yerel bir LangGraph sunucusu kurun ve arayüz üzerinden testlerinizi gerçekleştirin.
+
+## Sonuç
+
+Deep Agents, otonom sistemlerin sadece metin üretmekle kalmayıp, planlama ve uygulama yapabilen profesyonel asistanlara dönüşmesini sağlıyor. Planlama yetenekleri, dosya erişimi ve akıllı middleware yapısı sayesinde, teknik ekipler artık daha güvenilir ve ölçeklenebilir yapay zeka iş akışları kurgulayabilir.
+
+**Kaynak**: [Build a Research Agent with Deep Agents](https://www.youtube.com/watch?v=example)
