@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4] - 2026-01-14
+
+### Changed
+- **UI Refinement**: Removed borders from all heading elements (h1-h6) for a cleaner, more minimal appearance
+  - Removed `pencil-divider` class and border utilities from ResumeSection h2 headings
+  - Removed `pencil-divider` class and border utilities from MDX h2 headings in blog posts
+  - Refactored ResumeSection to use `cn()` utility for className composition (project pattern consistency)
+  - Removed padding-bottom classes (`pb-3`, `pb-2`) that were only used for border spacing
+  - Preserved all typography, spacing, and responsive styling
+  - Non-heading elements (dividers, sections, hr) retain `pencil-divider` class for decorative purposes
+
+### Technical
+- Updated `components/resume/resume-section.tsx` to remove borders and use `cn()` utility
+- Updated `components/blog/mdx-components.tsx` to remove borders from h2 component
+- All changes maintain responsive behavior, typography, and theme compatibility
+- Code quality checks passed (TypeScript, ESLint, Prettier)
+
 ## [0.8.3] - 2026-01-14
 
 ### Fixed

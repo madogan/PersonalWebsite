@@ -908,9 +908,11 @@ All phases of the notebook design refinement have been completed:
 
 ## Investigate and Remove Persistent Badge Borders
 
-### Phase 1: CSS Source Audit
+**Status**: ✅ Primary fix completed - Explicit Tailwind utility overrides added. Remaining tasks are optional verification steps.
 
-#### Task 1.1: Check Global CSS for Card Child Styles
+### Phase 1: CSS Source Audit ✅
+
+#### Task 1.1: Check Global CSS for Card Child Styles ✅
 - [x] Search for CSS rules targeting `.loose-leaf-card span` or `.loose-leaf-card p`
 - [x] Check for `@apply` directives that might add badge styles
 - [x] Review `.loose-leaf-card > *` rules (line 443) - verify only sets position and z-index
@@ -921,7 +923,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no inherited styles from parent selectors
 - [x] Verify `.loose-leaf-card > *` rule only affects positioning
 
-#### Task 1.2: Check Tailwind Typography Plugin
+#### Task 1.2: Check Tailwind Typography Plugin ✅
 - [x] Review `@tailwindcss/typography` plugin configuration in `tailwind.config.ts`
 - [x] Check for `prose` classes or typography defaults
 - [x] Verify if typography plugin adds styles to span/p elements
@@ -930,7 +932,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no prose classes applied to experience section
 - [x] Verify typography defaults don't conflict
 
-#### Task 1.3: Check Parent Component Styles
+#### Task 1.3: Check Parent Component Styles ✅
 - [x] Review parent component className props in `components/home/experience-section.tsx`
 - [x] Review parent component className props in `components/resume/resume-section.tsx`
 - [x] Check for any wrapper divs with styles
@@ -981,9 +983,9 @@ All phases of the notebook design refinement have been completed:
 - [ ] Determine if !important is needed (last resort)
 - [ ] Check for pseudo-class and media query conflicts
 
-### Phase 3: Code-Level Fixes
+### Phase 3: Code-Level Fixes ✅
 
-#### Task 3.1: Add Explicit Style Overrides Using Tailwind Utilities
+#### Task 3.1: Add Explicit Style Overrides Using Tailwind Utilities ✅
 - [x] Use `cn()` utility from `@/lib/utils` for className composition (follows project pattern)
 - [x] Add explicit Tailwind utility classes to location/date elements:
   - `bg-transparent` - explicitly remove backgrounds
@@ -1072,3 +1074,103 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify borders and backgrounds removed
 - [ ] Verify solution is thoroughly documented with root cause analysis
 - [ ] Verify plan to migrate away from inline styles is documented
+
+## Remove Borders from All Headings
+
+### Phase 1: Component Audit
+
+#### Task 1.1: Identify All Heading Elements with Borders
+- [ ] Search codebase for all `<h1>` through `<h6>` elements
+- [ ] Identify headings with `pencil-divider` class
+- [ ] Identify headings with border utilities (`border-b`, `border-b-2`, `border-t`, etc.)
+- [ ] Document all affected components
+- [ ] Complete list of heading elements with borders
+- [ ] All affected components identified
+- [ ] No headings missed in audit
+
+#### Task 1.2: Verify Global CSS Heading Styles
+- [ ] Review global h1-h6 styles (lines 140-171) in `app/globals.css`
+- [ ] Verify no border styles in global heading definitions
+- [ ] Check if `.pencil-divider` class affects headings globally
+- [ ] Document any global border styles affecting headings
+- [ ] Global heading styles reviewed
+- [ ] No border styles in global h1-h6 definitions
+- [ ] `.pencil-divider` class usage understood
+
+### Phase 2: Remove Borders from Component Headings
+
+#### Task 2.1: Update ResumeSection Component
+- [ ] Remove `pencil-divider` class from h2 element (line 16)
+- [ ] Remove `border-b-2 border-notebook-divider` classes from h2 element
+- [ ] Remove `pb-3` padding-bottom (was only for border spacing)
+- [ ] Refactor to use `cn()` utility for className composition
+- [ ] Group classes logically: spacing, typography, responsive
+- [ ] Verify `pencil-divider` class removed
+- [ ] Verify `border-b-2 border-notebook-divider` classes removed
+- [ ] Verify `pb-3` removed
+- [ ] Verify `cn()` utility used for className composition
+- [ ] Verify all typography and spacing classes preserved
+- [ ] Verify component renders without borders
+- [ ] Verify no TypeScript errors
+- [ ] Verify spacing remains appropriate after border removal
+
+#### Task 2.2: Update MDX Components h2
+- [ ] Remove `pencil-divider` class from h2 component (line 20)
+- [ ] Remove `border-b border-notebook-divider` classes from h2 component
+- [ ] Remove `pb-2` padding-bottom (was only for border spacing)
+- [ ] Preserve all other classes
+- [ ] Group classes logically: spacing, typography, responsive, alignment
+- [ ] Verify `pencil-divider` class removed from h2
+- [ ] Verify `border-b border-notebook-divider` classes removed
+- [ ] Verify `pb-2` removed
+- [ ] Verify all typography and spacing classes preserved
+- [ ] Verify `cn()` utility already in use
+- [ ] Verify MDX h2 renders without borders in blog posts
+- [ ] Verify no TypeScript errors
+- [ ] Verify spacing remains appropriate after border removal
+
+#### Task 2.3: Verify Other Heading Elements
+- [ ] Check h1, h3, h4, h5, h6 elements in MDX components
+- [ ] Search for any other heading elements with border classes
+- [ ] Verify no other components have headings with borders
+- [ ] Document any findings
+- [ ] Verify all h1-h6 elements checked
+- [ ] Verify no other headings have border classes
+- [ ] Verify complete audit documented
+
+### Phase 3: Preserve Non-Heading Elements
+
+#### Task 3.1: Verify Non-Heading pencil-divider Usage
+- [ ] Verify `pencil-divider` class is NOT removed from non-heading elements
+- [ ] Confirm dividers, sections, and hr elements keep their borders
+- [ ] Document that `pencil-divider` remains for non-heading decorative elements
+- [ ] Verify non-heading elements with `pencil-divider` identified
+- [ ] Verify `pencil-divider` class preserved for dividers/sections/hr
+- [ ] Verify no unintended removals
+
+### Phase 4: Testing & Verification
+
+#### Task 4.1: Visual Testing
+- [ ] Test ResumeSection component in browser
+- [ ] Verify h2 headings have no borders
+- [ ] Test MDX blog posts
+- [ ] Verify h2 headings in blog posts have no borders
+- [ ] Check responsive behavior (mobile, tablet, desktop)
+- [ ] Verify theme compatibility (light/dark mode)
+- [ ] Verify all headings display without borders
+- [ ] Verify typography remains correct
+- [ ] Verify spacing remains appropriate
+- [ ] Verify responsive behavior maintained
+- [ ] Verify theme compatibility verified
+
+#### Task 4.2: Code Quality Checks
+- [ ] Run TypeScript type checking: `pnpm type-check`
+- [ ] Run ESLint: `pnpm lint`
+- [ ] Run Prettier formatting: `pnpm format`
+- [ ] Verify no console warnings or errors
+- [ ] Check for unused imports or variables
+- [ ] Verify no TypeScript errors
+- [ ] Verify no ESLint warnings or errors
+- [ ] Verify code properly formatted
+- [ ] Verify no unused code or imports
+- [ ] Verify no runtime errors or warnings

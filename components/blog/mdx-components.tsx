@@ -17,7 +17,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <h2
         className={cn(
           'mb-4 mt-8 text-3xl font-bold tracking-tight md:text-4xl',
-          'pencil-divider border-b border-notebook-divider pb-2 text-left font-serif text-foreground',
+          'text-left font-serif text-foreground',
           className
         )}
         {...props}
