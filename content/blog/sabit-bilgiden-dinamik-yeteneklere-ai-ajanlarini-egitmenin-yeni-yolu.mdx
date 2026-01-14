@@ -1,0 +1,67 @@
+---
+title: "Sabit Bilgiden Dinamik Yeteneklere: AI Ajanlarını Eğitmenin Yeni Yolu"
+description: "AI ajanlarının geçmiş etkileşimlerinden nasıl öğrenebileceğini ve Deepagents ile sürekli öğrenme döngüsünü nasıl oluşturabileceğinizi keşfedin."
+date: "2026-01-20"
+tags: ["AI", "Deepagents", "Machine Learning", "Sürekli Öğrenme", "AI Ajanları", "Yapay Zeka"]
+locale: "tr"
+---
+
+# Giriş
+
+Yapay zeka (AI) ajanları ile insanlar arasındaki en belirgin farklardan biri, sürekli öğrenme kapasitesidir. İnsanlar deneyimlerinden ders çıkarıp kendilerini geliştirebilirken, geleneksel AI ajanları genellikle sabit bir bilgi kümesiyle sınırlı kalır. Bu makalede, Deepagents kullanarak ajanların geçmiş etkileşimlerinden nasıl yeni beceriler öğrenebileceğini ve operasyonel verimliliği nasıl artırabileceğinizi inceleyeceğiz.
+
+## Temel Çıkarımlar
+
+- **Sürekli Öğrenme Döngüsü**: Ajanlar, gerçekleştirdikleri görevlerin izlerini (traces) analiz ederek kendilerini geliştirebilir.
+
+- **Yansıma (Reflection)**: Geçmiş etkileşimler üzerinden yapılan analizler; bellek güncellemeleri, talimat optimizasyonu ve yeni beceri oluşumu sağlar.
+
+- **Beceri Tanımı**: Beceriler, ajanın belirli görevleri yerine getirmesi için gerekli talimatları içeren yapılandırılmış dosyalardır.
+
+- **Otomatik Gelişim**: Deepagents CLI, manuel müdahale gerektirmeden yeni operasyonel prosedürler (SOP) oluşturabilir.
+
+# Geleneksel Öğrenme ve Bağlam İçi Öğrenme
+
+AI sistemlerini eğitmenin iki ana yolu vardır. Birincisi, modelin ağırlıklarını güncellemeyi içeren ve oldukça maliyetli olan klasik eğitim yöntemidir. İkincisi ise, günümüzde giderek daha popüler hale gelen bağlam içi öğrenme (in-context learning) yaklaşımıdır.
+
+Geniş bağlam pencereleri sayesinde ajanlar, kendilerine sunulan verileri gerçek zamanlı olarak işleyebilir. Ancak bu bilginin kalıcı hale gelmesi için "yansıma" adı verilen bir sürece ihtiyaç duyulur. Bu süreçte ajan, geçmişteki performansını değerlendirerek çıkarımlarda bulunur.
+
+# Sürekli Öğrenme Döngüsünün Bileşenleri
+
+Deepagents ekosisteminde sürekli öğrenme üç ana sütun üzerine inşa edilmiştir:
+
+1. **Bellek Güncelleme**: Geçmiş deneyimlerden elde edilen olguların veya kullanıcı tercihlerinin kaydedilmesi.
+
+2. **Talimat Optimizasyonu**: Ajanın temel çalışma prensiplerini ve istemlerini (prompts) daha iyi sonuç alacak şekilde güncellemesi.
+
+3. **Beceri Öğrenme**: Belirli bir görevin nasıl yapılacağına dair kalıcı dosyalar (skill.md) oluşturulması.
+
+# Deepagents ile Otomatik Beceri Oluşturma
+
+Bir ajana yeni bir yetenek kazandırmak için kullanılan Skill Creator özelliği, Anthropic tarafından geliştirilen prensiplere dayanır. Bu süreç şu adımlarla gerçekleşir:
+
+1. **Veri Toplama**: Ajanın geçmiş konuşmaları ve işlem kayıtları LangSmith üzerinde izler (traces) olarak saklanır.
+
+2. **Analiz ve Yansıma**: Ajan, bu kayıtları okuyarak "burada ne yapıldı?" ve "bu süreç nasıl standartlaştırılabilir?" sorularına yanıt arar.
+
+3. **Dosya Üretimi**: Analiz sonucunda, ajanın gelecekte kullanabileceği bir skill.md dosyası ve gerekiyorsa yardımcı scriptler otomatik olarak oluşturulur.
+
+4. **Doğrulama**: Oluşturulan beceri, format ve işlevsellik açısından otomatik testlerden geçirilir.
+
+Bu sayede, örneğin karmaşık bir veri çekme işlemini bir kez yapan ajan, bu süreci öğrenerek bir sonraki seferde doğrudan bir "beceri" olarak kullanabilir.
+
+# Nasıl Uygulanır?
+
+Bu sistemi kendi projelerinize entegre etmek için şu adımları izleyebilirsiniz:
+
+1. **Deepagents CLI Kurulumu**: Terminal üzerinden Deepagents kütüphanesini sisteminize dahil edin.
+
+2. **Proje Yapılandırması**: İzlerin kaydedileceği `LANGSMITH_PROJECT` ve ajan kayıtlarının tutulacağı `DEEP_AGENTS_PROJECT` ortam değişkenlerini tanımlayın.
+
+3. **Beceri Oluşturucu Skill'i Ekleme**: Mevcut beceri setinize `skills_creator_skill` dosyasını kopyalayın.
+
+4. **Yansıma Komutu Verme**: Ajana, son oturumdaki verileri incelemesini ve bunları kalıcı bir beceriye dönüştürmesini söyleyin.
+
+# Sonuç
+
+AI ajanlarının statik araçlar olmaktan çıkıp, kurum kültürü ve operasyonel süreçlerle birlikte büyüyen dinamik varlıklara dönüşmesi, iş akışlarında devrim niteliğindedir. Deepagents ve sürekli öğrenme döngüsü, geliştiricilerin her detayı manuel olarak kodlaması yerine, sistemin kendi kendini optimize etmesine olanak tanır.
