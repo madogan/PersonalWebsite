@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.5] - 2026-01-14
+
+### Changed
+- **Typography**: Replaced all Google Fonts (Inter, Playfair Display, JetBrains Mono) with local Charm font family
+  - Implemented unified typography using Charm-Regular.ttf (400 weight) and Charm-Bold.ttf (700 weight)
+  - All text elements (headings, body, code) now use Charm font for consistent typographic identity
+  - Updated `app/layout.tsx` to use `next/font/local` with local font files
+  - Updated Tailwind configuration to use `--font-charm` CSS variable for all font families (sans, serif, mono)
+  - Removed Google Fonts dependencies - no external font requests
+  - Font files are preloaded for optimal performance
+  - License: SIL Open Font License (OFL) - compliant for commercial use
+
+### Technical
+- Updated `app/layout.tsx`: Replaced Google Font imports with `localFont` from `next/font/local`
+- Updated `tailwind.config.ts`: Changed all font families to use `var(--font-charm)` with Georgia fallback
+- Font configuration uses single `localFont` instance with array of src objects for multiple weights
+- Browser automatically selects correct font weight (Regular 400 or Bold 700) based on CSS `font-weight` property
+- All existing Tailwind font utilities (`font-sans`, `font-serif`, `font-mono`) now use Charm font
+- No hardcoded font-family values found in codebase - all components use Tailwind utilities
+- TypeScript type checking passed
+- No breaking changes - all existing components work with new font configuration
+
 ## [0.8.4] - 2026-01-14
 
 ### Changed

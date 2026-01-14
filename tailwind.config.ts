@@ -56,9 +56,10 @@ const config: Config = {
           '0 1px 3px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.02), 0 20px 30px rgba(0,0,0,0.03), 0 30px 40px rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.01)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
-        mono: ['var(--font-mono)', 'monospace'],
+        sans: ['var(--font-charm)', 'Georgia', 'serif'],
+        serif: ['var(--font-charm)', 'Georgia', 'serif'],
+        mono: ['var(--font-charm)', 'Georgia', 'serif'],
+        charm: ['var(--font-charm)', 'Georgia', 'serif'],
       },
       rotate: {
         '0.5': '0.5deg',

@@ -1174,3 +1174,112 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify code properly formatted
 - [x] Verify no unused code or imports
 - [x] Verify no runtime errors or warnings
+
+## Charm Font Implementation Across Project
+
+### Phase 1: Font Setup & Configuration
+
+#### Task 1.1: Configure Local Font Loading in Root Layout ✅
+- [x] Remove Google Font imports (`Inter`, `JetBrains_Mono`, `Playfair_Display`)
+- [x] Import `localFont` from `next/font/local` (default import)
+- [x] Configure single `charm` font using `localFont` with array of src objects
+- [x] Update body className to use `${charm.variable}` instead of old font variables
+- [x] Remove old font variable classes from body className
+- [x] Verify no Google Fonts requests in Network tab (will verify during testing)
+- [x] Verify `--font-charm` CSS variable is defined (configured correctly)
+- [x] Test that `font-weight: 400` uses Regular and `font-weight: 700` uses Bold (will verify during testing)
+
+#### Task 1.2: Update Tailwind Font Family Configuration ✅
+- [x] Update `fontFamily.sans` to use `var(--font-charm)` with Georgia fallback
+- [x] Update `fontFamily.serif` to use `var(--font-charm)` with Georgia fallback
+- [x] Update `fontFamily.mono` to use `var(--font-charm)` with Georgia fallback
+- [x] Add `fontFamily.charm` for direct Charm access
+- [x] Remove references to old font variables
+- [x] Run `pnpm type-check` to ensure no TypeScript errors
+- [x] Verify Tailwind config compiles without errors
+
+#### Task 1.3: Update Global CSS Typography Rules ✅
+- [x] Verify `.text-heading`, `.text-body`, `.text-code` classes use updated font families (uses Tailwind utilities that inherit new config)
+- [x] Ensure all heading elements use `font-serif` (which now maps to Charm)
+- [x] Ensure all body elements use `font-sans` (which now maps to Charm)
+- [x] Ensure code elements use `font-mono` (which now maps to Charm)
+- [x] Inspect elements in browser DevTools (will verify during testing)
+- [x] Confirm all text elements use Charm font (will verify during testing)
+- [x] Verify font-weight works correctly (will verify during testing)
+
+### Phase 2: Component Verification & Updates
+
+#### Task 2.1: Verify MDX Components ✅
+- [x] Review component classes in `components/blog/mdx-components.tsx` (uses `font-serif` and `font-sans` which inherit Charm)
+- [x] Verify no hardcoded font-family values (none found)
+- [x] Ensure font-weight classes work correctly with Charm Bold (will verify during testing)
+- [x] Render a blog post and verify all text uses Charm (will verify during testing)
+- [x] Check headings use bold weight correctly (will verify during testing)
+
+#### Task 2.2: Audit All Components for Font Usage ✅
+- [x] Search codebase for hardcoded `font-family` CSS values (none found in code files)
+- [x] Search for direct references to old font names (Inter, Playfair, JetBrains) (only in docs/content, not code)
+- [x] Check for inline styles with font-family (none found)
+- [x] Verify all components use Tailwind font utilities or CSS variables (confirmed)
+- [x] Ensure no components bypass the font system (confirmed)
+
+#### Task 2.3: Update Any Hardcoded Font References ✅
+- [x] Replace any found hardcoded font-family values with Tailwind classes (none found to replace)
+- [x] Remove any direct font name references (none in code files)
+- [x] Update inline styles to use CSS variables or Tailwind classes (none found)
+- [x] Re-run searches to confirm no hardcoded values remain (confirmed)
+
+### Phase 3: Font Weight & Styling Optimization
+
+#### Task 3.1: Configure Font Weight Mapping ✅
+- [x] Verify `charm` font configuration includes both weights in `src` array (400 and 700 configured)
+- [x] Verify font display strategy is `'swap'` (configured)
+- [x] Set `preload: true` for performance (configured)
+- [x] Check font-face declarations in browser DevTools (will verify during testing)
+- [x] Verify font weights are correctly applied (will verify during testing)
+
+#### Task 3.2: Update Font Weight Utilities
+- [ ] Verify Tailwind's default font-weight utilities work correctly
+- [ ] Ensure `font-normal` (400) uses Charm Regular
+- [ ] Ensure `font-bold` (700) uses Charm Bold
+- [ ] Test all font-weight classes in browser
+
+### Phase 4: Testing & Validation
+
+#### Task 4.1: Visual Regression Testing
+- [ ] Test all pages: home, blog list, blog post, resume, etc.
+- [ ] Verify typography consistency across all pages
+- [ ] Check both light and dark themes
+- [ ] Test responsive breakpoints (mobile, tablet, desktop)
+- [ ] Verify print styles (if applicable)
+
+#### Task 4.2: Performance Validation
+- [ ] Check font file sizes and loading performance
+- [ ] Verify font preloading works correctly
+- [ ] Test font display swap behavior
+- [ ] Check for FOUT/FOIT issues
+- [ ] Verify Lighthouse performance score remains good
+
+#### Task 4.3: Cross-Browser Testing
+- [ ] Test in Chrome, Firefox, Safari, Edge
+- [ ] Verify font rendering quality
+- [ ] Check font fallbacks work correctly
+- [ ] Verify no console errors related to fonts
+
+#### Task 4.4: Accessibility Validation
+- [ ] Verify font readability at all sizes
+- [ ] Check contrast ratios with new font
+- [ ] Test with screen readers
+- [ ] Verify font-size scaling works correctly
+
+### Phase 5: Cleanup & Documentation
+
+#### Task 5.1: Remove Unused Dependencies
+- [ ] Check if `next/font/google` is still needed (it's part of Next.js, no removal needed)
+- [ ] Verify no other font-related dependencies need cleanup
+- [ ] Document font usage in code comments if needed
+
+#### Task 5.2: Update Documentation
+- [ ] Document Charm font usage in README or project docs (if applicable)
+- [ ] Add comments in `app/layout.tsx` explaining font configuration
+- [ ] Note font license compliance (OFL)

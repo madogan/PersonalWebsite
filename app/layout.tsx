@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono, Playfair_Display } from 'next/font/google'
+import localFont from 'next/font/local'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
@@ -8,25 +8,16 @@ import { NotebookBinding } from '@/components/layout/notebook-binding'
 import { PageTransition } from '@/components/transitions/page-transition'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+// Charm font family - unified typography using local font files
+// License: SIL Open Font License (OFL) - see fonts/OFL.txt
+const charm = localFont({
+  src: [
+    { path: '../fonts/Charm-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../fonts/Charm-Bold.ttf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-charm',
   display: 'swap',
   preload: true,
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-  preload: false, // Less critical, load on demand
-})
-
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-serif',
-  display: 'swap',
-  preload: true, // Important for headings
 })
 
 export const metadata: Metadata = {
@@ -69,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable} paper-texture font-sans antialiased`}
+        className={`${charm.variable} paper-texture font-sans antialiased`}
       >
         <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
