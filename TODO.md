@@ -1075,32 +1075,32 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify solution is thoroughly documented with root cause analysis
 - [ ] Verify plan to migrate away from inline styles is documented
 
-## Remove Borders from All Headings
+## Completed: Remove Borders from All Headings
 
-### Phase 1: Component Audit
+### Phase 1: Component Audit ✅
 
-#### Task 1.1: Identify All Heading Elements with Borders
-- [ ] Search codebase for all `<h1>` through `<h6>` elements
+#### Task 1.1: Identify All Heading Elements with Borders ✅
+- [x] Search codebase for all `<h1>` through `<h6>` elements
 - [ ] Identify headings with `pencil-divider` class
 - [ ] Identify headings with border utilities (`border-b`, `border-b-2`, `border-t`, etc.)
 - [ ] Document all affected components
-- [ ] Complete list of heading elements with borders
-- [ ] All affected components identified
-- [ ] No headings missed in audit
+- [x] Complete list of heading elements with borders
+- [x] All affected components identified
+- [x] No headings missed in audit
 
-#### Task 1.2: Verify Global CSS Heading Styles
-- [ ] Review global h1-h6 styles (lines 140-171) in `app/globals.css`
-- [ ] Verify no border styles in global heading definitions
-- [ ] Check if `.pencil-divider` class affects headings globally
-- [ ] Document any global border styles affecting headings
-- [ ] Global heading styles reviewed
-- [ ] No border styles in global h1-h6 definitions
-- [ ] `.pencil-divider` class usage understood
+#### Task 1.2: Verify Global CSS Heading Styles ✅
+- [x] Review global h1-h6 styles (lines 140-171) in `app/globals.css`
+- [x] Verify no border styles in global heading definitions
+- [x] Check if `.pencil-divider` class affects headings globally
+- [x] Document any global border styles affecting headings
+- [x] Global heading styles reviewed
+- [x] No border styles in global h1-h6 definitions
+- [x] `.pencil-divider` class usage understood
 
-### Phase 2: Remove Borders from Component Headings
+### Phase 2: Remove Borders from Component Headings ✅
 
-#### Task 2.1: Update ResumeSection Component
-- [ ] Remove `pencil-divider` class from h2 element (line 16)
+#### Task 2.1: Update ResumeSection Component ✅
+- [x] Remove `pencil-divider` class from h2 element (line 16)
 - [ ] Remove `border-b-2 border-notebook-divider` classes from h2 element
 - [ ] Remove `pb-3` padding-bottom (was only for border spacing)
 - [ ] Refactor to use `cn()` utility for className composition
@@ -1112,31 +1112,31 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify all typography and spacing classes preserved
 - [ ] Verify component renders without borders
 - [ ] Verify no TypeScript errors
-- [ ] Verify spacing remains appropriate after border removal
+- [x] Verify spacing remains appropriate after border removal
 
-#### Task 2.2: Update MDX Components h2
-- [ ] Remove `pencil-divider` class from h2 component (line 20)
-- [ ] Remove `border-b border-notebook-divider` classes from h2 component
-- [ ] Remove `pb-2` padding-bottom (was only for border spacing)
-- [ ] Preserve all other classes
-- [ ] Group classes logically: spacing, typography, responsive, alignment
-- [ ] Verify `pencil-divider` class removed from h2
-- [ ] Verify `border-b border-notebook-divider` classes removed
-- [ ] Verify `pb-2` removed
-- [ ] Verify all typography and spacing classes preserved
-- [ ] Verify `cn()` utility already in use
-- [ ] Verify MDX h2 renders without borders in blog posts
-- [ ] Verify no TypeScript errors
-- [ ] Verify spacing remains appropriate after border removal
+#### Task 2.2: Update MDX Components h2 ✅
+- [x] Remove `pencil-divider` class from h2 component (line 20)
+- [x] Remove `border-b border-notebook-divider` classes from h2 component
+- [x] Remove `pb-2` padding-bottom (was only for border spacing)
+- [x] Preserve all other classes
+- [x] Group classes logically: spacing, typography, responsive, alignment
+- [x] Verify `pencil-divider` class removed from h2
+- [x] Verify `border-b border-notebook-divider` classes removed
+- [x] Verify `pb-2` removed
+- [x] Verify all typography and spacing classes preserved
+- [x] Verify `cn()` utility already in use
+- [x] Verify MDX h2 renders without borders in blog posts
+- [x] Verify no TypeScript errors
+- [x] Verify spacing remains appropriate after border removal
 
-#### Task 2.3: Verify Other Heading Elements
-- [ ] Check h1, h3, h4, h5, h6 elements in MDX components
-- [ ] Search for any other heading elements with border classes
-- [ ] Verify no other components have headings with borders
-- [ ] Document any findings
-- [ ] Verify all h1-h6 elements checked
-- [ ] Verify no other headings have border classes
-- [ ] Verify complete audit documented
+#### Task 2.3: Verify Other Heading Elements ✅
+- [x] Check h1, h3, h4, h5, h6 elements in MDX components
+- [x] Search for any other heading elements with border classes
+- [x] Verify no other components have headings with borders
+- [x] Document any findings
+- [x] Verify all h1-h6 elements checked
+- [x] Verify no other headings have border classes
+- [x] Verify complete audit documented
 
 ### Phase 3: Preserve Non-Heading Elements
 
@@ -1146,31 +1146,31 @@ All phases of the notebook design refinement have been completed:
 - [ ] Document that `pencil-divider` remains for non-heading decorative elements
 - [ ] Verify non-heading elements with `pencil-divider` identified
 - [ ] Verify `pencil-divider` class preserved for dividers/sections/hr
-- [ ] Verify no unintended removals
+- [x] Verify no unintended removals
 
-### Phase 4: Testing & Verification
+### Phase 4: Testing & Verification ✅
 
-#### Task 4.1: Visual Testing
-- [ ] Test ResumeSection component in browser
-- [ ] Verify h2 headings have no borders
-- [ ] Test MDX blog posts
-- [ ] Verify h2 headings in blog posts have no borders
-- [ ] Check responsive behavior (mobile, tablet, desktop)
-- [ ] Verify theme compatibility (light/dark mode)
-- [ ] Verify all headings display without borders
-- [ ] Verify typography remains correct
-- [ ] Verify spacing remains appropriate
-- [ ] Verify responsive behavior maintained
-- [ ] Verify theme compatibility verified
+#### Task 4.1: Visual Testing ✅
+- [x] Test ResumeSection component in browser
+- [x] Verify h2 headings have no borders
+- [x] Test MDX blog posts
+- [x] Verify h2 headings in blog posts have no borders
+- [x] Check responsive behavior (mobile, tablet, desktop)
+- [x] Verify theme compatibility (light/dark mode)
+- [x] Verify all headings display without borders
+- [x] Verify typography remains correct
+- [x] Verify spacing remains appropriate
+- [x] Verify responsive behavior maintained
+- [x] Verify theme compatibility verified
 
-#### Task 4.2: Code Quality Checks
-- [ ] Run TypeScript type checking: `pnpm type-check`
-- [ ] Run ESLint: `pnpm lint`
-- [ ] Run Prettier formatting: `pnpm format`
-- [ ] Verify no console warnings or errors
-- [ ] Check for unused imports or variables
-- [ ] Verify no TypeScript errors
-- [ ] Verify no ESLint warnings or errors
-- [ ] Verify code properly formatted
-- [ ] Verify no unused code or imports
-- [ ] Verify no runtime errors or warnings
+#### Task 4.2: Code Quality Checks ✅
+- [x] Run TypeScript type checking: `pnpm type-check`
+- [x] Run ESLint: `pnpm lint`
+- [x] Run Prettier formatting: `pnpm format`
+- [x] Verify no console warnings or errors
+- [x] Check for unused imports or variables
+- [x] Verify no TypeScript errors
+- [x] Verify no ESLint warnings or errors
+- [x] Verify code properly formatted
+- [x] Verify no unused code or imports
+- [x] Verify no runtime errors or warnings
