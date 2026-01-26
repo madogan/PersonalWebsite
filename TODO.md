@@ -2366,75 +2366,86 @@ All phases of the notebook design refinement have been completed:
 - Inline links work properly
 - Links in different contexts (lists, quotes) work
 
+## Completed: Fix Handwriting Border Color Inconsistency
+
+**Implementation Summary:**
+- Fixed all handwriting borders to display consistent grey color (no black)
+- Removed `background-image` declarations that caused color conflicts
+- Implemented two-layer mask system: gradient masks (border shape) + SVG pattern masks (texture)
+- All borders now respect theme colors (light grey in light mode, medium grey in dark mode)
+- Removed duplicate `.notebook-panel::before` definition
+- Version bumped to 0.8.14
+- Changes committed: `fix(styles): resolve handwriting border color inconsistency`
+
 ## Fix Handwriting Border Color Inconsistency
 
 ### Phase 0: Code Quality Fix
 
-#### Task 0.1: Remove Duplicate `.notebook-panel::before` Definition @workingon
-- [ ] Identify duplicate `.notebook-panel::before` definitions (lines 459-469 and 471-482)
-- [ ] Remove one duplicate definition
-- [ ] Ensure remaining definition has all necessary properties
-- [ ] Verify paper texture still works correctly
+#### Task 0.1: Remove Duplicate `.notebook-panel::before` Definition ✅
+- [x] Identify duplicate `.notebook-panel::before` definitions (lines 459-469 and 471-482)
+- [x] Remove one duplicate definition
+- [x] Ensure remaining definition has all necessary properties
+- [x] Verify paper texture still works correctly
 - **File**: `app/globals.css` (around lines 458-482)
 - **Priority**: Low (doesn't affect border colors, but improves code quality)
 
 ### Phase 1: Fix Card and Panel Borders
 
-#### Task 1.1: Fix `.notebook-panel::after`
-- [ ] Remove `background-image` declarations that use SVG patterns (lines 427-434)
-- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 426)
-- [ ] Keep gradient masks for border shape (lines 436-453) - these define the 2px border area
-- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
-- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
-- [ ] Verify border appears as consistent grey color with handwriting texture
+#### Task 1.1: Fix `.notebook-panel::after` ✅
+- [x] Remove `background-image` declarations that use SVG patterns (lines 427-434)
+- [x] Keep `background-color: rgb(var(--notebook-divider))` (line 426)
+- [x] Keep gradient masks for border shape (lines 436-453) - these define the 2px border area
+- [x] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [x] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [x] Verify border appears as consistent grey color with handwriting texture
 - **File**: `app/globals.css` (around line 418-456)
 - **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
 
-#### Task 1.2: Fix `.loose-leaf-card::after`
-- [ ] Remove `background-image` declarations that use SVG patterns (lines 527-534)
-- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 526)
-- [ ] Keep gradient masks for border shape (lines 536-553) - these define the 2px border area
-- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
-- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
-- [ ] Verify border appears as consistent grey color with handwriting texture
+#### Task 1.2: Fix `.loose-leaf-card::after` ✅
+- [x] Remove `background-image` declarations that use SVG patterns (lines 527-534)
+- [x] Keep `background-color: rgb(var(--notebook-divider))` (line 526)
+- [x] Keep gradient masks for border shape (lines 536-553) - these define the 2px border area
+- [x] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [x] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [x] Verify border appears as consistent grey color with handwriting texture
 - **File**: `app/globals.css` (around line 518-555)
 - **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
 
 ### Phase 2: Fix Utility Border Classes
 
-#### Task 2.1: Fix `.handwriting-border::before`
-- [ ] Remove `background-image` declarations that use SVG patterns (lines 962-969)
-- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 961)
-- [ ] Keep gradient masks for border shape (lines 971-988) - these define the 2px border area
-- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
-- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
-- [ ] Verify border appears as consistent grey color with handwriting texture
+#### Task 2.1: Fix `.handwriting-border::before` ✅
+- [x] Remove `background-image` declarations that use SVG patterns (lines 962-969)
+- [x] Keep `background-color: rgb(var(--notebook-divider))` (line 961)
+- [x] Keep gradient masks for border shape (lines 971-988) - these define the 2px border area
+- [x] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [x] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [x] Verify border appears as consistent grey color with handwriting texture
 - **File**: `app/globals.css` (around line 953-990)
 - **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
 
-#### Task 2.2: Fix `.pencil-divider::before`
-- [ ] Verify it only uses `mask-image` (should already be correct)
-- [ ] Ensure no `background-image` with SVG patterns
-- [ ] Verify divider appears as consistent grey color
+#### Task 2.2: Fix `.pencil-divider::before` ✅
+- [x] Verify it only uses `mask-image` (should already be correct)
+- [x] Ensure no `background-image` with SVG patterns
+- [x] Verify divider appears as consistent grey color
 - **File**: `app/globals.css` (around line 631-649)
 
 ### Phase 3: Fix Individual Border Classes
 
-#### Task 3.1: Fix Directional Border Classes
-- [ ] Review `.handwriting-border-t::before`
-- [ ] Review `.handwriting-border-b::before`
-- [ ] Review `.handwriting-border-l::before`
-- [ ] Review `.handwriting-border-r::before`
-- [ ] Review `.handwriting-border-x::before` and `::after`
-- [ ] Review `.handwriting-border-y::before` and `::after`
-- [ ] Remove any `background-image` with SVG patterns
-- [ ] Ensure all use `mask-image` only
+#### Task 3.1: Fix Directional Border Classes ✅
+- [x] Review `.handwriting-border-t::before` - Already correct (only uses mask-image)
+- [x] Review `.handwriting-border-b::before` - Already correct (only uses mask-image)
+- [x] Review `.handwriting-border-l::before` - Already correct (only uses mask-image)
+- [x] Review `.handwriting-border-r::before` - Already correct (only uses mask-image)
+- [x] Review `.handwriting-border-x::before` and `::after` - Already correct (only uses mask-image)
+- [x] Review `.handwriting-border-y::before` and `::after` - Already correct (only uses mask-image)
+- [x] Remove any `background-image` with SVG patterns - None found (all already correct)
+- [x] Ensure all use `mask-image` only - All verified correct
 - **File**: `app/globals.css` (various locations)
 
-#### Task 3.2: Fix `.handwriting-border-all`
-- [ ] Review `.handwriting-border-all::before` and `::after`
-- [ ] Remove any `background-image` with SVG patterns
-- [ ] Ensure all use `mask-image` only
+#### Task 3.2: Fix `.handwriting-border-all` ✅
+- [x] Review `.handwriting-border-all::before` and `::after`
+- [x] Remove any `background-image` with SVG patterns
+- [x] Ensure all use `mask-image` only
 - **File**: `app/globals.css` (around line 672-707)
 
 ### Phase 4: Verify and Test

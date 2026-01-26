@@ -679,12 +679,6 @@
     right: 0;
     bottom: 0;
     background-color: rgb(var(--notebook-divider));
-    background-image: 
-      var(--handwriting-border-horizontal),
-      var(--handwriting-border-horizontal);
-    background-repeat: repeat-x, repeat-x;
-    background-position: top, bottom;
-    background-size: auto 1px, auto 1px;
     -webkit-mask-image: var(--handwriting-border-horizontal),
       var(--handwriting-border-horizontal);
     -webkit-mask-repeat: repeat-x, repeat-x;
@@ -708,12 +702,6 @@
     right: 0;
     bottom: 0;
     background-color: rgb(var(--notebook-divider));
-    background-image: 
-      var(--handwriting-border-vertical),
-      var(--handwriting-border-vertical);
-    background-repeat: repeat-y, repeat-y;
-    background-position: left, right;
-    background-size: 1px auto, 1px auto;
     -webkit-mask-image: var(--handwriting-border-vertical),
       var(--handwriting-border-vertical);
     -webkit-mask-repeat: repeat-y, repeat-y;
@@ -955,32 +943,36 @@
     bottom: -5px;
     border-radius: inherit;
     background-color: rgb(var(--notebook-divider));
-    background-image: 
+    /* Use a two-layer mask: gradient masks for border shape + SVG patterns for handwriting texture */
+    -webkit-mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
       var(--handwriting-border-horizontal),
       var(--handwriting-border-horizontal),
       var(--handwriting-border-vertical),
       var(--handwriting-border-vertical);
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-position: top, bottom, left, right;
-    background-size: auto 4px, auto 4px, 4px auto, 4px auto;
-    /* Use a mask to show only the border area (outer 2px) */
-    -webkit-mask-image: 
-      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
-      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
-      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
-      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: top, bottom, left, right;
-    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    -webkit-mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position: top, bottom, left, right, top, bottom, left, right;
+    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
     -webkit-mask-composite: add;
     mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
       linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
       linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
       linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
-      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%);
-    mask-repeat: no-repeat;
-    mask-position: top, bottom, left, right;
-    mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-position: top, bottom, left, right, top, bottom, left, right;
+    mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
     mask-composite: add;
     pointer-events: none;
     z-index: 0;

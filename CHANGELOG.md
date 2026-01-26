@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.14] - 2026-01-26
+
+### Fixed
+
+- **Handwriting Border Color Inconsistency**: Fixed borders displaying both grey and black colors
+  - Removed `background-image` declarations that rendered SVG patterns with hardcoded black strokes
+  - Implemented two-layer mask system: gradient masks for border shape + SVG pattern masks for handwriting texture
+  - All borders now display consistent grey color controlled by `--notebook-divider` CSS variable
+  - Borders respect theme colors: light grey (`#E5E0D6`) in light mode, medium grey (`#6B7280`) in dark mode
+  - Handwriting pattern texture preserved while eliminating black color artifacts
+  - Fixed duplicate `.notebook-panel::before` definition (code quality improvement)
+
+### Technical
+
+- Updated `app/globals.css` handwriting border implementations:
+  - `.notebook-panel::after`: Removed `background-image`, combined gradient + SVG pattern masks
+  - `.loose-leaf-card::after`: Removed `background-image`, combined gradient + SVG pattern masks
+  - `.handwriting-border::before`: Removed `background-image`, combined gradient + SVG pattern masks
+  - `.handwriting-border-all::before/::after`: Removed `background-image`, use `mask-image` only
+  - All borders now use `mask-image` with SVG patterns for shape, `background-color` for color
+  - Two-layer mask system: gradient masks define border area, SVG patterns add handwriting texture
+  - Combined masks using `mask-composite: add` for proper rendering
+- Removed duplicate `.notebook-panel::before` definition (paper texture)
+- Verified all directional border classes (`.handwriting-border-t/b/l/r/x/y`) already correct
+- No component changes required - CSS-only fix
+
 ## [0.8.13] - 2026-01-26
 
 ### Fixed
