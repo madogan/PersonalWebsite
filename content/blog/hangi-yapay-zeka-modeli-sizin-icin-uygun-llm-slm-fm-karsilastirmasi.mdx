@@ -1,0 +1,78 @@
+---
+title: 'Hangi Yapay Zeka Modeli Sizin İçin Uygun? LLM, SLM ve FM Karşılaştırması'
+description: >-
+  Yapay zeka dünyasında "LLM" (Büyük Dil Modeli) kavramı artık herkesin dilinde. Ancak işletmeler için sadece en büyük modeli kullanmak, her zaman en verimli sonuçları vermiyor. Bu makalede, projeniz için en doğru tercihi yapmanızı sağlayacak olan LLM, SLM (Küçük Dil Modeli) ve Frontier (Öncü) modelleri arasındaki kritik farkları teknik bir perspektifle ele alıyoruz.
+date: '2026-01-18'
+tags:
+  - AI
+  - LLM
+  - SLM
+  - MLOps
+  - Mimari
+  - Üretim
+locale: tr
+alternateLocale: en
+alternateSlug: 'llm-vs-slm-vs-fm-strategic-guide-choosing-right-ai-model'
+---
+
+# Giriş
+
+Yapay zeka dünyasında "LLM" (Büyük Dil Modeli) kavramı artık herkesin dilinde. Ancak işletmeler için sadece en büyük modeli kullanmak, her zaman en verimli sonuçları vermiyor. Yanlış model seçimi; yüksek maliyetler, yavaş işlem süreleri ve veri güvenliği riskleri olarak geri dönebiliyor. Bu makalede, projeniz için en doğru tercihi yapmanızı sağlayacak olan LLM, SLM (Küçük Dil Modeli) ve Frontier (Öncü) modelleri arasındaki kritik farkları teknik bir perspektifle ele alıyoruz.
+
+## Önemli Çıkarımlar
+
+- **SLM'ler**, belirli görevlerde uzmanlaşmış, düşük maliyetli ve yüksek hızlı modellerdir.
+
+- **LLM'ler**, geniş bilgi birikimi ve genelleme yeteneği ile karmaşık müşteri etkileşimleri için idealdir.
+
+- **Frontier Modeller**, piyasadaki en gelişmiş akıl yürütme kapasitesine sahip "en uç" teknolojileri temsil eder.
+
+- **Model seçimi** her zaman kullanım durumuna (use-case) ve veri gizliliği ihtiyaçlarına göre yapılmalıdır.
+
+## 1. Küçük Dil Modelleri (SLM): Verimlilik ve Hızın Odak Noktası
+
+Küçük Dil Modelleri (SLM), genellikle 10 milyar parametrenin altında olan modellerdir. "Küçük" olmaları, onların daha az yetenekli olduğu anlamına gelmez; aksine belirli alanlarda uzmanlaşmış yapılardır.
+
+- **Düşük Maliyet ve Yüksek Hız**: Parametre sayısı az olduğu için her çıkarım (inference) daha az hesaplama gücü gerektirir. Bu da GPU maliyetlerini düşürür ve yanıt sürelerini hızlandırır.
+
+- **Veri Yönetişimi (Governance)**: SLM'ler düşük kaynak tüketimi sayesinde kurum içinde (on-premise) çalıştırılabilir. Bu durum, hassas verilerin şirket dışına çıkmamasını sağlayarak uyumluluk süreçlerini kolaylaştırır.
+
+- **Kullanım Örneği**: Binlerce dokümanın sınıflandırılması, özetlenmesi veya yönlendirilmesi gibi spesifik görevlerde SLM'ler, büyük modelleri hız ve maliyet açısından geride bırakır.
+
+## 2. Büyük Dil Modelleri (LLM): Çok Yönlü Generalistler
+
+On milyarlarca parametreye sahip olan LLM'ler, geniş veri setleri üzerinde eğitildikleri için farklı disiplinlerde genel bilgi sahibi modellerdir.
+
+- **Genelleme Yeteneği**: LLM'ler, daha önce doğrudan karşılaşmadıkları karmaşık senaryolarda bile mantıklı çıkarımlar yapabilir. Müşterilerin farklı şekillerde ifade ettiği sorunları anlama kapasiteleri oldukça yüksektir.
+
+- **Çok Katmanlı Analiz**: Farklı veri kaynaklarından (faturalama, teknik dökümanlar, geçmiş biletler) gelen bilgileri sentezleyerek karmaşık çözümler üretebilirler.
+
+- **Kullanım Örneği**: Çok yönlü bir müşteri destek sistemi kurmak istiyorsanız, LLM'lerin sunduğu geniş bağlam anlama yeteneği en doğru tercih olacaktır.
+
+## 3. Frontier (Öncü) Modeller: En Üst Düzey Akıl Yürütme
+
+Frontier modeller, yüz milyarlarca parametreye sahip, günümüzün en güçlü yapay zeka sistemleridir. GPT-4, Gemini Pro veya Claude 3 gibi modeller bu kategoriye girer.
+
+- **Agentic (Ajan) Yetenekleri**: Bu modeller karmaşık görevleri adım adım planlama, API çağrıları yapma ve sonuçları değerlendirerek bir sonraki adımı belirleme yeteneğine sahiptir.
+
+- **Uzun Akıl Yürütme Zinciri**: Bir sistem hatasının kök nedenini bulmak gibi, her adımın bir öncekine dayandığı uzun ve karmaşık araştırma süreçlerini yönetebilirler.
+
+- **Kullanım Örneği**: Gece yarısı gerçekleşen kritik bir sistem arızasına otonom müdahale edilmesi (Incident Response) gibi en üst düzey problem çözme gerektiren alanlarda kullanılırlar.
+
+## Nasıl Uygulanır? Türkiye Pazarı İçin Stratejik Tavsiyeler
+
+Türkiye'deki işletmelerin yapay zeka adaptasyonunda şu üç adımı izlemesi performans ve bütçe dengesi için kritiktir:
+
+1. **Veri Gizliliği Önceliği**: Kişisel Verilerin Korunması Kanunu (KVKK) kapsamındaki hassas verilerle çalışıyorsanız, IBM Granite veya Mistral gibi açık kaynaklı SLM'leri kendi sunucularınızda konumlandırmayı değerlendirin.
+
+2. **Hibrid Mimari Kurun**: Tüm yükü en pahalı modele (Frontier) yüklemek yerine, rutin işleri (sınıflandırma, etiketleme) SLM'lere; karmaşık analizleri ise LLM'lere yönlendiren bir orkestrasyon yapısı oluşturun.
+
+3. **İnsan Denetimini Unutmayın**: Özellikle Frontier modellerin otonom kararlar aldığı süreçlerde, Türkiye'deki operasyonel riskleri minimize etmek adına "Human-in-the-loop" (insan denetimli) mekanizmalarını sisteminize entegre edin.
+
+## Sonuç
+
+Doğru yapay zeka stratejisi, "en büyük" modeli seçmek değil, "göreve en uygun" modeli belirlemektir. SLM'ler hız ve maliyet tasarrufu sağlarken, LLM'ler geniş kapsamlı bilgi, Frontier modeller ise en karmaşık akıl yürütme ihtiyaçlarını karşılar. İşletmenizin verimliliğini artırmak için model kapasitesi ile iş ihtiyacını doğru eşleştirmek temel başarı kriteridir.
+
+---
+
+**Kaynak**: [YouTube Videosu](https://youtu.be/AVQzG2MY858?si=FFKCbt9TjDSACqIw)
