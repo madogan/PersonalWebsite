@@ -1639,6 +1639,27 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.7
 - Changes committed: `fix(blog): unify background color on blog detail page`
 
+## Completed: Add OpenTelemetry and Grafana Labs 2026 Blog Post
+
+### Phase 1: Blog Post Creation ✅
+
+#### Task 1.1: Create Blog Post Content ✅
+
+- [x] Create Turkish blog post "OpenTelemetry ve Grafana Labs: 2026 Vizyonu ve Yeni Teknolojiler"
+- [x] Add proper MDX frontmatter with title, description, date, tags, and locale
+- [x] Download and organize dashboard images from Grafana blog
+- [x] Copy images to `public/images/blog/` directory
+- [x] Insert images at appropriate sections in blog content
+- [x] Use local image paths instead of external URLs
+- [x] Verify blog post structure and formatting
+
+**Implementation Summary:**
+- Created `content/blog/opentelemetry-ve-grafana-labs-2026-vizyonu-ve-yeni-teknolojiler.mdx`
+- Added three dashboard images: APM dashboard, Collector monitoring dashboard, and Linux monitoring dashboard
+- Blog post covers OpenTelemetry 2026 vision, CNCF graduation, Declarative Configuration, Prometheus compatibility, and AIOps integration
+- Version bumped to 0.8.12
+- Changes committed: `feat(content): add OpenTelemetry and Grafana Labs 2026 blog post`
+
 ## Completed: Remove Border from Related Posts Cards
 
 ### Phase 1: Implementation ✅

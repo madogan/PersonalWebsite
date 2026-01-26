@@ -1,0 +1,87 @@
+---
+title: >-
+  OpenTelemetry ve Grafana Labs: 2026 Vizyonu ve Yeni Teknolojiler
+description: >-
+  Grafana Labs'in 2026 OpenTelemetry vizyonu: CNCF mezuniyeti, bildirimsel yapılandırma, Prometheus uyumu ve AIOps entegrasyonu. Kararlı bileşenler ve filo yönetimi stratejileri.
+date: '2026-01-17'
+tags:
+  - OpenTelemetry
+  - Grafana
+  - Observability
+  - DevOps
+  - Monitoring
+  - SRE
+locale: tr
+---
+
+# Giriş
+
+Modern bulut tabanlı sistemlerde gözlemlenebilirlik (observability), karmaşıklığı yönetmenin tek yolu haline geldi. Grafana Labs, 2026 yılına girerken OpenTelemetry (OTel) projesine olan bağlılığını derinleştirerek, açık standartların sektörü nasıl domine edeceğini şekillendiriyor. Bu makalede, Grafana ekosistemindeki en son OTel güncellemelerini, yeni kararlı (stable) hale gelen bileşenleri ve 2026 yılı boyunca odaklanılacak stratejik hedefleri inceleyeceğiz.
+
+## Temel Çıkarımlar
+
+- **CNCF Mezuniyeti**: OpenTelemetry, 2026'da en yüksek olgunluk seviyesi olan "Graduated" (Mezun) proje statüsüne ulaşmayı hedefliyor.
+
+- **Declarative Configuration**: YAML tabanlı bildirimsel yapılandırma, SDK yönetimini kod karmaşasından kurtarıyor.
+
+- **Prometheus Uyumu**: Prometheus Receiver bileşeni kararlı sürüme geçerek Collector kullanımını daha güvenli hale getiriyor.
+
+- **Gelişmiş Profilleme**: OTLP tabanlı profilleme (profiling) sinyalleri, uygulama performans analizinde yeni bir standart oluşturuyor.
+
+## 2026'da OpenTelemetry ve Grafana: Öne Çıkan Yenilikler
+
+2026 yılı, OpenTelemetry'nin sadece bir veri toplama aracı olmaktan çıkıp, kurumsal veri yönetişim (governance) çerçevesine dönüştüğü yıl olarak nitelendiriliyor.
+
+### 1. Bildirimsel Yapılandırma (Declarative Configuration)
+
+Artık OTel SDK'larını yapılandırmak için karmaşık kod blokları yazmaya gerek kalmıyor. Declarative Configuration özelliğinin stabilize olmasıyla birlikte, tüm ayarlar basit YAML dosyaları üzerinden yapılandırılabiliyor. Bu, özellikle büyük ölçekli altyapılarda merkezi yönetim kolaylığı sağlıyor.
+
+### 2. Prometheus ve OTel Arasındaki Kusursuz Geçiş
+
+Grafana Labs, Prometheus ve OpenTelemetry'nin birbirine rakip değil, tamamlayıcı olduğunu vurguluyor. Prometheus Receiver bileşeninin kararlı hale gelmesiyle birlikte, mevcut Prometheus kullanıcıları herhangi bir veri kaybı veya uyumluluk endişesi yaşamadan OTel Collector'ı ana gateway olarak kullanabiliyor.
+
+### 3. Yapay Zeka ve AIOps Entegrasyonu
+
+2026 vizyonunda OpenTelemetry, AI Agent (Yapay Zeka Ajanları) iletişimi için de temel katman haline geliyor. Uygulama sinyalleri artık sadece hata tespiti için değil, yapay zeka sistemlerinin "neden" sorusuna yanıt bulabilmesi için yüksek kaliteli bağlamsal veri sağlıyor.
+
+## Filo Yönetimi ve Ölçeklenebilirlik
+
+Binlerce kolektörü yönetmek manuel olarak imkansızdır. Grafana, bu sorunu çözmek için OpAMP (Open Agent Management Protocol) desteğini devreye alıyor.
+
+- **Grafana Alloy**: Hem OpenTelemetry hem de Prometheus formatlarını yerel olarak destekleyen bu dağıtım, gerçek zamanlı hata ayıklama (debug) ve modüler yapılandırma özellikleriyle güncellendi.
+
+- **Sema Farkındalığı**: Grafana Mimir'e eklenen "schema-aware" tasarım sayesinde, OTel veri yapınız değişse bile PromQL sorgularınız ve dashboard'larınız kırılmadan çalışmaya devam ediyor.
+
+Grafana Labs, OpenTelemetry Demo projesi için geliştirdiği yeni dashboard'lar ile bu kavramları görselleştiriyor. İşte OpenTelemetry Demo için yeni hafif APM dashboard'u:
+
+![OpenTelemetry Demo APM Dashboard](/images/blog/otel-demo-apm-dashboard.png)
+
+Bu dashboard, çeşitli servis metriklerini, yanıt sürelerini, hata oranlarını ve gelen veri akışını gösteriyor. Aşağıdaki görsel ise OpenTelemetry Collector'ın kendisini izlemek için tasarlanmış dashboard'u gösteriyor:
+
+![OpenTelemetry Collector Monitoring Dashboard](/images/blog/otel-demo-collector-monitoring-dashboard.png)
+
+Son olarak, Linux sistem izleme dashboard'u da altyapı metriklerini görselleştiriyor:
+
+![OpenTelemetry Demo Linux Monitoring Dashboard](/images/blog/otel-demo-linux-dashboard.png)
+
+Bu dashboard'lar, altyapı ve uygulama izlemenin yanı sıra OpenTelemetry Collector'ın kendisini izlemek için tasarlanmıştır ve gözlemlenebilirlik stratejinizin tüm katmanlarını kapsar.
+
+## Nasıl Uygulanır?
+
+OpenTelemetry stratejinizi 2026'ya hazırlamak için şu adımları takip edebilirsiniz:
+
+1. **Kararlı Bileşenlere Geçin**: Prometheus Receiver ve OTLP log ingest bileşenlerini üretim ortamlarınıza dahil edin.
+
+2. **Alloy ile Modernizasyon**: Eski agent yapılarınızı, daha esnek bir boru hattı (pipeline) yönetimi sunan Grafana Alloy ile değiştirin.
+
+3. **Profillemeyi Etkinleştirin**: CPU ve bellek kullanımındaki ani artışları doğrudan kod satırıyla eşleştirmek için OTel Profiling sinyallerini kullanmaya başlayın.
+
+4. **Topluluk Etkinliklerine Katılın**: Şubat 2026'daki ObservabilityCON ve "OTel Unplugged" etkinliklerini takip ederek en yeni pratikleri öğrenin.
+
+## Sonuç
+
+2026 yılında OpenTelemetry, bulut tabanlı dünyada gözlemlenebilirliğin "nervous system" (sinir sistemi) görevini üstleniyor. Grafana Labs'in sağladığı entegrasyonlar ve kararlı hale gelen yeni özellikler, ekiplerin satıcı bağımlılığından (vendor lock-in) kurtulmasını ve daha düşük maliyetle daha derin görünürlük elde etmesini sağlıyor.
+
+---
+
+**Kaynak**: [OpenTelemetry and Grafana Labs: What's new and what's next in 2026](https://grafana.com/blog/opentelemetry-and-grafana-labs-whats-new-and-whats-next-in-2026/)

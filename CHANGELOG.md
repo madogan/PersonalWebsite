@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.12] - 2026-01-26
+
+### Added
+
+- **Blog Content**: Added new Turkish blog post "OpenTelemetry ve Grafana Labs: 2026 Vizyonu ve Yeni Teknolojiler"
+  - Comprehensive article covering OpenTelemetry's 2026 vision and Grafana Labs' strategic direction
+  - Topics include CNCF graduation goals, Declarative Configuration, Prometheus compatibility, AIOps integration, and fleet management
+  - Includes three dashboard images: APM dashboard, OpenTelemetry Collector monitoring dashboard, and Linux monitoring dashboard
+  - Images stored locally in `public/images/blog/` directory for optimal performance
+  - Blog post date: 2026-01-17
+  - Tags: OpenTelemetry, Grafana, Observability, DevOps, Monitoring, SRE
+  - Locale: Turkish (tr)
+
+### Technical
+
+- Created `content/blog/opentelemetry-ve-grafana-labs-2026-vizyonu-ve-yeni-teknolojiler.mdx` with proper MDX frontmatter
+- Added three dashboard images to `public/images/blog/`:
+  - `otel-demo-apm-dashboard.png` - APM dashboard for OpenTelemetry Demo
+  - `otel-demo-collector-monitoring-dashboard.png` - Collector monitoring dashboard
+  - `otel-demo-linux-dashboard.png` - Linux system monitoring dashboard
+- Images properly referenced using local paths (`/images/blog/...`) instead of external URLs
+- Blog post follows project MDX structure and formatting conventions
+
 ## [0.8.11] - 2026-01-26
 
 ### Added
