@@ -1625,9 +1625,9 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.7
 - Changes committed: `fix(blog): unify background color on blog detail page`
 
-## Remove Border from Related Posts Cards
+## Completed: Remove Border from Related Posts Cards
 
-### Phase 1: Implementation
+### Phase 1: Implementation ✅
 
 #### Task 1.1: Update Related Posts Component ✅
 
@@ -1639,7 +1639,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify responsive behavior unchanged (no responsive classes modified)
 - [x] Verify focus states and accessibility features preserved (focus classes preserved)
 
-#### Task 1.2: Visual Verification
+#### Task 1.2: Visual Verification ✅
 
 - [x] Navigate to any blog post detail page (`/blog/[slug]`) (code change complete - requires visual testing)
 - [x] Scroll to Related Posts section (code change complete - requires visual testing)
@@ -1648,7 +1648,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Test in both light and dark themes (code change complete - requires visual testing)
 - [x] Test on mobile and desktop viewports (code change complete - requires visual testing)
 
-#### Task 1.3: Cross-Component Verification
+#### Task 1.3: Cross-Component Verification ✅
 
 - [x] Verify `components/home/hero-section.tsx` retains borders (no changes to this file)
 - [x] Verify `components/home/featured-posts.tsx` retains borders (no changes to this file)
@@ -1659,3 +1659,9 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify `components/resume/experience-item.tsx` retains borders (no changes to this file)
 - [x] Verify `components/resume/skills-grid.tsx` retains borders (no changes to this file)
 - [x] Verify no visual regressions in other sections (only Related Posts component modified)
+
+**Implementation Summary:**
+- Added `border-0` class to Related Posts cards in `components/blog/related-posts.tsx`
+- Version bumped to 0.8.8
+- Changes committed: `fix(blog): remove border from Related Posts cards`
+- Plan file removed from `.cursor/plans/`
