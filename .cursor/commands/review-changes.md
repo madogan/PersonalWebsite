@@ -1,6 +1,7 @@
 # Instructions: Code Review & Technical Audit
 
 Act as a Senior Full-Stack Engineer and SRE. We are managing a Next.js 15+ personal website with:
+
 1. **Next.js 15+ (App Router)**: Web application with SEO optimization and internationalization (next-intl)
 2. **React 19**: Modern React patterns with Server and Client Components
 3. **TypeScript 5.7.3**: Strict type checking and modern TypeScript patterns
@@ -140,6 +141,7 @@ Categorize issues by severity:
 - **Performance**: Inefficient data fetching, missing image optimization, unnecessary client components, bundle size issues, missing caching
 
 For each issue, specify:
+
 - **File/Component**: Specific file or component affected
 - **Issue Description**: Clear explanation of the problem
 - **Impact**: What could go wrong or what performance degradation could occur
@@ -148,6 +150,7 @@ For each issue, specify:
 ### 2. Clarification Questions
 
 Ask 3-5 targeted questions to understand:
+
 - Architectural intent or design decisions
 - Ambiguous logic found in the changes
 - Deployment assumptions (e.g., "I assume the site is deployed on Fly.io")
@@ -158,6 +161,7 @@ Ask 3-5 targeted questions to understand:
 ### 3. Assumptions
 
 List any assumptions you are making about:
+
 - Deployment architecture (dev vs. prod environments, Fly.io deployment)
 - Content structure and MDX format
 - Internationalization setup (locale routing, translation files)
@@ -179,6 +183,7 @@ After receiving responses to clarification questions, generate a **Fix Plan** wi
 ### Step-by-Step Instructions
 
 For each fix, provide:
+
 - **Files**: Specific files to change
 - **Changes**: Detailed code changes or refactoring steps
 - **Testing**: How to verify the fix
@@ -187,6 +192,7 @@ For each fix, provide:
 ### Pre-Commit Checklist
 
 Before applying fixes, ensure:
+
 - **Code Quality**: Run `pnpm lint:fix`, `pnpm format`, `pnpm type-check`
 - **Build**: Run `pnpm build` to verify no build errors
 - **Logging**: All logging uses centralized logger (no raw `console.*`)
