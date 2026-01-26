@@ -1,0 +1,158 @@
+---
+title: >-
+  React 19 Grafana'ya Geliyor: Eklentilerinizi Yeni Nesil Mimariye Nasıl
+  Hazırlarsınız?
+description: >-
+  Grafana 13 ile React 19'a geçiş rehberi. Eklenti geliştiricileri için uyumluluk
+  analizi, breaking changes ve @grafana/react-detect aracıyla geçiş stratejileri.
+date: '2026-01-16'
+tags:
+  - React
+  - Grafana
+  - Eklenti Geliştirme
+  - Migration
+  - Frontend
+locale: tr
+---
+
+# Giriş
+
+Nisan ayında yayınlanacak olan Grafana 13 ile birlikte, platformun temel kullanıcı arayüzü kütüphanesi React 19 sürümüne yükseltiliyor. Bu güncelleme, Grafana ekosisteminin modern React özelliklerinden ve performans iyileştirmelerinden yararlanmasını sağlarken, eklenti geliştiricileri için bazı kritik değişiklikleri de beraberinde getiriyor. Bu makalede, eklentilerinizin yeni sürüme nasıl uyumlu hale getirileceğini, olası çakışmaları ve geçiş sürecinde kullanabileceğiniz araçları öğreneceksiniz.
+
+## Temel Çıkarımlar
+
+- **Tekil React Örneği**: Grafana çalışma zamanında tüm eklentilerle tek bir React örneği paylaşır; bu nedenle eklentilerde React sürümünü sabitlememek (pinning) kritiktir.
+
+- **Kaldırılan API'ler**: propTypes, string refs ve legacy context API gibi eski özellikler React 19 ile tamamen kaldırıldı.
+
+- **Otomatik Tespit**: @grafana/react-detect aracı, kodunuzdaki ve bağımlılıklarınızdaki uyumluluk sorunlarını taramak için yayına alındı.
+
+- **Geriye Dönük Uyumluluk**: React 19 desteği için yapılan bazı yapılandırma değişiklikleri, Grafana 12.3.0 altındaki sürümlerle uyumluluğu sonlandırabilir.
+
+## React 19 Güncellemesinin Eklentiler Üzerindeki Etkisi
+
+Grafana, tüm yüklü eklentilerle çalışma zamanında (runtime) aynı React örneğini paylaşır. Bu durum, eklentinizin package.json dosyasındaki React sürümünü değiştirmenin çalışma zamanındaki sürümü değiştirmeyeceği anlamına gelir. Temel amaç, kodunuzu Grafana'nın çalışma zamanı ile uyumlu ve geleceğe dönük hale getirmektir.
+
+### Dikkat Edilmesi Gereken Kritik Değişiklikler
+
+React 19, eklentilerin işlevselliğini etkileyebilecek şu özellikleri kaldırmıştır:
+
+- Fonksiyon bileşenlerinde propTypes ve defaultProps kullanımı.
+- Eski bağlam API'si (contextTypes ve getChildContext).
+- ReactDOM.findDomNode ve ReactDOM.render gibi eski DOM metotları.
+- Dahili bir API olan __SECRET_INTERNALS_DO_NOT_USE isimlendirmesinin değiştirilmesi.
+
+## Uyumluluk Analizi: @grafana/react-detect
+
+Eklentinizin bu güncellemeden etkilenip etkilenmediğini anlamak için Grafana ekibi tarafından geliştirilen tarama aracını kullanabilirsiniz. Bu araç, hem kaynak kodunuzu hem de derlenmiş dosyalarınızı analiz eder.
+
+### Analizi Başlatmak İçin
+
+1. Eklentinizin kök dizininde `npm run build` komutunu çalıştırın.
+2. Ardından şu komutu yürütün:
+
+```bash
+npx -y @grafana/react-detect@latest
+```
+
+Bu tarama sonucunda eğer "No React 19 breaking changes detected" mesajını alıyorsanız, kodunuz büyük ölçüde güvenlidir. Ancak hata alıyorsanız, araç size hangi satırda neyi düzeltmeniz gerektiğini belirten bağlantılar sunacaktır.
+
+### Tespit Sonuçları ve Çözüm Yolları
+
+**Kaynak Kod Sorunları**: CLI çıktısı, kaynak kodunuzdaki sorunları detaylı bir şekilde listeler. Her sorun için kısa bir açıklama ve React 19 yükseltme rehberine bağlantı içerir.
+
+**Bağımlılık Sorunları**: Bağımlılık sorunları biraz daha karmaşıktır çünkü muhtemelen kaynak koduna sahip değilsiniz. CLI çıktısı, her bağımlılığı ve bulunan tüm sorunları listeler. Öneriler:
+
+1. Flaglenen (işaretlenen) kütüphanelerin en son sürümlerini kullanın.
+2. Her bağımlılık için GitHub repo'larını kontrol ederek React 19 desteğini doğrulayın.
+
+Eğer bağımlılık React 19'u desteklemiyorsa, bir fork veya alternatif arayın. Eğer destekliyorsa, react-detect CLI muhtemelen kütüphanenin birden fazla React sürümünü desteklemesi nedeniyle yanlış pozitif (false positive) gösteriyordur.
+
+## Bağımlılık ve Ekosistem Riskleri
+
+En büyük risklerden biri, sizin kontrolünüzde olmayan harici kütüphanelerdir. Özellikle React'in dahili mekanizmalarına (__SECRET_INTERNALS) güvenen eski paketler, React 19'da çalışma zamanı hatalarına yol açabilir.
+
+### __SECRET_INTERNALS Sorunu
+
+`__SECRET_INTERNALS` API'leri, eklenti yükleme sorunlarının en olası nedeni olarak görülmektedir. Bunlar doğrudan kullanım için tasarlanmamış dahili React API'leridir, ancak bazı React bağımlılıkları ve `react/jsx-runtime` hala bunlara güvenir.
+
+React 19'da bu dahili API'ler yeniden adlandırıldı, bu da eski ismi bekleyen bağımlılıkların çalışma zamanında başarısız olabileceği veya çökebileceği anlamına gelir. Bu sorundan etkilenen eklentiler, bu dahili API'lere güvenen bağımlılıkları güncellemeli veya değiştirmeli, ya da ideal olarak bu kullanımı tamamen kaldırmalıdır.
+
+### Webpack Yapılandırması ile Çözüm
+
+Bu sorunu çözmek için eklentinizin webpack yapılandırmasını genişletmeniz gerekir. Bu işlem, eklentinizi Grafana 12.3.0'dan önceki sürümlerle uyumsuz hale getirecektir.
+
+1. Eklentinizin repo'sunun kök dizininde bir `webpack.config.ts` dosyası oluşturun.
+
+2. Aşağıdaki kodu ekleyin:
+
+```typescript
+import type { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
+import grafanaConfig, { Env } from './.config/webpack/webpack.config';
+
+const config = async (env: Env): Promise<Configuration> => {
+  const baseConfig = await grafanaConfig(env);
+
+  return merge(baseConfig, {
+    externals: ['react/jsx-runtime', 'react/jsx-dev-runtime'],
+  });
+};
+
+export default config;
+```
+
+3. Eklentinizin `package.json` dosyasını yeni webpack yapılandırmasını kullanacak şekilde güncelleyin:
+
+```json
+"scripts": {
+  "build": "webpack -c ./webpack.config.ts --env production",
+  "dev": "webpack -w -c ./webpack.config.ts --env development",
+}
+```
+
+4. `src/plugin.json` dosyasındaki `grafanaDependency` değerini `>=12.3.0` olarak değiştirin. Bu, eklenti kullanıcılarına artık eski Grafana sürümlerini desteklemediğinizi bildirir.
+
+## Nasıl Uygulanır? (Sonraki Adımlar)
+
+Eklentinizin React 19 ile sorunsuz çalıştığından emin olmak için şu adımları izleyin:
+
+### Yerel Test
+
+Grafana'nın React 19 içeren geliştirici önizleme sürümünü Docker üzerinden çalıştırın:
+
+```bash
+GRAFANA_VERSION=dev-preview-react19 GRAFANA_IMAGE=grafana docker compose up --build
+```
+
+Çalıştıktan sonra, eklentinizin özelliklerini gezerek her şeyin beklendiği gibi çalıştığını kontrol edin. Eğer uçtan uca (e2e) testleriniz varsa, bunları dev-preview-react19 imajına karşı çalıştırarak sorunları tespit edin.
+
+### CI/CD Entegrasyonu
+
+Eklentinizin birden fazla Grafana sürümüyle uyumlu kalmasını sağlamak için, e2e test workflow'unuzu otomatik olarak birden fazla Grafana sürümüne karşı e2e testlerinizi çalıştıracak şekilde güncelleyin.
+
+Eğer zaten e2e test workflow'unu kullanıyorsanız (genellikle varsayılan olarak scaffold edilir), yalnızca bir giriş parametresini değiştirmeniz ve doğru `plugin/actions/e2e-version` workflow sürümüne işaret etmeniz gerekir.
+
+Şu şekilde değiştirin:
+
+```yaml
+- name: Resolve Grafana E2E versions
+  id: resolve-versions
+  uses: grafana/plugin-actions/e2e-version@e2e-version/v1.1.3
+  with:
+      skip-grafana-react-19-preview-image: false # Bu giriş parametresini ekleyin
+```
+
+### Sürüm Yayınlama
+
+Uyumluluğu doğruladıktan sonra, eklentinizin yeni sürümünü yayınlayarak Grafana 13 lansmanına hazır olun. Bu, kullanıcılarınızın Grafana 13 yayınlandığında eklentinizi sorunsuz bir şekilde kullanabilmelerini sağlar.
+
+## Sonuç
+
+React 19'a geçiş, Grafana ekosistemi için daha performanslı ve sürdürülebilir bir ön uç mimarisi anlamına geliyor. Geliştiricilerin @grafana/react-detect gibi araçları kullanarak hazırlıklarını şimdiden yapmaları, Nisan ayındaki büyük sürüm geçişinin sorunsuz tamamlanmasını sağlayacaktır.
+
+Eklenti geliştiricilerinin bu geçiş sürecine aktif olarak katılması, Grafana ekosisteminin sağlığı ve büyümesi için kritik öneme sahiptir. Sorularınız veya desteğe ihtiyacınız varsa, Grafana Community Forums veya Community Slack üzerinden iletişime geçebilirsiniz.
+
+---
+
+**Kaynak**: [React 19 is coming to Grafana: what plugin developers need to know](https://grafana.com/blog/react-19-is-coming-to-grafana-what-plugin-developers-need-to-know/)
