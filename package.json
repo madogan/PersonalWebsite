@@ -1,6 +1,6 @@
 {
   "name": "personal-website",
-  "version": "0.8.12",
+  "version": "0.8.13",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 3232",

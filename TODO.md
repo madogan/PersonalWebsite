@@ -2218,3 +2218,253 @@ All phases of the notebook design refinement have been completed:
 - Performance is optimal (no layout shifts, fast rendering)
 - Print styles work correctly
 - Code is well-documented with clear comments
+
+## Fix Invisible URL Links in Blog Posts
+
+### Phase 1: Fix Handwriting Underline CSS Implementation (Option A)
+
+#### Task 1.1: Refactor Handwriting Underline to Use Explicit Colors ✅
+**Objective**: Replace `currentColor` with explicit `accent-cyan` color for both text and underline background, ensuring visibility regardless of CSS specificity conflicts.
+
+**Steps**:
+1. Open `app/globals.css` and locate `.handwriting-underline` class (around line 932)
+2. Replace `background-color: currentColor` with `background-color: rgb(var(--color-accent-cyan))`
+3. Add explicit `color: rgb(var(--color-accent-cyan))` property as fallback
+4. Keep all existing mask properties unchanged
+5. Maintain `padding-bottom: 2px` for spacing
+6. Verify the CSS variable `--color-accent-cyan` is defined
+
+**Verification Criteria**:
+- Link text is clearly visible in both light and dark modes
+- Handwriting underline renders correctly below the text in turquoise/cyan color
+- No visual artifacts or rendering issues
+- CSS variable resolves correctly (72 209 204 in RGB format)
+
+### Phase 2: Verify Component Integration
+
+#### Task 2.1: Verify MDX Component Compatibility ✅
+**Objective**: Ensure MDX component link styles work correctly with the updated CSS class.
+
+**Steps**:
+1. Review `components/blog/mdx-components.tsx` link component (line 56-65)
+2. Verify `text-accent-cyan` class is present
+3. Verify `handwriting-underline` class is applied
+4. Confirm no conflicting styles
+5. Test that component-level `text-accent-cyan` works with CSS fallback
+
+**Verification Criteria**:
+- MDX component link styles remain compatible
+- Text color displays as `accent-cyan` (turquoise)
+- No style conflicts in browser DevTools
+- Component classes and CSS class work together harmoniously
+
+#### Task 2.2: Verify Prose Class Compatibility ✅
+
+**Completed Tasks Summary:**
+- ✅ Task 1.1: Updated `.handwriting-underline` CSS class with explicit colors
+- ✅ Task 2.1: Verified MDX component compatibility (no changes needed)
+- ✅ Task 2.2: Verified prose class compatibility (no conflicts)
+
+**Remaining Tasks (Manual Testing Required):**
+- Task 3.1-3.3: Visual, cross-browser, and accessibility testing (requires browser testing)
+- Task 4.1-4.2: Edge case testing (requires manual verification)
+
+**Note**: Core implementation is complete. Remaining tasks require manual browser testing which should be performed before deployment.
+**Objective**: Ensure prose classes don't interfere with the handwriting underline fix.
+
+**Steps**:
+1. Review `app/blog/[slug]/page.tsx` prose-a classes (line 143)
+2. Verify `prose-a:text-accent-cyan` is present
+3. Verify `prose-a:no-underline` is present (this is fine - it removes default underline)
+4. Test that prose classes work correctly with the updated handwriting-underline CSS
+
+**Verification Criteria**:
+- Prose classes don't break handwriting underline
+- Text color is consistently applied via both prose and CSS
+- No double underlines or visual conflicts
+- Handwriting underline renders correctly
+
+### Phase 3: Test and Validate Fix
+
+#### Task 3.1: Visual Testing
+**Objective**: Verify links are visible in all scenarios.
+
+**Steps**:
+1. Test links in blog posts with source citations
+2. Test links in both light and dark modes
+3. Test links in different browsers (Chrome, Firefox, Safari)
+4. Verify hover states work correctly
+5. Check that underline renders correctly below text
+
+**Verification Criteria**:
+- All links are visible in light mode
+- All links are visible in dark mode
+- Handwriting underline appears below text (not replacing it)
+- Hover states work as expected
+- No console errors or warnings
+
+#### Task 3.2: Cross-Browser Testing
+**Objective**: Ensure fix works across different browsers and rendering engines.
+
+**Steps**:
+1. Test in Chrome/Edge (Chromium)
+2. Test in Firefox (Gecko)
+3. Test in Safari (WebKit)
+4. Check mobile browsers if possible
+5. Verify CSS mask support across browsers
+
+**Verification Criteria**:
+- Links visible in all tested browsers
+- Handwriting underline renders correctly
+- No browser-specific rendering issues
+
+#### Task 3.3: Accessibility Testing
+**Objective**: Ensure links are accessible and meet WCAG standards.
+
+**Steps**:
+1. Verify link text is readable (contrast ratio)
+2. Test with screen readers
+3. Verify keyboard navigation works
+4. Check focus states are visible
+5. Ensure color is not the only indicator (underline also present)
+
+**Verification Criteria**:
+- Link contrast meets WCAG AA standards (4.5:1 for normal text)
+- Screen readers can identify and read links
+- Keyboard navigation works correctly
+- Focus states are visible
+
+### Phase 4: Edge Cases and Error Handling
+
+#### Task 4.1: Handle Missing or Invalid Links
+**Objective**: Ensure graceful handling of edge cases.
+
+**Steps**:
+1. Test links with empty href
+2. Test links with invalid URLs
+3. Test links with very long URLs
+4. Verify error handling doesn't break rendering
+
+**Verification Criteria**:
+- Invalid links don't break page rendering
+- Empty links are handled gracefully
+- Long URLs wrap or truncate appropriately
+
+#### Task 4.2: Verify All Link Types
+**Objective**: Ensure fix works for all link types in blog posts.
+
+**Steps**:
+1. Test markdown links `[text](url)`
+2. Test HTML anchor tags `<a href="url">text</a>`
+3. Test source citations at end of posts
+4. Test inline links within paragraphs
+5. Test links in lists and blockquotes
+
+**Verification Criteria**:
+- All link formats render correctly
+- Source citations are visible
+- Inline links work properly
+- Links in different contexts (lists, quotes) work
+
+## Fix Handwriting Border Color Inconsistency
+
+### Phase 0: Code Quality Fix
+
+#### Task 0.1: Remove Duplicate `.notebook-panel::before` Definition @workingon
+- [ ] Identify duplicate `.notebook-panel::before` definitions (lines 459-469 and 471-482)
+- [ ] Remove one duplicate definition
+- [ ] Ensure remaining definition has all necessary properties
+- [ ] Verify paper texture still works correctly
+- **File**: `app/globals.css` (around lines 458-482)
+- **Priority**: Low (doesn't affect border colors, but improves code quality)
+
+### Phase 1: Fix Card and Panel Borders
+
+#### Task 1.1: Fix `.notebook-panel::after`
+- [ ] Remove `background-image` declarations that use SVG patterns (lines 427-434)
+- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 426)
+- [ ] Keep gradient masks for border shape (lines 436-453) - these define the 2px border area
+- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [ ] Verify border appears as consistent grey color with handwriting texture
+- **File**: `app/globals.css` (around line 418-456)
+- **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
+
+#### Task 1.2: Fix `.loose-leaf-card::after`
+- [ ] Remove `background-image` declarations that use SVG patterns (lines 527-534)
+- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 526)
+- [ ] Keep gradient masks for border shape (lines 536-553) - these define the 2px border area
+- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [ ] Verify border appears as consistent grey color with handwriting texture
+- **File**: `app/globals.css` (around line 518-555)
+- **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
+
+### Phase 2: Fix Utility Border Classes
+
+#### Task 2.1: Fix `.handwriting-border::before`
+- [ ] Remove `background-image` declarations that use SVG patterns (lines 962-969)
+- [ ] Keep `background-color: rgb(var(--notebook-divider))` (line 961)
+- [ ] Keep gradient masks for border shape (lines 971-988) - these define the 2px border area
+- [ ] Add SVG pattern masks to `mask-image` (combine with existing gradient masks)
+- [ ] Update `mask-composite` to combine gradient masks + SVG pattern masks
+- [ ] Verify border appears as consistent grey color with handwriting texture
+- **File**: `app/globals.css` (around line 953-990)
+- **Note**: Must combine gradient masks (border shape) + SVG pattern masks (texture) in single `mask-image` declaration
+
+#### Task 2.2: Fix `.pencil-divider::before`
+- [ ] Verify it only uses `mask-image` (should already be correct)
+- [ ] Ensure no `background-image` with SVG patterns
+- [ ] Verify divider appears as consistent grey color
+- **File**: `app/globals.css` (around line 631-649)
+
+### Phase 3: Fix Individual Border Classes
+
+#### Task 3.1: Fix Directional Border Classes
+- [ ] Review `.handwriting-border-t::before`
+- [ ] Review `.handwriting-border-b::before`
+- [ ] Review `.handwriting-border-l::before`
+- [ ] Review `.handwriting-border-r::before`
+- [ ] Review `.handwriting-border-x::before` and `::after`
+- [ ] Review `.handwriting-border-y::before` and `::after`
+- [ ] Remove any `background-image` with SVG patterns
+- [ ] Ensure all use `mask-image` only
+- **File**: `app/globals.css` (various locations)
+
+#### Task 3.2: Fix `.handwriting-border-all`
+- [ ] Review `.handwriting-border-all::before` and `::after`
+- [ ] Remove any `background-image` with SVG patterns
+- [ ] Ensure all use `mask-image` only
+- **File**: `app/globals.css` (around line 672-707)
+
+### Phase 4: Verify and Test
+
+#### Task 4.1: Visual Testing
+- [ ] Test borders in light mode - should be light grey (`#E5E0D6`)
+- [ ] Test borders in dark mode - should be medium grey (`#6B7280`)
+- [ ] Verify no black color appears in borders
+- [ ] Check all card borders (notebook-panel, loose-leaf-card)
+- [ ] Check all utility borders (handwriting-border class)
+- [ ] Check dividers (pencil-divider)
+- [ ] Check navigation borders
+- [ ] Check button borders
+- [ ] Check tag/badge borders
+
+#### Task 4.2: Browser Compatibility Testing
+- [ ] Test in Chrome/Edge (WebKit mask support)
+- [ ] Test in Firefox (standard mask support)
+- [ ] Test in Safari (WebKit mask support)
+- [ ] Verify consistent appearance across browsers
+
+#### Task 4.3: Code Review
+- [ ] Ensure no `background-image` uses SVG pattern variables
+- [ ] Ensure all borders use `mask-image` with SVG patterns
+- [ ] Ensure all borders use `background-color: rgb(var(--notebook-divider))`
+- [ ] Verify theme switching works correctly
+
+**Verification Criteria:**
+- All borders display in consistent grey color (no black)
+- Borders respect theme colors (light grey in light mode, medium grey in dark mode)
+- Handwriting pattern shape is preserved (wavy lines)
+- No visual regressions in border appearance
+- All border implementations follow the same pattern

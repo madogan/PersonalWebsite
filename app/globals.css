@@ -86,7 +86,7 @@
     --color-accent-cyan: 72 209 204; /* #48D1CC - Medium Turquoise (keep for compatibility) */
 
     /* Notebook Design System Colors - Dark Theme */
-    --notebook-divider: 42 42 42; /* #2A2A2A - Subtle divider on dark */
+    --notebook-divider: 107 114 128; /* #6B7280 - Lighter grey for better visibility on dark background */
     --notebook-binding: 156 163 175; /* #9CA3AF - Grey Metallic (lighter for dark theme) */
 
     /* Glassmorphism for dark theme */
@@ -202,6 +202,13 @@
   a,
   button {
     @apply font-sans;
+  }
+
+  /* Ensure select dropdowns use project font */
+  select,
+  select option {
+    @apply font-sans;
+    font-family: var(--font-solitreo), Georgia, serif;
   }
 
   p {
@@ -394,7 +401,9 @@
 
   /* Notebook Panel - Flat panel style (distinct from cards) */
   .notebook-panel {
-    @apply rounded-lg border border-notebook-divider bg-background;
+    @apply rounded-lg bg-background;
+    /* Remove regular border - using handwriting border instead */
+    border: none;
     box-shadow:
       0 1px 3px rgba(0, 0, 0, 0.05),
       0 10px 20px rgba(0, 0, 0, 0.02),
@@ -402,6 +411,52 @@
     position: relative;
     /* No rotation - flat panel style */
     transform: rotate(0deg);
+  }
+
+  /* Add handwriting border to notebook panel */
+  /* Extend border area to cover rounded corners */
+  .notebook-panel::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: inherit;
+    background-color: rgb(var(--notebook-divider));
+    /* Use a two-layer mask: gradient masks for border shape + SVG patterns for handwriting texture */
+    -webkit-mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    -webkit-mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position: top, bottom, left, right, top, bottom, left, right;
+    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
+    -webkit-mask-composite: add;
+    mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-position: top, bottom, left, right, top, bottom, left, right;
+    mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
+    mask-composite: add;
+    pointer-events: none;
+    z-index: 0;
   }
 
   /* Add subtle paper texture to panels */
@@ -412,7 +467,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     pointer-events: none;
     mix-blend-mode: overlay;
-    z-index: 0;
+    z-index: 1; /* Above border, below content */
     opacity: 0.03;
     border-radius: inherit;
   }
@@ -424,7 +479,7 @@
 
   .notebook-panel > * {
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Above texture and border */
   }
 
   .notebook-panel:hover {
@@ -438,13 +493,61 @@
 
   /* Loose-Leaf Card - Cards with subtle rotation (distinct from panels) */
   .loose-leaf-card {
-    @apply rounded-lg border border-notebook-divider bg-background p-6 transition-all duration-300;
+    @apply rounded-lg bg-background p-6 transition-all duration-300;
+    /* Remove regular border - using handwriting border instead */
+    border: none;
     position: relative;
     transform: rotate(0deg); /* No rotation on mobile */
     box-shadow:
       0 1px 3px rgba(0, 0, 0, 0.05),
       0 10px 20px rgba(0, 0, 0, 0.02),
       0 2px 4px rgba(0, 0, 0, 0.01);
+  }
+
+  /* Add handwriting border to loose-leaf cards */
+  /* Extend border area to cover rounded corners */
+  .loose-leaf-card::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: inherit;
+    background-color: rgb(var(--notebook-divider));
+    /* Use a two-layer mask: gradient masks for border shape + SVG patterns for handwriting texture */
+    -webkit-mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    -webkit-mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    -webkit-mask-position: top, bottom, left, right, top, bottom, left, right;
+    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
+    -webkit-mask-composite: add;
+    mask-image: 
+      /* Gradient masks define the border area (outer 2px on all sides) */
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      /* SVG pattern masks add handwriting texture within the border area */
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    mask-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-y, repeat-y;
+    mask-position: top, bottom, left, right, top, bottom, left, right;
+    mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, auto 4px, auto 4px, 4px auto, 4px auto;
+    mask-composite: add;
+    pointer-events: none;
+    z-index: 0; /* Below texture and content */
   }
 
   /* Add paper texture to cards */
@@ -455,7 +558,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     pointer-events: none;
     mix-blend-mode: overlay;
-    z-index: 0;
+    z-index: 1; /* Above border, below content */
     opacity: 0.05;
     border-radius: inherit;
   }
@@ -467,7 +570,7 @@
 
   .loose-leaf-card > * {
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Above texture and border */
   }
 
   /* Add rotation on larger screens */
@@ -520,27 +623,36 @@
 
   /* Pencil Divider - Enhanced to look like a drawn line */
   .pencil-divider {
-    @apply border-t border-notebook-divider;
-    border-width: 1px;
+    /* Remove regular border - using handwriting border instead */
+    border: none;
+    border-width: 0;
     position: relative;
   }
 
-  /* Add subtle texture to divider to make it look more hand-drawn */
-  .pencil-divider::after {
+  /* Add handwriting border as top border */
+  .pencil-divider::before {
     content: '';
     position: absolute;
-    top: -0.5px;
+    top: 0;
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent 0%,
-      rgb(var(--notebook-divider)) 20%,
-      rgb(var(--notebook-divider)) 80%,
-      transparent 100%
-    );
-    opacity: 0.6;
+    background-color: rgb(var(--notebook-divider));
+    -webkit-mask-image: var(--handwriting-border-horizontal);
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position: top;
+    -webkit-mask-size: auto 1px;
+    mask-image: var(--handwriting-border-horizontal);
+    mask-repeat: repeat-x;
+    mask-position: top;
+    mask-size: auto 1px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Remove old ::after pseudo-element that was creating gradient overlay */
+  .pencil-divider::after {
+    display: none;
   }
 
   /* Handwriting Border Classes */
@@ -666,6 +778,11 @@
     z-index: 0;
   }
 
+  /* Bottom border with accent color variant (for active navigation states) */
+  .handwriting-border-b-accent::before {
+    background-color: rgb(var(--color-accent));
+  }
+
   /* Left border only */
   .handwriting-border-l {
     position: relative;
@@ -691,9 +808,9 @@
     z-index: 0;
   }
 
-  /* Right border only */
-  .handwriting-border-r {
-    position: relative;
+  /* Left border with accent color variant (for active mobile menu states) */
+  .handwriting-border-l-accent::before {
+    background-color: rgb(var(--color-accent));
   }
 
   .handwriting-border-r::before {
@@ -809,7 +926,8 @@
   /* Handwriting underline for text */
   .handwriting-underline {
     text-decoration: none;
-    background-color: currentColor;
+    color: rgb(var(--color-accent-cyan)); /* Explicit text color fallback */
+    background-color: rgb(var(--color-accent-cyan)); /* Explicit underline color */
     -webkit-mask-image: var(--handwriting-underline);
     -webkit-mask-repeat: repeat-x;
     -webkit-mask-position: bottom;
@@ -819,6 +937,58 @@
     mask-position: bottom;
     mask-size: auto 2px;
     padding-bottom: 2px; /* Space for underline */
+  }
+
+  /* Utility class to add handwriting border to any element */
+  /* Use this for buttons, badges, tags, and other components */
+  .handwriting-border {
+    position: relative;
+    border: none !important; /* Remove regular border */
+  }
+
+  .handwriting-border::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: inherit;
+    background-color: rgb(var(--notebook-divider));
+    background-image: 
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-horizontal),
+      var(--handwriting-border-vertical),
+      var(--handwriting-border-vertical);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-position: top, bottom, left, right;
+    background-size: auto 4px, auto 4px, 4px auto, 4px auto;
+    /* Use a mask to show only the border area (outer 2px) */
+    -webkit-mask-image: 
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: top, bottom, left, right;
+    -webkit-mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    -webkit-mask-composite: add;
+    mask-image: 
+      linear-gradient(to bottom, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to bottom, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%),
+      linear-gradient(to right, transparent 0, black 1px, black 3px, transparent 3px),
+      linear-gradient(to right, transparent calc(100% - 3px), black calc(100% - 3px), black calc(100% - 1px), transparent 100%);
+    mask-repeat: no-repeat;
+    mask-position: top, bottom, left, right;
+    mask-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    mask-composite: add;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Handwriting border with accent color (for tags, badges, etc.) */
+  .handwriting-border-accent::before {
+    background-color: rgb(var(--color-accent) / 0.2);
   }
 
   /* Reduced Motion */

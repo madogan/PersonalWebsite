@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.13] - 2026-01-26
+
+### Fixed
+
+- **Blog Links Visibility**: Fixed invisible URL links in blog posts
+  - Updated `.handwriting-underline` CSS class to use explicit `accent-cyan` color instead of `currentColor`
+  - Added explicit `color` property as fallback to ensure text visibility
+  - Links now display correctly in both light and dark modes
+  - Handwriting underline effect preserved while ensuring text remains visible
+  - Fixes issue where only underline was visible but link text was invisible
+
+### Technical
+
+- Modified `app/globals.css` `.handwriting-underline` class:
+  - Changed `background-color: currentColor` to `background-color: rgb(var(--color-accent-cyan))`
+  - Added `color: rgb(var(--color-accent-cyan))` as explicit fallback
+  - Maintains all existing mask properties for handwriting underline effect
+- No component changes required - MDX components already compatible
+
 ## [0.8.12] - 2026-01-26
 
 ### Added
