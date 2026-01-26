@@ -22,7 +22,7 @@ export function MobileMenu() {
           'rounded-lg p-2 transition-all duration-200',
           'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-          'border border-transparent text-foreground hover:border-notebook-divider'
+          'handwriting-border text-foreground' /* Use handwriting border */
         )}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -40,7 +40,7 @@ export function MobileMenu() {
           <div
             className={cn(
               'fixed right-0 top-0 z-50 h-full w-64',
-              'notebook-panel border-l border-notebook-divider p-6',
+              'notebook-panel p-6', /* Border handled by notebook-panel CSS */
               'animate-slide-in-right',
               'paper-texture shadow-paper-xl'
             )}
@@ -60,10 +60,11 @@ export function MobileMenu() {
                       'rounded-lg px-4 py-3 text-base font-medium transition-all duration-200',
                       'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
                       'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-                      'border-l-2 border-transparent',
+                      'handwriting-border-l', /* Use handwriting border for left border */
+                      isActive && 'handwriting-border-l-accent', /* Accent color for active state */
                       isActive
-                        ? 'border-l-accent bg-accent/10 font-semibold text-accent'
-                        : 'text-foreground/80 hover:border-l-notebook-divider hover:text-foreground'
+                        ? 'bg-accent/10 font-semibold text-accent'
+                        : 'text-foreground/80 hover:text-foreground'
                     )}
                   >
                     {item.label}

@@ -23,9 +23,9 @@ export function LocaleFilter({
           onChange={(e) => onChange(e.target.value as 'all' | 'en' | 'tr')}
           className={cn(
             'w-full appearance-none rounded-lg py-3 pl-12 pr-10',
-            'border-2 border-notebook-divider bg-background',
+            'handwriting-border bg-background', /* Use handwriting border */
             'font-sans text-foreground',
-            'focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent',
+            'focus:outline-none focus:ring-2 focus:ring-accent',
             'focus:shadow-[var(--shadow-xl)]',
             'transition-all duration-200',
             'shadow-paper-sm hover:shadow-paper-md',

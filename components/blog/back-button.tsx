@@ -13,7 +13,7 @@ export function BackButton() {
       className={cn(
         'no-print fixed left-4 top-4 z-50',
         'inline-flex h-10 w-10 items-center justify-center rounded-lg',
-        'border border-notebook-divider bg-background',
+        'handwriting-border bg-background', /* Use handwriting border */
         'transition-all duration-200 hover:scale-[0.98] focus:outline-none active:scale-[0.96]',
         'focus:ring-2 focus:ring-accent focus:ring-offset-2',
         'shadow-paper-sm hover:shadow-paper-md',

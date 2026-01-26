@@ -36,9 +36,10 @@ export function TagFilter({
               className={cn(
                 'rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-200',
                 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
+                'handwriting-border', /* Use handwriting border */
                 isSelected
                   ? 'bg-accent text-foreground hover:bg-accent/90'
-                  : 'border border-notebook-divider bg-background text-foreground/80 shadow-paper-sm hover:border-accent/50 hover:text-foreground hover:shadow-paper-md'
+                  : 'bg-background text-foreground/80 shadow-paper-sm hover:text-foreground hover:shadow-paper-md'
               )}
             >
               {tag}

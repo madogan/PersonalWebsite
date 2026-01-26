@@ -75,7 +75,7 @@ export function CertificationsSection() {
                   <div className="space-y-4">
                     {/* Logo and Title */}
                     <div className="flex items-start gap-3">
-                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent/20 bg-background">
+                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg handwriting-border handwriting-border-accent bg-background">
                         {getLogoPath(cert.issuer) ? (
                           <Image
                             src={getLogoPath(cert.issuer)!}
@@ -86,7 +86,7 @@ export function CertificationsSection() {
                             unoptimized={false}
                           />
                         ) : (
-                          <div className="flex h-full w-full items-center justify-center rounded-lg border border-accent/20 bg-accent/10 p-2">
+                          <div className="flex h-full w-full items-center justify-center rounded-lg handwriting-border handwriting-border-accent bg-accent/10 p-2">
                             <Award className="h-6 w-6 text-accent" />
                           </div>
                         )}
@@ -139,7 +139,7 @@ export function CertificationsSection() {
                             className={cn(
                               'rounded-md px-2 py-1 text-xs font-medium',
                               'bg-accent/10 text-accent',
-                              'border border-accent/20'
+                              'handwriting-border handwriting-border-accent' /* Use handwriting border */
                             )}
                           >
                             {skill}

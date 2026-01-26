@@ -26,7 +26,7 @@ export function LanguageSwitcher({
 
   // Determine display text based on alternate locale
   const displayText =
-    alternateLocale === 'tr' ? 'Read in Turkish' : 'Türkçe oku'
+    alternateLocale === 'tr' ? 'Read in Turkish' : 'Read in English'
 
   // Check if alternate locale matches preferred locale for visual emphasis
   const isPreferred = preferredLocale === alternateLocale

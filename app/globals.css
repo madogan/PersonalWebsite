@@ -205,10 +205,12 @@
   }
 
   /* Ensure select dropdowns use project font */
-  select,
+  select {
+    font-family: var(--font-solitreo), Georgia, serif !important;
+  }
+
   select option {
-    @apply font-sans;
-    font-family: var(--font-solitreo), Georgia, serif;
+    font-family: var(--font-solitreo), Georgia, serif !important;
   }
 
   p {

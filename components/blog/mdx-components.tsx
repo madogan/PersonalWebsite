@@ -56,8 +56,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     a: ({ className, ...props }) => (
       <a
         className={cn(
-          'text-accent underline underline-offset-4 hover:text-accent-cyan',
+          'text-accent-cyan handwriting-underline underline-offset-4 hover:text-accent-cyan/80',
           'transition-colors duration-200',
+          'font-medium',
           className
         )}
         {...props}
@@ -89,7 +90,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     blockquote: ({ className, ...props }) => (
       <blockquote
         className={cn(
-          'my-4 border-l-4 border-accent py-2 pl-4',
+          'my-4 handwriting-border-l py-2 pl-4',
           'rounded-r-md bg-accent/5 italic text-foreground/80',
           className
         )}
@@ -110,7 +111,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <pre
         className={cn(
           'mb-4 overflow-x-auto rounded-lg bg-foreground/5 p-4',
-          'border border-notebook-divider font-mono',
+          'handwriting-border font-mono',
           className
         )}
         {...props}

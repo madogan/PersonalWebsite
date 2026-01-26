@@ -123,7 +123,7 @@ export function BottomNavigation() {
       <div className="notebook-panel paper-texture relative mx-4 flex w-full max-w-sm items-center gap-1 rounded-lg px-2 py-2 shadow-paper-lg md:w-fit md:max-w-none md:gap-2 md:px-4 md:py-3">
         {/* Sliding indicator */}
         <div
-          className="absolute bottom-2 top-2 rounded-lg border border-accent/30 bg-accent/20 transition-all duration-500 ease-out"
+          className="absolute bottom-2 top-2 rounded-lg handwriting-border bg-accent/20 transition-all duration-500 ease-out"
           style={{
             left: `${indicatorStyle.left}px`,
             width: `${indicatorStyle.width}px`,

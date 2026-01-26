@@ -9,7 +9,7 @@ export function Header() {
     <header
       className={cn(
         'sticky top-0 z-50 w-full',
-        'notebook-panel border-b border-notebook-divider',
+        'notebook-panel handwriting-border-b', /* Use handwriting border for bottom border */
         'bg-background/95 backdrop-blur-sm',
         'paper-texture transition-all duration-300'
       )}

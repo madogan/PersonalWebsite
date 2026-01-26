@@ -70,7 +70,7 @@ export function PersonalHero() {
             {/* Contact Info - All devices */}
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-xs sm:text-sm md:gap-6 md:pt-6 md:text-base">
               <div className="flex items-center gap-2 text-foreground/70 md:gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-notebook-divider bg-foreground/5 md:h-9 md:w-9">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg handwriting-border bg-foreground/5 md:h-9 md:w-9">
                   <MapPin className="h-3.5 w-3.5 md:h-4 md:w-4" />
                 </div>
                 <span>{personal.location}</span>
@@ -83,7 +83,7 @@ export function PersonalHero() {
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-foreground/70 transition-colors hover:text-accent md:gap-3"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-notebook-divider bg-foreground/5 transition-colors group-hover:border-accent/30 group-hover:bg-accent/10 md:h-9 md:w-9">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg handwriting-border bg-foreground/5 transition-colors group-hover:bg-accent/10 md:h-9 md:w-9">
                     <Linkedin className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </div>
                   <span className="hidden sm:inline">LinkedIn</span>
@@ -97,7 +97,7 @@ export function PersonalHero() {
                   rel="noopener noreferrer"
                   className="group flex items-center gap-2 text-foreground/70 transition-colors hover:text-accent md:gap-3"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-notebook-divider bg-foreground/5 transition-colors group-hover:border-accent/30 group-hover:bg-accent/10 md:h-9 md:w-9">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg handwriting-border bg-foreground/5 transition-colors group-hover:bg-accent/10 md:h-9 md:w-9">
                     <Github className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </div>
                   <span className="hidden sm:inline">GitHub</span>
