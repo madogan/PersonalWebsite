@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.11] - 2026-01-26
+
+### Added
+
+- **Handwriting Border System**: Implemented hand-drawn/sketchy border system for organic, notebook-style aesthetic
+  - Created SVG patterns for horizontal, vertical, and underline borders with seamless tiling
+  - Implemented CSS classes using pseudo-elements to support `border-radius` (unlike `border-image`)
+  - Added `.handwriting-border-all` class for all borders
+  - Added directional variants: `.handwriting-border-t`, `.handwriting-border-b`, `.handwriting-border-l`, `.handwriting-border-r`, `.handwriting-border-x`, `.handwriting-border-y`
+  - Added `.handwriting-underline` class for text decorations
+  - Uses CSS `mask-image` for proper color inheritance from CSS variables
+  - Follows existing `.paper-texture::before` pattern for consistency
+  - Optimized SVG patterns to < 500 bytes each for performance
+
+### Technical
+
+- Added CSS custom properties in `:root` for handwriting border SVG patterns:
+  - `--handwriting-border-horizontal`: Hand-drawn wavy line pattern (50px width) for top/bottom borders
+  - `--handwriting-border-vertical`: Hand-drawn wavy line pattern (50px height) for left/right borders
+  - `--handwriting-underline`: Hand-drawn underline pattern (35px width) for text decorations
+- Implemented handwriting border classes in `app/globals.css`:
+  - All classes use pseudo-elements (`::before`, `::after`) positioned absolutely
+  - Pseudo-elements respect parent `border-radius` automatically
+  - Uses `mask-image` with `background-color` for color control
+  - Proper z-index stacking: border (0) < texture (0) < content (1)
+  - Includes fallback support for older browsers
+- Foundation ready for Phase 2: Applying handwriting borders to components (cards, panels, dividers, etc.)
+
 ## [0.8.10] - 2026-01-26
 
 ### Fixed

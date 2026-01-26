@@ -1756,3 +1756,444 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.10
 - Changes committed: `fix(blog): remove outer border from Related Posts section and restore card borders`
 - Plan file removed from `.cursor/plans/`
+
+## Implement Handwriting-Style Borders Throughout the Website
+
+### Phase 1: Create Handwriting Border System
+
+#### Task 1.1: Design SVG Border Patterns ✅
+
+- [x] Create base SVG pattern for horizontal borders (top/bottom)
+  - Design sketchy, hand-drawn line pattern
+  - Ensure seamless tiling for long borders
+  - Create multiple variations for randomness
+  - Test pattern at different widths (1px, 2px, 4px)
+- [x] Create base SVG pattern for vertical borders (left/right)
+  - Similar to horizontal but optimized for vertical rendering
+  - Ensure seamless tiling
+  - Create variations
+- [x] Create SVG pattern for underlines
+  - Hand-drawn underline style
+  - Positioned for text decoration
+  - Multiple variations for different link styles
+- [ ] Test SVG patterns in browser (will test in Task 1.2 with CSS implementation)
+  - Verify seamless tiling
+  - Check color inheritance
+  - Test at different sizes
+  - Verify performance impact
+
+**Verification Criteria:**
+- SVG patterns render correctly in all modern browsers
+- Patterns tile seamlessly without visible seams
+- Colors inherit from CSS variables correctly
+- Performance impact is minimal (< 5ms render time)
+
+#### Task 1.2: Implement Base CSS Classes ✅
+
+- [ ] Create `.handwriting-border-all` class in `app/globals.css`
+  - **CRITICAL:** Use pseudo-element approach (NOT `border-image`) to support `border-radius`
+  - Follow existing `.paper-texture::before` pattern for consistency
+  - Use SVG background image on `::before` pseudo-element
+  - Position absolutely with `inset: 0` and `border-radius: inherit`
+  - Use CSS `mask` property for border effect (more compatible than `border-image`)
+  - Set border width via padding on pseudo-element (1px default)
+  - Include fallback: keep original `border` as fallback for older browsers
+  - Test with existing `.loose-leaf-card` component (has `rounded-lg`)
+- [ ] Create directional variants:
+  - `.handwriting-border-t` (top border only)
+  - `.handwriting-border-b` (bottom border only)
+  - `.handwriting-border-l` (left border only)
+  - `.handwriting-border-r` (right border only)
+  - `.handwriting-border-x` (horizontal borders)
+  - `.handwriting-border-y` (vertical borders)
+- [ ] Create `.handwriting-underline` class
+  - Use SVG background image approach (NOT `border-image`)
+  - Set `text-decoration: none` to remove default underline
+  - Position below text with `background-position: bottom`
+  - Use `background-size: auto 2px` for thickness
+  - Support `padding-bottom` or `background-position-y` for offset equivalent
+  - Test with link components in `mdx-components.tsx`
+#### Task 1.2: Implement Base CSS Classes ✅
+
+- [x] Create `.handwriting-border-all` class in `app/globals.css`
+  - **CRITICAL:** Use pseudo-element approach (NOT `border-image`) to support `border-radius`
+  - Follow existing `.paper-texture::before` pattern for consistency
+  - Use SVG background image on `::before` pseudo-element
+  - Position absolutely with `inset: 0` and `border-radius: inherit`
+  - Use CSS `mask` property for border effect (more compatible than `border-image`)
+  - Set border width via padding on pseudo-element (1px default)
+  - Include fallback: keep original `border` as fallback for older browsers
+  - Test with existing `.loose-leaf-card` component (has `rounded-lg`)
+- [x] Create directional variants:
+  - `.handwriting-border-t` (top border only)
+  - `.handwriting-border-b` (bottom border only)
+  - `.handwriting-border-l` (left border only)
+  - `.handwriting-border-r` (right border only)
+  - `.handwriting-border-x` (horizontal borders)
+  - `.handwriting-border-y` (vertical borders)
+- [x] Create `.handwriting-underline` class
+  - Use SVG background image approach (NOT `border-image`)
+  - Set `text-decoration: none` to remove default underline
+  - Position below text with `background-position: bottom`
+  - Use `background-size: auto 2px` for thickness
+  - Support `padding-bottom` or `background-position-y` for offset equivalent
+  - Test with link components in `mdx-components.tsx`
+- [x] Test base classes with sample components
+  - Verify visual appearance matches handwriting style
+  - **CRITICAL:** Verify `border-radius` works correctly (test with `rounded-lg`)
+  - Check browser compatibility (Chrome, Firefox, Safari)
+  - Verify responsive behavior
+  - Test z-index stacking (ensure content appears above border)
+
+**Verification Criteria:**
+- All base classes render correctly
+- Borders maintain proper spacing and alignment
+- Underlines align correctly with text
+- No layout shifts or visual glitches
+
+### Phase 2: Update Card and Panel Borders
+
+#### Task 2.1: Update Loose-Leaf Card Borders
+
+- [ ] Modify `.loose-leaf-card` class in `app/globals.css`
+  - **CRITICAL:** Keep `border border-notebook-divider` as fallback
+  - Add handwriting border implementation
+  - **IMPORTANT:** Ensure pseudo-element respects `rounded-lg` border-radius
+  - Maintain existing `::before` pseudo-element (paper texture) - may need z-index adjustment
+  - Preserve hover effects (transform, shadow)
+  - Ensure border pseudo-element doesn't interfere with card content z-index
+- [ ] Test card appearance
+  - Verify handwriting border renders correctly
+  - **CRITICAL:** Verify `rounded-lg` border-radius works (no sharp corners)
+  - Verify hover states work (transform, shadow)
+  - Test on mobile and desktop
+  - Verify paper texture still appears correctly
+
+**Verification Criteria:**
+- Card borders display as handwriting style
+- **CRITICAL:** Border-radius (`rounded-lg`) works correctly - no sharp corners
+- Hover effects preserved (rotation, shadow)
+- Paper texture overlay still works
+- No visual regressions
+
+#### Task 2.2: Update Notebook Panel Borders
+
+- [ ] Modify `.notebook-panel` class in `app/globals.css`
+  - Keep `border border-notebook-divider` as fallback
+  - Add handwriting border implementation
+  - Maintain existing styling
+  - Preserve hover effects
+- [ ] Test panel appearance
+  - Verify border renders correctly
+  - Check all panel instances (header, mobile menu, etc.)
+  - Verify hover states
+
+**Verification Criteria:**
+- Panel borders display as handwriting style
+- All panel instances updated correctly
+- Hover effects preserved
+
+### Phase 3: Update Divider Lines
+
+#### Task 3.1: Update Pencil Divider
+
+- [ ] Modify `.pencil-divider` class in `app/globals.css`
+  - Replace `border-t border-notebook-divider` with handwriting border
+  - Use `.handwriting-border-t` or equivalent
+  - Remove or update `::after` pseudo-element (may conflict)
+  - Maintain existing spacing
+- [ ] Test divider appearance
+  - Verify divider renders correctly
+  - Check all divider instances
+  - Verify spacing maintained
+
+**Verification Criteria:**
+- Divider lines display as handwriting style
+- All divider instances updated
+- Spacing preserved
+
+#### Task 3.2: Update Footer Top Border
+
+- [ ] Modify `components/layout/footer.tsx`
+  - Update `pencil-divider border-t` classes
+  - Apply handwriting border style
+  - Maintain existing styling
+- [ ] Test footer appearance
+  - Verify top border renders correctly
+  - Check responsive behavior
+
+**Verification Criteria:**
+- Footer top border displays as handwriting style
+- Responsive behavior maintained
+
+### Phase 4: Update Navigation and Menu Borders
+
+#### Task 4.1: Update Header Bottom Border
+
+- [ ] Modify `components/layout/header.tsx`
+  - Update `border-b border-notebook-divider` classes
+  - Apply handwriting border style
+  - Maintain existing styling
+- [ ] Test header appearance
+  - Verify bottom border renders correctly
+  - Check sticky behavior
+
+**Verification Criteria:**
+- Header bottom border displays as handwriting style
+- Sticky behavior maintained
+
+#### Task 4.2: Update Navigation Underlines
+
+- [ ] Modify `components/layout/navigation.tsx`
+  - Update `border-b-2` classes for active/hover states
+  - Apply handwriting border style
+  - Maintain existing hover/active behavior
+- [ ] Test navigation appearance
+  - Verify underlines render correctly
+  - Check hover and active states
+  - Verify transitions work
+
+**Verification Criteria:**
+- Navigation underlines display as handwriting style
+- Hover and active states work correctly
+- Transitions preserved
+
+#### Task 4.3: Update Mobile Menu Borders
+
+- [ ] Modify `components/layout/mobile-menu.tsx`
+  - Update `border-l border-notebook-divider` on menu panel
+  - Update `border-l-2` classes on menu items
+  - Apply handwriting border styles
+  - Maintain existing behavior
+- [ ] Test mobile menu appearance
+  - Verify left border renders correctly
+  - Check menu item borders
+  - Verify active states
+
+**Verification Criteria:**
+- Mobile menu borders display as handwriting style
+- Menu item borders updated
+- Active states work correctly
+
+### Phase 5: Update Component Borders
+
+#### Task 5.1: Update Button Borders
+
+- [ ] Search for all button components with borders
+  - `components/ui/glassy-button.tsx`
+  - `components/ui/theme-toggle.tsx`
+  - Other button instances
+- [ ] Apply handwriting border styles
+  - Replace `border border-notebook-divider` or `border-accent/20`
+  - Maintain existing hover/active states
+- [ ] Test button appearance
+  - Verify borders render correctly
+  - Check all button variants
+  - Verify interactions
+
+**Verification Criteria:**
+- Button borders display as handwriting style
+- All button variants updated
+- Interactions preserved
+
+#### Task 5.2: Update Input Borders
+
+- [ ] Search for all input components with borders
+  - `components/blog/search-bar.tsx`
+  - `components/blog/locale-filter.tsx`
+  - Other input instances
+- [ ] Apply handwriting border styles
+  - Replace `border-2 border-notebook-divider`
+  - Maintain focus states
+- [ ] Test input appearance
+  - Verify borders render correctly
+  - Check focus states
+  - Verify accessibility
+
+**Verification Criteria:**
+- Input borders display as handwriting style
+- Focus states work correctly
+- Accessibility maintained
+
+#### Task 5.3: Update Badge and Tag Borders
+
+- [ ] Search for all badge/tag components with borders
+  - `components/blog/tag-list.tsx`
+  - `components/blog/tag-filter.tsx`
+  - `components/resume/skills-grid.tsx`
+  - Other badge/tag instances
+- [ ] Apply handwriting border styles
+  - Replace `border border-accent/20` or similar
+  - Maintain existing styling
+- [ ] Test badge/tag appearance
+  - Verify borders render correctly
+  - Check all instances
+
+**Verification Criteria:**
+- Badge/tag borders display as handwriting style
+- All instances updated
+
+#### Task 5.4: Update Blockquote Borders
+
+- [ ] Modify `components/blog/mdx-components.tsx`
+  - Update `border-l-4 border-accent` on blockquote
+  - Apply handwriting border style
+  - Maintain existing styling
+- [ ] Test blockquote appearance
+  - Verify left border renders correctly
+
+**Verification Criteria:**
+- Blockquote borders display as handwriting style
+
+#### Task 5.5: Update Code Block Borders
+
+- [ ] Modify `components/blog/mdx-components.tsx`
+  - Update `border border-notebook-divider` on code blocks
+  - Apply handwriting border style
+  - Maintain existing styling
+- [ ] Test code block appearance
+  - Verify borders render correctly
+
+**Verification Criteria:**
+- Code block borders display as handwriting style
+
+### Phase 6: Update Text Underlines
+
+#### Task 6.1: Update Link Underlines
+
+- [ ] Modify `components/blog/mdx-components.tsx`
+  - Update link component with `underline` class
+  - Replace with `.handwriting-underline` or equivalent
+  - Maintain `underline-offset-4` spacing
+- [ ] Search for other link instances with underlines
+  - `components/home/certifications-section.tsx` (hover:underline)
+  - Other link instances
+- [ ] Apply handwriting underline styles
+  - Replace all `underline` classes
+  - Maintain hover states where applicable
+- [ ] Test link appearance
+  - Verify underlines render correctly
+  - Check hover states
+  - Verify spacing
+
+**Verification Criteria:**
+- Link underlines display as handwriting style
+- All link instances updated
+- Hover states work correctly
+
+### Phase 7: Update Remaining Border Instances
+
+#### Task 7.1: Comprehensive Border Audit
+
+- [ ] Search codebase for remaining border instances
+  - Use grep to find all `border` class usages
+  - Review each instance
+  - Categorize by component type
+- [ ] Update remaining instances:
+  - `components/home/personal-hero.tsx` (icon borders)
+  - `components/home/bottom-navigation.tsx` (indicator border)
+  - `components/resume/experience-item.tsx` (left border)
+  - `components/blog/back-button.tsx` (button border)
+  - `components/blog/pagination.tsx` (button borders)
+  - Any other instances found
+- [ ] Apply handwriting border styles consistently
+- [ ] Test all updated components
+
+**Verification Criteria:**
+- All border instances updated to handwriting style
+- No straight borders remain
+- Consistent appearance across all components
+
+### Phase 8: Testing and Refinement
+
+#### Task 8.1: Visual Testing
+
+- [ ] Test all pages and components
+  - Home page
+  - Blog pages (list and detail)
+  - Resume page
+  - All navigation states
+  - Mobile menu
+  - Footer
+- [ ] Verify handwriting style consistency
+  - Check border thickness consistency
+  - Verify color consistency
+  - Check spacing alignment
+- [ ] Test responsive behavior
+  - Mobile devices
+  - Tablet devices
+  - Desktop devices
+- [ ] Test theme switching
+  - Light theme
+  - Dark theme
+  - Verify borders work in both themes
+
+**Verification Criteria:**
+- All pages display correctly
+- Handwriting style is consistent
+- Responsive behavior maintained
+- Theme switching works correctly
+
+#### Task 8.2: Browser Compatibility Testing
+
+- [ ] Test in modern browsers
+  - Chrome/Edge (Chromium)
+  - Firefox
+  - Safari
+- [ ] Verify SVG border-image support
+  - Check fallback behavior
+  - Verify rendering quality
+- [ ] Test performance
+  - Check render times
+  - Verify no layout shifts
+  - Check memory usage
+
+**Verification Criteria:**
+- Borders render correctly in all browsers
+- Fallbacks work where needed
+- Performance impact is minimal
+
+#### Task 8.3: Accessibility Testing
+
+- [ ] Verify borders don't affect readability
+  - Check contrast ratios
+  - Verify text remains readable
+- [ ] Test with screen readers
+  - Verify no accessibility regressions
+- [ ] Test keyboard navigation
+  - Verify focus indicators work
+  - Check tab order
+
+**Verification Criteria:**
+- Accessibility maintained
+- No readability issues
+- Focus indicators work correctly
+
+#### Task 8.4: Refinement and Polish
+
+- [ ] Fine-tune SVG patterns if needed
+  - Adjust sketchiness level
+  - Refine line variations
+  - Optimize SVG code
+- [ ] Adjust border thickness if needed
+  - Ensure consistency across all components
+  - Maintain visual hierarchy
+- [ ] Optimize performance
+  - Minimize SVG data URL sizes (< 500 bytes each)
+  - Verify no layout shifts (CLS impact)
+  - Test rendering performance (should be < 5ms)
+- [ ] Update print styles (`app/globals.css` print media query)
+  - Ensure handwriting borders print correctly
+  - May need to simplify for print (use solid borders)
+  - Test print preview
+- [ ] Document the handwriting border system
+  - Add comprehensive comments to CSS classes
+  - Document usage patterns and examples
+  - Note z-index stacking requirements
+  - Document fallback behavior
+
+**Verification Criteria:**
+- Borders look polished and consistent
+- Performance is optimal (no layout shifts, fast rendering)
+- Print styles work correctly
+- Code is well-documented with clear comments
