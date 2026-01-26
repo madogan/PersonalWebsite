@@ -64,17 +64,17 @@
     /* Horizontal border pattern (for top/bottom borders) */
     /* Hand-drawn wavy line with slight variation - tiles seamlessly horizontally */
     /* Pattern width: 50px for good variation without being too repetitive */
-    --handwriting-border-horizontal: url("data:image/svg+xml,%3Csvg%20width%3D%2750%27%20height%3D%272%27%20xmlns%3D%27http://www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M0%2C1%20Q8%2C0.3%2015%2C1%20Q22%2C1.7%2030%2C1%20Q37%2C0.4%2045%2C1%20Q47%2C1.2%2050%2C1%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.2%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E");
+    --handwriting-border-horizontal: url("data:image/svg+xml,%3Csvg%20width%3D%2250%22%20height%3D%222%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%2C1%20Q8%2C0.3%2015%2C1%20Q22%2C1.7%2030%2C1%20Q37%2C0.4%2045%2C1%20Q47%2C1.2%2050%2C1%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
 
     /* Vertical border pattern (for left/right borders) */
     /* Hand-drawn wavy line with slight variation - tiles seamlessly vertically */
     /* Pattern height: 50px for good variation */
-    --handwriting-border-vertical: url("data:image/svg+xml,%3Csvg%20width%3D%272%27%20height%3D%2750%27%20xmlns%3D%27http://www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M1%2C0%20Q0.3%2C8%201%2C15%20Q1.7%2C22%201%2C30%20Q0.4%2C37%201%2C45%20Q1.2%2C47%201%2C50%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.2%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E");
+    --handwriting-border-vertical: url("data:image/svg+xml,%3Csvg%20width%3D%222%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1%2C0%20Q0.3%2C8%201%2C15%20Q1.7%2C22%201%2C30%20Q0.4%2C37%201%2C45%20Q1.2%2C47%201%2C50%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.2%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
 
     /* Underline pattern (for text underlines) */
     /* Hand-drawn wavy underline with organic feel - tiles seamlessly */
     /* Pattern width: 35px for subtle variation */
-    --handwriting-underline: url("data:image/svg+xml,%3Csvg%20width%3D%2735%27%20height%3D%272%27%20xmlns%3D%27http://www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M0%2C1%20Q4%2C0.2%208%2C1%20Q12%2C1.6%2016%2C1%20Q20%2C0.3%2024%2C1%20Q28%2C1.5%2032%2C1%20Q33%2C1.1%2035%2C1%27%20stroke%3D%27%23000%27%20stroke-width%3D%271.5%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E");
+    --handwriting-underline: url("data:image/svg+xml,%3Csvg%20width%3D%2235%22%20height%3D%222%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%2C1%20Q4%2C0.2%208%2C1%20Q12%2C1.6%2016%2C1%20Q20%2C0.3%2024%2C1%20Q28%2C1.5%2032%2C1%20Q33%2C1.1%2035%2C1%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
   }
 
   .dark {
