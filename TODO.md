@@ -1665,3 +1665,29 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.8
 - Changes committed: `fix(blog): remove border from Related Posts cards`
 - Plan file removed from `.cursor/plans/`
+
+## Completed: Update Next.js 15+ Rules Documentation
+
+### Phase 1: Rules Update ✅
+
+#### Task 1.1: Update Next.js Rules Documentation ✅
+
+- [x] Updated `nextjs-rules.mdc` to correctly document Promise-typed params for dynamic routes
+- [x] Clarified that `generateMetadata` is required for dynamic route metadata in Next.js 15+
+- [x] Added examples showing correct usage patterns for both static and dynamic routes
+- [x] Updated code review command documentation to align with Next.js 15 patterns
+- [x] Verified all existing code was already compliant with Next.js 15 best practices
+
+#### Task 1.2: Documentation Updates ✅
+
+- [x] Updated CHANGELOG.md with version 0.8.9 entry
+- [x] Bumped version in `lib/constants.ts` to 0.8.9
+- [x] Bumped version in `package.json` to 0.8.9
+- [x] Committed changes with proper commit message format
+
+**Implementation Summary:**
+- Updated `.cursor/rules/nextjs-rules.mdc`: Corrected metadata and params handling documentation
+- Updated `.cursor/commands/review-changes.md`: Aligned review criteria with Next.js 15 actual behavior
+- No code changes required - existing implementation was already correct
+- Version bumped to 0.8.9
+- Changes committed: `docs(rules): update Next.js 15+ rules to reflect actual framework behavior`
