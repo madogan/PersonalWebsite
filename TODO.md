@@ -1366,12 +1366,14 @@ All phases of the notebook design refinement have been completed:
 ### Phase 1: Font Configuration Update ✅
 
 #### Task 1.0: Pre-Implementation Verification ✅
+
 - [x] Verify Solitreo font file exists at `fonts/Solitreo/Solitreo-Regular.ttf`
 - [x] Verify license file exists at `fonts/Solitreo/OFL.txt`
 - [x] Check font file size (for performance reference) - 92KB
 - [x] Confirm font file is readable and not corrupted
 
 #### Task 1.1: Update Root Layout Font Configuration ✅
+
 - [x] Open `app/layout.tsx`
 - [x] Replace `charm` constant with `solitreo`
 - [x] Update font path from `../fonts/Charm-Regular.ttf` to `../fonts/Solitreo/Solitreo-Regular.ttf`
@@ -1383,6 +1385,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify TypeScript compilation: `pnpm type-check`
 
 #### Task 1.2: Update Tailwind Font Family Configuration ✅
+
 - [x] Open `tailwind.config.ts`
 - [x] Update `fontFamily.sans` to use `var(--font-solitreo)` instead of `var(--font-charm)`
 - [x] Update `fontFamily.serif` to use `var(--font-solitreo)` instead of `var(--font-charm)`
@@ -1394,18 +1397,21 @@ All phases of the notebook design refinement have been completed:
 ### Phase 2: Documentation & Comments Update ✅
 
 #### Task 2.1: Update Code Comments ✅
+
 - [x] Update comment in `app/layout.tsx` from "Charm font family" to "Solitreo font family"
 - [x] Update license reference in comments
 - [x] Search codebase for any remaining "Charm" references in comments
 - [x] Replace all "Charm" references with "Solitreo" in code comments
 
 #### Task 2.2: Update Version Numbers ✅
+
 - [x] Update `package.json`: Change version from `"0.8.5"` to `"0.8.6"`
 - [x] Update `lib/constants.ts`: Change `VERSION` from `'0.8.5'` to `'0.8.6'`
 - [x] Verify both files have matching version numbers
 - [x] Run `pnpm type-check` to ensure no TypeScript errors
 
 #### Task 2.3: Update Documentation Files ✅
+
 - [x] Update `CHANGELOG.md`:
   - [x] Add new entry for version 0.8.6 with current date
   - [x] Document font change from Charm to Solitreo
@@ -1420,12 +1426,14 @@ All phases of the notebook design refinement have been completed:
 ### Phase 3: Component Verification ✅
 
 #### Task 3.1: Verify No Hardcoded Font References ✅
+
 - [x] Search codebase for "charm" (case-insensitive) in code files
 - [x] Search for `--font-charm` CSS variable references
 - [x] Verify no components have hardcoded font-family values
 - [x] Confirm all components use Tailwind font utilities (`font-sans`, `font-serif`, `font-mono`)
 
 #### Task 3.2: Verify Font Weight Handling ✅
+
 - [x] Review `app/globals.css` for font-weight usage
 - [x] Verify `font-bold` classes will work with synthetic bold
 - [x] Check that all heading elements use appropriate font-weight
@@ -1436,6 +1444,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 4: Testing & Validation
 
 #### Task 4.1: Visual Regression Testing
+
 - [ ] Start development server: `pnpm dev`
 - [ ] Test home page - verify Solitreo font renders correctly
 - [ ] Test blog list page - verify typography consistency
@@ -1450,6 +1459,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify no layout shifts due to font change
 
 #### Task 4.2: Performance Validation
+
 - [ ] Check font file size in Network tab
 - [ ] Verify font preloading works correctly
 - [ ] Test font display swap behavior
@@ -1457,6 +1467,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify font loads quickly
 
 #### Task 4.3: Code Quality Checks ✅
+
 - [x] Run TypeScript type checking: `pnpm type-check`
 - [x] Run ESLint: `pnpm lint`
 - [x] Run Prettier formatting: `pnpm format`
@@ -1467,6 +1478,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 5: Cleanup (Optional)
 
 #### Task 5.1: Remove Unused Font Files (Optional)
+
 - [ ] **Decision Point**: Keep Charm font files for rollback or remove?
 - [ ] If removing: Delete `fonts/Charm-Regular.ttf` and `fonts/Charm-Bold.ttf`
 - [ ] If keeping: Document in README or comments that Charm is available for rollback
@@ -1571,6 +1583,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify font loads quickly
 
 #### Task 4.3: Code Quality Checks ✅
+
 - [x] Run TypeScript type checking: `pnpm type-check`
 - [x] Run ESLint: `pnpm lint`
 - [x] Run Prettier formatting: `pnpm format`
@@ -1621,6 +1634,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify paper texture effect preserved (`paper-texture` class remains intact)
 
 **Implementation Summary:**
+
 - Added `bg-background` class to blog content div in `app/blog/[slug]/page.tsx`
 - Version bumped to 0.8.7
 - Changes committed: `fix(blog): unify background color on blog detail page`
@@ -1661,6 +1675,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no visual regressions in other sections (only Related Posts component modified)
 
 **Implementation Summary:**
+
 - Added `border-0` class to Related Posts cards in `components/blog/related-posts.tsx`
 - Version bumped to 0.8.8
 - Changes committed: `fix(blog): remove border from Related Posts cards`
@@ -1686,8 +1701,57 @@ All phases of the notebook design refinement have been completed:
 - [x] Committed changes with proper commit message format
 
 **Implementation Summary:**
+
 - Updated `.cursor/rules/nextjs-rules.mdc`: Corrected metadata and params handling documentation
 - Updated `.cursor/commands/review-changes.md`: Aligned review criteria with Next.js 15 actual behavior
 - No code changes required - existing implementation was already correct
 - Version bumped to 0.8.9
 - Changes committed: `docs(rules): update Next.js 15+ rules to reflect actual framework behavior`
+
+## Remove Outer Border from Related Posts Section
+
+### Phase 1: Implementation ✅
+
+#### Task 1.1: Update Related Posts Component ✅
+
+- [x] Remove `pencil-divider` class from section element (line 66) in `components/blog/related-posts.tsx`
+- [x] Preserve spacing classes (`mt-16 pt-12`) on section element
+- [x] Remove `border-0` class from post cards (line 75) to restore default borders
+- [x] Update comment on line 75 to reflect border restoration
+- [x] Verify `pencil-divider` class removed from section element
+- [x] Verify `border-0` class removed from post cards
+- [x] Verify post cards now display with borders (from `loose-leaf-card` class)
+- [x] Verify no TypeScript errors
+- [x] Verify component renders without outer border on section
+- [x] Verify individual post cards display with borders
+
+#### Task 1.2: Visual Verification
+
+- [ ] Navigate to any blog detail page (`/blog/[slug]`)
+- [ ] Scroll to Related Posts section
+- [ ] Verify no outer border around the section
+- [ ] Verify individual post cards HAVE borders (restored default behavior)
+- [ ] Verify spacing remains appropriate (`mt-16 pt-12`)
+- [ ] Inspect element to confirm `border-0` class is NOT present on post cards
+- [ ] Verify post cards have borders from `loose-leaf-card` class
+- [ ] Test in both light and dark themes
+- [ ] Test on mobile and desktop viewports
+
+#### Task 1.3: Code Quality & Documentation ✅
+
+- [x] Run TypeScript type checking: `pnpm type-check`
+- [x] Run ESLint: `pnpm lint`
+- [x] Run Prettier formatting check: `pnpm format:check`
+- [x] Fix any issues found
+- [x] Update `CHANGELOG.md` with the change
+- [x] Document that `pencil-divider` was removed from Related Posts section
+- [x] Document that `border-0` was removed to restore post card borders
+- [x] Update version numbers in `package.json` and `lib/constants.ts`
+- [ ] Commit changes following commit conventions
+- [ ] Remove plan file from `.cursor/plans/`
+
+**Implementation Summary:**
+- Removed `pencil-divider` class from section element in `components/blog/related-posts.tsx`
+- Removed `border-0` class from post cards to restore default borders
+- Version bumped to 0.8.10
+- Changes ready for commit: `fix(blog): remove outer border from Related Posts section and restore card borders`

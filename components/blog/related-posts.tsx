@@ -63,7 +63,7 @@ export async function RelatedPosts({
   }
 
   return (
-    <section className="pencil-divider mt-16 pt-12">
+    <section className="mt-16 pt-12">
       <h2 className="mb-8 text-2xl font-bold md:text-3xl">Related Posts</h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {relatedPosts.map((post, index) => (
@@ -72,7 +72,7 @@ export async function RelatedPosts({
             href={`/blog/${post.slug}`}
             className={cn(
               'loose-leaf-card paper-texture group p-6 md:p-8',
-              'border-0', // Remove border from Related Posts cards
+              // border-0 removed - cards now have default loose-leaf-card borders
               'transition-all duration-300',
               'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
               'animate-slide-up'

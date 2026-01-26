@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.8.10] - 2026-01-26
+
+### Fixed
+
+- **Blog Detail Page**: Removed outer border from Related Posts section and restored borders on individual post cards
+  - Removed `pencil-divider` class from Related Posts section container to eliminate outer border
+  - Removed `border-0` class from Related Posts post cards to restore default `loose-leaf-card` borders
+  - Related Posts section now has a cleaner appearance without outer border
+  - Individual post cards now display with borders as originally intended
+  - Preserves all other styling including rounded corners, shadows, hover effects, paper texture, and spacing
+
+### Technical
+
+- Updated `components/blog/related-posts.tsx`: Removed `pencil-divider` from section element and `border-0` from post cards
+- Post cards now use default `loose-leaf-card` border behavior (as originally designed)
+- Section spacing (`mt-16 pt-12`) preserved
+- No changes to global CSS classes - isolated fix to Related Posts component only
+- Minimal code change - two class removals for targeted styling adjustments
+
 ## [0.8.9] - 2026-01-26
 
 ### Changed
