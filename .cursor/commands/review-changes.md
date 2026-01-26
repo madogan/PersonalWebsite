@@ -25,8 +25,9 @@ Analyze the provided changes with these specific filters:
 
 - **Next.js 15+ Patterns**:
   - Server Components by default, Client Components only when needed
-  - Static `export const metadata` (NO `generateMetadata`)
-  - Params as plain objects (NOT Promise-typed)
+  - Static `export const metadata` for static pages; `generateMetadata` for dynamic routes
+  - Params as Promise-typed for dynamic routes (Next.js 15+ requirement); plain objects for static routes
+  - Always await Promise-typed params before use
   - Proper error.tsx and not-found.tsx for route segments
   - No React.FC (use modern function declarations)
   - Proper Suspense usage (only for legitimate streaming/lazy loading)
@@ -192,7 +193,7 @@ Before applying fixes, ensure:
 - **Components**: All new components check existing centralized components first
 - **Internationalization**: All user-facing text uses translations
 - **Error Handling**: Proper error.tsx files exist for route segments
-- **Next.js Patterns**: Follow Next.js 15+ best practices (no `generateMetadata`, proper params typing, etc.)
+- **Next.js Patterns**: Follow Next.js 15+ best practices (use `generateMetadata` for dynamic routes, Promise-typed params for dynamic routes, etc.)
 
 ---
 

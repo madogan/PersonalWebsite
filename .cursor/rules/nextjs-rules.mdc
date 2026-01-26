@@ -13,7 +13,7 @@ alwaysApply: true
 - ✅ Use Server Components by default, Client Components only when needed
 - ✅ **REQUIRED**: Implement error.tsx, not-found.tsx for all route segments
 - ✅ Use route groups `(public)` for organization
-- ✅ Use static `export const metadata` for SEO; avoid `generateMetadata`
+- ✅ Use static `export const metadata` for static pages; use `generateMetadata` for dynamic routes
 
 ### Server Components & Client Components
 
@@ -38,26 +38,43 @@ const Component: React.FC<Props> = () => {}
 export function Component(props: Props) {}
 ```
 
-### Metadata & Params Handling (Project Policy)
+### Metadata & Params Handling (Next.js 15+ Best Practices)
 
 ```typescript
-// ✅ PROJECT RULE: Do NOT use generateMetadata anywhere
-// Use a static metadata export instead
+// ✅ CORRECT: Static metadata for static pages
 export const metadata: Metadata = {
   title: 'Page Title',
   description: 'Page description',
 };
 
-// ✅ Correct params typing for pages/components
-// Params is a plain object – NEVER Promise-typed
-export default async function Page({ params }: { params: { locale: string; id?: string; slug?: string } }) {
-  const { locale } = params
+// ✅ CORRECT: generateMetadata for dynamic routes (Next.js 15+)
+// Params MUST be Promise-typed in Next.js 15+ for dynamic routes
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params // ✅ Always await params
+  const post = getPostBySlug(slug)
+  
+  return {
+    title: post.title,
+    description: post.description,
+  }
+}
+
+// ✅ CORRECT: Dynamic route params are Promise-typed in Next.js 15+
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params // ✅ Always await params
   /* ... */
 }
 
-// ❌ AVOID: Promise-typed params and generateMetadata
-// export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {}
-// export default async function Page({ params }: { params: Promise<{ locale: string }> }) {}
+// ✅ CORRECT: Static route params (if not using dynamic segments)
+export default async function StaticPage({ params }: { params: { locale: string } }) {
+  const { locale } = params // No await needed for static params
+  /* ... */
+}
+
+// ❌ AVOID: Not awaiting Promise-typed params
+// export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+//   const { slug } = params // ❌ WRONG: Must await Promise-typed params
+// }
 ```
 
 ### Suspense Usage Rules
@@ -119,12 +136,13 @@ export default function Error({
 - ✅ Implement proper error boundaries
 - ✅ Use Suspense ONLY for legitimate streaming/lazy loading
 - ✅ Cache data appropriately with `cache()` and `unstable_cache()`
-- ✅ Prefer handling dynamic titles/descriptions in-content; keep `metadata` static
+- ✅ Use `generateMetadata` for dynamic route metadata; use static `metadata` export for static pages
 
 ### Performance Optimizations
 
 - ✅ Use `next/image` with proper sizing and optimization
-- ✅ Define static metadata via `export const metadata` (no `generateMetadata`)
+- ✅ Define static metadata via `export const metadata` for static pages
+- ✅ Use `generateMetadata` for dynamic route metadata (required for per-route SEO)
 - ✅ Use streaming with Suspense (for appropriate use cases)
 - ✅ Optimize bundle size with dynamic imports for code splitting
 

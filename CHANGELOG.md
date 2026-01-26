@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.9] - 2026-01-26
+
+### Changed
+
+- **Documentation**: Updated Next.js 15+ project rules to reflect actual Next.js 15 behavior
+  - Updated `nextjs-rules.mdc` to correctly document Promise-typed params for dynamic routes (Next.js 15+ requirement)
+  - Updated rules to allow `generateMetadata` for dynamic routes (required for per-route SEO)
+  - Clarified distinction between static routes (plain object params) and dynamic routes (Promise-typed params)
+  - Updated code review command documentation to reflect correct Next.js 15 patterns
+  - All existing code was already compliant with Next.js 15 best practices
+
+### Technical
+
+- Updated `.cursor/rules/nextjs-rules.mdc`: Corrected metadata and params handling documentation
+- Updated `.cursor/commands/review-changes.md`: Aligned review criteria with Next.js 15 actual behavior
+- No code changes required - existing implementation was already correct
+- Rules now accurately reflect Next.js 15.1.0 requirements
+
 ## [0.8.8] - 2026-01-26
 
 ### Fixed
