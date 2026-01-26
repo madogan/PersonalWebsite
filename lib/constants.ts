@@ -1,4 +1,4 @@
-export const VERSION = '0.8.6'
+export const VERSION = '0.8.7'
 
 export const siteConfig = {
   name: 'Personal Website',

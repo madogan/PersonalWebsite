@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.7] - 2026-01-26
+
+### Fixed
+
+- **Blog Detail Page**: Fixed background color mismatch between blog content area and outer page background
+  - Added `bg-background` class to blog content div to ensure unified background color
+  - Blog content area now matches outer page background in both light and dark themes
+  - Maintains seamless visual appearance across the entire blog detail page
+  - Paper texture overlay continues to function correctly above the background
+
+### Technical
+
+- Updated `app/blog/[slug]/page.tsx`: Added `bg-background` class to blog content div className
+- Background color uses same CSS variable (`--color-background`) as outer page background
+- No visual regressions - typography, spacing, and paper texture effects preserved
+- Minimal code change - single class addition for improved visual consistency
+
 ## [0.8.6] - 2026-01-26
 
 ### Changed

@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Post Content */}
           <div
             className={cn(
-              'paper-texture prose prose-lg max-w-none',
+              'paper-texture prose prose-lg max-w-none bg-background',
               'text-justify md:text-left',
               'prose-headings:text-left prose-headings:font-serif prose-headings:text-foreground',
               'prose-p:text-justify prose-p:font-sans prose-p:text-foreground/90 md:prose-p:text-left',

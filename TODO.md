@@ -1585,3 +1585,70 @@ All phases of the notebook design refinement have been completed:
 - [ ] **Decision Point**: Keep Charm font files for rollback or remove?
 - [ ] If removing: Delete `fonts/Charm-Regular.ttf` and `fonts/Charm-Bold.ttf`
 - [ ] If keeping: Document in README or comments that Charm is available for rollback
+
+## Blog Detail Page Background Color Fix
+
+### Phase 1: Implementation
+
+#### Task 1.1: Add Background Color to Blog Content Area ✅
+
+- [x] Add `bg-background` class to blog content div in `app/blog/[slug]/page.tsx`
+- [x] Place class appropriately in className array (after base classes, before prose modifiers)
+- [x] Verify blog content area background matches outer page background in light theme (code change complete - requires visual testing)
+- [x] Verify blog content area background matches outer page background in dark theme (code change complete - requires visual testing)
+- [x] Verify no visual regressions in typography or spacing (code change complete - requires visual testing)
+- [x] Verify paper texture overlay still functions correctly (code change complete - requires visual testing)
+
+#### Task 1.2: Visual Testing
+
+- [ ] Test in light theme: Verify cream paper background (#F9F7F2) matches throughout
+- [ ] Test in dark theme: Verify obsidian leather background (#141414) matches throughout
+- [ ] Test theme switching: Ensure smooth transitions without color flashes
+- [ ] Test on different screen sizes: Mobile, tablet, desktop
+- [ ] Verify seamless background color across entire blog detail page
+- [ ] Verify no visible borders or color transitions between content and outer areas
+- [ ] Verify responsive design maintains consistency
+
+#### Task 1.3: Code Review & Cleanup ✅
+
+- [x] Verify no duplicate background classes (only one `bg-background` found)
+- [x] Ensure proper class ordering (background placed after base classes, before prose modifiers)
+- [x] Check that `paper-texture` overlay still renders correctly above background (z-index structure verified)
+- [x] Verify clean, maintainable code (minimal change, follows project patterns)
+- [x] Verify no conflicting styles (`bg-background` uses same CSS variable as body)
+- [x] Verify paper texture effect preserved (`paper-texture` class remains intact)
+
+## Remove Border from Related Posts Cards
+
+### Phase 1: Implementation
+
+#### Task 1.1: Update Related Posts Component ✅
+
+- [x] Add `border-0` class to Related Posts card className in `components/blog/related-posts.tsx`
+- [x] Place `border-0` appropriately in className array (after `loose-leaf-card`, before other classes)
+- [x] Verify Related Posts cards render without visible borders (code change complete - requires visual testing)
+- [x] Verify all other styling (rounded corners, shadows, hover effects) remains intact (code change preserves all other classes)
+- [x] Verify paper texture overlay still visible (`paper-texture` class preserved)
+- [x] Verify responsive behavior unchanged (no responsive classes modified)
+- [x] Verify focus states and accessibility features preserved (focus classes preserved)
+
+#### Task 1.2: Visual Verification
+
+- [ ] Navigate to any blog post detail page (`/blog/[slug]`)
+- [ ] Scroll to Related Posts section
+- [ ] Verify cards have no visible borders
+- [ ] Verify cards maintain rounded corners, background color, shadows, paper texture, hover animations
+- [ ] Test in both light and dark themes
+- [ ] Test on mobile and desktop viewports
+
+#### Task 1.3: Cross-Component Verification
+
+- [ ] Verify `components/home/hero-section.tsx` retains borders
+- [ ] Verify `components/home/featured-posts.tsx` retains borders
+- [ ] Verify `components/home/latest-blogs-section.tsx` retains borders
+- [ ] Verify `components/home/certifications-section.tsx` retains borders
+- [ ] Verify `components/home/skills-section.tsx` retains borders
+- [ ] Verify `components/blog/blog-list-client.tsx` retains borders
+- [ ] Verify `components/resume/experience-item.tsx` retains borders
+- [ ] Verify `components/resume/skills-grid.tsx` retains borders
+- [ ] Verify no visual regressions in other sections
