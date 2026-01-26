@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.8] - 2026-01-26
+
+### Fixed
+
+- **Blog Detail Page**: Removed unwanted border from Related Posts section cards
+  - Added `border-0` class to Related Posts cards to override default `loose-leaf-card` border
+  - Related Posts cards now display without visible borders while maintaining all other styling
+  - All other components using `loose-leaf-card` retain their borders as intended
+  - Preserves rounded corners, shadows, hover effects, paper texture, and accessibility features
+
+### Technical
+
+- Updated `components/blog/related-posts.tsx`: Added `border-0` Tailwind utility class to card className
+- Border removal uses Tailwind utility override pattern (maintains design system integrity)
+- No changes to global CSS classes - isolated fix to Related Posts component only
+- All other `loose-leaf-card` instances across the site remain unaffected
+- Minimal code change - single class addition for targeted border removal
+
 ## [0.8.7] - 2026-01-26
 
 ### Fixed

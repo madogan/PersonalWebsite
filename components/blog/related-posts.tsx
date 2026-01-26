@@ -72,6 +72,7 @@ export async function RelatedPosts({
             href={`/blog/${post.slug}`}
             className={cn(
               'loose-leaf-card paper-texture group p-6 md:p-8',
+              'border-0', // Remove border from Related Posts cards
               'transition-all duration-300',
               'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
               'animate-slide-up'
