@@ -27,7 +27,7 @@ export function SkillsGrid({ skills }: SkillsGridProps) {
                 className={cn(
                   'rounded-lg px-3 py-1.5 text-sm font-medium',
                   'bg-accent/10 text-accent',
-                  'handwriting-border handwriting-border-accent', /* Use handwriting border */
+                  'border border-accent/20', /* Use clean border with subtle accent */
                   'transition-colors hover:bg-accent/20'
                 )}
               >

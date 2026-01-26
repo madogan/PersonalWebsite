@@ -90,7 +90,7 @@ export function BlogListClient({
                     className={cn(
                       'rounded-md px-2 py-1 text-xs font-medium',
                       'bg-foreground/10 text-foreground/60',
-                      'handwriting-border' /* Use handwriting border */
+                      'border border-notebook-divider' /* Use clean border */
                     )}
                   >
                     {post.locale.toUpperCase()}

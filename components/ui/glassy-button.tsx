@@ -48,7 +48,7 @@ export function GlassyButton({
 
   const baseClasses = cn(
     'relative inline-flex items-center gap-2 rounded-lg font-medium',
-    'handwriting-border', /* Use handwriting border instead of regular border */
+    'border border-notebook-divider', /* Use clean border */
     'transition-all duration-200',
     'hover:scale-[0.98] active:scale-[0.96]',
     'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',

@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer
       className={cn(
-        'pencil-divider', /* Already has handwriting border via CSS */
+        'pencil-divider', /* Has clean border via CSS */
         'bg-background/95 backdrop-blur-sm',
         'no-pdf paper-texture mt-auto pb-20 md:pb-6'
       )}

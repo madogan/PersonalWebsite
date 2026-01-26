@@ -56,7 +56,7 @@ export function FeaturedPosts() {
                         className={cn(
                           'rounded-md px-2 py-1 text-xs font-medium',
                           'bg-accent/10 text-accent',
-                          'handwriting-border handwriting-border-accent' /* Use handwriting border */
+                          'border border-accent/20' /* Use clean border with subtle accent */
                         )}
                       >
                         {tag}

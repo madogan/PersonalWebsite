@@ -22,7 +22,7 @@ export function MobileMenu() {
           'rounded-lg p-2 transition-all duration-200',
           'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
           'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-          'handwriting-border text-foreground' /* Use handwriting border */
+          'border border-notebook-divider text-foreground' /* Use clean border */
         )}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -60,8 +60,8 @@ export function MobileMenu() {
                       'rounded-lg px-4 py-3 text-base font-medium transition-all duration-200',
                       'hover:scale-[0.98] hover:bg-foreground/10 active:scale-[0.96]',
                       'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2',
-                      'handwriting-border-l', /* Use handwriting border for left border */
-                      isActive && 'handwriting-border-l-accent', /* Accent color for active state */
+                      'border-l border-notebook-divider', /* Use clean border for left border */
+                      isActive && 'border-l border-accent', /* Accent color for active state */
                       isActive
                         ? 'bg-accent/10 font-semibold text-accent'
                         : 'text-foreground/80 hover:text-foreground'

@@ -25,7 +25,7 @@ export function SearchBar({
           placeholder={placeholder}
           className={cn(
             'relative w-full rounded-lg py-3 pl-12 pr-12',
-            'handwriting-border bg-background', /* Use handwriting border */
+            'border border-notebook-divider bg-background', /* Use clean border */
             'font-sans text-foreground placeholder:text-foreground/50',
             'focus:outline-none focus:ring-2 focus:ring-accent',
             'focus:shadow-[var(--shadow-xl)]',

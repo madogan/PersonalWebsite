@@ -119,7 +119,7 @@ export function ExperienceItem({
       </ul>
 
       {note && (
-        <div className="mt-4 rounded-r-lg handwriting-border-l handwriting-border-l-accent bg-accent/10 p-3 md:mt-6 md:p-4">
+        <div className="mt-4 rounded-r-lg border-l border-accent bg-accent/10 p-3 md:mt-6 md:p-4">
           <p className="text-xs italic leading-5 text-foreground/80 sm:text-sm md:leading-6">
             {parseLinks(note)}
           </p>
