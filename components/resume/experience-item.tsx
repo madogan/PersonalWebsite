@@ -71,7 +71,7 @@ export function ExperienceItem({
           <div className="flex items-center gap-2 md:hidden">
             <span
               className={cn(
-                'bg-transparent border-0 rounded-none p-0 m-0',
+                'm-0 rounded-none border-0 bg-transparent p-0',
                 'text-xs text-foreground/70 sm:text-sm'
               )}
             >
@@ -79,7 +79,7 @@ export function ExperienceItem({
             </span>
             <span
               className={cn(
-                'bg-transparent border-0 rounded-none p-0 m-0',
+                'm-0 rounded-none border-0 bg-transparent p-0',
                 'text-xs text-foreground/70 sm:text-sm'
               )}
             >
@@ -89,7 +89,7 @@ export function ExperienceItem({
           {/* Desktop: location only */}
           <p
             className={cn(
-              'bg-transparent border-0 rounded-none p-0 m-0',
+              'm-0 rounded-none border-0 bg-transparent p-0',
               'hidden text-xs text-foreground/70 sm:text-sm md:block'
             )}
           >
@@ -99,7 +99,7 @@ export function ExperienceItem({
         {/* Desktop: date on the right */}
         <div
           className={cn(
-            'bg-transparent border-0 rounded-none p-0',
+            'rounded-none border-0 bg-transparent p-0',
             'mt-2 hidden text-xs font-semibold text-foreground/70 sm:text-sm md:ml-4 md:mt-0 md:block md:text-right md:text-base'
           )}
         >
