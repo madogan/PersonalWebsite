@@ -64,17 +64,17 @@
     /* Horizontal border pattern (for top/bottom borders) */
     /* Hand-drawn wavy line with slight variation - tiles seamlessly horizontally */
     /* Pattern width: 50px for good variation without being too repetitive */
-    --handwriting-border-horizontal: url("data:image/svg+xml,%3Csvg width='50' height='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,1 Q8,0.3 15,1 Q22,1.7 30,1 Q37,0.4 45,1 Q47,1.2 50,1' stroke='%23000' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    --handwriting-border-horizontal: url(data:image/svg+xml,%3Csvg width='50' height='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,1 Q8,0.3 15,1 Q22,1.7 30,1 Q37,0.4 45,1 Q47,1.2 50,1' stroke='%23000' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E);
 
     /* Vertical border pattern (for left/right borders) */
     /* Hand-drawn wavy line with slight variation - tiles seamlessly vertically */
     /* Pattern height: 50px for good variation */
-    --handwriting-border-vertical: url("data:image/svg+xml,%3Csvg width='2' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1,0 Q0.3,8 1,15 Q1.7,22 1,30 Q0.4,37 1,45 Q1.2,47 1,50' stroke='%23000' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    --handwriting-border-vertical: url(data:image/svg+xml,%3Csvg width='2' height='50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1,0 Q0.3,8 1,15 Q1.7,22 1,30 Q0.4,37 1,45 Q1.2,47 1,50' stroke='%23000' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E);
 
     /* Underline pattern (for text underlines) */
     /* Hand-drawn wavy underline with organic feel - tiles seamlessly */
     /* Pattern width: 35px for subtle variation */
-    --handwriting-underline: url("data:image/svg+xml,%3Csvg width='35' height='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,1 Q4,0.2 8,1 Q12,1.6 16,1 Q20,0.3 24,1 Q28,1.5 32,1 Q33,1.1 35,1' stroke='%23000' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    --handwriting-underline: url(data:image/svg+xml,%3Csvg width='35' height='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,1 Q4,0.2 8,1 Q12,1.6 16,1 Q20,0.3 24,1 Q28,1.5 32,1 Q33,1.1 35,1' stroke='%23000' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E);
   }
 
   .dark {
