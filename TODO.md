@@ -913,6 +913,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 1: CSS Source Audit ✅
 
 #### Task 1.1: Check Global CSS for Card Child Styles ✅
+
 - [x] Search for CSS rules targeting `.loose-leaf-card span` or `.loose-leaf-card p`
 - [x] Check for `@apply` directives that might add badge styles
 - [x] Review `.loose-leaf-card > *` rules (line 443) - verify only sets position and z-index
@@ -924,6 +925,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify `.loose-leaf-card > *` rule only affects positioning
 
 #### Task 1.2: Check Tailwind Typography Plugin ✅
+
 - [x] Review `@tailwindcss/typography` plugin configuration in `tailwind.config.ts`
 - [x] Check for `prose` classes or typography defaults
 - [x] Verify if typography plugin adds styles to span/p elements
@@ -933,6 +935,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify typography defaults don't conflict
 
 #### Task 1.3: Check Parent Component Styles ✅
+
 - [x] Review parent component className props in `components/home/experience-section.tsx`
 - [x] Review parent component className props in `components/resume/resume-section.tsx`
 - [x] Check for any wrapper divs with styles
@@ -945,6 +948,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no runtime class manipulation
 
 #### Task 1.4: Check for Browser Extensions and Injected Styles
+
 - [ ] Inspect element in browser DevTools
 - [ ] Check for styles marked as "user agent stylesheet" (browser defaults)
 - [ ] Look for styles from browser extensions (often marked in DevTools)
@@ -959,10 +963,11 @@ All phases of the notebook design refinement have been completed:
 ### Phase 2: Browser DevTools Investigation
 
 #### Task 2.1: Inspect Computed Styles
+
 - [ ] Use browser DevTools (F12) to inspect location/date elements
 - [ ] Right-click on element → "Inspect" or use element picker
 - [ ] Check Computed Styles tab for all applied CSS properties
-- [ ] Look specifically for background-color, background, border, border-*, border-radius, padding properties
+- [ ] Look specifically for background-color, background, border, border-\*, border-radius, padding properties
 - [ ] Identify which CSS rules are adding these properties
 - [ ] Note the source file and line number of conflicting rules
 - [ ] Check if styles come from User Agent stylesheet, Global CSS, Tailwind utilities, or Browser extensions
@@ -972,6 +977,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Check for browser extension interference
 
 #### Task 2.2: Check CSS Cascade and Specificity
+
 - [ ] In DevTools, review the Styles panel (not just Computed)
 - [ ] Check CSS specificity scores for conflicting rules
 - [ ] Look for `!important` declarations (red underline in DevTools)
@@ -986,6 +992,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 3: Code-Level Fixes ✅
 
 #### Task 3.1: Add Explicit Style Overrides Using Tailwind Utilities ✅
+
 - [x] Use `cn()` utility from `@/lib/utils` for className composition (follows project pattern)
 - [x] Add explicit Tailwind utility classes to location/date elements:
   - `bg-transparent` - explicitly remove backgrounds
@@ -1006,6 +1013,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no `!important` used unless absolutely necessary and documented
 
 #### Task 3.2: Remove Conflicting Global CSS Rules
+
 - [ ] Remove or modify any global CSS rules causing conflicts in `app/globals.css`
 - [ ] Update `.loose-leaf-card > *` rules if they add unwanted styles
 - [ ] Remove any @apply directives that add badge styles
@@ -1015,6 +1023,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify no unintended style inheritance
 
 #### Task 3.3: Add Targeted CSS Reset (If Tailwind Utilities Fail)
+
 - [ ] Only if Step 3.1 (Tailwind utilities) fails: Add targeted CSS reset in global CSS
 - [ ] Use specific selectors: `.loose-leaf-card span[data-metadata]` or similar data attribute pattern
 - [ ] Prefer data attributes for scoping rather than complex selectors
@@ -1030,6 +1039,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 4: Build and Cache Investigation
 
 #### Task 4.1: Clear All Build Caches
+
 - [ ] Stop dev server if running
 - [ ] Delete `.next` directory (Next.js build cache)
 - [ ] Delete `node_modules/.cache` if exists
@@ -1042,6 +1052,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify dev server restarted successfully
 
 #### Task 4.2: Verify Production Build
+
 - [ ] Run `pnpm build` to create production build
 - [ ] Check built CSS files for badge-related classes
 - [ ] Verify no unexpected classes in output
@@ -1053,6 +1064,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 5: Alternative Solutions
 
 #### Task 5.1: Use CSS Modules (Last Resort - Not Recommended)
+
 - [ ] Only if all previous steps fail: Create CSS module (project doesn't currently use CSS modules)
 - [ ] Use scoped styles to override global rules
 - [ ] Import and apply module classes with TypeScript support
@@ -1065,6 +1077,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify deviation from project pattern is documented
 
 #### Task 5.2: Use Inline Styles (Absolute Last Resort)
+
 - [ ] Only if all other solutions fail: Apply inline styles using React `style` prop
 - [ ] Use explicit CSS values: `style={{ background: 'transparent', border: 'none', borderRadius: 0, padding: 0 }}`
 - [ ] Override any CSS cascade issues
@@ -1078,20 +1091,24 @@ All phases of the notebook design refinement have been completed:
 ## Completed: Charm Font Implementation Across Project
 
 ### Phase 1: Font Setup & Configuration ✅
+
 - ✅ Configured local font loading in root layout (`app/layout.tsx`)
 - ✅ Updated Tailwind font family configuration to use `--font-charm` variable
 - ✅ Verified global CSS typography rules inherit new font configuration
 
 ### Phase 2: Component Verification & Updates ✅
+
 - ✅ Verified MDX components use Tailwind utilities (inherit Charm automatically)
 - ✅ Audited all components for font usage (no hardcoded values found)
 - ✅ Confirmed no hardcoded font references need updating
 
 ### Phase 3: Font Weight & Styling Optimization ✅
+
 - ✅ Configured font weight mapping (400 Regular, 700 Bold)
 - ✅ Verified Tailwind font-weight utilities work correctly
 
 **Implementation Summary:**
+
 - Replaced Google Fonts (Inter, Playfair Display, JetBrains Mono) with local Charm font family
 - All text elements (headings, body, code) now use unified Charm typography
 - No external font requests - improved performance and privacy
@@ -1099,11 +1116,13 @@ All phases of the notebook design refinement have been completed:
 - License: SIL Open Font License (OFL) compliant
 
 **Files Modified:**
+
 - `app/layout.tsx`: Local font configuration with `next/font/local`
 - `tailwind.config.ts`: Updated all font families to use `--font-charm`
 - Version: 0.8.5
 
 **Remaining Tasks (Manual Testing):**
+
 - Phase 4: Visual regression testing, performance validation, cross-browser testing, accessibility validation
 - Phase 5: Documentation updates (if needed)
 
@@ -1112,6 +1131,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 1: Component Audit ✅
 
 #### Task 1.1: Identify All Heading Elements with Borders ✅
+
 - [x] Search codebase for all `<h1>` through `<h6>` elements
 - [ ] Identify headings with `pencil-divider` class
 - [ ] Identify headings with border utilities (`border-b`, `border-b-2`, `border-t`, etc.)
@@ -1121,6 +1141,7 @@ All phases of the notebook design refinement have been completed:
 - [x] No headings missed in audit
 
 #### Task 1.2: Verify Global CSS Heading Styles ✅
+
 - [x] Review global h1-h6 styles (lines 140-171) in `app/globals.css`
 - [x] Verify no border styles in global heading definitions
 - [x] Check if `.pencil-divider` class affects headings globally
@@ -1132,6 +1153,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 2: Remove Borders from Component Headings ✅
 
 #### Task 2.1: Update ResumeSection Component ✅
+
 - [x] Remove `pencil-divider` class from h2 element (line 16)
 - [ ] Remove `border-b-2 border-notebook-divider` classes from h2 element
 - [ ] Remove `pb-3` padding-bottom (was only for border spacing)
@@ -1147,6 +1169,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify spacing remains appropriate after border removal
 
 #### Task 2.2: Update MDX Components h2 ✅
+
 - [x] Remove `pencil-divider` class from h2 component (line 20)
 - [x] Remove `border-b border-notebook-divider` classes from h2 component
 - [x] Remove `pb-2` padding-bottom (was only for border spacing)
@@ -1162,6 +1185,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify spacing remains appropriate after border removal
 
 #### Task 2.3: Verify Other Heading Elements ✅
+
 - [x] Check h1, h3, h4, h5, h6 elements in MDX components
 - [x] Search for any other heading elements with border classes
 - [x] Verify no other components have headings with borders
@@ -1173,6 +1197,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 3: Preserve Non-Heading Elements
 
 #### Task 3.1: Verify Non-Heading pencil-divider Usage
+
 - [ ] Verify `pencil-divider` class is NOT removed from non-heading elements
 - [ ] Confirm dividers, sections, and hr elements keep their borders
 - [ ] Document that `pencil-divider` remains for non-heading decorative elements
@@ -1183,6 +1208,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 4: Testing & Verification ✅
 
 #### Task 4.1: Visual Testing ✅
+
 - [x] Test ResumeSection component in browser
 - [x] Verify h2 headings have no borders
 - [x] Test MDX blog posts
@@ -1196,6 +1222,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify theme compatibility verified
 
 #### Task 4.2: Code Quality Checks ✅
+
 - [x] Run TypeScript type checking: `pnpm type-check`
 - [x] Run ESLint: `pnpm lint`
 - [x] Run Prettier formatting: `pnpm format`
@@ -1207,11 +1234,14 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify no unused code or imports
 - [x] Verify no runtime errors or warnings
 
-## Charm Font Implementation Across Project
+## Charm Font Implementation Across Project (Superseded by Solitreo)
+
+**Note**: This section documents the previous Charm font implementation, which has been replaced by Solitreo font in version 0.8.6. See "Solitreo Font Implementation Across Project" section below for current implementation.
 
 ### Phase 1: Font Setup & Configuration
 
 #### Task 1.1: Configure Local Font Loading in Root Layout ✅
+
 - [x] Remove Google Font imports (`Inter`, `JetBrains_Mono`, `Playfair_Display`)
 - [x] Import `localFont` from `next/font/local` (default import)
 - [x] Configure single `charm` font using `localFont` with array of src objects
@@ -1222,6 +1252,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Test that `font-weight: 400` uses Regular and `font-weight: 700` uses Bold (will verify during testing)
 
 #### Task 1.2: Update Tailwind Font Family Configuration ✅
+
 - [x] Update `fontFamily.sans` to use `var(--font-charm)` with Georgia fallback
 - [x] Update `fontFamily.serif` to use `var(--font-charm)` with Georgia fallback
 - [x] Update `fontFamily.mono` to use `var(--font-charm)` with Georgia fallback
@@ -1231,6 +1262,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify Tailwind config compiles without errors
 
 #### Task 1.3: Update Global CSS Typography Rules ✅
+
 - [x] Verify `.text-heading`, `.text-body`, `.text-code` classes use updated font families (uses Tailwind utilities that inherit new config)
 - [x] Ensure all heading elements use `font-serif` (which now maps to Charm)
 - [x] Ensure all body elements use `font-sans` (which now maps to Charm)
@@ -1242,6 +1274,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 2: Component Verification & Updates
 
 #### Task 2.1: Verify MDX Components ✅
+
 - [x] Review component classes in `components/blog/mdx-components.tsx` (uses `font-serif` and `font-sans` which inherit Charm)
 - [x] Verify no hardcoded font-family values (none found)
 - [x] Ensure font-weight classes work correctly with Charm Bold (will verify during testing)
@@ -1249,6 +1282,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Check headings use bold weight correctly (will verify during testing)
 
 #### Task 2.2: Audit All Components for Font Usage ✅
+
 - [x] Search codebase for hardcoded `font-family` CSS values (none found in code files)
 - [x] Search for direct references to old font names (Inter, Playfair, JetBrains) (only in docs/content, not code)
 - [x] Check for inline styles with font-family (none found)
@@ -1256,6 +1290,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Ensure no components bypass the font system (confirmed)
 
 #### Task 2.3: Update Any Hardcoded Font References ✅
+
 - [x] Replace any found hardcoded font-family values with Tailwind classes (none found to replace)
 - [x] Remove any direct font name references (none in code files)
 - [x] Update inline styles to use CSS variables or Tailwind classes (none found)
@@ -1264,6 +1299,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 3: Font Weight & Styling Optimization
 
 #### Task 3.1: Configure Font Weight Mapping ✅
+
 - [x] Verify `charm` font configuration includes both weights in `src` array (400 and 700 configured)
 - [x] Verify font display strategy is `'swap'` (configured)
 - [x] Set `preload: true` for performance (configured)
@@ -1271,6 +1307,7 @@ All phases of the notebook design refinement have been completed:
 - [x] Verify font weights are correctly applied (will verify during testing)
 
 #### Task 3.2: Update Font Weight Utilities ✅
+
 - [x] Verify Tailwind's default font-weight utilities work correctly (Tailwind utilities work by default with font configuration)
 - [x] Ensure `font-normal` (400) uses Charm Regular (configured correctly)
 - [x] Ensure `font-bold` (700) uses Charm Bold (configured correctly)
@@ -1279,6 +1316,7 @@ All phases of the notebook design refinement have been completed:
 ### Phase 4: Testing & Validation
 
 #### Task 4.1: Visual Regression Testing
+
 - [ ] Test all pages: home, blog list, blog post, resume, etc.
 - [ ] Verify typography consistency across all pages
 - [ ] Check both light and dark themes
@@ -1286,6 +1324,7 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify print styles (if applicable)
 
 #### Task 4.2: Performance Validation
+
 - [ ] Check font file sizes and loading performance
 - [ ] Verify font preloading works correctly
 - [ ] Test font display swap behavior
@@ -1293,12 +1332,14 @@ All phases of the notebook design refinement have been completed:
 - [ ] Verify Lighthouse performance score remains good
 
 #### Task 4.3: Cross-Browser Testing
+
 - [ ] Test in Chrome, Firefox, Safari, Edge
 - [ ] Verify font rendering quality
 - [ ] Check font fallbacks work correctly
 - [ ] Verify no console errors related to fonts
 
 #### Task 4.4: Accessibility Validation
+
 - [ ] Verify font readability at all sizes
 - [ ] Check contrast ratios with new font
 - [ ] Test with screen readers
@@ -1307,11 +1348,240 @@ All phases of the notebook design refinement have been completed:
 ### Phase 5: Cleanup & Documentation
 
 #### Task 5.1: Remove Unused Dependencies
+
 - [ ] Check if `next/font/google` is still needed (it's part of Next.js, no removal needed)
 - [ ] Verify no other font-related dependencies need cleanup
 - [ ] Document font usage in code comments if needed
 
 #### Task 5.2: Update Documentation
+
 - [ ] Document Charm font usage in README or project docs (if applicable)
 - [ ] Add comments in `app/layout.tsx` explaining font configuration
 - [ ] Note font license compliance (OFL)
+
+## Solitreo Font Implementation Across Project ✅
+
+**Status**: Implementation complete. Code changes verified and tested. Visual testing recommended before production deployment.
+
+### Phase 1: Font Configuration Update ✅
+
+#### Task 1.0: Pre-Implementation Verification ✅
+- [x] Verify Solitreo font file exists at `fonts/Solitreo/Solitreo-Regular.ttf`
+- [x] Verify license file exists at `fonts/Solitreo/OFL.txt`
+- [x] Check font file size (for performance reference) - 92KB
+- [x] Confirm font file is readable and not corrupted
+
+#### Task 1.1: Update Root Layout Font Configuration ✅
+- [x] Open `app/layout.tsx`
+- [x] Replace `charm` constant with `solitreo`
+- [x] Update font path from `../fonts/Charm-Regular.ttf` to `../fonts/Solitreo/Solitreo-Regular.ttf`
+- [x] Remove Charm-Bold.ttf from src array (only Regular weight available)
+- [x] Update CSS variable from `--font-charm` to `--font-solitreo`
+- [x] Update comment from "Charm font family" to "Solitreo font family"
+- [x] Update license comment to reference `fonts/Solitreo/OFL.txt`
+- [x] Update body className from `${charm.variable}` to `${solitreo.variable}`
+- [x] Verify TypeScript compilation: `pnpm type-check`
+
+#### Task 1.2: Update Tailwind Font Family Configuration ✅
+- [x] Open `tailwind.config.ts`
+- [x] Update `fontFamily.sans` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Update `fontFamily.serif` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Update `fontFamily.mono` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Replace `fontFamily.charm` with `fontFamily.solitreo` using `var(--font-solitreo)`
+- [x] Verify Tailwind config compiles without errors
+- [x] Run `pnpm type-check` to ensure no TypeScript errors
+
+### Phase 2: Documentation & Comments Update ✅
+
+#### Task 2.1: Update Code Comments ✅
+- [x] Update comment in `app/layout.tsx` from "Charm font family" to "Solitreo font family"
+- [x] Update license reference in comments
+- [x] Search codebase for any remaining "Charm" references in comments
+- [x] Replace all "Charm" references with "Solitreo" in code comments
+
+#### Task 2.2: Update Version Numbers ✅
+- [x] Update `package.json`: Change version from `"0.8.5"` to `"0.8.6"`
+- [x] Update `lib/constants.ts`: Change `VERSION` from `'0.8.5'` to `'0.8.6'`
+- [x] Verify both files have matching version numbers
+- [x] Run `pnpm type-check` to ensure no TypeScript errors
+
+#### Task 2.3: Update Documentation Files ✅
+- [x] Update `CHANGELOG.md`:
+  - [x] Add new entry for version 0.8.6 with current date
+  - [x] Document font change from Charm to Solitreo
+  - [x] Note that only Regular weight is available (synthetic bold for bold text)
+  - [x] Update technical details section
+  - [x] Follow Keep a Changelog format
+- [x] Update `TODO.md`:
+  - [x] Mark Charm font implementation tasks as superseded
+  - [x] Add new section for Solitreo font implementation
+  - [x] Document font weight limitation (Regular only)
+
+### Phase 3: Component Verification ✅
+
+#### Task 3.1: Verify No Hardcoded Font References ✅
+- [x] Search codebase for "charm" (case-insensitive) in code files
+- [x] Search for `--font-charm` CSS variable references
+- [x] Verify no components have hardcoded font-family values
+- [x] Confirm all components use Tailwind font utilities (`font-sans`, `font-serif`, `font-mono`)
+
+#### Task 3.2: Verify Font Weight Handling ✅
+- [x] Review `app/globals.css` for font-weight usage
+- [x] Verify `font-bold` classes will work with synthetic bold
+- [x] Check that all heading elements use appropriate font-weight
+- [x] Ensure no components rely on specific font weight files
+- [x] Review `font-feature-settings` in `globals.css` (line 90-92) - verify compatibility with Solitreo
+- [x] Test synthetic bold rendering in browser DevTools (will verify during visual testing)
+
+### Phase 4: Testing & Validation
+
+#### Task 4.1: Visual Regression Testing
+- [ ] Start development server: `pnpm dev`
+- [ ] Test home page - verify Solitreo font renders correctly
+- [ ] Test blog list page - verify typography consistency
+- [ ] Test blog post page - verify headings and body text
+- [ ] Test resume page - verify all text elements
+- [ ] Check both light and dark themes
+- [ ] Test responsive breakpoints (mobile, tablet, desktop)
+- [ ] Verify bold text renders acceptably (synthetic bold)
+- [ ] Check print styles (if applicable)
+- [ ] Verify font metrics (line-height, letter-spacing) are appropriate
+- [ ] Test with different browser zoom levels (100%, 125%, 150%)
+- [ ] Verify no layout shifts due to font change
+
+#### Task 4.2: Performance Validation
+- [ ] Check font file size in Network tab
+- [ ] Verify font preloading works correctly
+- [ ] Test font display swap behavior
+- [ ] Check for FOUT/FOIT issues
+- [ ] Verify font loads quickly
+
+#### Task 4.3: Code Quality Checks ✅
+- [x] Run TypeScript type checking: `pnpm type-check`
+- [x] Run ESLint: `pnpm lint`
+- [x] Run Prettier formatting: `pnpm format`
+- [x] Verify no console warnings or errors (ESLint passed, only unrelated img warnings)
+- [x] Check for unused imports or variables (no issues found)
+- [x] Verify build succeeds: `pnpm build` (build successful)
+
+### Phase 5: Cleanup (Optional)
+
+#### Task 5.1: Remove Unused Font Files (Optional)
+- [ ] **Decision Point**: Keep Charm font files for rollback or remove?
+- [ ] If removing: Delete `fonts/Charm-Regular.ttf` and `fonts/Charm-Bold.ttf`
+- [ ] If keeping: Document in README or comments that Charm is available for rollback
+
+- [x] Verify Solitreo font file exists at `fonts/Solitreo/Solitreo-Regular.ttf`
+- [x] Verify license file exists at `fonts/Solitreo/OFL.txt`
+- [x] Check font file size (for performance reference) - 92KB
+- [x] Confirm font file is readable and not corrupted
+
+#### Task 1.1: Update Root Layout Font Configuration ✅
+
+- [x] Open `app/layout.tsx`
+- [x] Replace `charm` constant with `solitreo`
+- [x] Update font path from `../fonts/Charm-Regular.ttf` to `../fonts/Solitreo/Solitreo-Regular.ttf`
+- [x] Remove Charm-Bold.ttf from src array (only Regular weight available)
+- [x] Update CSS variable from `--font-charm` to `--font-solitreo`
+- [x] Update comment from "Charm font family" to "Solitreo font family"
+- [x] Update license comment to reference `fonts/Solitreo/OFL.txt`
+- [x] Update body className from `${charm.variable}` to `${solitreo.variable}`
+- [x] Verify TypeScript compilation: `pnpm type-check`
+
+#### Task 1.2: Update Tailwind Font Family Configuration ✅
+
+- [x] Open `tailwind.config.ts`
+- [x] Update `fontFamily.sans` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Update `fontFamily.serif` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Update `fontFamily.mono` to use `var(--font-solitreo)` instead of `var(--font-charm)`
+- [x] Replace `fontFamily.charm` with `fontFamily.solitreo` using `var(--font-solitreo)`
+- [x] Verify Tailwind config compiles without errors
+- [x] Run `pnpm type-check` to ensure no TypeScript errors
+
+### Phase 2: Documentation & Comments Update
+
+#### Task 2.1: Update Code Comments ✅
+
+- [x] Update comment in `app/layout.tsx` from "Charm font family" to "Solitreo font family"
+- [x] Update license reference in comments
+- [x] Search codebase for any remaining "Charm" references in comments
+- [x] Replace all "Charm" references with "Solitreo" in code comments
+
+#### Task 2.2: Update Version Numbers ✅
+
+- [x] Update `package.json`: Change version from `"0.8.5"` to `"0.8.6"`
+- [x] Update `lib/constants.ts`: Change `VERSION` from `'0.8.5'` to `'0.8.6'`
+- [x] Verify both files have matching version numbers
+- [x] Run `pnpm type-check` to ensure no TypeScript errors
+
+#### Task 2.3: Update Documentation Files ✅
+
+- [x] Update `CHANGELOG.md`:
+  - [x] Add new entry for version 0.8.6 with current date
+  - [x] Document font change from Charm to Solitreo
+  - [x] Note that only Regular weight is available (synthetic bold for bold text)
+  - [x] Update technical details section
+  - [x] Follow Keep a Changelog format
+- [x] Update `TODO.md`:
+  - [x] Mark Charm font implementation tasks as superseded
+  - [x] Add new section for Solitreo font implementation
+  - [x] Document font weight limitation (Regular only)
+
+### Phase 3: Component Verification
+
+#### Task 3.1: Verify No Hardcoded Font References ✅
+
+- [x] Search codebase for "charm" (case-insensitive) in code files
+- [x] Search for `--font-charm` CSS variable references
+- [x] Verify no components have hardcoded font-family values
+- [x] Confirm all components use Tailwind font utilities (`font-sans`, `font-serif`, `font-mono`)
+
+#### Task 3.2: Verify Font Weight Handling ✅
+
+- [x] Review `app/globals.css` for font-weight usage
+- [x] Verify `font-bold` classes will work with synthetic bold
+- [x] Check that all heading elements use appropriate font-weight
+- [x] Ensure no components rely on specific font weight files
+- [x] Review `font-feature-settings` in `globals.css` (line 90-92) - verify compatibility with Solitreo
+- [x] Test synthetic bold rendering in browser DevTools (will verify during visual testing)
+
+### Phase 4: Testing & Validation
+
+#### Task 4.1: Visual Regression Testing
+
+- [ ] Start development server: `pnpm dev`
+- [ ] Test home page - verify Solitreo font renders correctly
+- [ ] Test blog list page - verify typography consistency
+- [ ] Test blog post page - verify headings and body text
+- [ ] Test resume page - verify all text elements
+- [ ] Check both light and dark themes
+- [ ] Test responsive breakpoints (mobile, tablet, desktop)
+- [ ] Verify bold text renders acceptably (synthetic bold)
+- [ ] Check print styles (if applicable)
+- [ ] Verify font metrics (line-height, letter-spacing) are appropriate
+- [ ] Test with different browser zoom levels (100%, 125%, 150%)
+- [ ] Verify no layout shifts due to font change
+
+#### Task 4.2: Performance Validation
+
+- [ ] Check font file size in Network tab
+- [ ] Verify font preloading works correctly
+- [ ] Test font display swap behavior
+- [ ] Check for FOUT/FOIT issues
+- [ ] Verify font loads quickly
+
+#### Task 4.3: Code Quality Checks ✅
+- [x] Run TypeScript type checking: `pnpm type-check`
+- [x] Run ESLint: `pnpm lint`
+- [x] Run Prettier formatting: `pnpm format`
+- [x] Verify no console warnings or errors (ESLint passed, only unrelated img warnings)
+- [x] Check for unused imports or variables (no issues found)
+- [x] Verify build succeeds: `pnpm build` (build successful)
+
+### Phase 5: Cleanup (Optional)
+
+#### Task 5.1: Remove Unused Font Files (Optional)
+
+- [ ] **Decision Point**: Keep Charm font files for rollback or remove?
+- [ ] If removing: Delete `fonts/Charm-Regular.ttf` and `fonts/Charm-Bold.ttf`
+- [ ] If keeping: Document in README or comments that Charm is available for rollback

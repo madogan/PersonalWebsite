@@ -5,9 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.6] - 2026-01-26
+
+### Changed
+
+- **Typography**: Replaced Charm font family with Solitreo font family
+  - Implemented unified typography using Solitreo-Regular.ttf (400 weight only)
+  - All text elements (headings, body, code) now use Solitreo font for consistent typographic identity
+  - Updated `app/layout.tsx` to use Solitreo font with `next/font/local`
+  - Updated Tailwind configuration to use `--font-solitreo` CSS variable for all font families (sans, serif, mono)
+  - Bold text uses synthetic bold (browser-generated) since only Regular weight is available
+  - Font file is preloaded for optimal performance
+  - License: SIL Open Font License (OFL) - compliant for commercial use
+
+### Technical
+
+- Updated `app/layout.tsx`: Replaced Charm font with Solitreo font using `localFont` from `next/font/local`
+- Updated `tailwind.config.ts`: Changed all font families to use `var(--font-solitreo)` with Georgia fallback
+- Font configuration uses single `localFont` instance with Regular weight only (400)
+- Browser generates synthetic bold for `font-weight: 700` (no separate Bold font file available)
+- All existing Tailwind font utilities (`font-sans`, `font-serif`, `font-mono`) now use Solitreo font
+- No hardcoded font-family values found in codebase - all components use Tailwind utilities
+- TypeScript type checking passed
+- No breaking changes - all existing components work with new font configuration
+
 ## [0.8.5] - 2026-01-14
 
 ### Changed
+
 - **Typography**: Replaced all Google Fonts (Inter, Playfair Display, JetBrains Mono) with local Charm font family
   - Implemented unified typography using Charm-Regular.ttf (400 weight) and Charm-Bold.ttf (700 weight)
   - All text elements (headings, body, code) now use Charm font for consistent typographic identity
@@ -18,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - License: SIL Open Font License (OFL) - compliant for commercial use
 
 ### Technical
+
 - Updated `app/layout.tsx`: Replaced Google Font imports with `localFont` from `next/font/local`
 - Updated `tailwind.config.ts`: Changed all font families to use `var(--font-charm)` with Georgia fallback
 - Font configuration uses single `localFont` instance with array of src objects for multiple weights
@@ -30,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.8.4] - 2026-01-14
 
 ### Changed
+
 - **UI Refinement**: Removed borders from all heading elements (h1-h6) for a cleaner, more minimal appearance
   - Removed `pencil-divider` class and border utilities from ResumeSection h2 headings
   - Removed `pencil-divider` class and border utilities from MDX h2 headings in blog posts
@@ -39,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Non-heading elements (dividers, sections, hr) retain `pencil-divider` class for decorative purposes
 
 ### Technical
+
 - Updated `components/resume/resume-section.tsx` to remove borders and use `cn()` utility
 - Updated `components/blog/mdx-components.tsx` to remove borders from h2 component
 - All changes maintain responsive behavior, typography, and theme compatibility
@@ -47,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.8.3] - 2026-01-14
 
 ### Fixed
+
 - **Persistent Badge Borders**: Added explicit Tailwind utility overrides to completely remove any inherited badge styles from location and date elements
   - Added `bg-transparent border-0 rounded-none p-0 m-0` utilities to all location/date elements in Experience Item component
   - Used `cn()` utility for proper className composition following project patterns
@@ -54,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Verified no conflicting global CSS rules or Tailwind plugin conflicts
 
 ### Technical
+
 - Updated `components/resume/experience-item.tsx` with explicit style overrides using Tailwind utilities
 - Investigated and verified no global CSS rules, Tailwind typography plugin, or parent component styles causing conflicts
 - All changes maintain responsive behavior, text styling, and theme compatibility
@@ -62,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.8.2] - 2026-01-14
 
 ### Changed
+
 - **UI Refinement**: Removed badge frames from title-related elements across the website for a cleaner, more minimal appearance
   - Removed location and date badge frames from Professional Experience section (mobile and desktop views)
   - Removed summary opening words badge frame from Personal Hero section
@@ -69,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Maintained text readability and proper spacing without background frames
 
 ### Technical
+
 - Updated `components/resume/experience-item.tsx` to remove badge styling from location and date metadata
 - Updated `components/home/personal-hero.tsx` to remove badge frame from summary opening words
 - All changes maintain responsive behavior and theme compatibility

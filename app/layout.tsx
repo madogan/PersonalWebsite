@@ -8,14 +8,18 @@ import { NotebookBinding } from '@/components/layout/notebook-binding'
 import { PageTransition } from '@/components/transitions/page-transition'
 import './globals.css'
 
-// Charm font family - unified typography using local font files
-// License: SIL Open Font License (OFL) - see fonts/OFL.txt
-const charm = localFont({
+// Solitreo font family - unified typography using local font files
+// License: SIL Open Font License (OFL) - see fonts/Solitreo/OFL.txt
+const solitreo = localFont({
   src: [
-    { path: '../fonts/Charm-Regular.ttf', weight: '400', style: 'normal' },
-    { path: '../fonts/Charm-Bold.ttf', weight: '700', style: 'normal' },
+    {
+      path: '../fonts/Solitreo/Solitreo-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    // Note: Only Regular weight available - bold will use synthetic bold
   ],
-  variable: '--font-charm',
+  variable: '--font-solitreo',
   display: 'swap',
   preload: true,
 })
@@ -60,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${charm.variable} paper-texture font-sans antialiased`}
+        className={`${solitreo.variable} paper-texture font-sans antialiased`}
       >
         <ThemeProvider>
           <div className="relative flex min-h-screen flex-col">
