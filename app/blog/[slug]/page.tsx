@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: Props) {
               'text-justify md:text-left',
               'prose-headings:text-left prose-headings:font-serif prose-headings:text-foreground',
               'prose-p:text-justify prose-p:font-sans prose-p:text-foreground/90 md:prose-p:text-left',
-              'prose-a:text-accent prose-a:no-underline hover:prose-a:underline',
+              'prose-a:text-accent-cyan prose-a:font-medium prose-a:no-underline hover:prose-a:underline',
               'prose-strong:text-foreground',
               'prose-code:rounded prose-code:bg-foreground/10 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-foreground',
               'prose-pre:border prose-pre:border-notebook-divider prose-pre:bg-foreground/5',
