@@ -330,6 +330,26 @@
 
 ### Footer Enhancements
 
+### Source URL Title Fetching
+
+- [x] Implement URL metadata fetching utilities (`lib/source-url-metadata.ts`)
+  - URL validation and type detection
+  - YouTube oEmbed API integration
+  - Web page title scraping with regex
+  - In-memory caching for build-time scripts
+- [x] Implement MDX content processing (`lib/source-url-processor.ts`)
+  - Source URL extraction with regex pattern matching
+  - Generic label detection (YouTube Video, YouTube Videosu, etc.)
+  - Content replacement logic with markdown escaping
+- [x] Create build-time processing script (`scripts/process-source-urls.ts`)
+  - Batch processing with rate limiting (5 URLs at a time, 200ms delays)
+  - Error resilience with `Promise.allSettled`
+  - `--dry-run` and `--resume` flag support
+  - Cache file persistence for resume capability
+- [x] Add npm scripts for easy execution
+  - `pnpm process-source-urls` - Run the script
+  - `pnpm process-source-urls:dry-run` - Test without modifying files
+
 - [x] Add project version display to footer with small font size
 - [x] Center version display in footer layout using grid system
 
@@ -2580,4 +2600,5 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.16
 - Changes committed: `fix(blog): resolve locale filter dropdown font inconsistency`
 - Plan file removed from `.cursor/plans/`
+
 

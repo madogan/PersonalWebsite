@@ -1,6 +1,6 @@
 {
   "name": "personal-website",
-  "version": "0.8.16",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack -p 3232",
@@ -11,7 +11,9 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "generate-favicon": "node scripts/generate-favicon.js",
-    "update-blog-dates": "tsx scripts/update-blog-dates.ts"
+    "update-blog-dates": "tsx scripts/update-blog-dates.ts",
+    "process-source-urls": "tsx scripts/process-source-urls.ts",
+    "process-source-urls:dry-run": "tsx scripts/process-source-urls.ts --dry-run"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",

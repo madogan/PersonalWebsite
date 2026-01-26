@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-01-26
+
+### Added
+
+- **Source URL Title Fetching**: Automatic fetching and display of actual titles for source URLs in blog posts
+  - Replaces generic labels like "YouTube Video" or "YouTube Videosu" with actual video/page titles
+  - Supports YouTube videos (all URL formats: youtu.be, youtube.com/watch, youtube.com/embed)
+  - Supports regular web pages with title extraction
+  - Build-time processing script for batch updating all blog posts
+  - Batch processing with rate limiting (5 URLs at a time, 200ms delays)
+  - Error resilience - continues processing even if some URLs fail
+  - Cache file persistence for resume capability (`cache/source-url-metadata.json`)
+  - `--dry-run` flag for safe testing without modifying files
+  - `--resume` flag to continue from cached metadata
+
+### Technical
+
+- **New Utilities**:
+  - `lib/source-url-metadata.ts`: URL validation, type detection, YouTube normalization, metadata fetching
+  - `lib/source-url-processor.ts`: MDX content parsing and source URL replacement
+  - `scripts/process-source-urls.ts`: Build-time script for processing all blog posts
+
+- **New NPM Scripts**:
+  - `pnpm process-source-urls` - Process all blog posts and update source URLs
+  - `pnpm process-source-urls:dry-run` - Test processing without modifying files
+
+- **Features**:
+  - YouTube oEmbed API integration with 10-second timeout
+  - Web page title scraping with regex (falls back to Open Graph og:title)
+  - Redirect handling (up to 3 redirects)
+  - In-memory caching for build-time efficiency
+  - Generic label detection (case-insensitive)
+  - Markdown character escaping for safe title replacement
+  - Preserves frontmatter and formatting during content updates
+
 ## [0.8.16] - 2026-01-26
 
 ### Fixed
