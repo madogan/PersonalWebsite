@@ -23,8 +23,8 @@ export function LocaleFilter({
           onChange={(e) => onChange(e.target.value as 'all' | 'en' | 'tr')}
           className={cn(
             'w-full appearance-none rounded-lg py-3 pl-12 pr-10',
-            'handwriting-border bg-background', /* Use handwriting border */
-            'font-sans text-foreground',
+            'border border-notebook-divider bg-background', /* Use clean border */
+            'text-foreground',
             'focus:outline-none focus:ring-2 focus:ring-accent',
             'focus:shadow-[var(--shadow-xl)]',
             'transition-all duration-200',

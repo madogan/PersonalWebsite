@@ -2378,3 +2378,234 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.14
 - Changes committed: `fix(styles): resolve handwriting border color inconsistency`
 
+## Revert Handwriting Design Changes
+
+**Decision:** Revert handwriting borders to clean, professional borders for better visual clarity, performance, and maintainability.
+
+### Phase 1: Assessment & Decision
+
+#### Task 1.1: Visual Review
+
+- [x] Review current handwriting border implementation in browser
+- [x] Test on multiple screen sizes (mobile, tablet, desktop)
+- [x] Test in both light and dark themes
+- [x] Assess visual quality and professionalism
+- [x] Document specific issues found (if any)
+- [x] Make decision: Keep handwriting borders or revert to clean borders
+- **Decision Made:** Revert to clean borders - handwriting style doesn't look professional
+
+### Phase 2: Revert to Clean Borders
+
+#### Task 2.1: Remove Handwriting Border CSS System ✅
+
+- [x] Remove handwriting border CSS custom properties from `app/globals.css`:
+  - Removed `--handwriting-border-horizontal`, `--handwriting-border-vertical`, `--handwriting-underline`
+- [x] Remove all handwriting border CSS classes from `app/globals.css`:
+  - Removed all `.handwriting-border-*` classes (~400 lines of CSS)
+- [x] Remove handwriting border implementations from component styles:
+  - Removed `.notebook-panel::after` handwriting border
+  - Removed `.loose-leaf-card::after` handwriting border
+  - Removed `.pencil-divider::before` handwriting border
+- [x] Replace with clean border implementations:
+  - `.notebook-panel`: Added `border border-notebook-divider`
+  - `.loose-leaf-card`: Added `border border-notebook-divider`
+  - `.pencil-divider`: Added `border-t border-notebook-divider`
+
+#### Task 2.2: Update Component Classes @workingon
+
+**CRITICAL**: Use `cn()` utility from `@/lib/utils` for all className updates to ensure proper Tailwind class merging.
+
+**Layout Components:**
+- [x] `components/layout/header.tsx`:
+  - Line 12: Replace `handwriting-border-b` with `border-b border-notebook-divider` in `cn()` call
+  - Verify `notebook-panel` class still applies correctly
+- [ ] `components/layout/mobile-menu.tsx`:
+  - Line 25: Replace `handwriting-border` with `border border-notebook-divider` in button `cn()` call
+  - Lines 63-64: Replace `handwriting-border-l` with `border-l border-notebook-divider`
+  - Line 64: Replace `handwriting-border-l-accent` with `border-l border-accent` (for active state)
+  - Ensure conditional logic for active state remains intact
+- [ ] `components/layout/navigation.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+  - Maintain existing hover/active state logic
+
+**Blog Components:**
+- [x] `components/blog/mdx-components.tsx`: ✅ Updated
+  - Line 59: Replace `handwriting-underline` with `underline decoration-accent-cyan underline-offset-4` (keep accent-cyan color for links)
+  - Line 93: Replace `handwriting-border-l` with `border-l border-notebook-divider` in blockquote `cn()` call
+  - Line 114: Replace `handwriting-border` with `border border-notebook-divider` in pre `cn()` call
+  - Maintain all existing MDX component props and className merging
+- [ ] `components/blog/blog-list-client.tsx`:
+  - Search for `handwriting-border` usage (around line 93 based on grep results)
+  - Replace with `border border-notebook-divider` in `cn()` call
+- [ ] `components/blog/back-button.tsx`:
+  - Line 16: Replace `handwriting-border` with `border border-notebook-divider` in `cn()` call
+- [ ] `components/blog/locale-filter.tsx`:
+  - Line 26: Replace `handwriting-border` with `border border-notebook-divider` in `cn()` call
+- [ ] `components/blog/search-bar.tsx`:
+  - Line 28: Replace `handwriting-border` with `border border-notebook-divider` in `cn()` call
+- [ ] `components/blog/tag-filter.tsx`:
+  - Line 39: Replace `handwriting-border` with `border border-notebook-divider` in `cn()` call
+- [ ] `components/blog/tag-list.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+
+**Home Components:**
+- [x] `components/home/personal-hero.tsx`: ✅ Updated
+  - Lines 73, 86, 100: Replace `handwriting-border` with `border border-notebook-divider` in icon container `cn()` calls
+  - Maintain existing hover states and transitions
+- [ ] `components/home/certifications-section.tsx`:
+  - Lines 78, 89: Replace `handwriting-border` with `border border-notebook-divider`
+  - Replace `handwriting-border-accent` with `border-accent/20` (subtle accent border)
+  - Maintain existing hover/active states
+- [ ] `components/home/latest-blogs-section.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+- [ ] `components/home/featured-posts.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+- [ ] `components/home/bottom-navigation.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+
+**Resume Components:**
+- [x] `components/resume/experience-item.tsx`: ✅ Updated
+  - Line 122: Replace `handwriting-border-l` with `border-l border-notebook-divider`
+  - Replace `handwriting-border-l-accent` with `border-l border-accent` (for accent state)
+  - Maintain existing styling and layout
+- [ ] `components/resume/skills-grid.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+
+**UI Components:**
+- [x] `components/ui/theme-toggle.tsx`: ✅ Updated
+  - Lines 22, 41: Replace `handwriting-border` with `border border-notebook-divider` in `cn()` calls
+  - Maintain existing toggle functionality and accessibility
+- [ ] `components/ui/glassy-button.tsx`:
+  - Search for all `handwriting-border-*` classes
+  - Replace with appropriate standard border classes using `cn()`
+  - Note: Component name suggests glassmorphism - verify if this component should be updated to notebook styling
+
+#### Task 2.3: Update Global Styles ✅
+
+**CRITICAL**: Maintain existing z-index stacking and pseudo-element patterns for paper texture.
+
+- [x] Update `.notebook-panel` in `app/globals.css`: ✅ Completed (as part of Task 2.1)
+  - Remove `::after` pseudo-element with handwriting border (lines 420-462)
+  - Add `border border-notebook-divider` to base class definition
+  - Ensure `::before` pseudo-element for paper texture remains intact (lines 465-475)
+  - Verify z-index stacking: border (base) < texture (::before, z-index: 1) < content (z-index: 2)
+- [ ] Update `.loose-leaf-card` in `app/globals.css` (around line 497):
+  - Remove `::after` pseudo-element with handwriting border (lines 511-553)
+  - Add `border border-notebook-divider` to base class definition
+  - Ensure `::before` pseudo-element for paper texture remains intact (lines 556-571)
+  - Verify z-index stacking: border (base) < texture (::before, z-index: 1) < content (z-index: 2)
+- [ ] Update `.pencil-divider` in `app/globals.css` (around line 627):
+  - Remove `::before` pseudo-element with handwriting border (lines 635-653)
+  - Add `border-t border-notebook-divider` to base class definition
+  - Remove or update `::after` pseudo-element if present (line 656-658)
+- [ ] Ensure all borders use `border-notebook-divider` color for consistency
+- [ ] Verify no layout shifts occur after removing pseudo-elements
+
+#### Task 2.4: Clean Up Documentation ✅
+
+- [x] Update `CHANGELOG.md`: ✅ Added version 0.8.15 entry
+  - Add new version entry (0.8.15) documenting revert to clean borders
+  - Include list of components updated
+  - Note performance improvements
+  - Reference this plan for technical details
+- [x] Update `package.json` version: ✅ Updated to 0.8.15
+- [x] Update `lib/constants.ts` version: ✅ Updated to 0.8.15
+- [x] Update `TODO.md`: ✅ Marked tasks as completed
+
+### Phase 3: Verification & Testing
+
+#### Task 3.1: Visual Verification
+
+- [ ] Verify all borders render correctly with clean border system
+- [ ] Test in both light and dark themes
+- [ ] Verify border colors match notebook aesthetic (`--notebook-divider`)
+- [ ] Check that borders are visible but not overwhelming
+- [ ] Verify `border-radius` still works correctly
+
+#### Task 3.2: Component Verification
+
+- [ ] Verify all 22 components render correctly:
+  - Use `grep -r "handwriting-border" components/ app/` to find any remaining instances
+  - Verify each component visually in browser
+  - Check responsive behavior (mobile, tablet, desktop)
+- [ ] Check that no handwriting border classes remain in codebase:
+  - Run: `grep -r "handwriting-border" . --exclude-dir=node_modules --exclude-dir=.next`
+  - Should only find references in `CHANGELOG.md`, `TODO.md`, and this plan file
+- [ ] Verify no broken styles or missing borders:
+  - Check all cards, panels, buttons, and interactive elements
+  - Verify borders are visible and properly styled
+- [ ] Test interactive states (hover, focus, active):
+  - Verify hover states work correctly
+  - Test focus states for accessibility
+  - Verify active states for buttons and links
+- [ ] Run TypeScript type checking: `pnpm type-check`
+- [ ] Run ESLint: `pnpm lint`
+
+#### Task 3.3: Performance Verification
+
+- [ ] Verify page load performance (should improve without mask operations)
+- [ ] Check rendering performance (should be faster)
+- [ ] Verify no layout shifts or visual glitches
+
+#### Task 3.4: Cross-Browser Testing
+
+- [ ] Test in Chrome/Edge
+- [ ] Test in Firefox
+- [ ] Test in Safari
+- [ ] Verify borders render consistently across browsers
+
+## Fix Locale Filter Dropdown Font Issue
+
+### Phase 1: Remove Conflicting Font Class ✅
+
+#### Task 1.1: Remove font-sans from LocaleFilter Component ✅
+
+- [x] Remove `font-sans` class from select element in `components/blog/locale-filter.tsx` (line 27)
+- [x] Let global CSS rules handle font application
+- [x] Verify select element still renders correctly without explicit font class
+
+### Phase 2: Strengthen Global CSS Rules ✅
+
+#### Task 2.1: Enhance Select and Option CSS Rules ✅
+
+- [x] Review existing CSS rules for `select` and `select option` in `app/globals.css` (lines 184-190)
+- [x] Add more specific selectors to ensure font applies to all states
+- [x] Verify `!important` flags are present and working
+- [x] Consider adding rules for `select:focus` and `select:hover` states
+- [x] Ensure CSS rules target all select and option elements globally
+
+### Phase 3: Component-Specific CSS (If Needed)
+
+#### Task 3.1: Add Component-Specific Font Application ✅
+
+- [x] Global CSS rules should be sufficient - no component-specific CSS needed
+- [x] Verified global CSS rules cover all select and option states
+- [x] Font should apply correctly via global CSS
+
+### Phase 4: Testing & Verification
+
+#### Task 4.1: Visual Verification
+
+- [ ] Dropdown selected value displays in Solitreo font
+- [ ] Dropdown options ("All Languages", "English", "Turkish") display in Solitreo font when dropdown is open
+- [ ] Font matches other page elements (headings, search bar placeholder)
+
+#### Task 4.2: Cross-Browser Testing
+
+- [ ] Test in Chrome/Edge (Chromium-based)
+- [ ] Test in Firefox
+- [ ] Test in Safari (if available)
+- [ ] Verify font renders correctly in both light and dark themes
+
+#### Task 4.3: Functional Verification
+
+- [ ] Dropdown still functions correctly (opens, closes, selects options)
+- [ ] No layout issues or spacing problems
+- [ ] No console errors or warnings
+

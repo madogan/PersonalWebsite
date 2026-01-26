@@ -5,6 +5,70 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.16] - 2026-01-26
+
+### Fixed
+
+- **Blog List Page**: Fixed locale filter dropdown font inconsistency
+  - Removed conflicting `font-sans` class from locale filter select element
+  - Enhanced global CSS rules to ensure Solitreo font applies to all select and option elements
+  - Added specific CSS selectors for all select states (focus, hover, active)
+  - Added specific CSS selectors for all option states (checked, hover, focus)
+  - Dropdown options ("All Languages", "English", "Turkish") now use Solitreo font consistently
+  - Font now matches other page elements (headings, search bar placeholder)
+
+### Technical
+
+- Updated `components/blog/locale-filter.tsx`: Removed `font-sans` class from select element
+- Updated `app/globals.css`: Enhanced select and option CSS rules with state-specific selectors
+- CSS rules use `!important` flag to override browser default styling
+- Font consistency maintained across all dropdown states and interactions
+
+## [0.8.15] - 2026-01-26
+
+### Changed
+
+- **Reverted Handwriting Border Design**: Reverted handwriting border system to clean, professional borders
+  - Removed complex CSS mask operations (~400+ lines of handwriting border CSS)
+  - Replaced handwriting borders with standard Tailwind border utilities
+  - Improved performance by removing complex mask calculations
+  - Enhanced maintainability with simpler, standard CSS patterns
+  - Better browser compatibility (universal support vs. mask-image requirement)
+  - Cleaner, more professional visual appearance
+
+### Technical
+
+- **Removed Handwriting Border CSS System**:
+  - Removed CSS custom properties: `--handwriting-border-horizontal`, `--handwriting-border-vertical`, `--handwriting-underline`
+  - Removed all handwriting border CSS classes (`.handwriting-border-all`, `.handwriting-border-t/b/l/r/x/y`, `.handwriting-border`, `.handwriting-underline`, etc.)
+  - Removed handwriting border pseudo-elements from `.notebook-panel::after`, `.loose-leaf-card::after`, `.pencil-divider::before`
+  - Updated `.notebook-panel` to use `border border-notebook-divider`
+  - Updated `.loose-leaf-card` to use `border border-notebook-divider`
+  - Updated `.pencil-divider` to use `border-t border-notebook-divider`
+
+- **Updated Components** (22+ files):
+  - **Layout**: `header.tsx`, `mobile-menu.tsx`, `navigation.tsx`, `footer.tsx`
+  - **Blog**: `mdx-components.tsx`, `blog-list-client.tsx`, `back-button.tsx`, `locale-filter.tsx`, `search-bar.tsx`, `tag-filter.tsx`, `tag-list.tsx`
+  - **Home**: `personal-hero.tsx`, `certifications-section.tsx`, `latest-blogs-section.tsx`, `featured-posts.tsx`, `bottom-navigation.tsx`
+  - **Resume**: `experience-item.tsx`, `skills-grid.tsx`
+  - **UI**: `theme-toggle.tsx`, `glassy-button.tsx`
+  - All components now use standard Tailwind border classes (`border`, `border-t`, `border-b`, `border-l`, `border-accent`, etc.)
+  - Maintained existing hover/active states and accessibility features
+
+### Performance
+
+- Reduced CSS file size by ~400 lines
+- Improved rendering performance (no complex mask operations)
+- Faster page load (less CSS to parse)
+- Better compatibility with Next.js build optimizations
+
+### Browser Compatibility
+
+- Universal browser support (CSS borders supported since CSS 1.0)
+- Consistent rendering across all modern browsers
+- No fallback handling needed
+- Works perfectly in all browsers (including IE11+)
+
 ## [0.8.14] - 2026-01-26
 
 ### Fixed
