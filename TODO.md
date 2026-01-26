@@ -1708,7 +1708,7 @@ All phases of the notebook design refinement have been completed:
 - Version bumped to 0.8.9
 - Changes committed: `docs(rules): update Next.js 15+ rules to reflect actual framework behavior`
 
-## Remove Outer Border from Related Posts Section
+## Completed: Remove Outer Border from Related Posts Section
 
 ### Phase 1: Implementation ✅
 
@@ -1747,11 +1747,12 @@ All phases of the notebook design refinement have been completed:
 - [x] Document that `pencil-divider` was removed from Related Posts section
 - [x] Document that `border-0` was removed to restore post card borders
 - [x] Update version numbers in `package.json` and `lib/constants.ts`
-- [ ] Commit changes following commit conventions
-- [ ] Remove plan file from `.cursor/plans/`
+- [x] Commit changes following commit conventions
+- [x] Remove plan file from `.cursor/plans/`
 
 **Implementation Summary:**
 - Removed `pencil-divider` class from section element in `components/blog/related-posts.tsx`
 - Removed `border-0` class from post cards to restore default borders
 - Version bumped to 0.8.10
-- Changes ready for commit: `fix(blog): remove outer border from Related Posts section and restore card borders`
+- Changes committed: `fix(blog): remove outer border from Related Posts section and restore card borders`
+- Plan file removed from `.cursor/plans/`
