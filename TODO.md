@@ -229,8 +229,8 @@
 
 ### Phase 2: Hero & Summary
 
-- [ ] 3. Hero and summary edit page — `app/admin/hero-summary/page.tsx`; form for personal + summary; submit via server action or PATCH API.
-- [ ] 4. Resume write API — Add `writeResumeData` in `lib/resume.ts`; server action or PATCH `/api/admin/resume` with Zod + deep-merge.
+- [x] 3. Hero and summary edit page — `app/admin/hero-summary/page.tsx`; form for personal + summary; submit via server action or PATCH API.
+- [x] 4. Resume write API — Add `writeResumeData` in `lib/resume.ts`; server action or PATCH `/api/admin/resume` with Zod + deep-merge.
 
 ### Phase 3: Resume Section
 

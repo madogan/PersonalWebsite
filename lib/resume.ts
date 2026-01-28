@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
-const resumePath = path.join(process.cwd(), 'content/resume/resume.json')
+const resumeDir = path.join(process.cwd(), 'content/resume')
+const resumePath = path.join(resumeDir, 'resume.json')
 
 export type ResumeData = {
   personal: {
@@ -68,6 +69,15 @@ export function getResumeData(): ResumeData {
   } catch (error) {
     throw new Error('Failed to load resume data')
   }
+}
+
+/**
+ * Writes resume data atomically (temp file + rename). Server-only.
+ */
+export async function writeResumeData(data: ResumeData): Promise<void> {
+  const tmpPath = path.join(resumeDir, `resume.json.${Date.now()}.tmp`)
+  await fs.promises.writeFile(tmpPath, JSON.stringify(data, null, 2), 'utf8')
+  await fs.promises.rename(tmpPath, resumePath)
 }
 
 export function getSkillCategoryTitle(category: string): string {

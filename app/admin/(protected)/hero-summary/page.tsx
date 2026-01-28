@@ -1,10 +1,19 @@
+import { getResumeData } from '@/lib/resume'
+import { HeroSummaryForm } from '@/components/admin/hero-summary-form'
+
 export default function AdminHeroSummaryPage() {
+  const resume = getResumeData()
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-foreground">
+      <h1 className="mb-6 text-2xl font-bold text-foreground">
         Hero & Summary
       </h1>
-      <p className="text-foreground/80">Edit hero name and summary (form coming in next task).</p>
+      <HeroSummaryForm
+        initialData={{
+          personal: resume.personal,
+          summary: resume.summary,
+        }}
+      />
     </div>
   )
 }
