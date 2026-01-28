@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-01-28
+
+### Added
+
+- **Admin panel (auth and layout):** Protected admin area for content management
+  - NextAuth v5 (beta) with credentials provider; env: `AUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`
+  - Login page at `/admin/login`; unauthenticated users redirected to login
+  - Protected routes under `/admin` (route group `(protected)`); `/admin` redirects to `/admin/hero-summary`
+  - Admin layout with top nav: Hero & Summary, Resume, Certifications, Blogs; sign-out button
+  - Placeholder pages: `/admin/hero-summary`, `/admin/resume`, `/admin/certifications`, `/admin/blogs`
+
+### Technical
+
+- Added `auth.ts` (NextAuth config with Credentials provider), `app/api/auth/[...nextauth]/route.ts`
+- Added `app/admin/login/page.tsx`, `app/admin/(protected)/layout.tsx`, `app/admin/(protected)/page.tsx`, placeholder admin pages
+- Added `.env.example` with `AUTH_SECRET`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`
+- Dependencies: `next-auth@5.0.0-beta.30`, `zod@^3.23`
+
 ## [0.9.0] - 2026-01-26
 
 ### Added

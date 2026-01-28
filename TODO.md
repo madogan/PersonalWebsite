@@ -218,6 +218,37 @@
 - [x] Add comments to complex components
 - [x] Create contribution guidelines (if needed)
 
+## Plan: Admin Content Management (Hero, Resume, Certifications, Blogs)
+
+*Source: `.cursor/plans/plan_admin_content_management.md`*
+
+### Phase 1: Foundation
+
+- [x] 1. Protect admin routes — Add authentication (NextAuth credentials or middleware). All routes under `/admin` require auth; redirect to login.
+- [x] 2. Admin layout and nav — Create `app/admin/layout.tsx` with session check; sidebar/top nav: Hero & Summary, Resume, Certifications, Blogs.
+
+### Phase 2: Hero & Summary
+
+- [ ] 3. Hero and summary edit page — `app/admin/hero-summary/page.tsx`; form for personal + summary; submit via server action or PATCH API.
+- [ ] 4. Resume write API — Add `writeResumeData` in `lib/resume.ts`; server action or PATCH `/api/admin/resume` with Zod + deep-merge.
+
+### Phase 3: Resume Section
+
+- [ ] 5. Resume section edit page — `app/admin/resume/page.tsx`; form for experience, education, coreSkills; dynamic add/remove.
+
+### Phase 4: Certifications
+
+- [ ] 6. Certifications edit page — `app/admin/certifications/page.tsx`; list, add, edit, delete certifications; merge into resume.
+
+### Phase 5: Blog Management
+
+- [ ] 7. Blog list page — `app/admin/blogs/page.tsx`; list posts via `getAllPosts()`; Edit, Delete (confirm + `deleteBlogPost`).
+- [ ] 8. Blog create and edit — `app/admin/blogs/new/page.tsx` and `app/admin/blogs/[slug]/edit/page.tsx`; Zod slug; `writeBlogPost`, slug change = write new then delete old.
+
+### Phase 6: Error Handling
+
+- [ ] 9. Admin error boundary and validation — `app/admin/error.tsx` (mirror root error.tsx); Zod 400 on invalid payloads.
+
 ## Completed
 
 ### Resume Page Removal
