@@ -24,6 +24,7 @@ export type BlogPostPayloadInput = z.infer<typeof blogPostPayloadSchema>
 export const blogDraftSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string(),
+  date: z.string().optional(), // set server-side to today if missing
   tags: z.array(z.string()),
   content: z.string().min(0),
 })

@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2026-01-28
+
+### Added
+
+- **Gemini blog draft generation (EN/TR, UI-managed prompts)**
+  - Admin can generate blog drafts via Google Gemini from a topic/outline. Prompts are stored in `content/config/gemini-prompts.json` and editable at `/admin/blog-prompts`.
+  - **Config:** `lib/gemini-prompts.ts`: `getGeminiPrompts()`, `writeGeminiPrompts()` (atomic write), `getDefaultGeminiPrompts()`; `lib/schemas/gemini-prompts.ts`: `GeminiPromptsConfig`, `generateBlogDraftInputSchema`.
+  - **Actions:** `lib/actions/gemini.ts`: `getDefaultGeminiPromptsAction()`, `updateGeminiPromptsAction()`, `generateBlogDraftAction()`; all Gemini usage server-only.
+  - **Generation:** `lib/gemini-generate.ts`: `generateBlogDraft()` with `@google/genai` (model `gemini-2.0-flash`), `{{topic}}`/`{{context}}` substitution, Zod-validated JSON output, date set server-side; timeout 30s, Turkish error messages.
+  - **Blog draft schema:** `blogDraftSchema` in `lib/schemas/blog.ts` for generation output validation.
+  - **Admin Blog prompts page:** `/admin/blog-prompts` with two text areas (EN/TR prompts), Save, Reset to defaults; nav item "Blog prompts" in admin layout.
+  - **New post:** "Generate with Gemini" section (create mode only): topic text area, Generate button; fills form for selected locale (EN or TR).
+  - **Edit post:** "Generate with Gemini" section: shared topic field, buttons "EN taslak", "TR taslak", "Her iki dil"; fills EN and/or TR panels; optional context from other locale.
+  - **Locale support:** EN only, TR only, or both; no requirement for both locales; existing add/remove locale unchanged.
+  - **Env:** `GEMINI_API_KEY` in `.env`; documented in `.env.example` for other developers.
+
+### Technical
+
+- Dependency: `@google/genai@^1.38.0`
+- Default prompts in `content/config/gemini-prompts.json`; in-code defaults in `lib/gemini-prompts.ts` when file missing
+- Topic max 2000 chars; prompt max 10k chars per locale (Zod in `lib/schemas/gemini-prompts.ts`)
+
 ## [0.11.1] - 2026-01-28
 
 ### Added

@@ -1,8 +1,13 @@
 'use server'
 
 import { writeGeminiPrompts, getDefaultGeminiPrompts } from '@/lib/gemini-prompts'
+import { generateBlogDraft } from '@/lib/gemini-generate'
 import type { GeminiPromptsConfig } from '@/lib/schemas/gemini-prompts'
-import { geminiPromptsConfigSchema } from '@/lib/schemas/gemini-prompts'
+import {
+  geminiPromptsConfigSchema,
+  generateBlogDraftInputSchema,
+} from '@/lib/schemas/gemini-prompts'
+import type { GenerateBlogDraftResult } from '@/lib/gemini-generate'
 
 export type UpdateGeminiPromptsResult = { success: true } | { success: false; error: string }
 export type GetDefaultGeminiPromptsResult =
@@ -42,6 +47,24 @@ export async function updateGeminiPromptsAction(payload: {
     return { success: true }
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Promptlar kaydedilemedi'
+    return { success: false, error: message }
+  }
+}
+
+/**
+ * Generates blog draft(s) via Gemini. Validates input with Zod; calls generateBlogDraft.
+ * Server-only; never exposes API key or raw model output.
+ */
+export async function generateBlogDraftAction(input: unknown): Promise<GenerateBlogDraftResult> {
+  try {
+    const parsed = generateBlogDraftInputSchema.safeParse(input)
+    if (!parsed.success) {
+      const message = parsed.error.errors.map((e) => e.message).join('; ')
+      return { success: false, error: message }
+    }
+    return await generateBlogDraft(parsed.data)
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Taslak oluşturulamadı'
     return { success: false, error: message }
   }
 }
