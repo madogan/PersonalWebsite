@@ -1,0 +1,72 @@
+---
+title: >-
+  Statik Kurallardan Semantik Kararlara: Langflow Smart Router ile Esnek İş
+  Akışları
+description: >-
+  Yapay zeka iş akışlarında kullanıcı niyetinin öngörülemezliği en büyük
+  engeldir. Langflow Smart Router ile semantik anlayışla yol seçen, esnek ve
+  ölçeklenebilir sistemler kurmayı öğrenin.
+date: '2026-01-24'
+tags:
+  - AI
+  - LLM
+  - İş Akışları
+  - MLOps
+  - Ajanlar
+  - Langflow
+locale: tr
+alternateLocale: en
+alternateSlug: how-smart-routers-enable-dynamic-context-aware-ai-workflows
+---
+
+# Giriş
+
+Yapay zeka iş akışları tasarlanırken karşılaşılan en büyük engel, kullanıcı niyetinin (intent) öngörülemezliğidir. Klasik yazılım mantığındaki katı "eğer-ise" (if-else) kuralları, dilin sunduğu nüansları yakalamakta yetersiz kalır. Bu durum, sistemin yanlış kola sapmasına veya kullanıcının cevapsız kalmasına yol açar. Langflow tarafından sunulan Smart Router (Akıllı Yönlendirici) bileşeni, iş akışlarının kendi yolunu semantik bir anlayışla seçmesini sağlayarak bu sorunu ortadan kaldırıyor.
+
+## Önemli Çıkarımlar
+
+- **Semantik Karar Mekanizması**: Smart Router, veriyi sadece kelime bazlı değil, anlam ve niyet bazlı analiz ederek en uygun iş akışına yönlendirir.
+
+- **Düşük Bakım Maliyeti**: Yüzlerce manuel kural yazmak yerine, modelin muhakeme yeteneği sayesinde daha az eforla daha karmaşık sistemler kurulabilir.
+
+- **Ölçeklenebilirlik**: Yeni bir iş akışı veya "ajan" eklendiğinde, tüm sistemi yeniden kodlamak yerine Smart Router'ın yönlendirme tablosunu güncellemek yeterlidir.
+
+- **Gelişmiş Kullanıcı Deneyimi**: Kullanıcının ihtiyacı olan doğru birime (satış, teknik destek, genel bilgi vb.) anında ve hatasız aktarım yapılır.
+
+## Smart Router Nedir? Statik Kuralların Ötesine Geçiş
+
+Geleneksel yönlendiriciler, belirli anahtar kelimelere göre çalışır. Örneğin, kullanıcı "fiyat" dediğinde sistem satış birimine gider. Ancak "Fiyatlandırma politikanızdaki değişiklikler teknik altyapımı nasıl etkiler?" gibi hibrit bir soru geldiğinde statik kurallar genellikle çöker.
+
+Smart Router, girdi verisini bir büyük dil modeli (LLM) aracılığıyla değerlendirir. Girdinin bağlamını analiz eder ve tanımlanmış yollar arasından en mantıklı olanı seçer. Bu, sistemin sadece bir "yönlendirici" değil, aynı zamanda bir karar verici olarak çalışması anlamına gelir.
+
+## İş Akışlarında Dinamik Görev Dağıtımı
+
+Bir yapay zeka sisteminde birden fazla uzmanlaşmış ajan (multi-agent) varsa, her ajanın ne zaman devreye gireceğini belirlemek kritik bir mühendislik problemidir. Smart Router, bu süreci bir "orkestra şefi" gibi yönetir.
+
+- **Girdi Analizi**: Kullanıcıdan gelen ham veri veya sistem içindeki bir önceki adımın çıktısı alınır.
+
+- **Niyet Tespiti**: Model, girdinin neyi amaçladığını (soru sorma, işlem yapma, şikayet bildirme vb.) saptar.
+
+- **Yol Seçimi**: Tanımlanmış Flow A (Destek), Flow B (Satış) veya Flow C (Analiz) gibi opsiyonlar arasından en uygun olanı tetikler.
+
+Bu dinamik yapı, özellikle büyük ölçekli kurumsal chatbotlar ve otomasyon sistemleri için operasyonel bir devrim niteliğindedir.
+
+## Karmaşık Diyalog Yönetimi ve Veri Akışı
+
+Smart Router, sadece basit soru-cevap sistemlerinde değil, karmaşık veri işleme süreçlerinde de kilit rol oynar. Örneğin; bir doküman analiz sisteminde gelen dosyanın türüne (PDF, Excel, Görsel) veya içeriğin konusuna (Hukuk, Finans, Sağlık) göre farklı işleme modellerini devreye alabilir.
+
+Bu yaklaşım, sistemin gereksiz kaynak tüketmesini engeller. Her girdi için tüm modelleri çalıştırmak yerine, sadece ilgili modele yönlendirme yaparak token maliyetlerini ve işlem süresini (latency) optimize eder.
+
+## Türkiye'deki Şirketler İçin Uygulama ve Sektörel Tavsiyeler
+
+Türkiye pazarındaki dijital dönüşüm projelerinde, özellikle müşteri ilişkileri yönetimi (CRM) ve doküman otomasyonu ön plandadır. Smart Router bileşenini yerel bağlamda kullanırken şu noktalar göz önünde bulundurulmalıdır:
+
+- **Türkçe Nüanslarına Odaklanın**: Türkçenin ironi ve dolaylı anlatım zenginliği, basit anahtar kelime sistemlerini yanıltır. Smart Router'ı yapılandırırken, Türkçe dil yetkinliği yüksek modeller (GPT-4o, Claude 3.5 Sonnet vb.) üzerinden semantik analiz yaptırmak hata payını minimize eder.
+
+- **Sektörel Uzman Ajanlar Kurun**: KOBİ veya kurumsal düzeydeyseniz, her şeyi bilen tek bir devasa model yerine; mevzuat bilen bir ajan, lojistik takip yapan bir ajan ve ürün uzmanı bir ajan tasarlayın. Smart Router bu ajanlar arasındaki trafik polisiniz olsun.
+
+- **Mevzuat Uyumu**: Finans veya sağlık gibi regülasyona tabi sektörlerde, Smart Router'ı "hassas veri" tespiti yapacak şekilde programlayabilirsiniz. Kişisel veri içeren girdileri doğrudan anonimleştirme akışına yönlendirerek KVKK uyumunu otomatize edebilirsiniz.
+
+## Sonuç
+
+Yapay zeka sistemlerinin başarısı, modellerin gücü kadar bu modellerin nasıl yönetildiğiyle de ilgilidir. Smart Router, geliştiricilere katı kod blokları arasında boğulmadan, akıllı ve esnek sistemler kurma imkanı tanır. Kendi yolunu seçebilen iş akışları, hem geliştirme sürecini hızlandırır hem de son kullanıcı için çok daha doğal ve sorunsuz bir etkileşim sunar.

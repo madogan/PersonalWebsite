@@ -1,0 +1,73 @@
+---
+title: >-
+  Karmaşık LLM Ajanlarını Test Etme Rehberi: Değerlendirme ve Optimizasyon
+  Stratejileri
+description: >-
+  Yapay zeka ajanlarını prototip aşamasından gerçek dünya kullanımına taşımak
+  için gereken değerlendirme tekniklerini öğrenin. Birim testlerinden uçtan uca
+  değerlendirmeye, LangChain ekibinin deneyimlerinden çıkarılan kritik başarı
+  faktörleri.
+date: '2026-01-20'
+tags:
+  - AI
+  - LLM
+  - Test
+  - MLOps
+  - Üretim
+  - Ajanlar
+locale: tr
+alternateLocale: en
+alternateSlug: evaluating-deep-agents-advanced-frameworks-testing-long-running-llms
+---
+
+# Giriş
+
+Yapay zeka ajanlarını prototip aşamasından gerçek dünya kullanımına taşımak, pek çok mühendislik ekibi için öngörülemeyen engellerle doludur. Bir sohbet botunun aksine, kendi başına karar veren ve araç kullanan "derin" ajanların (deep agents) hata payı çok daha yüksektir. Çıktının doğruluğu kadar, ajanın bu çıktıya ulaşırken izlediği mantıksal yol da büyük önem taşır. Bu makale, LangChain ekibinin karmaşık ajanları değerlendirirken elde ettiği teknik içgörüleri ve bu süreçteki kritik başarı faktörlerini ele almaktadır.
+
+## Önemli Çıkarımlar
+
+- **Birim Testleri Şart**: Ajanın tüm iş akışını test etmeden önce, kullandığı her bir aracı ve karar mekanizmasını ayrı ayrı doğrulayın.
+
+- **Ara Adımları İzleyin**: Sadece nihai sonuca değil, ajanın muhakeme sürecindeki (reasoning) ara adımlara odaklanın.
+
+- **Simülasyon Ortamları Kurun**: Tekrarlanabilir sonuçlar için dış dünyayı taklit eden izole test ortamları oluşturun.
+
+- **İnsan-Yapay Zeka İş Birliği**: Değerlendirme sürecinde altın standart veri setleri (gold datasets) oluşturmak için insan denetimini sürece dahil edin.
+
+## Neden Geleneksel Metrikler Yetersiz Kalıyor?
+
+Geleneksel yazılım testleri veya basit LLM değerlendirmeleri, ajanların çok aşamalı doğasını ölçmekte yetersizdir. Bir ajan, doğru sonuca yanlış bir yoldan ulaşabilir veya sonsuz döngüye girebilir. Bu durum, sistemin güvenilirliğini sarsar.
+
+Ajanların değerlendirilmesi, sadece girdi-çıktı eşleşmesi değildir. Ajanın hangi aracı, ne zaman ve hangi parametrelerle çağırdığını analiz etmek gerekir. LangChain tecrübesi, değerlendirme sürecinin ajan mimarisinin ayrılmaz bir parçası olması gerektiğini gösteriyor.
+
+## Birim Testlerinden Uçtan Uca Değerlendirmeye
+
+Karmaşık bir ajanı test etmeye en tepeden başlamak, hataların kaynağını bulmayı zorlaştırır. Bunun yerine katmanlı bir yaklaşım benimsemek daha verimlidir. Önce ajan bileşenlerini (promptlar, araç seçim mantığı) birim testlerine tabi tutun.
+
+Birim testleri başarıyla tamamlandıktan sonra uçtan uca (E2E) testlere geçilmelidir. Bu aşamada ajanın gerçek dünya karmaşıklığıyla nasıl başa çıktığı gözlemlenir. Süreç, hataların hangi aşamada (muhakeme mi, araç kullanımı mı, veri çekme mi) oluştuğunu netleştirir.
+
+## Ara Adımların (Intermediate Steps) Kritik Önemi
+
+Ajan değerlendirmesinde en büyük yanılgılardan biri, sadece son yanıta odaklanmaktır. Ancak "doğru" cevap, her zaman sistemin sağlıklı çalıştığı anlamına gelmez. Ajanın yanlış bir araç kullanarak doğru cevabı bulması, ileride büyük güvenlik veya maliyet sorunlarına yol açabilir.
+
+Geliştiriciler, ajanın her adımını kayıt altına almalıdır. Hangi düşünce zinciriyle (Chain of Thought) hareket ettiği ve araçlardan gelen yanıtları nasıl yorumladığı titizlikle incelenmelidir. Bu izlenebilirlik, hata ayıklama (debugging) sürecini hızlandırır.
+
+## LLM-as-a-Judge: Modelin Modeli Değerlendirmesi
+
+Büyük dil modellerini (LLM), başka bir modelin performansını ölçmek için kullanmak (LLM-as-a-Judge) popüler bir yöntemdir. Ancak bu yöntemin de kendi içinde bias (yanlılık) barındırdığı unutulmamalıdır. Model, uzun cevapları veya kendi üslubuna benzeyen çıktıları daha yüksek puanlama eğilimindedir.
+
+Bu riskleri minimize etmek için değerlendirme promptlarını spesifik kriterlere (doğruluk, kısalık, araç kullanım verimliliği) göre yapılandırın. Ayrıca, modelin verdiği puanların tutarlılığını düzenli olarak insan gözüyle kontrol edin.
+
+## Türkiye Pazarında Uygulama ve Sektörel Tavsiyeler
+
+Türkiye'deki teknoloji ekosisteminde AI projeleri genellikle hızlı teslimat baskısı altındadır. Ancak ajan tabanlı sistemlerde "hızlı üretim", uzun vadede teknik borç ve operasyonel risk yaratır. Yerel pazardaki geliştiriciler için şu adımlar kritiktir:
+
+- **Türkçe Dil Yapısına Özel Testler**: LLM'lerin Türkçe sondan eklemeli dil yapısı nedeniyle araç parametrelerini yanlış anlama ihtimali yüksektir. Test setlerinize mutlaka dil bilgisinden kaynaklı "edge case" örnekleri ekleyin.
+
+- **Maliyet Odaklı Değerlendirme**: Türkiye'deki bulut maliyetleri göz önüne alındığında, ajanın bir sorunu çözmek için kaç token harcadığını ve kaç gereksiz araç çağrısı yaptığını bir başarı kriteri olarak belirleyin.
+
+- **Yerel Regülasyon Uyumu**: KVKK kapsamındaki verilerle çalışan ajanların, veri sızıntısı yapıp yapmadığını denetleyen özel "negatif test" senaryoları kurgulayın. Ajanın yetkisi olmayan verilere erişim taleplerini reddettiğinden emin olun.
+
+## Sonuç
+
+Yapay zeka ajanlarını değerlendirmek, statik kodları test etmekten çok canlı bir organizmanın davranışlarını gözlemlemeye benzer. Başarılı bir prodüksiyon süreci için birim testlerine önem vermek, ara adımları izlemek ve insan denetimini sistemden tamamen çıkarmamak gerekir. Doğru metriklerle donatılmış bir değerlendirme süreci, sadece hataları azaltmakla kalmaz, aynı zamanda kullanıcı güvenini ve sistem verimliliğini de en üst düzeye çıkarır.

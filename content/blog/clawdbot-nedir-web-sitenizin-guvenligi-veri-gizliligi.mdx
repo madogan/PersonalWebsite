@@ -1,0 +1,82 @@
+---
+title: >-
+  Clawdbot Nedir? Web Sitenizin Güvenliği ve Veri Gizliliği İçin Bilmeniz
+  Gerekenler
+description: >-
+  Anthropic'in Claude için kullandığı Clawdbot tarayıcısı nedir? Güvenlik
+  durumu, veri gizliliği riskleri ve robots.txt ile erişim kontrolü hakkında
+  bilmeniz gerekenler.
+date: '2026-01-25'
+tags:
+  - AI
+  - Güvenlik
+  - Web
+  - Veri Gizliliği
+  - Crawler
+locale: tr
+alternateLocale: en
+alternateSlug: decoding-clawdbot-anthropic-web-crawler-threat-infrastructure
+---
+
+# Giriş
+
+Web sitesi trafik günlüklerinizi (log) kontrol ettiğinizde, Google veya Bing gibi tanıdık isimlerin dışında yeni bir ziyaretçiyle karşılaşmış olabilirsiniz: Clawdbot. Yapay zeka dünyasının hızla büyümesiyle birlikte, modelleri eğitmek için veri toplayan botların sayısı da artıyor. Peki, web sitenizi ziyaret eden bu bot gerçekten güvenli mi, yoksa sunucu kaynaklarınızı tüketen bir veri avcısı mı? Bu makalede, Anthropic'in tarayıcısı Clawdbot'un teknik detaylarını ve siteniz üzerindeki etkilerini inceleyeceğiz.
+
+## Önemli Çıkarımlar
+
+- **Tanım**: Clawdbot, Anthropic firması tarafından Claude yapay zeka modellerini eğitmek ve geliştirmek amacıyla kullanılan bir web tarayıcısıdır (crawler).
+
+- **Güvenlik Durumu**: Doğrudan bir siber saldırı aracı veya zararlı yazılım değildir; ancak kontrolsüz bırakıldığında sunucu yükünü artırabilir.
+
+- **Veri Gizliliği**: Sitenizdeki içeriklerin rızanız dışında yapay zeka eğitiminde kullanılmasını istemiyorsanız, bu botu kısıtlamanız gerekir.
+
+- **Kontrol Mekanizması**: Robots.txt dosyası veya IP engelleme yöntemleriyle Clawdbot'un erişimini kolayca yönetebilirsiniz.
+
+## Clawdbot Nedir ve Neden Sitenizi Ziyaret Ediyor?
+
+Clawdbot, Anthropic şirketinin geliştirdiği Claude isimli yapay zeka modelinin "bilgi dağarcığını" genişletmek için interneti tarayan bir yazılımdır. Bu botun temel görevi, açık web üzerindeki metinleri okumak ve bunları yapay zekanın öğrenme süreçlerine dahil etmektir.
+
+Arama motoru botlarından farklı olarak Clawdbot, sitenizi dizine ekleyip size trafik göndermez. Amacı sadece veriyi toplamak ve analiz etmektir. Bu durum, içerik üreticileri ve web yöneticileri arasında "emeğin karşılıksız kullanımı" konusunda tartışmalara yol açmaktadır.
+
+## Clawdbot Güvenli mi?
+
+Teknik anlamda Clawdbot güvenli kategorisindedir. Sitenize virüs bulaştırmaz, SQL enjeksiyonu yapmaz veya veritabanınızı ele geçirmeye çalışmaz. Ancak "güvenli" olması, "zararsız" olduğu anlamına gelmez.
+
+### Kaynak Tüketimi ve Performans Sorunları
+
+Eğer web siteniz kısıtlı sunucu kaynaklarına sahipse, Clawdbot gibi yoğun tarama yapan botlar CPU ve RAM kullanımını artırabilir. Bu durum, gerçek kullanıcılarınızın sitenize erişirken yavaşlık yaşamasına neden olur. Özellikle e-ticaret siteleri için bu tip tarayıcı trafiği, dönüşüm oranlarını olumsuz etkileyebilir.
+
+### İçerik Hırsızlığı ve Telif Hakları
+
+Clawdbot, sitenizdeki özel makaleleri, rehberleri ve verileri toplar. Bu veriler daha sonra yapay zeka tarafından kullanıcılara sunulur. Eğer özel bir içerik stratejiniz varsa, bilgilerinizin izinsiz olarak büyük modellerin eğitimine dahil edilmesi ticari bir risk oluşturabilir.
+
+## Clawdbot Nasıl Kontrol Edilir?
+
+Clawdbot'un sitenizi taramasını istemiyorsanız veya bu taramayı sınırlandırmak istiyorsanız uygulayabileceğiniz iki ana yöntem bulunmaktadır:
+
+### 1. Robots.txt Düzenlemesi
+
+Sitenizin ana dizinindeki `robots.txt` dosyasına aşağıdaki komutu ekleyerek botun erişimini tamamen engelleyebilirsiniz:
+
+```plaintext
+User-agent: Clawdbot
+Disallow: /
+```
+
+### 2. IP ve User-Agent Engelleme
+
+Eğer bot robots.txt kurallarına uymuyorsa, sunucu düzeyinde veya Cloudflare gibi bir WAF (Web Application Firewall) üzerinden User-agent bilgisini engelleyerek girişi durdurabilirsiniz.
+
+## Türkiye'deki İşletmeler ve Web Yöneticileri İçin Tavsiyeler
+
+Türkiye pazarında faaliyet gösteren KOBİ'ler ve içerik üreticileri için bu tip botların yönetimi hem maliyet hem de hukuki açıdan kritiktir:
+
+1. **Sunucu Maliyetlerini Yönetin**: Türkiye'deki yüksek barındırma (hosting) maliyetlerini göz önüne aldığınızda, size trafik getirmeyen botların bant genişliğinizi tüketmesine izin vermeyin. Log analizleri yaparak Clawdbot'un ne kadar veri transferi yaptığını ölçün.
+
+2. **KVKK ve Veri Koruması**: Sitenizde kullanıcı yorumları veya forum bölümleri gibi kişisel veri içerebilecek alanlar varsa, bu verilerin yapay zeka havuzlarına kontrolsüzce girmesini engellemek için Clawdbot'a bu sayfalarda kısıtlama getirin.
+
+3. **İçerik Değerinizi Koruyun**: Eğer özgün bir blog veya haber portalı yönetiyorsanız, içeriğinizin "hammadde" olarak kullanılmasını önlemek için robot kurallarınızı güncel tutun.
+
+## Sonuç
+
+Clawdbot, dijital dünyanın yeni bir gerçeği olan yapay zeka tarayıcılarından sadece biridir. Kendi başına bir güvenlik tehdidi oluşturmasa da, web sitenizin performansını ve içerik haklarını korumak adına kontrol altında tutulması gerekir. Stratejik bir karar olarak, eğer yapay zeka ekosistemine veri sağlamaktan bir çıkarınız yoksa, bu tarayıcıyı kısıtlamak en sağlıklı teknik yaklaşım olacaktır.
