@@ -3,7 +3,7 @@ import localFont from 'next/font/local'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { Footer } from '@/components/layout/footer'
 import { BottomNavigation } from '@/components/home/bottom-navigation'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { ThemeTogglePlacement } from '@/components/ui/theme-toggle-placement'
 import { PageTransition } from '@/components/transitions/page-transition'
 import './globals.css'
 
@@ -60,17 +60,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // suppressHydrationWarning on body helps when a browser extension injects attributes (e.g. data--h-bstatus, hb-hide-temp) and causes hydration mismatch; disable extensions for this site if warnings persist.
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${solitreo.variable} paper-texture font-sans antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider>
-          <div className="relative flex min-h-screen flex-col">
-            {/* Theme Toggle - Top Right */}
-            <div className="no-print fixed right-4 top-4 z-50">
-              <ThemeToggle />
-            </div>
+          <div className="relative flex min-h-screen flex-col" suppressHydrationWarning>
+            {/* Theme Toggle - Top Right (hidden on /admin; admin header has its own) */}
+            <ThemeTogglePlacement />
             <main className="flex-1">
               <PageTransition>{children}</PageTransition>
             </main>

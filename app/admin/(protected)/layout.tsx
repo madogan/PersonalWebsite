@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { signOut } from '@/auth'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export default async function AdminProtectedLayout({
   children,
@@ -41,13 +42,14 @@ export default async function AdminProtectedLayout({
               </Link>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <span className="text-sm text-foreground/70">{session.user.email}</span>
             <form
               action={async () => {
                 'use server'
                 await signOut({ redirectTo: '/admin/login' })
               }}
+              className="flex items-center"
             >
               <button
                 type="submit"
@@ -56,6 +58,7 @@ export default async function AdminProtectedLayout({
                 Sign out
               </button>
             </form>
+            <ThemeToggle />
           </div>
         </div>
       </header>
