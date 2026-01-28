@@ -1,0 +1,55 @@
+# Dependencies (large, rarely needed in context)
+node_modules
+.pnp
+.pnp.js
+.yarn
+
+# Build outputs
+.next
+out
+build
+dist
+
+# Lock files (large, low value for indexing)
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Testing & coverage
+coverage
+.nyc_output
+
+# Cache & turbo
+.cache
+.turbo
+*.tsbuildinfo
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE & OS
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Binary / heavy assets (reduce indexing)
+*.ttf
+*.otf
+*.woff
+*.woff2
+fonts/
+
+# Cursor / planning artifacts (not source)
+.cursor/plans

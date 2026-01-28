@@ -1,0 +1,65 @@
+---
+description: Unified project rules — Next.js 15+, development, commits, errors, validation, state, components
+globs: ["**/*.tsx", "**/*.ts", "next.config.ts"]
+alwaysApply: true
+---
+
+# Project Rules (Personal Website)
+
+## 1. Next.js 15+
+
+- **App Router only.** Server Components by default; `'use client'` only when needed.
+- **Required:** `error.tsx`, `not-found.tsx` per route segment.
+- **Metadata:** static `export const metadata` for static pages; `generateMetadata` for dynamic routes.
+- **Params (Next.js 15+):** Dynamic route params are `Promise<>` — always `await params`.
+- **Components:** Use function declarations; avoid `React.FC`. Use `next/image` and dynamic imports for code splitting.
+- **i18n:** Use next-intl; externalize strings; locale-aware URLs and dates.
+- **Config:** `output: 'standalone'`, `compress: true`; no custom turbopack keys. Use `pnpm dev`, `pnpm build`, `pnpm type-check`, `pnpm lint`.
+
+## 2. Development & Checklist
+
+- **Before any task:** Check/update `TODO.md`; on completion update `CHANGELOG.md` and version in `lib/constants.ts` and `package.json`. Commit atomically.
+- **i18n:** User-facing text → next-intl; new pages → `/[locale]/...`; links and dates → locale-aware. Translation paths: `app/i18n/locales/{tr,en}/`, `common.json`.
+- **Stack:** Next.js 15+, React 19, TypeScript, Tailwind, PNPM only, shadcn/ui, Zod for validation. Use centralized logger (no `console.log` in production).
+- **Scripts:** `pnpm dev`, `pnpm build`, `pnpm lint`, `pnpm lint:fix`, `pnpm format`, `pnpm type-check`, `pnpm check`, `pnpm check:fix`. Use Git Bash scripts under `scripts/` for clean install, Docker, Fly.io, secrets.
+- **PrismaClient:** Never in client components. Use API routes + `fetch` in client; Server Components or Server Actions for DB access.
+- **Git (agents):** Do not run `git status`/`git diff`/`git log`. Commit only files modified in the current session with `git add <files>` and `git commit -m "message"`.
+
+## 3. Commits
+
+- **Format:** `<type>(<scope>): <subject>` — types: feat, fix, docs, style, refactor, perf, test, chore, ci, revert. Scope lowercase; subject imperative, ≤72 chars.
+- **Atomic:** One logical change per commit; related files only; conventional messages.
+- **Version:** Bump in `package.json` and `lib/constants.ts`; update `CHANGELOG.md`. Commit as `version: X.Y.Z`.
+
+## 4. Error Handling
+
+- **Route errors:** Each segment has `error.tsx` (client) with `error`, `reset`; use Turkish user-facing messages and a reset button.
+- **404:** Implement `not-found.tsx` and call `notFound()` from Server Components when resource missing.
+- **Server Components:** Try/catch; throw to let `error.tsx` handle; use `notFound()` for 404.
+- **Client Components:** Own loading/error state; do not wrap in Suspense for loading.
+- **API routes:** Validate with Zod; return 400 with validation messages, 500 with generic message; use Turkish messages where applicable.
+- **Safety:** In production avoid exposing stack/sensitive data; use generic messages.
+
+## 5. Validation (Zod)
+
+- **Centralized schemas:** Use `@/lib/schemas` (e.g. blog, resume). No inline schemas for the same purpose.
+- **Design:** Use `.transform()` for sanitization; Turkish error messages; export types via `z.infer<typeof schema>`.
+- **API:** `schema.safeParse(body)`; on failure return 400 with joined error messages.
+- **Server Actions:** Parse with schema; on `ZodError` return `{ success: false, message }` with Turkish text.
+- **Security:** Always sanitize, validate server-side, use `safeParse` in APIs, log suspicious validation failures.
+
+## 6. State Management
+
+- **Local:** Prefer `useState`/`useMemo`; avoid large single state objects.
+- **Forms:** Server Actions + Zod; use `useFormStatus()` for pending; optional local message state.
+- **Server state:** Prefer Server Components/async; for client use React Query/SWR with proper keys and stale/cache times.
+- **Context:** Use for theme, auth, locale, feature flags; memoize context value.
+- **Updates:** Immutable updates; batch related state changes. Use `useMemo`/`useCallback` only when needed for referential equality.
+- **Persistence:** Safe localStorage (try/catch, SSR guard); effect cleanup for subscriptions.
+
+## 7. Components & UI
+
+- **Reuse:** Prefer components under `components/ui` and design tokens (e.g. glassy buttons, cards, section badges). Check before adding new UI.
+- **Styling:** Tailwind + CVA for variants; mobile-first; consistent spacing and palette.
+- **shadcn/ui:** Use existing components; customize via Tailwind; add with `pnpm dlx shadcn-ui@latest add <name>`.
+- **A11y:** ARIA, keyboard nav, loading and error states.
