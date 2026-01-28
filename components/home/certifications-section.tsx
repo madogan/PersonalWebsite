@@ -76,7 +76,16 @@ export function CertificationsSection() {
                     {/* Logo and Title */}
                     <div className="flex items-start gap-3">
                       <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent/20 bg-background">
-                        {getLogoPath(cert.issuer) ? (
+                        {cert.imageUrl ? (
+                          <Image
+                            src={cert.imageUrl}
+                            alt={cert.issuer}
+                            width={64}
+                            height={64}
+                            className="object-contain p-2"
+                            unoptimized={cert.imageUrl.startsWith('/') ? false : true}
+                          />
+                        ) : getLogoPath(cert.issuer) ? (
                           <Image
                             src={getLogoPath(cert.issuer)!}
                             alt={cert.issuer}

@@ -1,12 +1,16 @@
+import { getResumeData } from '@/lib/resume'
+import { CertificationsForm } from '@/components/admin/certifications-form'
+
 export default function AdminCertificationsPage() {
+  const resume = getResumeData()
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-foreground">
-        Certifications
-      </h1>
-      <p className="text-foreground/80">
-        Edit certifications and achievements (form coming in next task).
-      </p>
+      <h1 className="mb-6 text-2xl font-bold text-foreground">Certifications</h1>
+      <CertificationsForm
+        initialData={{
+          certifications: resume.certifications ?? [],
+        }}
+      />
     </div>
   )
 }

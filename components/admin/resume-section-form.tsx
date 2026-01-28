@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { updateResumeAction } from '@/lib/actions/resume'
-import { getSkillCategoryTitle } from '@/lib/resume'
+import { getCategoryDisplayName } from '@/lib/skill-category-titles'
 import type { ResumeData } from '@/lib/resume'
 import { Plus, Trash2 } from 'lucide-react'
 
@@ -24,6 +24,8 @@ export function ResumeSectionForm({ initialData }: Props) {
   const [coreSkills, setCoreSkills] = useState<Record<string, string[]>>(
     initialData.coreSkills ?? {}
   )
+  const [newCategoryKey, setNewCategoryKey] = useState('')
+  const [newCategoryBullets, setNewCategoryBullets] = useState('')
 
   function addExperience() {
     setExperience((prev) => [
@@ -94,6 +96,32 @@ export function ResumeSectionForm({ initialData }: Props) {
     setEducation((prev) => {
       const next = [...prev]
       next[index] = { ...next[index], [field]: value }
+      return next
+    })
+  }
+
+  function addCoreSkillCategory() {
+    const raw = newCategoryKey.trim()
+    if (!raw) return
+    const key = raw
+      .split(/\s+/)
+      .map((word, i) =>
+        i === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      )
+      .join('')
+    const bullets = newCategoryBullets
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean)
+    setCoreSkills((prev) => ({ ...prev, [key]: bullets }))
+    setNewCategoryKey('')
+    setNewCategoryBullets('')
+  }
+
+  function removeCoreSkillCategory(key: string) {
+    setCoreSkills((prev) => {
+      const next = { ...prev }
+      delete next[key]
       return next
     })
   }
@@ -313,21 +341,39 @@ export function ResumeSectionForm({ initialData }: Props) {
 
       {/* Core Skills */}
       <section>
-        <h2 className="mb-4 text-lg font-semibold text-foreground">Core Skills</h2>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-foreground">Core Skills</h2>
+        </div>
         <p className="mb-4 text-sm text-foreground/70">
-          Edit bullet points for each category. One line per bullet.
+          Edit bullet points for each category (one line per bullet). Add or remove categories below.
         </p>
         <div className="space-y-6">
           {Object.keys(coreSkills).map((key) => (
-            <div key={key} className="rounded-lg border border-notebook-divider bg-background/50 p-4">
-              <label className={labelClass}>{getSkillCategoryTitle(key)}</label>
+            <div
+              key={key}
+              className="flex flex-col gap-3 rounded-lg border border-notebook-divider bg-background/50 p-4"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <label className={labelClass}>{getCategoryDisplayName(key)}</label>
+                <span className="text-xs text-foreground/50">key: {key}</span>
+                <button
+                  type="button"
+                  onClick={() => removeCoreSkillCategory(key)}
+                  className="shrink-0 inline-flex items-center gap-1 text-sm text-red-600 hover:underline dark:text-red-400"
+                >
+                  <Trash2 className="h-4 w-4" /> Remove category
+                </button>
+              </div>
               <textarea
-                rows={6}
+                rows={5}
                 value={(coreSkills[key] ?? []).join('\n')}
                 onChange={(e) =>
                   setCoreSkills((prev) => ({
                     ...prev,
-                    [key]: e.target.value.split('\n').filter((s) => s.trim() !== ''),
+                    [key]: e.target.value
+                      .split('\n')
+                      .map((s) => s.trim())
+                      .filter((s) => s !== ''),
                   }))
                 }
                 className={inputClass}
@@ -335,6 +381,38 @@ export function ResumeSectionForm({ initialData }: Props) {
               />
             </div>
           ))}
+        </div>
+        <div className="mt-6 rounded-lg border border-dashed border-notebook-divider bg-background/30 p-4">
+          <h3 className="mb-3 text-sm font-medium text-foreground">Add category</h3>
+          <div className="space-y-3">
+            <div>
+              <label className={labelClass}>Category key (camelCase, e.g. securityAndCompliance)</label>
+              <input
+                type="text"
+                value={newCategoryKey}
+                onChange={(e) => setNewCategoryKey(e.target.value)}
+                className={inputClass}
+                placeholder="e.g. securityAndCompliance"
+              />
+            </div>
+            <div>
+              <label className={labelClass}>Bullets (one per line)</label>
+              <textarea
+                rows={4}
+                value={newCategoryBullets}
+                onChange={(e) => setNewCategoryBullets(e.target.value)}
+                className={inputClass}
+                placeholder="One bullet per line"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={addCoreSkillCategory}
+              className="inline-flex items-center gap-1 rounded-md border border-notebook-divider bg-background px-3 py-1.5 text-sm text-foreground hover:bg-foreground/5"
+            >
+              <Plus className="h-4 w-4" /> Add category
+            </button>
+          </div>
         </div>
       </section>
 

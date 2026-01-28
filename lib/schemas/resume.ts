@@ -53,6 +53,7 @@ export const partialResumeSchema = z.object({
         expirationDate: z.string().nullable().optional(),
         credentialId: z.string().nullable().optional(),
         credentialUrl: z.string().nullable().optional(),
+        imageUrl: z.string().nullable().optional(),
         skills: z.array(z.string()).optional(),
       })
     )

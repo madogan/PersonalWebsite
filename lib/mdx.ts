@@ -91,6 +91,63 @@ export function getPostBySlug(slug: string): BlogPost | null {
   }
 }
 
+export type BlogPostPayload = {
+  slug: string
+  title: string
+  description: string
+  date: string
+  tags: string[]
+  locale: 'en' | 'tr'
+  alternateLocale?: 'en' | 'tr'
+  alternateSlug?: string
+  content: string
+}
+
+/**
+ * Writes a blog post atomically (temp file + rename). Server-only.
+ * Caller must validate slug (e.g. /^[a-z0-9-]+$/, unique on create).
+ */
+export async function writeBlogPost(payload: BlogPostPayload): Promise<void> {
+  const safeSlug = payload.slug.replace(/[^a-z0-9-]/g, '')
+  if (safeSlug !== payload.slug) {
+    throw new Error('Slug must contain only lowercase letters, numbers, and hyphens')
+  }
+  const filename = `${payload.slug}.mdx`
+  const fullPath = path.join(postsDirectory, filename)
+  const tmpPath = path.join(postsDirectory, `${filename}.${Date.now()}.tmp`)
+
+  const frontmatter = {
+    title: payload.title,
+    description: payload.description,
+    date: payload.date,
+    tags: payload.tags,
+    locale: payload.locale,
+    ...(payload.alternateLocale && { alternateLocale: payload.alternateLocale }),
+    ...(payload.alternateSlug && { alternateSlug: payload.alternateSlug }),
+  }
+  const fileContents = matter.stringify(payload.content, frontmatter)
+  await fs.promises.mkdir(postsDirectory, { recursive: true })
+  await fs.promises.writeFile(tmpPath, fileContents, 'utf8')
+  await fs.promises.rename(tmpPath, fullPath)
+}
+
+/**
+ * Deletes a blog post file. Server-only. Caller must validate slug.
+ */
+export async function deleteBlogPost(slug: string): Promise<void> {
+  const safeSlug = slug.replace(/[^a-z0-9-]/g, '')
+  if (safeSlug !== slug || !slug) {
+    throw new Error('Invalid slug')
+  }
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`)
+  try {
+    await fs.promises.access(fullPath)
+  } catch {
+    throw new Error('Post not found')
+  }
+  await fs.promises.unlink(fullPath)
+}
+
 export function getAllTags(): string[] {
   const posts = getAllPosts()
   const tagsSet = new Set<string>()

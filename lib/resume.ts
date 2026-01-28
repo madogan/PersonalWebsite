@@ -44,6 +44,7 @@ export type ResumeData = {
     expirationDate?: string | null
     credentialId?: string | null
     credentialUrl?: string | null
+    imageUrl?: string | null
     skills?: string[]
   }>
   skills: {
@@ -80,18 +81,4 @@ export async function writeResumeData(data: ResumeData): Promise<void> {
   await fs.promises.rename(tmpPath, resumePath)
 }
 
-export function getSkillCategoryTitle(category: string): string {
-  const titleMap: Record<string, string> = {
-    reliabilityAndSre: 'Reliability & SRE',
-    cloudAndPlatform: 'Cloud & Platform',
-    aiMlopsInfrastructure: 'AI / MLOps Infrastructure',
-    observabilityAndTelemetry: 'Observability & Telemetry',
-    automationAndEngineering: 'Programming & Automation',
-    // Legacy mappings for backward compatibility
-    aiMlops: 'AI / MLOps Systems (Infrastructure-Level)',
-    reliability: 'Reliability & Observability',
-    cloud: 'Cloud & Infrastructure',
-  }
-
-  return titleMap[category] || 'Programming & Automation'
-}
+export { getSkillCategoryTitle } from '@/lib/skill-category-titles'
