@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.1] - 2026-01-28
+
+### Added
+
+- **Admin error handling (Phase 6)**
+  - `app/admin/error.tsx`: segment-level error boundary mirroring root; English copy; "Back to dashboard" link to `/admin`
+  - `lib/api-responses.ts`: `badRequestFromZod(zodError)` for 400 with joined Zod validation messages; `serverErrorResponse(message?)` for 500 with generic message
+  - API route convention: use `badRequestFromZod` on Zod `safeParse` failure; use `serverErrorResponse` for unexpected errors (documented in JSDoc)
+
 ## [0.11.0] - 2026-01-28
 
 ### Added

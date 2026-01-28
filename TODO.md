@@ -253,7 +253,7 @@
 
 ### Phase 6: Error Handling
 
-- [ ] 9. Admin error boundary and validation — `app/admin/error.tsx` (mirror root error.tsx); Zod 400 on invalid payloads.
+- [x] 9. Admin error boundary and validation — `app/admin/error.tsx` (mirror root error.tsx); Zod 400 on invalid payloads; `lib/api-responses.ts` (badRequestFromZod, serverErrorResponse).
 
 ## Plan: Admin Blog — Single Edit per Locale Pair + Better Text Editor
 
