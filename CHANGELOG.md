@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dependencies: `next-auth@5.0.0-beta.30`, `zod@^3.23`
 - **Hero & Summary edit:** Admin form at `/admin/hero-summary` to edit name, title, tagline, email, location, website, LinkedIn, GitHub, summary; submits via server action
 - **Resume write layer:** `writeResumeData()` in `lib/resume.ts` (atomic write); `lib/schemas/resume.ts` (partial Zod schema); `lib/actions/resume.ts` (`updateResumeAction` with deep-merge)
+- **Resume section edit:** Admin page at `/admin/resume` with `ResumeSectionForm`: experience (add/remove entries, description bullets), education (add/remove), coreSkills (per-category bullet list); submits via `updateResumeAction`
 
 ## [0.9.0] - 2026-01-26
 
