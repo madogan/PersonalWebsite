@@ -20,4 +20,14 @@ export const blogPostPayloadSchema = z.object({
 
 export type BlogPostPayloadInput = z.infer<typeof blogPostPayloadSchema>
 
+/** Schema for Gemini-generated blog draft (no slug/locale/alternate*). Date set server-side. */
+export const blogDraftSchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string(),
+  tags: z.array(z.string()),
+  content: z.string().min(0),
+})
+
+export type BlogDraft = z.infer<typeof blogDraftSchema>
+
 export { slugSchema }

@@ -16,6 +16,7 @@
     "process-source-urls:dry-run": "tsx scripts/process-source-urls.ts --dry-run"
   },
   "dependencies": {
+    "@google/genai": "^1.38.0",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@next/mdx": "^15.1.0",

@@ -19,6 +19,7 @@ export default async function AdminProtectedLayout({
     { href: '/admin/resume', label: 'Resume' },
     { href: '/admin/certifications', label: 'Certifications' },
     { href: '/admin/blogs', label: 'Blogs' },
+    { href: '/admin/blog-prompts', label: 'Blog prompts' },
   ]
 
   return (

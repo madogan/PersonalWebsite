@@ -301,13 +301,13 @@
 ### Phase 1: Config and prompt storage
 
 - [x] 1. Add `content/config` and prompts file — Ensure `content/config/` exists; create `content/config/gemini-prompts.json` with default `promptEn` and `promptTr`. Commit default file so prompts are versioned and editable in UI.
-- [ ] 2. Implement prompt config read/write — `lib/gemini-prompts.ts`: `getGeminiPrompts()`, `writeGeminiPrompts()` (atomic write); `lib/schemas/gemini-prompts.ts`: Zod schema for `GeminiPromptsConfig`.
-- [ ] 3. Server actions for prompts — `lib/actions/gemini.ts`: `updateGeminiPromptsAction(payload)`; validate with Zod, call `writeGeminiPrompts`; Turkish error messages where applicable.
+- [x] 2. Implement prompt config read/write — `lib/gemini-prompts.ts`: `getGeminiPrompts()`, `writeGeminiPrompts()` (atomic write); `lib/schemas/gemini-prompts.ts`: Zod schema for `GeminiPromptsConfig`.
+- [x] 3. Server actions for prompts — `lib/actions/gemini.ts`: `updateGeminiPromptsAction(payload)`; validate with Zod, call `writeGeminiPrompts`; Turkish error messages where applicable.
 
 ### Phase 2: Admin UI for editing prompts
 
-- [ ] 4. Admin page: Edit prompts — `app/admin/(protected)/blog-prompts/page.tsx` (Server Component + client form); nav item "Blog prompts" in layout next to "Blogs".
-- [ ] 5. Validation and UX — Non-empty prompts; Zod min/max length; Turkish messages where applicable.
+- [x] 4. Admin page: Edit prompts — `app/admin/(protected)/blog-prompts/page.tsx` (Server Component + client form); nav item "Blog prompts" in layout next to "Blogs".
+- [x] 5. Validation and UX — Non-empty prompts; Zod min/max length; Turkish messages where applicable.
 
 ### Phase 3: Gemini integration
 
