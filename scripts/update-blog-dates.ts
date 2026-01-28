@@ -4,8 +4,8 @@ import matter from 'gray-matter'
 
 const postsDirectory = path.join(process.cwd(), 'content/blog')
 
-// Start date: 2026-01-14
-const startDate = new Date('2026-01-14')
+// Start from today (most recent post gets today's date)
+const startDate = new Date()
 
 function formatDate(date: Date): string {
   const year = date.getFullYear()
@@ -48,7 +48,9 @@ const posts: BlogPostFile[] = fileNames
 posts.sort((a, b) => b.createdTime.getTime() - a.createdTime.getTime())
 
 console.log(`Found ${posts.length} blog posts`)
-console.log('\nUpdating dates starting from 2026-01-14 going backwards...\n')
+console.log(
+  `\nUpdating dates starting from ${formatDate(startDate)} going backwards...\n`
+)
 
 // Update each post
 posts.forEach((post, index) => {
