@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2026-01-28
+
+### Added
+
+- **Admin blog: single edit per locale pair**
+  - Blog list shows one row per blog (group): EN slug, TR slug, primary title, date, tags; Edit opens a single edit page for both locales
+  - `lib/blog-groups.ts`: `getBlogGroups()` (reciprocal `alternateSlug` = pair, else solo), `getBlogGroupByPrimarySlug(primarySlug)`
+  - `lib/actions/blog.ts`: `updateBlogGroupAction(primarySlug, payload)`, `deleteBlogGroupAction(primarySlug)` (deletes both locale files)
+  - Edit page at `/admin/blogs/[slug]/edit` loads group and renders `BlogGroupForm` with two panels (English, Türkçe); add/remove locale; save keeps `alternateSlug`/`alternateLocale` in sync
+  - New post creates one locale and redirects to `/admin/blogs/[slug]/edit` so the other locale can be added on the same page
+- **Markdown editor for blog content**
+  - `react-markdown` dependency for preview
+  - `components/admin/markdown-editor.tsx`: split view (textarea + live preview)
+  - `BlogGroupForm` uses `MarkdownEditor` for EN and TR content fields
+
+### Technical
+
+- Admin blogs list: sync `getBlogGroups()` from `lib/blog-groups.ts`; `BlogList` accepts `groups: BlogGroup[]`
+- `BlogGroupForm`: two locale panels; optional "Remove English/TR version"; submit builds `{ en?, tr? }` and calls `updateBlogGroupAction`
+- Edit route: `getBlogGroupByPrimarySlug(slug)`; `not-found` when group missing
+- Dependencies: `react-markdown@10.1.0`
+
 ## [0.10.0] - 2026-01-28
 
 ### Added
@@ -25,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Hero & Summary edit:** Admin form at `/admin/hero-summary` to edit name, title, tagline, email, location, website, LinkedIn, GitHub, summary; submits via server action
 - **Resume write layer:** `writeResumeData()` in `lib/resume.ts` (atomic write); `lib/schemas/resume.ts` (partial Zod schema); `lib/actions/resume.ts` (`updateResumeAction` with deep-merge)
 - **Resume section edit:** Admin page at `/admin/resume` with `ResumeSectionForm`: experience (add/remove entries, description bullets), education (add/remove), coreSkills (per-category bullet list); submits via `updateResumeAction`
+- **Certifications edit:** Admin page at `/admin/certifications` with `CertificationsForm`: list, add, edit, remove certifications; fields: name, version, issuer, issueDate, expirationDate, credentialId, credentialUrl, skills (one per line); submits via `updateResumeAction`
 
 ## [0.9.0] - 2026-01-26
 

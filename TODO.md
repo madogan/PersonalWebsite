@@ -238,26 +238,75 @@
 
 ### Phase 4: Certifications
 
-- [ ] 6. Certifications edit page — `app/admin/certifications/page.tsx`; list, add, edit, delete certifications; merge into resume.
+- [x] 6. Certifications edit page — `app/admin/certifications/page.tsx`; list, add, edit, delete certifications; merge into resume.
+
+#### Certifications follow-ups (future)
+
+- [ ] **i18n:** Add next-intl translations for admin certification UI (labels, buttons, messages); currently hardcoded (plan had i18n out of scope).
+- [ ] **Stable image paths:** Upload path is index-based (`cert-{index}.{ext}`); reordering certifications can make a file path point at a different cert. Consider stable IDs (e.g. cert slug or UUID) for image filenames.
+- [ ] **Delete file on Clear image:** When user clicks "Clear image", optionally delete the file on disk if `imageUrl` is under `public/images/certifications/` (currently only sets `imageUrl` to `null`; file remains).
 
 ### Phase 5: Blog Management
 
-- [ ] 7. Blog list page — `app/admin/blogs/page.tsx`; list posts via `getAllPosts()`; Edit, Delete (confirm + `deleteBlogPost`).
-- [ ] 8. Blog create and edit — `app/admin/blogs/new/page.tsx` and `app/admin/blogs/[slug]/edit/page.tsx`; Zod slug; `writeBlogPost`, slug change = write new then delete old.
+- [x] 7. Blog list page — `app/admin/blogs/page.tsx`; list posts via `getAllPosts()`; Edit, Delete (confirm + `deleteBlogPost`).
+- [x] 8. Blog create and edit — `app/admin/blogs/new/page.tsx` and `app/admin/blogs/[slug]/edit/page.tsx`; Zod slug; `writeBlogPost`, slug change = write new then delete old.
 
 ### Phase 6: Error Handling
 
 - [ ] 9. Admin error boundary and validation — `app/admin/error.tsx` (mirror root error.tsx); Zod 400 on invalid payloads.
 
+## Plan: Admin Blog — Single Edit per Locale Pair + Better Text Editor
+
+*Source: `.cursor/plans/plan_admin_blog_locale_editor.md`*
+
+### Phase 1: Blog group model and list
+
+- [x] 1. Add `getBlogGroups()` in `lib/blog-groups.ts` (reciprocal link = pair; else solo).
+- [x] 2. Add `getBlogGroupByPrimarySlug(primarySlug)` in `lib/blog-groups.ts`.
+- [x] 3. Add server action `updateBlogGroupAction(primarySlug, payload)` in `lib/actions/blog.ts`.
+- [x] 4. Add server action `deleteBlogGroupAction(primarySlug)` in `lib/actions/blog.ts`.
+- [x] 5. Update admin blog list page and `BlogList` to use groups (one row per group).
+
+### Phase 2: Single edit page with two locale panels
+
+- [x] 6. Refactor edit page to group-based (`getBlogGroupByPrimarySlug`, pass group to form).
+- [x] 7. Build `BlogGroupForm` with two locale panels (English, Türkçe); add/remove locale.
+- [x] 8. New post flow: redirect to `/admin/blogs/[primarySlug]/edit` after create.
+
+### Phase 3: Markdown editor for content
+
+- [x] 9. Choose and integrate Markdown editor dependency (react-markdown for preview).
+- [x] 10. Create `MarkdownEditor` component (value, onChange, preview).
+- [x] 11. Use `MarkdownEditor` in blog form content fields (EN and TR).
+
+### Phase 4: Cleanup and edge cases
+
+- [x] 12. Handle primary slug change when only one locale exists (rename = write new, delete old).
+- [x] 13. Ensure "New post" still works with group list (new post appears as group of one).
+- [x] 14. Required: `not-found.tsx` for edit route; validation errors in action responses.
+
 ## Completed
 
-### Admin Content Management (Tasks 1–5)
+### Admin Blog — Single Edit per Locale Pair + Better Text Editor (Tasks 1–14)
+
+- [x] 1–2. `lib/blog-groups.ts`: `getBlogGroups()`, `getBlogGroupByPrimarySlug()` (reciprocal link = pair).
+- [x] 3–4. `lib/actions/blog.ts`: `updateBlogGroupAction`, `deleteBlogGroupAction`.
+- [x] 5. Admin blogs list: `getBlogGroups()`, `BlogList` with groups (one row per blog).
+- [x] 6–7. Edit page group-based; `BlogGroupForm` with EN/TR panels; add/remove locale.
+- [x] 8. New post redirects to `/admin/blogs/[slug]/edit`.
+- [x] 9–11. `react-markdown`; `MarkdownEditor` (textarea + preview); used in `BlogGroupForm`.
+- [x] 12–14. Slug change in action; not-found for edit route; validation in actions.
+
+### Admin Content Management (Tasks 1–6)
 
 - [x] 1. Protect admin routes — NextAuth v5 credentials; `/admin/login`; `(protected)` layout redirect.
 - [x] 2. Admin layout and nav — Top nav: Hero & Summary, Resume, Certifications, Blogs; sign-out; placeholder pages.
 - [x] 3. Hero and summary edit page — `/admin/hero-summary` form (personal + summary); server action.
 - [x] 4. Resume write API — `writeResumeData()` in `lib/resume.ts`; `updateResumeAction` + Zod partial schema in `lib/actions/resume.ts`, `lib/schemas/resume.ts`.
 - [x] 5. Resume section edit page — `/admin/resume` form for experience (add/remove, description bullets), education (add/remove), coreSkills (per-category bullets); `ResumeSectionForm` + `updateResumeAction`.
+- [x] 6. Certifications edit page — `/admin/certifications` form for list, add, edit, delete certifications; `CertificationsForm` + `updateResumeAction`.
+- [x] 7. Blog list page — `/admin/blogs` list via `getBlogPostsForAdmin()`; `BlogList` with Edit link, Delete (confirm + `deleteBlogPostAction`).
+- [x] 8. Blog create and edit — `/admin/blogs/new` and `/admin/blogs/[slug]/edit`; `BlogPostForm`; Zod `blogPostPayloadSchema`; `createBlogPostAction`, `updateBlogPostAction` (slug change = write new then delete old); `writeBlogPost`, `deleteBlogPost` in `lib/mdx.ts`.
 
 ### Resume Page Removal
 
