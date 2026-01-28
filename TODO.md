@@ -251,6 +251,13 @@
 
 ## Completed
 
+### Admin Content Management (Tasks 1–4)
+
+- [x] 1. Protect admin routes — NextAuth v5 credentials; `/admin/login`; `(protected)` layout redirect.
+- [x] 2. Admin layout and nav — Top nav: Hero & Summary, Resume, Certifications, Blogs; sign-out; placeholder pages.
+- [x] 3. Hero and summary edit page — `/admin/hero-summary` form (personal + summary); server action.
+- [x] 4. Resume write API — `writeResumeData()` in `lib/resume.ts`; `updateResumeAction` + Zod partial schema in `lib/actions/resume.ts`, `lib/schemas/resume.ts`.
+
 ### Resume Page Removal
 
 - [x] Remove resume page and all related functionality
