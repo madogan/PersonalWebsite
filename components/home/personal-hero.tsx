@@ -28,16 +28,68 @@ export function PersonalHero() {
             <div className="mx-auto max-w-3xl space-y-4 text-base leading-relaxed text-foreground/70 sm:text-lg md:text-xl">
               {(() => {
                 const summary = resume.summary
-                // Split point: after "With a strong background in observability, incident response, and deep system analysis, I approach AI workloads from a production-first perspective—prioritizing predictability, debuggability, and scalability over experimentation."
-                const splitPoint = summary.indexOf('With a strong')
 
-                const firstParagraph = summary.substring(0, splitPoint).trim()
-                const secondParagraph = summary.substring(splitPoint).trim()
+                // Split summary into two paragraphs by sentences
+                const sentences = summary.split('. ').filter((s) => s.trim().length > 0)
+                const splitIndex = Math.ceil(sentences.length / 2)
+                const firstParagraph = sentences.slice(0, splitIndex).join('. ').trim()
+                const secondParagraph = sentences.slice(splitIndex).join('. ').trim()
 
-                // Process first paragraph
-                const firstWords = firstParagraph.split(' ')
-                const firstFourWords = firstWords.slice(0, 4).join(' ')
-                const firstRemainingText = firstWords.slice(4).join(' ')
+                // Ensure trailing periods are preserved
+                const firstParagraphText = firstParagraph.endsWith('.')
+                  ? firstParagraph
+                  : `${firstParagraph}.`
+                const secondParagraphText = secondParagraph
+                  ? secondParagraph.endsWith('.')
+                    ? secondParagraph
+                    : `${secondParagraph}.`
+                  : ''
+
+                // Emphasize the first few words of the opening paragraph
+                const firstWords = firstParagraphText.split(' ')
+                const emphasizedIntro = firstWords.slice(0, 6).join(' ')
+                const remainingIntro = firstWords.slice(6).join(' ')
+
+                // Helper to visually emphasize important terms in the second paragraph
+                const highlightTerms = (text: string) => {
+                  const terms = [
+                    'Root Cause Analysis (RCA)',
+                    'L4-L7 Packet Analysis',
+                    'Wireshark',
+                    'Azure',
+                    'LGTM Stack',
+                    'OpenTelemetry',
+                  ]
+
+                  let parts: (string | JSX.Element)[] = [text]
+
+                  terms.forEach((term) => {
+                    parts = parts.flatMap((part, index) => {
+                      if (typeof part !== 'string') return [part]
+                      const segments = part.split(term)
+                      if (segments.length === 1) return [part]
+
+                      const result: (string | JSX.Element)[] = []
+                      segments.forEach((segment, segIndex) => {
+                        if (segment) result.push(segment)
+                        if (segIndex < segments.length - 1) {
+                          result.push(
+                            <span
+                              key={`${term}-${index}-${segIndex}`}
+                              className="font-semibold text-accent"
+                            >
+                              {term}
+                            </span>
+                          )
+                        }
+                      })
+
+                      return result
+                    })
+                  })
+
+                  return parts
+                }
 
                 return (
                   <>
@@ -50,14 +102,14 @@ export function PersonalHero() {
                           animationFillMode: 'both',
                         }}
                       >
-                        {firstFourWords}
+                        {emphasizedIntro}
                       </span>
-                      {firstRemainingText && ` ${firstRemainingText}`}
+                      {remainingIntro && ` ${remainingIntro}`}
                     </p>
 
                     {/* Second Paragraph */}
                     <p className="text-justify md:text-center">
-                      {secondParagraph}
+                      {highlightTerms(secondParagraphText)}
                     </p>
                   </>
                 )
